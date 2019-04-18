@@ -20,4 +20,4 @@ Here is a beamer LaTeX template you can use for any slides you intend to present
 * [Hands-on Sessions](https://paper.dropbox.com/doc/Hands-on-Sessions--Abdr7q_kEizkOXqMfKBTot77Ag-NJFHU78WYuYmg3jdA9SIL)
 
 ---
-_This page is built in mkdocs, for full documentation visit [mkdocs.org](https://mkdocs.org)._
+_This page is built in mkdocs. For how to make edits to this page see instruction for the dime-analytics page [here](https://worldbank.github.io/dimeanalytics/z-contributing/), for full mkdocs documentation visit [mkdocs.org](https://mkdocs.org)._
