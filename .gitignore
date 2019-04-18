@@ -94,5 +94,8 @@ passwords/
 !/Data/
 !/Labs/**/Data/
 
+#Unignore files needed for the webpage
+!MSIE-Presenter-Page/*.yml
+
 #Always ignore anything in the mkdocs local build folder
 MSIE-Presenter-Page/site/
