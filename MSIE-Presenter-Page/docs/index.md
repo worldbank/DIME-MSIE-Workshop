@@ -8,7 +8,7 @@ June 10 - 14, 2019 - Registration is full!
 
 ### Agenda
 
-See here for [the tentative agenda](https://docs.google.com/spreadsheets/d/1LnDaHHaVlJdoTA4easjHexjog6D-YgR51fcRVR10xbc/edit#gid=125240703)
+See here for [the tentative agenda](https://www.dropbox.com/s/7qsbw11iz56plh2/Agenda.xlsx?dl=0)
 
 ### Latex templates
 
