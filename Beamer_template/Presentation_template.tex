@@ -1,493 +1,56 @@
-%%%%%%%
+
 \documentclass[aspectratio=169]{beamer}
 \usetheme{metropolis}           % Use metropolis theme
-%%%%%%%
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{mathabx}
-\usepackage{mathpazo}
-\usepackage{eulervm}
-\usepackage{adjustbox}
-\usepackage{natbib}
-\usepackage{multicol}
-\usepackage{listings}
-\usepackage{helvet}
-\usepackage{booktabs}
-\usepackage{threeparttable}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
 
-\lstset{ %
-  backgroundcolor=\color{white},
-  basicstyle=\tiny,
-  breakatwhitespace=false,
-  breaklines=true,
-  captionpos=b,
-  commentstyle=\color{mygreen},
-  escapeinside={\%*}{*)},
-  extendedchars=true,
-  frame=single,
-  numbers=left,
-  numbersep=5pt,
-  numberstyle=\tiny\color{mygray},
-  rulecolor=\color{black},
-  showspaces=false,
-  showstringspaces=false,
-  showtabs=false,
-  stringstyle=\color{mymauve},
-  tabsize=2,
-  title=\lstname,
-  morekeywords={not,\},\{,preconditions,effects },
-  deletekeywords={time}
+\title{Introduction to STATA}
+\date{\today}
+\author{Author of Session here!}
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+
+
+\usebackgroundtemplate{%             declare it
+	\tikz[overlay,remember picture] \node[opacity=1, at=(current page.center)] {
+		\includegraphics[height=90mm,width=\paperwidth]{top_right_corner.pdf}};
 }
 
-\title{A workflow for exporting tables from Stata}
-\date{\today}
-\author{Prepared by DIME Analytics \newline \url{dimeanalytics@worldbank.org}}
-\institute{Presented by: \newline Luiza Cardoso de Andrade (\url{lcardoso@worldbank.org}) \newline Benjamin Daniels (\url{bdaniels@worldbank.org})}
 
 \begin{document}
-\maketitle
+	
+\maketitle %% This sets the title page this must always be on
+\usebackgroundtemplate{}    %% undeclare it
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conceptual Framework}
 
-%%%SLIDE%%%
-\begin{frame}[fragile]{Main idea: tables in two stages}
-Tables have two ``stages'':
-\begin{itemize}
-    \item In Stage One, you only need \textbf{information}
-    \item In Stage Two, you also need \textbf{formatting}
-    \item Moving from Step One to Step Two is a big task, that is better to do \textbf{once}
-    \item Deciding what stage a table is in will save you a lot of work
-    \item But the PI or other teammates need to agree
-\end{itemize}
-\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\section{Data Cleaning}	
 
-%%%SLIDE%%%
-\begin{frame}[fragile]{Which stage are we in?}
-Core questions:
-\begin{itemize}
-    \item Do I need this output to be immediately shareable without postprocessing?
-    \item Do I need this output to be useful for publication, or just for reading results?
-    \item Do I need to be able to adjust number formatting and rounding later?
-    \item Will I need to adjust table layout and formatting later?
-    \item What will be the required workflow when I re-produce this table?
-    \item What if I alter models, parameters, or other core components?
-\end{itemize}
-\end{frame}
 
-%%%SLIDE%%%
-\begin{frame}[fragile]{Which stage are we in?}
-\begin{table}[]
-\begin{tabular}{p{4.5cm}cc}
-\hline
-                                       & \textbf{Stage One}                                                    & \textbf{Stage Two}        \\
-                                       \hline
-\textbf{Amount of coding}                       & Little                                                       & Moderate to lots \\
-\textbf{Replicability}                          & \begin{tabular}{p{4cm}}Results replicate but may require copying or post-processing \end{tabular} & Fully replicable \\
-\textbf{Adjustability of models and parameters} & High                                                         & Moderate to low  \\
-\textbf{Suitability to frequent updates}        & Slow                                                         & Fast             \\
-\textbf{Formatting}                             & Little to none                                               & Complete        \\
-\hline
-\end{tabular}
-\end{table}
-\end{frame}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{Stage One: Focus on the information}
-A table in Stage One needs to only follow a few rules:
-\begin{itemize}
-    \item One file per output, named functionally, like \texttt{regression-robustness.xlsx}
-    \item It should require \textbf{zero} formatting by hand for the core results to be readable
-    \item It should be created with built-in or user-written Stata commands, unless impossible
-    \item It should be created in a standalone code chunk beginning with \texttt{use}
-\end{itemize}
-What do these requirements accomplish? They have one goal: when you need to see how something changes,
-you simply re-run this table's specific code chunk, and new results are instantly available.
-\end{frame}
-
-%Add instructions to create a matrix from results
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{Moving to Stage Two: Focus on the structure}
-Only move a table to Stage Two when you are 100\% (ideally -- 85\% is more realistic) decided on the \textbf{structure}.
-
-Structure is anything that would be \textbf{hard to change} in code, such as:
-\begin{itemize}
-    %\item Placement in the paper (such as the name of the table)
-    \item Exactly which rows and columns need to be displayed and in what order
-    \item Exactly how any text & decoration should be implemented
-\end{itemize}
-These are often things that non-coders think are easy to change -- they may think it is as easy as moving things in Excel. But these are places where you can waste a lot of time being asked to make ``little'' changes if it's not clear that these are costly things to change.
-\end{frame}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{Stage Two: Focus on formatting}
-Once a table is in Stage Two, you should have done the following:
-\begin{itemize}
-    \item One file per output, named structurally, like \texttt{table-01\_regression-robustness.xlsx}
-    \item Have set up formatting either in code, or such that only \textbf{one} copy-paste operation in Excel is needed to fully recreate the new table
-    \item The exact numbers and stars should appear in exactly the right places (this may require custom coding such as building up a matrix)
-    \item It should be created in a standalone code chunk beginning with \texttt{use}
-\end{itemize}
-These requirements are very similar to those in Stage One, except once you have put in the extra work formatting your table, the re-run is now able to create a production-ready output.
-\end{frame}
-
-\begin{frame}[fragile]{Writing an arbitrary matrix: Review}
-\begin{lstlisting}
-// Use data
-sysuse census.dta , clear
-
-// Loop over variables
-local indepvars death marriage divorce
-local depvars pop poplt5 pop5_17 pop65p pop18p popurban
-
-cap mat drop results results_STARS  // Gotta do this
-qui foreach depvar in `depvars' {
-  reg `depvar' `indepvars'          // Run regression
-  mat a = r(table)                  // Store results
-  mat a = a[....,1]'                // Get [death] only and transpose
-  mat rownames a = "`depvar'"       // Proper label
-  mat results = nullmat(results)   /// First run
-    \ a                             // Stack up results
-}
-
-// Print this matrix nicely: Excel
-outwrite results /// If only one name, matrix is assumed
-  using "/path/to/file.xlsx" , replace
-  
-// Print this matrix nicely: LaTeX
-\end{lstlisting}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{How to make it relatively painless: Excel}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{Run and store some regressions}
-\begin{multicols}{2}
-\begin{lstlisting}
-// Data
-sysuse census.dta, clear
-
-// Basic Regression
-reg divorce marriage pop
-    est sto reg1
-
-// Basic Regression 2
-reg medage popurban
-    est sto reg2
-
-// Indicator Regression
-reg divorce marriage pop i.region
-    est sto reg3
-
-// Interaction Regression
-gen binary = rnormal() > 0
-    lab def binary 0 "No" 1 "Yes"
-    lab val binary binary
-    label var binary "Indicator"
-reg divorce marriage pop i.region#i.binary
-    est sto reg4
-\end{lstlisting}
-\parbox{\linewidth}{
-In this code we have four of the core functions of regressions: basic estimates, different models, and indicator and interaction expansion.
-\newline \newline
-From these specifications you can make almost any of the typical IE estimators.
-\newline \newline
-This can be a lot of information, and Stata is not very good at displaying multiple regressions simultaneously.
-}
-\end{multicols}
-\end{frame}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{Export to Stage One using four user-written programs}
-\begin{multicols}{2}
-\begin{lstlisting}
-// outreg2
-outreg2 [reg1 reg2 reg3 reg4]   ///
-using "outputs/outreg.xls"      ///
-, replace excel
-
-// estout
-estout reg1 reg2 reg3 reg4      ///
-using "outputs/estout.xls"      ///
-, replace c(b & _star se)
-
-// xml_tab
-xml_tab reg1 reg2 reg3 reg4     ///
-, save("outputs/xml_tab.xls")   ///
-  replace below
-
-// outwrite
-outwrite reg1 reg2 reg3 reg4    ///
-using "outputs/outwrite.xlsx"   ///
-, replace
-\end{lstlisting}
-\parbox{\linewidth}{
-Each of these four commands has different features. The first three have lots of formatting options, but you should use these sparingly.
-\newline \newline
-Notice how they take different approaches to (a) creating the file and (b) handling the four different regressions and their features together.
-\newline \newline
-The last one is new (from us), and is intended to take the best bits of these commands and make it easier to output a simple table.
-}
-\end{multicols}
-\end{frame}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{What does Stage One look like? (\texttt{outwrite})}
-\begin{multicols}{2}
-    Key Excel-related decisions:
-    \newline \newline
-    Fully XLSX native -- Uses \textbf{Stata 15}'s \texttt{putexcel} to write file
-    \newline \newline
-    Cells at \textbf{full precision} -- you can use the decimal place adjustment tools within Excel; from Stata only the overall \texttt{format()} can be set
-    \newline \newline
-    Stars are \textbf{formatted} -- they will be \textbf{lost} by \texttt{Copy → Paste Special → Values}
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{outwrite.png}
-\end{figure}
-\end{multicols}
-\end{frame}
-
-%%%SLIDE%%%
-\begin{frame}[fragile]{What does Stage Two look like?}
-\begin{multicols}{2}
-     To move to Stage Two:
-    \newline \newline
-    Set up a \texttt{\_final-tables.xlsx} file with one sheet per table; all the formatting, titles, bolding, column numbering, model notes, etc. can be set up in here
-    \newline \newline
-    But the alignment of the cells should be such that the raw table will copy \textbf{exactly} into this frame -- re-running all the tables and inserting them here should take at most 15 minutes
-\begin{figure}
-    \centering
-    \includegraphics[width=\linewidth]{final-tables.png}
-\end{figure}
-\end{multicols}
-\end{frame}
-
-\begin{frame}[Stage Two formatting in Excel]
-What to do when moving into Stage Two, but is a waste of time in Stage one:
-\begin{itemize}
-    \item Organize the tables into sheets (by the end, these are \textbf{ordered})
-    \item Make the raw outputs "almost" exactly what you need -- so that no "micro" formatting or "micro" copy-pasting needs to be done to update the final table (only "macro" formatting and copy-pasting)
-    \item For example, if you have two panels, make \texttt{table-03\_1.xlsx and table-03\_2.xlsx}
-    \item The biggest pain is things like italics, parentheses, and bolding -- wait till the very end to do this (or omit entirely)
-    \item Use \texttt{Paste Special → Values} and \texttt{Paste Special → Transpose}
-    \item Use the Format Paintbrush intelligently (but be careful with decimal places and stars when doing so)
-\end{itemize}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{How to make it relatively painless: LaTeX}
-\begin{frame}[fragile]{Not much new here}
-\begin{multicols}{2}
-\begin{lstlisting}
-// Load the data **************************
-sysuse census.dta, clear
-
-// Run regressions ************************
-// Regression 1: nothing interesting
-reg death marriage pop
-est sto reg1
-estadd local region "No"
-
-// Regression 2: a different regression
-reg death popurban
-est sto reg2
-estadd local region "No"
-
-// Regression 3: indicator expansion
-reg divorce marriage pop
-est sto reg3
-estadd local region "No"
-
-// Regression 4: interaction
-reg divorce marriage pop i.region
-est sto reg4
-estadd local region "Yes"
-\end{lstlisting}
-
-\vspace{2cm}
-\vspace{2cm}
-\begin{itemize}
-    \item Let's start by just running some regressions
-    \item \texttt{est sto} saves the regression results
-    \item \texttt{estadd} saves additional information to be displayed on the table
-\end{itemize}
-
-\end{multicols}
+\begin{frame}{First Frame}
+Hello, world!
 \end{frame}
 
 
-\begin{frame}[fragile]{Export simple table to \LaTeX }
-The simplest possible table is created with the code to the left and looks as displayed on the right.
-
-\begin{multicols}{2}
-\begin{lstlisting}
-global out_raw "FILE/PATH/HERE"
-
-esttab  reg1 reg2 reg3 reg4 ///
-    using "${out_raw}/esttab_label.tex", ///
-    label /// Add variable labels
-    replace
-\end{lstlisting}
-
-\begin{table}
-\begin{adjustbox}{max width = .45\textwidth}
-\input{tables/esttab_label.tex}
-\end{adjustbox}
-\end{table}
-\end{multicols}
+\begin{frame}{Second Frame}
+Hello, world!
 \end{frame}
 
-\begin{frame}[fragile]{Stage one formatting in \LaTeX }
-\begin{itemize}
-    \item There's still some simple formatting that you can do while in stage 1
-    \item This includes formatting that the command can still generalize for other model adjustments that will still be made
-    \item Almost all options shown in \texttt{help esttab} fall within this case
-\end{itemize}
-\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
+\section{Data Management}
 
-\begin{frame}[fragile]{Stage one formatting in \LaTeX }
-\begin{multicols}{2}
-\begin{lstlisting}
-esttab reg1 reg2 reg3 reg4 ///
-    using "${out_raw}/esttab_scalar.tex", ///
-    scalars("region Region fixed effects")  ///
-    addnotes("Add a note here." "Other custom note here.")  ///
-    label ///
-    ci ///
-    replace
-\end{lstlisting}
 
-\begin{table}
-\begin{adjustbox}{max width = .45\textwidth}
-\input{tables/esttab_scalar.tex}
-\end{adjustbox}
-\end{table}
-\end{multicols}
-\end{frame}
-
-\begin{frame}[fragile]{Stage one formatting in \LaTeX }
-Here's a list of useful options:
-\begin{itemize}
-\scriptsize
-    \item   \texttt{se[(fmt)]}: display standard errors instead of t-statistics
-    \item   \texttt{p[(fmt)]}: display p-values instead of t-statistics
-    \item   \texttt{ci[(fmt)]}: display confidence intervals instead of t-stat's
-    \item   \texttt{[no]constant}: do not/do report the intercept
-    \item   \texttt{[no]star[(list)]}: do not/do report significance stars
-    \item   \texttt{r2|ar2|pr2[(fmt)]}: display (adjusted, pseudo) R-squared
-    \item   \texttt{scalars(list)}: display any other scalars contained in e()
-    \item   \texttt{noobs}: do not display the number of observations
-    \item   \texttt{label}: make use of variable labels
-    \item   \texttt{nomtitles}: disable model titles
-    \item   \texttt{[no]depvars}: do not/do use dependent variables as model titles
-    \item   \texttt{[no]numbers}: do not/do print model numbers in table header
-    \item   \texttt{[no]notes}: suppress/add notes in the table footer
-    \item   \texttt{addnotes(list)}: add lines at the end of the table
-    \item   \texttt{noomitted}: drop omitted coefficients
-    \item   \texttt{nobaselevels}: drop base levels of factor variables
-\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Moving on to stage two in \LaTeX }
-
-\begin{itemize}
-    \item More advanced options than the ones listed in the previous slide can cause you some trouble when you modify your models
-    \item This includes options that require you to spell out variable names, embed {\LaTeX} code in Stata code or cite models individually
-    \item Let's look at some examples
-\end{itemize}
+\begin{frame}{First Frame}
+Hello, world!
 \end{frame}
 
 
-\begin{frame}[fragile]{Stage two formatting in \LaTeX }
-Here are the two easiest way to add formatting that may crash your code if you change your models:
-
-\begin{multicols}{2}
-\begin{lstlisting}
-esttab reg1 reg2 reg3 reg4 ///
-    using "${out_raw}/esttab_titles.tex", ///
-    mtitles("Title 1" "Title 2" ///
-            "Title 3" "Title 4") ///
-    drop(*.region*) ///
-    scalars("region Region fixed effects") ///
-    addnotes("Add a note here." "Other custom note here.")  ///
-    label ///
-    replace
-\end{lstlisting}
-
-\begin{table}
-\begin{adjustbox}{max width = .45\textwidth}
-\input{tables/esttab_titles.tex}
-\end{adjustbox}
-\end{table}
-\end{multicols}
+\begin{frame}{Second Frame}
+Hello, world!
 \end{frame}
 
-\begin{frame}[fragile]{Stage two formatting in \LaTeX }
-Here's what you \textit{really} shouldn't do before you have final models -- the consequence being to risk spending a lot of time on formatting for small edits
 
-\begin{multicols}{2}
-\begin{lstlisting}
-esttab reg1 reg2 reg3 reg4 ///
-    using "${out_raw}/esttab_header.tex", ///
-    prehead("\begin{tabular}{l*{4}{c}} \hline\hline & \multicolumn{4}{c}{\textit{Dependent variable:}} \\ & \multicolumn{2}{c}{Number of deaths} & \multicolumn{2}{c}{Number of divorces} \\ \cmidrule(lr){2-3} \cmidrule(lr){4-5} ") ///
-    nomtitles ///
-    drop(*.region*) ///
-    scalars("region Region fixed effects") ///
-    label ///
-    replace
-\end{lstlisting}
-
-\begin{table}
-\begin{adjustbox}{max width = .45\textwidth}
-\input{tables/esttab_header.tex}
-\end{adjustbox}
-\end{table}
-\end{multicols}
-\end{frame}
-
-\begin{frame}[fragile]{Stage two formatting in \LaTeX }
-And here's what we think is probably the most complicated thing you can do while still using \texttt{esttab}
-
-\begin{lstlisting}
-* A table with two panels --------------------------------------------------------------------------------
-* Top panel
-esttab reg1 reg2 using "${out_raw}/esttab_panel.tex", ///
-    refcat(marriage "\\ \multicolumn{3}{c}{\textbf{Panel A: Number of deaths}} \\[-1ex]  ", nolabel) ///
-    prehead("\begin{tabular}{l*{2}{c}} \hline\hline" ) ///
-    fragment  ///
-    nomtitles noobs ///
-    panel ///
-    label ///
-    replace
-
-* Bottom panel
-esttab reg3 reg4 using "${out_raw}/esttab_panel.tex", ///
-    refcat(marriage "\\ \multicolumn{3}{c}{\textbf{Panel B: Number of divorces}} \\[-1ex]  ", nolabel) ///
-    fragment ///
-    append ///
-    nomtitles nonumbers nolines ///
-    prefoot("\hline") ///
-    postfoot("\hline\hline \end{tabular} \begin{tablenotes} \footnotesize \item Add notes manually here. \end{tablenotes}") ///
-    drop(*.region*) ///
-    label
-\end{lstlisting}
-\end{frame}
-
-\begin{frame}[fragile]{Stage two formatting in \LaTeX }
-\begin{table}
-\scriptsize
-\begin{adjustbox}{max width = .3\textwidth}
-\begin{threeparttable}
-\input{tables/esttab_panel.tex}
-\end{threeparttable}
-\end{adjustbox}
-\end{table}
-\end{frame}
-
-%%%%%%%%%%%%%
-\section{Thank you!}
 \end{document}
-%%%%%%%%%%%%%
