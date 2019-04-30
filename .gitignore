@@ -99,3 +99,5 @@ passwords/
 
 #Always ignore anything in the mkdocs local build folder
 MSIE-Presenter-Page/site/
+
+!.png
