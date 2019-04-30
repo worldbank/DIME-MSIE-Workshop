@@ -7,50 +7,105 @@
 \usepackage{eso-pic}
 \usepackage{graphics}
 \usepackage{tikz}
+\usepackage{subcaption}
 
 \title{Introduction to STATA}
 \date{\today}
 \author{Author of Session here!}
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
 
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(270,-180){\makebox(0,0)[rt]{\includegraphics[width=2cm]{WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(310,-180){\makebox(0,0)[rt]{\includegraphics[width=1cm]{UK_aid_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(350,-180){\makebox(0,0)[rt]{\includegraphics[width=1cm]{Europe_union_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(420,-180){\makebox(0,0)[rt]{\includegraphics[width=2cm]{Norad_logo}}}
+	\end{picture}%
+}
 
-\usebackgroundtemplate{%             declare it
-	\tikz[overlay,remember picture] \node[opacity=1, at=(current page.center)] {
-		\includegraphics[height=90mm,width=\paperwidth]{top_right_corner.pdf}};
+
+%%% Section page template with picture
+
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\insertsectionhead\\[-1ex]
+		\usebeamertemplate*{progress bar in section page}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\insertsubsectionhead
+		\fi
+		\vskip0.5cm
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
 }
 
 
 \begin{document}
-	
-\maketitle %% This sets the title page this must always be on
-\usebackgroundtemplate{}    %% undeclare it
-
+	{
+		\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=55mm]{top_right_corner.pdf}}
+		\maketitle
+}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
-\section{Data Cleaning}	
+\sectionpic{Data Cleaning}{section_slide}
 
 
 \begin{frame}{First Frame}
-Hello, world!
+Content here!
 \end{frame}
 
 
 \begin{frame}{Second Frame}
-Hello, world!
+Content here!
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
-\section{Data Management}
+\sectionpic{Data Management}{section_slide}
 
 
 \begin{frame}{First Frame}
-Hello, world!
+Content here!
 \end{frame}
 
 
 \begin{frame}{Second Frame}
-Hello, world!
+Content here!
 \end{frame}
 
 
-\end{document}
+
+
+
+
+
+
+
+
+\end{document} 
