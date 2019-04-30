@@ -8,30 +8,25 @@
 \usepackage{graphics}
 \usepackage{tikz}
 \usepackage{subcaption}
+\usepackage[export]{adjustbox}
 
-\title{Introduction to STATA}
+\title{Introduction to Stata}
 \date{\today}
-\author{Author of Session here!}
+\author{Author of Session here!} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
 
+% The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(270,-180){\makebox(0,0)[rt]{\includegraphics[width=2cm]{WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(310,-180){\makebox(0,0)[rt]{\includegraphics[width=1cm]{UK_aid_logo}}}
-	\end{picture}%
-	\begin{picture}(0,0)
-	\put(350,-180){\makebox(0,0)[rt]{\includegraphics[width=1cm]{Europe_union_logo}}}
-	\end{picture}%
-	\begin{picture}(0,0)
-	\put(420,-180){\makebox(0,0)[rt]{\includegraphics[width=2cm]{Norad_logo}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{i2i}}}
 	\end{picture}%
 }
 
-
-%%% Section page template with picture
-
+%%% Section page with picture of Light bulb
 \makeatletter
 \defbeamertemplate*{section page}{mytheme}[1][]{
 	\centering
@@ -59,17 +54,16 @@
 
 %%% Define a command to include picture in section, 
 %%% make section, and revert to old template
-
 \newcommand{\sectionpic}[2]{
 	\setbeamertemplate{section page}[mytheme][#2]
 	\section{#1}
 	\setbeamertemplate{section page}[mytheme]
 }
 
-
+%% The below command creates the ligh bulb logos in the top right corner of the 
 \begin{document}
 	{
-		\usebackgroundtemplate{\includegraphics[width=\paperwidth,height=55mm]{top_right_corner.pdf}}
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{top_right_corner.pdf}}
 		\maketitle
 }
 
@@ -101,6 +95,19 @@ Content here!
 
 
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+\begin{frame}{Conclusion}
+
+Wrap up final contents of presentation
+
+\vspace{20mm}
+For more information or further questions please contact:
+\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{The End}{section_slide}
 
 
 
