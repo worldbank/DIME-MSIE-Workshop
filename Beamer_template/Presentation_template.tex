@@ -33,18 +33,18 @@
 		\raggedright
 		\usebeamercolor[fg]{section title}
 		\usebeamerfont{section title}
-		\insertsectionhead\\[-1ex]
-		\usebeamertemplate*{progress bar in section page}
 		\par
 		\ifx\insertsubsectionhead\@empty\else%
 		\usebeamercolor[fg]{subsection title}%
 		\usebeamerfont{subsection title}%
-		\insertsubsectionhead
 		\fi
-		\vskip0.5cm
 		\ifstrempty{#1}{}{%
 			\includegraphics[width=100mm, height=60mm]{#1}%
 		}
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
 	\end{minipage}
 	\par
 	\vspace{\baselineskip}
