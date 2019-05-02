@@ -68,15 +68,6 @@
 # Markdown
 !/**/*.md
 
-# Images
-!/**/*.png
-
-# PDF
-!/**/*.pdf
-
-# PowerPoint
-!/**/*.pptx
-
 #######################
 # Include some additional file formats in any output folder. You might have
 # to change the name of the Output folder to whatever it is called in your
@@ -108,3 +99,7 @@ passwords/
 
 #Always ignore anything in the mkdocs local build folder
 MSIE-Presenter-Page/site/
+
+#Un-ignore images needed for the beamer template
+!Beamer_template\img\*.png
+!Beamer_template\img\*.pdf
