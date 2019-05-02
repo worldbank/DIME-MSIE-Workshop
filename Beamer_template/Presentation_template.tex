@@ -2,12 +2,17 @@
 \documentclass[aspectratio=169]{beamer}
 \usetheme{metropolis}           % Use metropolis theme
 \usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{graphics}
 \usepackage{tikz}
 \usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
 
 \title{Introduction to Stata}
 \date{\today}
@@ -59,6 +64,31 @@
 	\setbeamertemplate{section page}[mytheme]
 }
 
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{mygreen},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{mygray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mymauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
 %% The below command creates the ligh bulb logos in the top right corner of the 
 \begin{document}
 	
@@ -80,6 +110,7 @@ Content here!
 Content here!
 \end{frame}
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
 \sectionpic{Data Management}{img/section_slide}
 
@@ -93,7 +124,41 @@ Content here!
 Content here!
 \end{frame}
 
-
+\begin{frame}[fragile]{Testing Stata code and Text}
+\begin{multicols}{2}
+	\begin{lstlisting}
+	// Data
+	sysuse census.dta, clear
+	
+	// Basic Regression
+	reg divorce marriage pop
+	est sto reg1
+	
+	// Basic Regression 2
+	reg medage popurban
+	est sto reg2
+	
+	// Indicator Regression
+	reg divorce marriage pop i.region
+	est sto reg3
+	
+	// Interaction Regression
+	gen binary = rnormal() > 0
+	lab def binary 0 "No" 1 "Yes"
+	lab val binary binary
+	label var binary "Indicator"
+	reg divorce marriage pop i.region#i.binary
+	est sto reg4
+	\end{lstlisting}
+	\parbox{\linewidth}{
+		This is where you write content describing the Stata code in the text box to the left. Try not to place too much code in the text box. The Stat code is written in the lines before this.
+		\newline \newline
+		More information about the Stata, giving time for the participants to write the code themselves and run it.
+		\newline \newline
+		More information about the Stata code and the different ways to code it.
+	}
+\end{multicols}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
 \begin{frame}{Conclusion}
