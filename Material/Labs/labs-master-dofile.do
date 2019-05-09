@@ -42,29 +42,37 @@
     * Topic 1
     ***********************
 	
-	
+	*Start with data copied above and do solutions track 1 and save data 
 	
     ***********************
     * Topic 2
     ***********************	
 
+	*Start with data saved in end of topic 1 and do solutions track 2 and save data 
+	
     ***********************
     * Topic 3
     ***********************
+	
+	*Start with data saved in end of topic 2 and do solutions track 3 and save data 
 	
     ***********************
     * Topic 4
     ***********************
 	
+	*Start with data saved in end of topic 3 and do solutions track 4 and save data 
+	
     ***********************
     * Topic 5
     ***********************
+	
+	*Start with data saved in end of topic 4 and do solutions track 5 and save data 
 	
     ***********************
     * Topic 6
     ***********************
 	
-	
+	*Start with data saved in end of topic 5 and do solutions track 6 and save data 
 	
 
 	/* ******************************************************************* *
@@ -90,24 +98,34 @@
     * Topic 1
     ***********************
 	
-	
+	*Start with data copied above and do solutions track 1 and save data 
 	
     ***********************
     * Topic 2
     ***********************	
 
+	*Start with data saved in end of topic 1 and do solutions track 2 and save data 
+	
     ***********************
     * Topic 3
     ***********************
+	
+	*Start with data saved in end of topic 2 and do solutions track 3 and save data 
 	
     ***********************
     * Topic 4
     ***********************
 	
+	*Start with data saved in end of topic 3 and do solutions track 4 and save data 
+	
     ***********************
     * Topic 5
     ***********************
 	
+	*Start with data saved in end of topic 4 and do solutions track 5 and save data 
+	
     ***********************
     * Topic 6
     ***********************
+	
+	*Start with data saved in end of topic 5 and do solutions track 6 and save data 
