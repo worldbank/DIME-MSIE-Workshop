@@ -52,6 +52,11 @@
 	*Save data set to use
     save "${data2use}/endline_data_raw.dta" ,replace
 	
+	*Dropping the varibles 
+	iedropone if key == "uuid:932bb696-285d-XXXX-aed2-8c9b1f76d4cc"
+	iedropone if key == "uuid:b8e3dde7-413a-eab4-bff2-a44756b3d384"
+	iedropone if key == "uuid:fd4cd6dc-ffdf-477b-86e5-f60df2325774"
+
 	************************
 	*Save data set to use
     save "${data2use}/endline_data_raw_nodup.dta" ,replace
