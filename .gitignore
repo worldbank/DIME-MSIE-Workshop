@@ -99,3 +99,7 @@ passwords/
 
 #Always ignore anything in the mkdocs local build folder
 MSIE-Presenter-Page/site/
+
+#Un-ignore images needed for the beamer template
+!Beamer_template\img\*.png
+!Beamer_template\img\*.pdf
