@@ -1,16 +1,3 @@
-******
-* Global
-****
-*Set directory
-gl directory "C:\Users\Saori\Documents\Github\DIME-MSIE-Workshop\Material\Data\2018-data" 
-cd "C:\Users\Saori\Documents\Github\DIME-MSIE-Workshop\Material\Data"
-
-******
-* Creating copy for 2019
-****
-copy "$directory/back_check_2018.dta" "back_check_2019.dta", replace
-copy "$directory/endline_data_raw_2018.dta" "endline_data_raw_2019.dta", replace
-copy "$directory/panel_data_2018.dta" "panel_data_2019.dta", replace
 
 ******
 * Back Check
@@ -47,3 +34,21 @@ use "panel_data_2019.dta", clear
 
 
 save "panel_data.dta" //, replace?
+	/* ******************************************************************* *
+	* ******************************************************************** *
+
+		This master do-file sets up the data needed for the Managing 
+		Successful Impact Evaluations workshop (also known as the FC training).
+
+		To replicate all files, set up your root folder in the 
+		\DIME-MSIE-Workshop\Material\master-dofile.do file and then run
+		this file.
+
+	* ******************************************************************** *
+	* ******************************************************************* */
+
+	*Create globals for the data work folder
+	global datafolder "${mtrl_fldr}/Data"
+	global data2018 "${datafolder}/2018-data"
+	global data2use "${datafolder}/data-to-use"
+
