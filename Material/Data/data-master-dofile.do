@@ -34,6 +34,7 @@
 	
 	************************
 	*Save data set to use
+	compress
     save "${data2use}/back_check.dta", replace
 
 
@@ -50,6 +51,7 @@
 	
 	************************
 	*Save data set to use
+	compress
     save "${data2use}/endline_data_raw.dta" ,replace
 	
 	*Dropping the varibles 
@@ -59,6 +61,7 @@
 
 	************************
 	*Save data set to use
+	compress
     save "${data2use}/endline_data_raw_nodup.dta" ,replace
 
 
@@ -77,4 +80,5 @@
 	
 	************************
 	*Save data set to use
+	compress
     save "${data2use}/panel_data.dta", replace
