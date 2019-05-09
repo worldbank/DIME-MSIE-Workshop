@@ -54,3 +54,9 @@
     * that data set and applies any changes needed to be done to
     * that data set as the labs keeps developing.
     do "$mtrl_fldr/Data/data-master-dofile.do"
+	
+	**This dofile copies the data files created above to each Stata
+	* track. Then it runs all solutions do-files for each topic to 
+	* make sure that they all run, and that each topic correctly 
+	*builds on each other and that the results are correct.
+    do "$mtrl_fldr/Labs/labs-master-dofile.do"
