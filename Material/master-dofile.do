@@ -34,7 +34,7 @@
     * ---------------------
 
     if "`c(username)'" == "kbrkb" {
-        global MSIE_local_clone ""
+        global MSIE_local_clone "C:\Users\kbrkb\Documents\GitHub\DIME-MSIE-Workshop"
     }
 
     if "`c(username)'" == "" {
