@@ -57,6 +57,7 @@
 
 # LaTeX
 !/**/*.tex
+!/**/*.bib
 
 # Python
 !/**/*.py
@@ -93,6 +94,9 @@ passwords/
 #Unignore the main data folder and all lab session data folders. All changes to the data should be tracked
 !Material/Data/2018-data/*.dta
 !Material/Labs/Stata-Track-*/Data/*.dta
+
+#Unignore logo images
+!/**/Handouts/light.png
 
 #Unignore files needed for the webpage
 !MSIE-Presenter-Page/*.yml
