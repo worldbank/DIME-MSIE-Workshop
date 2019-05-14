@@ -55,4 +55,4 @@ use "${Lab2}/endline_data_raw_nodup.dta" , clear
     saveold "${Lab2}/hh_roster_clean.dta" , replace v(12)
       use "${Lab2}/hh_roster_clean.dta" , clear
 
-// Have a lovely day!
+// End of dofile

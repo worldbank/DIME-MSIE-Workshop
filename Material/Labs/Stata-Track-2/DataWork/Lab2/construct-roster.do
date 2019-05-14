@@ -19,4 +19,4 @@
 	saveold "${Lab2}/hh_roster.dta" , replace v(12)
 		use "${Lab2}/hh_roster.dta" , clear
 
-// Have a lovely day!
+// End of dofile

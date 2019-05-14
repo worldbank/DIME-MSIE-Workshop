@@ -27,4 +27,4 @@
     saveold "${mastData}/master_households.dta" , replace v(12)
       use "${mastData}/master_households.dta" , clear
 
-// Have a lovely day!
+// End of dofile

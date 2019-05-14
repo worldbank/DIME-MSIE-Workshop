@@ -45,4 +45,4 @@
   saveold "${Lab1}/endline_data_final.dta", replace v(12)
     use "${Lab1}/endline_data_final.dta", clear
 
-// Have a lovely day! // Stata needs a blank line at the end of code. I like affirmations.
+// End of dofile
