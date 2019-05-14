@@ -1,7 +1,6 @@
 * Cleaning dofile for Lab 2
 
 duplicates report id_05
-duplicates drop id_05, force // <- Don't do this in reality, this is just a demo!
 isid id_05 , sort
 local id id_05 gr_16
 local treatment oi_assign
@@ -20,7 +19,7 @@ keep `id' /// ID variables
 foreach var of varlist * {
 replace `var' = 0 if `var' == -88
 }
-save "${Lab2_dtFin}/endline_data_raw.dta", replace
-use "${Lab2_dtFin}/endline_data_final.dta", clear
+saveold "${Lab1}/endline_data.dta", replace
+use "${Lab1}/endline_data_final.dta", clear
 
 * Have a lovely day! <- Stata needs a blank line at the end of code. I like affirmations.

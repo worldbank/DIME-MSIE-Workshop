@@ -25,7 +25,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title{Lab 2: Stata Coding for Reproducible Research}
+\title{Stata Lab 1: Stata Coding for Reproducible Research}
 \author{Benjamin Daniels \\ bdaniels@worldbank.org}
 % \date{24 January 2009}  % if the \date{} command is left out, the current date will be used
 
@@ -181,17 +181,17 @@ It can automatically sets up a further series of global macros
 with the file path to this folder and its subfolders.
 
 Now use |iefolder| to create a new ``subfolder''.
-Call it |/Lab2/|. This is the folder you’ll work from during this session.
+Call it |/Lab1/|. This is the folder you’ll work from during this session.
 (In the future, you are more likely to use new ``round'' folders,
 as they come with additional structure,
 but we will keep it simple for now.)
 You should have written:
 \begin{Verbatim}
-  iefolder new subfolder Lab2, project("${directory}")
+  iefolder new subfolder Lab1, project("${directory}")
 \end{Verbatim}
 Check that |Project_MasterDofile.do| now defines globals
 with file paths to the new folder.
-Explore the contents of your |/Lab2/| folder.
+Explore the contents of your |/Lab1/| folder.
 Finally, use |iefolder| once more to create a new subfolder,
 and use |iegitaddmd|\sidenote{\url{https://dimewiki.worldbank.org/wiki/iegitaddmd}}
 to make sure all these folders have |README.md| files.
@@ -216,33 +216,33 @@ and improve them for readability.
 Before you start the exercises, make sure you run the new |Project_MasterDofile.do|.
 This will store globals with filepaths you will use to load your data.
 
-You will find a data file, |/data/endline_data_raw.dta|
+You will find a data file, |/data/endline_data_raw_dedup.dta|
 in the public Field Coordinator Training folder.
-Save this dataset to |/DataWork/Lab2/|.
+Save this dataset to |/DataWork/Lab1/|.
 This data has already been de-identified.
 Raw data is data that still has personal information.
 Final data is data that has been cleaned
 and has the constructed or derived variables that will be used for analysis.
 
-You will also find a |.do| file, |/dofiles/lab2-cleaning.do|
+You will also find a |.do| file, |/dofiles/Lab1-cleaning.do|
 in the public Field Coordinator Training folder.
-Save this dofile as |/DataWork/Lab2/cleaning.do| and open it in Stata.
+Save this dofile as |/DataWork/Lab1/cleaning.do| and open it in Stata.
 Edit this file.
-Use the global |Lab2| to load the |endline_data_raw.dta| data set
+Use the global |Lab1| to load the |endline_data_raw_dedup.dta| data set
 by adding a line in the beginning of the dofile you just opened.
 You should write something like:
 \marginnote{Reminder: You should always use quotation marks around filepaths,
 you should always use \{ \} around globals, and you should always use “/” in filepaths.}
 \begin{Verbatim}
-  use "${Lab2}/endline_data_raw.dta" , clear
+  use "${Lab1}/endline_data_raw_dedup.dta" , clear
 \end{Verbatim}
-|Lab2| is a global macro defined in |Project_MasterDofile.do|
-specifying the file path to the |/Lab2/| folder.
+|Lab1| is a global macro defined in |Project_MasterDofile.do|
+specifying the file path to the |/Lab1/| folder.
 It was created automatically by |iefolder|.
 
 See what you can do to improve this do-file
 based on the techniques in the presentation.
-The .do file corresponds to the data set |endline_data_raw.dta|.
+The .do file corresponds to the data set |endline_data_raw_dedup.dta|.
 You will need to open both the do-file and |browse| and |describe|
 the data set in order to understand what the do-file is supposed to do.
 Can you make it clearer which dataset this depends on?
@@ -252,7 +252,7 @@ Could you improve the readability?
 Are there ways to improve the coding through macros?
 
 The techniques taught in this lab are not only to make the code more legible.
-Open the file |lab2-cleaning.do| again.
+Open the file |Lab1-cleaning.do| again.
 We intentionally put in a bug. Can you find it?
 It is hard to find even when you know it is there.
 Simplifying code helps the reader,
@@ -261,23 +261,23 @@ When you are done, the file might look as shown below.
 
 \begin{figure*}[h]
 {\setstretch{0.7}
-\VerbatimInput[frame=lines,numbers=left,label=cleaning.do]{../DataWork/Lab2/cleaning.do}}
+\VerbatimInput[frame=lines,numbers=left,label=cleaning.do]{../DataWork/Lab1/cleaning.do}}
 \end{figure*}
 
 \subsection{Analysis dofile}
 
 Your dofile should now create a |.dta| file,
-|/DataWork/Lab2/endline_data_final.dta|.
+|/DataWork/Lab1/endline_data_final.dta|.
 If not, get this file from |/Materials/endline_data_final.dta|
 in the public Field Coordinator Training folder.
-You will find another dofile, |lab2-analysis.do|,
+You will find another dofile, |Lab1-analysis.do|,
 in the public Field Coordinator Training folder.
-Save this dofile as |/DataWork/Lab2/analysis.do| and open it.
+Save this dofile as |/DataWork/Lab1/analysis.do| and open it.
 
-Use the global |Lab2| that specifies the file path
+Use the global |Lab1| that specifies the file path
 to the Lab 2 folder to load this data set
 by adding a line in the beginning of the do-file you just opened.
-|Lab2| is a global defined in |Lab2_MasterDofile.do|
+|Lab1| is a global defined in |Lab1_MasterDofile.do|
 specifying the file path to the folder.
 It is created automatically by |iefolder|/
 See what you can do to improve the dofile
@@ -291,7 +291,7 @@ When you are done, it might look like the one below.
 
 \begin{figure*}[h]
 {\setstretch{0.7}
-\VerbatimInput[frame=lines,numbers=left,label=analysis.do]{../DataWork/Lab2/analysis.do}}
+\VerbatimInput[frame=lines,numbers=left,label=analysis.do]{../DataWork/Lab1/analysis.do}}
 \end{figure*}
 
 \section{Part 3: Work with a master dofile}
@@ -300,7 +300,7 @@ Open |Project_MasterDofile.do| and make changes to it
 in ``PART 3: - RUN DOFILES CALLED BY THIS MASTER DOFILE''
 so that you can run both the dofiles you worked on during this session
 by running only the master dofile.
-Then, run |Lab2_MasterDofile.do| and verify
+Then, run |Lab1_MasterDofile.do| and verify
 that both the cleaning and analysis dofiles were executed.
 
 It might look like:
@@ -324,8 +324,8 @@ It might look like:
    * ******************************************************************** *
 
    // Lab 2: Stata Coding for Reproducible Research
-     if (1) do "${Lab2}/cleaning.do"
-     if (1) do "${Lab2}/analysis.do"
+     if (1) do "${Lab1}/cleaning.do"
+     if (1) do "${Lab1}/analysis.do"
 \end{Verbatim}
 
 Thanks to the template creators.\cite{tuftelatex}

@@ -1,7 +1,7 @@
-// Analysis dofile for Lab 2
+// Analysis dofile for Lab 1
 
   // Load the dataset
-  use "${Lab2}/Lab2_endline_data_final.dta", clear
+  use "${Lab1}/endline_data_final.dta", clear
 
   // Create some simple graphs
   graph bar numplots  ///

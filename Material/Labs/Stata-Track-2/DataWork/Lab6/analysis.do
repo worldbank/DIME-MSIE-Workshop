@@ -1,125 +1,106 @@
-* Suggested solution for Lab 6
+* Lab 7: Visualization
 
-	* Install programs
+* Easy graph defaults (milage varies by version)
 
-		net install ///
-			"https://raw.githubusercontent.com/worldbank/stata/master/wb_git_install/wb_git_install.pkg"
+	global graph_opts ///
+		title(, justification(left) color(black) span pos(11)) ///
+		graphregion(color(white) lc(white) lw(med) la(center)) /// <- Delete la(center) for version < 15
+		ylab(,angle(0) nogrid) xtit(,placement(left) justification(left)) ///
+		yscale(noline) xscale(noline) legend(region(lc(none) fc(none)))
 
-		wb_git_install sumStats
-		wb_git_install xml_tab
+	global graph_opts1 ///
+		title(, justification(left) color(black) span pos(11)) ///
+		graphregion(color(white) lc(white) lw(med) la(center)) /// <- Delete la(center) for version < 15
+		ylab(,angle(0) nogrid)  ///
+		yscale(noline) legend(region(lc(none) fc(none)))
 
-	* Use data
+* Task 1: Histogram
 
-		use "${Lab6_dtFin}/hh_roster.dta" ///
-		, clear
+	* Load data
 
-	* Create variable locals
+		use "${Lab7_dtFin}/hh_roster.dta" ///
+			if tag_hh == 1 , clear
 
-		local controls hh_fs_01 hh_fs_03 hh_fs_05 hh_inc_01 hh_inc_02
-		local outcome1 hh_inc_08 // Livestock sales
-		local outcome2 hh_inc_12 // LWH terracing
+	* Find a reasonable viewing range.
 
-* Task 1: Summary statistics
+		histogram hh_ag_16_x_16_1
+		histogram hh_ag_16_x_16_1 if hh_ag_16_x_16_1 < 10000
+		histogram hh_ag_16_x_16_1 if hh_ag_16_x_16_1 < 200
 
-	* Clean variables of missings
+		histogram hh_ag_16_x_16_1 ///
+				if hh_ag_16_x_16_1 < 200 & hh_ag_16_x_16_1 > 0 ///
+			, freq w(5)
 
-		foreach var of varlist  `controls' {
-				replace `var' = .a if `var' == -88
-			}
+	* Make a final histogram and save it
 
-	* Summarize food security
+		histogram ///
+			hh_ag_16_x_16_1 ///
+				if hh_ag_16_x_16_1 < 200 & hh_ag_16_x_16_1 > 0 ///
+			, $graph_opts freq w(5) ytit("Number of households") ///
+				lc(black) lw(thin) fc(maroon) ///
+				xtitle("Days spent on land preparation {&rarr}")
 
-		sumStats ///
-			( `controls' `outcome1' `outcome2' ) ///
-			using "${Lab6_outRaw}/task1_1.xls" ///
-		, replace stats(N mean median sd min max)
+			graph save "${Lab7_outRaw}/task1.gph" , replace
 
-	* Summarize by treatment/control
+* Task 2: Bar chart
 
-		sumStats ///
-			(`controls' `outcome1' `outcome2' if hh_treatment == 0) ///
-			(`controls' `outcome1' `outcome2' if hh_treatment == 1) ///
-			(`controls' `outcome1' `outcome2' if tag_hh == 1) ///
-			using "${Lab6_outRaw}/task1_2.xls" ///
-		, replace stats(N mean median sd min max)
+	* Load data
 
-* Task 2: Balance table
+		use "${Lab7_dtFin}/hh_roster.dta" ///
+			if tag_hh == 1 , clear
 
-	* Balance tables
+	* Investigate outcome
 
-		**This is a balance table testing differences between treatment and control
-		* for household head gender, household size and all the income variables
-		iebaltab  ///
-			hh_head_gender hh_hhsize hh_inc_* ///
-		, grpvar(hh_treatment) ///
-			save("${Lab6_outRaw}/balance_1") replace
+		ta hh_gr_16 hh_ag_17_x_16_1 , row m
 
-		**The same balance table as above but the variable labels are used as row
-		* names instead of the variable names. A column for the total sample
-		* (treatment and control combined) is also added
-		iebaltab  ///
-			hh_head_gender hh_hhsize hh_inc_* ///
-		, grpvar(hh_treatment) total 	///
-			save("${Lab6_outRaw}/balance_2") ///
-				replace rowvarlabel
+	* Bar graph
 
-		**The same balance table as above but row labels for hh_hhsize and hh_head_gender
-		* are entered manually. rowvarlabels is still used so the variable label is used
-		* for all other variables. Some observations has missing values in the income
-		* variables. balmiss(zero) treats those missing values as zero instead of dropping
-		* the observation from the table. An ftest for joint difference is also added at
-		* the bottom of the table.
-		iebaltab ///
-		 	hh_head_gender hh_hhsize hh_inc_* ///
-		, grpvar(hh_treatment) total 	///
-			balmiss(zero) ftest				///
-			save("${Lab6_outRaw}/balance_3") ///
-				replace rowvarlabel ///
-			rowlabels("hh_hhsize Household Size @ hh_head_gender Share of male household heads")
+		graph bar hh_ag_17_x_16_1 ///
+			, over(hh_gr_16) horizontal ///
+				${graph_opts1} ylabel(0 "0%" .25 "25%" .5 "50%" .75 "75%" 1 "100%") ///
+				ytitle("Proportion of households that hired labor to assist {&rarr}") ///
+				title("Use of hired labor by LWH cooperative") ///
+				bar(1 ,	lw(thin) lc(black) fc(navy) fi(50))
 
+			graph save  "${Lab7_outRaw}/task2.gph" , replace
 
-* Task 3: Regression table
+* Task 3: Scatter plot
 
-	* Regressions
+	* Load data
 
-		reg `outcome1' ///
-			`controls' ///
-		, cl(hh_id)
-			est sto reg1
+		use "${Lab7_dtFin}/hh_roster.dta" , clear
 
-		reg `outcome2' ///
-			`controls' ///
-		, cl(hh_id)
-			est sto reg2
+	* Scatter plot
 
-		reg `outcome1' ///
-			hh_treatment ///
-			`controls' ///
-		, cl(hh_id)
-			est sto reg3
+		tw ///
+			(scatter hh_ag_18_x_16_1 hh_ag_16_x_16_1 ///
+				if hh_treatment == 0 ///
+				, mc(navy) ms(Oh)) ///
+			(scatter hh_ag_18_x_16_1 hh_ag_16_x_16_1 ///
+				if hh_treatment == 1 ///
+				, mc(maroon) ms(T)) ///
+			(lowess hh_ag_18_x_16_1 hh_ag_16_x_16_1 ///
+				if hh_treatment == 0 ///
+				, lc(navy) lw(thick)) ///
+			(lowess hh_ag_18_x_16_1 hh_ag_16_x_16_1 ///
+				if hh_treatment == 1 ///
+				, lc(maroon) lw(thick)) ///
+		if hh_ag_16_x_16_1 < 200 & hh_ag_16_x_16_1 > 0 & hh_ag_18_x_16_1 < 20000 ///
+		, ${graph_opts} ///
+			xtitle("Days spent on land preparation {&rarr}") ///
+			ytitle("Amount spent on hired labor") ///
+			legend(order(1 "Control" 2 "Treatment") c(1) ring(0) pos(1))
 
-		reg `outcome1' ///
-			hh_treatment ///
-			`controls' ///
-		, cl(hh_id)
-			est sto reg4
+			graph save "${Lab7_outRaw}/task3.gph" , replace
 
-	* Output: basic
+* Combine
 
-		xml_tab ///
-			reg1 reg2 reg3 reg4 ///
-		using "${Lab6_outRaw}/task3_1.xls" ///
-		, replace
+	graph combine ///
+		"${Lab7_outRaw}/task1.gph" ///
+		"${Lab7_outRaw}/task2.gph" ///
+		"${Lab7_outRaw}/task3.gph" ///
+	, graphregion(color(white))
 
-	* Output: cleaned
-
-		xml_tab ///
-			reg1 reg2 reg3 reg4 ///
-		using "${Lab6_outRaw}/task3_1_clean.xls" ///
-		, replace below stats(N r2) ///
-			keep(hh_treatment `controls' _cons) ///
-			lines(COL_NAMES 3 LAST_ROW 3) ///
-			cnames("Livestock" "LWH Terracing" "Livestock" "LWH Terracing") ///
-			format((S2110) (SCCB0 N2302))
+		graph export "${Lab7_outRaw}/lab7.png" , replace width(1000)
 
 * Have a lovely day!

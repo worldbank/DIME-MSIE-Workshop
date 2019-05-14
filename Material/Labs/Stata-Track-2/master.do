@@ -8,7 +8,7 @@
   iefolder new project , project("${directory}")
 
   // Create separate folders for each lab
-  forvalues i = 2/7 { // Set up for all the labs
+  forvalues i = 1/6 { // Set up for all the labs
     iefolder new subfolder "Lab`i'", project("${directory}")
   }
 

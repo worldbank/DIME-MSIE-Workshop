@@ -1,49 +1,62 @@
-// Cleaning dofile for Lab 2
+* Lab 3 cleaning dofile
 
-  // Load the dataset
-  use "${Lab2}/endline_data_raw.dta", clear
+* Open the Lab3 dataset.
 
-  // Check ID variable
-  duplicates report id_05
-    duplicates drop id_05, force // Don't do this in reality, this is just a demo!
-    isid id_05 , sort
+		use "${Lab3_dtInt}/endline_data_raw.dta" , clear
 
-  // Set up macros for desired variables
-  local id id_05 gr_16
-  local treatment oi_assign
-  local baseline numplots pl_hhsize pl_id_10 pl_id_09 pl_id_08
-  local hhh pl_age_1 pl_sex_1
-  local fs fs_01 fs_02 fs_03 fs_04 fs_05
-  local inc inc_01 inc_02 inc_03 inc_06 inc_08 inc_09 inc_12 ///
-    inc_13 inc_14 inc_15 inc_16 inc_17 inc_t
-  local ag ag_16_x_16_1 ag_16_y_16_1 ag_16_z_16_1 ag_17_x_16_1 ///
-    ag_17_y_16_1 ag_17_z_16_1 ag_18_x_16_1 ag_18_y_16_1 ag_18_z_16_1
+	* We are going to keep only variables from the household roster.
 
-  // Keep only the selected variables
-  keep            ///
-    `id'          /// ID variables
-    `treatment'   /// Treatment variables
-    `baseline'    /// Baseline data
-    `hhh'         /// Household head data
-    `fs'          /// Food security data
-    `inc'         /// Income data
-    `ag'           // Ag data for Plot A
+		keep id_05 age_* pl_sex_* education_*
+			drop *str* *new*
 
-  // Clean up -88 survey codes
-  foreach var of varlist * {
-    cap replace `var' = .a if (`var'==-88)
-  }
+	* Investigation
 
-  // Generate binary treatment variable
-  gen treatment = (oi_assign=="Treatment")
-    lab var treatment "Treatment"
-    lab def treatment ///
-      0 "Control"     ///
-      1 "Treatment"
-    lab val treatment treatment
+		codebook, compact
 
-  // Save the dataset
-  saveold "${Lab2}/endline_data_final.dta", replace v(12)
-    use "${Lab2}/endline_data_final.dta", clear
+		duplicates report id_05
+		duplicates list id_05
 
-// Have a lovely day! // Stata needs a blank line at the end of code. I like affirmations.
+		codebook education_1
+
+		summarize education_1, detail
+
+		histogram education_1
+
+	* Reshaping the household roster data
+
+		duplicates drop id_05 , force
+
+		rename edu*_* edu*[2]
+		rename *sex_* sex*[2]
+		rename age_* age*
+
+		rename id_05 hh_id
+
+		reshape long age sex edu, i(hh_id) j(mem_id)
+
+	* Cleaning
+
+		drop if sex == .
+		label var mem_id "Member ID"
+
+		label var age "Age"
+		label var sex "Sex"
+			label def sex 1 "Male" 2 "Female" , modify
+			label val sex sex
+		label var edu "Education"
+
+		numlabel ed_level , add
+
+		tab edu, missing plot
+			replace edu = .a if edu == -88
+			replace edu = .b if edu == -66
+
+		label def ed_level .a "Don't Know" .b "Refused" , modify
+		numlabel ed_level , remove force
+
+	* Save this.
+
+		saveold "${Lab3_dtInt}/hh_roster_clean.dta" , replace v(12)
+			use "${Lab3_dtInt}/hh_roster_clean.dta" , clear
+
+* Have a lovely day! <- Stata needs a blank line at the end of code. I like affirmations.
