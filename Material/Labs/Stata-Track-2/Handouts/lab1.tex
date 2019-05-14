@@ -216,7 +216,7 @@ and improve them for readability.
 Before you start the exercises, make sure you run the new |Project_MasterDofile.do|.
 This will store globals with filepaths you will use to load your data.
 
-You will find a data file, |/data/endline_data_raw_dedup.dta|
+You will find a data file, |/data/endline_data_raw_nodup.dta|
 in the public Field Coordinator Training folder.
 Save this dataset to |/DataWork/Lab1/|.
 This data has already been de-identified.
@@ -228,13 +228,13 @@ You will also find a |.do| file, |/dofiles/Lab1-cleaning.do|
 in the public Field Coordinator Training folder.
 Save this dofile as |/DataWork/Lab1/cleaning.do| and open it in Stata.
 Edit this file.
-Use the global |Lab1| to load the |endline_data_raw_dedup.dta| data set
+Use the global |Lab1| to load the |endline_data_raw_nodup.dta| data set
 by adding a line in the beginning of the dofile you just opened.
 You should write something like:
 \marginnote{Reminder: You should always use quotation marks around filepaths,
 you should always use \{ \} around globals, and you should always use “/” in filepaths.}
 \begin{Verbatim}
-  use "${Lab1}/endline_data_raw_dedup.dta" , clear
+  use "${Lab1}/endline_data_raw_nodup.dta" , clear
 \end{Verbatim}
 |Lab1| is a global macro defined in |Project_MasterDofile.do|
 specifying the file path to the |/Lab1/| folder.
@@ -242,7 +242,7 @@ It was created automatically by |iefolder|.
 
 See what you can do to improve this do-file
 based on the techniques in the presentation.
-The .do file corresponds to the data set |endline_data_raw_dedup.dta|.
+The .do file corresponds to the data set |endline_data_raw_nodup.dta|.
 You will need to open both the do-file and |browse| and |describe|
 the data set in order to understand what the do-file is supposed to do.
 Can you make it clearer which dataset this depends on?

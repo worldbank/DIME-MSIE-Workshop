@@ -87,7 +87,7 @@
    * ---------------------
 
    if $user == 1 {
-       global projectfolder "/Users/bbdaniels/Desktop/Stata-Track-2"
+       global projectfolder "/Users/bbdaniels/GitHub/DIME-MSIE-Workshop/Material/Labs/Stata-Track-2"
    }
 
    if $user == 2 {
@@ -110,6 +110,10 @@
 *iefolder will not work properly if the line above is edited
 
 
+   *Lab1 sub-folder globals
+   global Lab1                   "$dataWorkFolder/Lab1"
+   global Lab1_encrypt           "$encryptFolder/Subfolder Lab1 Encrypted"
+
    *Lab2 sub-folder globals
    global Lab2                   "$dataWorkFolder/Lab2"
    global Lab2_encrypt           "$encryptFolder/Subfolder Lab2 Encrypted"
@@ -129,10 +133,6 @@
    *Lab6 sub-folder globals
    global Lab6                   "$dataWorkFolder/Lab6"
    global Lab6_encrypt           "$encryptFolder/Subfolder Lab6 Encrypted"
-
-   *Lab7 sub-folder globals
-   global Lab7                   "$dataWorkFolder/Lab7"
-   global Lab7_encrypt           "$encryptFolder/Subfolder Lab7 Encrypted"
 
 *iefolder*1*FolderGlobals*master************************************************
 *iefolder will not work properly if the line above is edited
@@ -160,7 +160,7 @@
    * standardization, different sets of control variables,
    * adofile paths etc.
 
-   do "$dataWorkFolder/global_setup.do"
+   // do "$dataWorkFolder/global_setup.do"
 
 
 *iefolder*2*End_StandardGlobals*************************************************
@@ -185,8 +185,8 @@
    * ******************************************************************** *
 
    // Lab 2: Stata Coding for Reproducible Research
-     if (1) do "${Lab2}/cleaning.do"
-     if (1) do "${Lab2}/analysis.do"
+     if (1) do "${Lab1}/cleaning.do"
+     if (1) do "${Lab1}/analysis.do"
 
 *iefolder*3*End_RunDofiles******************************************************
 *iefolder will not work properly if the line above is edited

@@ -1,7 +1,7 @@
 // Cleaning dofile for Lab 1
 
   // Load the dataset
-  use "${Lab1}/endline_data_raw_dedup.dta", clear
+  use "${Lab1}/endline_data_raw_nodup.dta", clear
 
   // Check ID variable
   duplicates report id_05
