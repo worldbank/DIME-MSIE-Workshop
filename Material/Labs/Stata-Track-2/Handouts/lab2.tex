@@ -1,0 +1,409 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Stata Lab 2: Data Management}
+\author{Benjamin Daniels \\ bdaniels@worldbank.org}
+% \date{24 January 2009}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{upquote}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\renewcommand{\FancyVerbFormatLine}{\color{violet}}
+\DefineShortVerb{\|}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{marginfigure}%
+  \includegraphics[width=\linewidth]{light.png}
+\end{marginfigure}
+
+\begin{abstract}
+In this lab we will use our data management skills to complete two common, but complex tasks: reshaping data and merging master data.
+
+This exercise is challenging and will probably only be finished by those of you already familiar with some of the topics covered. This exercise is written in a step-by-step recipe fashion, so it should be possible to finish the task on your own if you do not finish it today.
+
+For those of you who are very familiar with these tasks and complete them quickly, there is a bonus exercise that introduces a helpful new command for data cleaning, |iecodebook|.
+
+\bigskip\noindent \textbf{Exercise Objectives}:
+\begin{enumerate}
+  \item Get used to the folder structure and load the raw data
+  \item Introduction to creating master data sets
+  \item Introduction to how to address unexpected values
+  \item Load “wide” data and |reshape| it into “long” data
+  \item Use a master dataset to |merge| data
+\end{enumerate}
+\end{abstract}
+
+%\printclassoptions
+\section{Part 1: Get used to the folder structure (again)}
+
+As you know from Lab 2, the |iefolder| command sets up
+the basic folder structure for all data work for an entire project.
+But it is up to its users to make use of
+and maintain the basic structure so that
+new users can intuitively understand your work.
+It is often the case that research assistants
+are the ones leading in making sure this is accomplished;
+however, it is important that field coordinators are familiar with this system
+so you can understand what RAs have done –
+since you will often work with two, three, or more RAs
+over the course of a single project!
+
+As you work with full projects,
+you will inevitably get more used to the structure,
+but here is an introduction exercise to get you started.
+If you have not yet created a |/Lab3/| folder,
+do so now using |iefolder|.
+In the first lab, we did this using:
+\begin{Verbatim}
+  iefolder new subfolder Lab1, project("${directory}")
+\end{Verbatim}
+where |directory| was the name of the global macro
+we created to store the location of our project folder.
+
+If you have closed Stata since then,
+you will need to run code to creates that macro again.
+All global macros are cleared at the end of the session,
+and are also cleared whenever we begin a session with |ieboilstart|.
+That is also why this segment of code appears in |Project_MasterDofile.do|:
+\begin{Verbatim}[frame=leftline,numbers=left]
+*Set this value to the user currently using this file
+  global user  1
+
+* Root folder globals
+* ---------------------
+
+  if $user == 1 {
+    global projectfolder "/Users/bbdaniels/GitHub/DIME-MSIE-Workshop/Material/Labs/Stata-Track-2"
+  }
+  if $user == 2 {
+    global projectfolder ""  // Enter the file path to the project folder for the next user here
+  }
+\end{Verbatim}
+This section of code allows you to change between
+users of the code, by pre-specifying where the project folder
+is located on each user's computer.
+Since the project folder will be identical for all users,
+the remainder of the code creates additional global macros
+that hold that information separately:
+\begin{Verbatim}[frame=leftline,numbers=left]
+ *Lab1 sub-folder globals
+ global Lab1                   "${dataWorkFolder}/Lab1"
+ global Lab1_encrypt           "${encryptFolder}/Subfolder Lab1 Encrypted"
+
+ *Lab2 sub-folder globals
+ global Lab2                   "${dataWorkFolder}/Lab2"
+ global Lab2_encrypt           "${encryptFolder}/Subfolder Lab2 Encrypted"
+
+ *Lab3 sub-folder globals
+ global Lab3                   "${dataWorkFolder}/Lab3"
+ global Lab3_encrypt           "${encryptFolder}/Subfolder Lab3 Encrypted"
+\end{Verbatim}
+...and so on. It is now straightforward for multiple users
+to share the entire folder structure,
+because allowing another person to work
+on the same code is as simple as adding their filepath
+to the ``root folder globals'' section.
+Notice that, because all the global macros are fully expanded,
+if you write
+\begin{Verbatim}
+  di "${Lab2}"
+\end{Verbatim}
+Stata will show you the complete filepath to the folder.
+
+As you work with full projects,
+instead of using subfolders,
+you will use |round| folders instead.
+You can try creating one as a demo using a command like:
+\begin{Verbatim}
+  iefolder new round Baseline, project("${projectfolder}")
+\end{Verbatim}
+Note that we can now use the |projectfolder| global in the code.
+Take a minute to explore the Baseline folder,
+and see what global definitions were added tp |Project_MasterDofile.do|.
+In a full project, this file stucture is used to stay organized,
+with data and code in the correct place for various tasks.
+(In these exercises, we will continue using the simpler subfolders
+to get used to using a single master file and globals.)
+
+\section{Part 2: Create a master dataset}
+
+If you have not done so yet, create a Lab 2 subfolder using:
+\begin{Verbatim}
+  iefolder new subfolder Lab2, project("${projectfolder}")
+\end{Verbatim}
+Copy two datasets into that folder:
+|endline_data_raw_nodup.dta|, which we provided, and
+|endline_data_final.dta|, which we created in Lab 1.
+(There is a spare copy for you in the Materials folder.)
+Now we are ready to get to work.
+
+First, we are going to create a household master data set
+from the data we created in Lab 1.
+Start a new do-file and save it as:
+|/Lab3/Dofiles/Construct/construct-masterhh.do.|
+Use the dataset |endline_data_final.dta| that we created.
+Do |rename id_05 id| and check that it is an ID variable using |isid|.
+
+Label the household head variables |pl_*_1| so they will be interpretable,
+then use |rename| and |label| to mark everything as household-level variables
+(Hint: try |rename * hh_*|). Then |order| the id variables first,
+putting everything else in sequential order (not alphabetical),
+|compress| the data, and |saveold| this dataset as
+|master_households.dta| in the |/MasterData/| folder
+(using the global macro created in |Project_MasterDofile.do|)
+The |order| command makes the dataset easy to understand
+for the next person who opens it
+and |compress| ensures that it takes as little space as possible
+on the computer (and in transit).
+This might look like the one below.
+
+\section{Part 3: Clean, reshape, and merge a roster}
+
+\subsection{Identify unexpected values in data}
+
+In most cases we have research assistants cleaning the data set.
+But there are parts of the cleaning process
+that field coordinators usually are at least involved in resolving.
+This section will focus on those tasks.
+The most important task related to unexpected values
+for both research assistants and field coordinators is to identify them.
+In the end, it is up to the researcher in charge of the project
+to make the final decision on how to address them.
+The main lesson in this exercise is therefore to learn
+methods for exploring the data set for unexpected data values.
+But we will cover some examples on how to address them as well.
+
+Open Stata and a blank dofile (in the same dofile editor).
+Now, |use| the dataset |endline_data_raw_nodup.dta|, in the do-file.
+Let’s save this do-file now call it |reshape-roster.do|.
+As you know, Stata does not auto-save,
+so make sure to save your do-file frequently.
+(Again, it is even easier if you do this in a separate editor.)
+As with any data set you open for the first time,
+you should explore the data set to make sure that you understand
+the unit of observation and have a uniquely and fully identifying ID variable.
+For this exercise you do not have to correct anything you find,
+since we don't have field notes to go back to,
+but it is best to go through the process of exploring the data set
+to get into this extremely important habit.
+
+We are going to start by trimming this dataset
+down to the household roster and working from there.
+First, |keep| only the household ID variable and the
+|age_?|, |pl_sex_?|, and |education_?| variables from the household roster.
+Then, use the command |codebook, compact| on all variables.
+If you do not specify any variable Stata will assume that you mean all variables.
+What do you notice immediately?
+Look first at the columns |Obs| and |Unique|.
+For the ID variable, these should both be equal,
+and equal to the number of observations in the data set.
+Here you can see they are. If they were not,
+you could use |duplicates report id_05|
+to see how many errors there are and |duplicates list id_05| to see them.
+The |duplicates| command has many more features and is also worth exploring!
+
+For other variables, we are more concerned about missing values.
+Where the number in the |Obs| column match the number of observations in the data,
+we have no missing values.
+If the number is lower than the number of observations,
+we have observations with missing data.
+Sometimes that is ok, for example, if a question was not asked
+because of a skip pattern.
+Since you are not familiar with the questionnaire for this particular dataset,
+we will not ask you to follow up on missing values in this exercise,
+but you should do that in a real-life scenario.
+This data set is not as large as most survey datasets,
+so you can scroll through all variables.
+In a real data set, that would be difficult and you could, for example,
+limit the summarize command to the education variables by typing
+|codebook education_*, compact|.
+Look at the max and min values for the education variables.
+Are any of these values unexpected? Are any of the values too low or too high?
+
+Negative values do not make sense for an education variable,
+so -88 must be a survey code for a type of missing value.
+For example, “don’t know” or “declined to answer” could be coded like this.
+Type |codebook education_1|.
+In general, you will consult the questionnaire or
+the person who wrote the questionnaire to find out what the code represents.
+The |summarize| command also has an option called |detail|.
+Enter |summarize education_1, detail| in Stata.
+The first column with the title |Percentiles|
+gives you the value of some standard percentiles.
+Most observations in this data set did not have any income from renting out land.
+The middle column shows the four smallest values and the four largest values.
+The third column shows additional descriptive statistics.
+Another method to identify unexpected values is |histogram|.
+Histograms are particularly useful to explore outliers.
+Type |histogram education_1| in Stata,
+and you can see immediately where the data is unusual.
+
+\subsection{Reshaping the household roster dataset}
+
+The variables are right now in what we call a “wide” format:
+we have a dataset that (in our minds) corresponds to individuals,
+but each observation is actually a household.
+Therefore the individuals are listed across the rows (“wide”),
+and we would like to |reshape| the dataset so each row represents an individual.
+Type |help reshape| and give it a shot. (It is not going to work.)
+
+We need to do a little cleaning so that the |reshape| can proceed.
+Let’s rename some variables so they are more sensible
+using |rename|’s powerful syntax.
+Let’s try to have our dataset en up only with
+|age?|, |sex?|, and |edu?| variables using just three lines of code.
+(Hint: see what |rename *sex_* sex*[2]| does.
+Then |rename id_05 hh_id|.
+This is so that it matches exactly the corresponding code
+in the master dataset you just created.
+
+Now we have a dataset |reshape| can work with. Use:
+\begin{Verbatim}
+  reshape long age sex edu, i(hh_id) j(mem_id)
+\end{Verbatim}
+Then |browse| the data. How’s it look?
+Ok, no, it’s not great. Raw data never is.
+Clean and label this data fully –
+including, at this point, using |drop if (sex == .)|.
+Dropping observations with key variables missing
+does clean up after |reshape|,
+but in this case you’ll notice that some households
+are going to be dropped entirely: they have no members with data.
+Normally we’d go back and ask the field team why this is the case,
+but this will be used as an example for now.
+
+In part 2, we discussed how to identify codes
+used to represent missing values and outliers.
+You can also do that now that |reshape| has condensed the variables.
+To see what we are working with, do the following:
+type |codebook edu| and see that the name of
+the associated value label is |ed_level|.
+Then type |numlabel ed_level, add| and finally,
+|tab edu, missing plot|. Nearly magical, right?
+
+Each code -77, -88, ..., means something and
+if we would change them all to the same missing value (.),
+we would lose information.
+The researcher might want to know how many
+of the respondents that did not answer the question did it
+because they “don’t know”, “declined to answer” or the “question do not apply”.
+Stata provides a solution in its extended missing values (.a, .b, .c ... .z).
+If you are not familiar with missing values you can type |help missing|
+in Stata and read the documentation.
+We now need to replace the survey codes with these missing values.
+Do this now for |edu|, and add labels to |.a| and |.b|.
+Finally, |save| the data.
+When you are done, your dofile might look like the one below.
+There is a trick you can use to easily loop over all numeric variables
+if there are more than one using this scheme,
+but you will not need to do this here.
+Use |ds, has(type numeric)| to generate a varlist of all numeric variables
+that you then can loop through.
+If you do not know how to use |ds|, type |help ds| in Stata.
+
+\subsection{Merge the master data and the roster data}
+
+Start a new dofile and save it as |construct-roster.do|.
+This will be a short dofile: all we are going to do is |merge| on our master data.
+First, |use| the clean roster data you saved.
+Then type |help merge| and think about how to merge
+|master_households.dta| onto the roster dataset we’ve created. Do that.
+Once you do, |tab| the special |_merge| variable that is created.
+What does it tell you? Next, |drop| the |_merge| variable.
+Future merges will fail if the dataset contains this variable.
+Then, create a “tag” variable called |tag_hh|
+indicating the first person in each household using |egen| and label it.
+This will allow you to continue conducting analysis at the household level
+even in the combined dataset.
+Use |isid| to confirm that you have a unique ID variable (or combination).
+If you don’t, can you find out what the problem is?
+(Just for now, go ahead and |drop| the offending observations.)
+Finally, save the dataset as |hh_roster.dta|.
+When you are done, your dofile might look like the one below.
+
+\subsection{Using Excel to generate repetitive code}
+
+You can use Excel to manage repetitive code.
+A lot of what we have done in terms of cleaning
+could be done faster this way using a program called |iecodebook|,
+available at \url{http://worldbank.github.io/iefieldkit}.
+See if you can do some cleaning and labeling quickly using this tool.
+
+\begin{figure*}[h]
+{\setstretch{0.7}
+\VerbatimInput[frame=lines,numbers=left,label=construct-masterhh.do]
+{../DataWork/Lab2/construct-masterhh.do}}
+\end{figure*}
+
+
+\begin{figure*}[h]
+{\setstretch{0.7}
+\VerbatimInput[frame=lines,numbers=left,label=reshape-roster.do]
+{../DataWork/Lab2/reshape-roster.do}}
+\end{figure*}
+
+
+\begin{figure*}[h]
+{\setstretch{0.7}
+\VerbatimInput[frame=lines,numbers=left,label=construct-roster.do]
+{../DataWork/Lab2/construct-roster.do}}
+\end{figure*}
+
+Thanks to the template creators.\cite{tuftelatex}
+
+\bibliography{sample-handout}
+\bibliographystyle{plainnat}
+
+\end{document}
