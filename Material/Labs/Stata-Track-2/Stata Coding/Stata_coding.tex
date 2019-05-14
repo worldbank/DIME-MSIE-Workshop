@@ -14,7 +14,7 @@
 \usepackage{threeparttable}
 
 
-\title{Introduction to Stata}
+\title{Introduction to Stata Coding}
 \date{\today}
 \author{Benjamin Daniels} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
@@ -158,7 +158,8 @@
 \begin{multicols}{2}	
 	
 	\begin{itemize}[<default overlay specification>]
-		\item<1> Version Control –  Analysts can always find “that code that did that one thing”, and the current master version will have various experimental “branches” until they are confirmed functional and merged in.
+		\item<1> Version Control –  Analysts can always find “that code that did that one thing”, and the current master version will have various experimental “branches” until they are confirmed functional and merged in.
+
 		\item<1>  Efficiency – This allows simultaneous distributed editing of dofiles, text files, bibliographies, etc., but is not appropriate for Office/.dta/.pdf files.
 		\item<1>  Privacy – Must use paid account (such as github.com/worldbank) to have “private” or “secret” folders. 
 	\end{itemize}
@@ -289,7 +290,8 @@
 	
 	\begin{itemize}[<default overlay specification>]
 		\item<1>  Only define globals in the main master do-file.
-		\item<1>  Usages of globals:
+		\item<1>  Usages of globals:
+
 			\leavevmode 	\newline  - Root folders.
 			\leavevmode 	\newline  - Standardize conversion coefficients.
 			\leavevmode 	\newline  - Varlists commonly used across the project – for example list of controls included in multiple regressions.
