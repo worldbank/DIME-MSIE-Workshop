@@ -1,51 +1,43 @@
-* Suggested solution for Lab 5
+// Suggested solution for Lab 4
 
-	* Setup
+  // Setup
+    version 12.1
+    di c(version)
+    set seed 580917 // <- generated on Random.org at Timestamp: 2018-06-09 22:20:43 UTC
 
-		clear all
-		ieboilstart, v(12.0)
-		`r(version)'
+  // Load the data
+    use "${Lab4}/hh_roster.dta", clear
+      isid hh_id mem_id , sort // Confirm unique sort
+      drop hh_treatment // Drop the existing treatment assignment
 
-		 di `c(version)'
+  // Randomize a new treatment at the individual level
+    gen random = runiform(0,1)
+      xtile group = random , n(2)
+      recode group (1=0 "Control")(2=1 "Treatment") , gen(treatment)
 
-		 set seed 580917 // <- generated on Random.org at Timestamp: 2018-06-09 22:20:43 UTC
+    // Check randomness of randomization
+    gen n = _n
+    ranksum n , by(treatment)
+    drop random group n
 
-	* Load the data
+  // Save the randomization
+  saveold "${Lab4}/hh_roster_randomized.dta", replace v(12)
+      use "${Lab4}/hh_roster_randomized.dta" , clear
 
-		use "${Lab5_dtInt}/hh_roster.dta", clear
+// Confirm replicability
+  version 12.1 // Same version
+  set seed 580917 // Same seed
+  use "${Lab4}/hh_roster.dta", clear // Same data
+    isid hh_id mem_id , sort // Same sort order
+    drop hh_treatment
 
-			isid hh_id mem_id , sort
+  // Idendical randomization process
+  gen random = runiform(0,1)
+    xtile group = random , n(2)
+    recode group (1=0 "Control")(2=1 "Treatment") , gen(treatment)
+    drop random group
 
-		* Drop the existing treatment assignment
+  // Check against first randomization
+  cf _all using "${Lab4}/hh_roster_randomized.dta"
 
-			drop hh_treatment
-
-	* Randomize a new treatment at the individual level
-
-		gen random = runiform(0,1)
-		xtile group = random , n(2)
-
-		recode group (1=0 "Control")(2=1 "Treatment") , gen(treatment)
-
-		gen n = _n
-		ranksum n , by(treatment)
-
-	* Save it
-
-		saveold "${Lab5_dtFin}/hh_roster.dta", replace v(12)
-			use "${Lab5_dtFin}/hh_roster.dta" , clear
-
-* Do it again!
-
-	set seed 580917
-	use "${Lab5_dtInt}/hh_roster.dta", clear
-		isid hh_id mem_id , sort
-		drop hh_treatment
-
-	gen random = runiform(0,1)
-		xtile group = random , n(2)
-		recode group (1=0 "Control")(2=1 "Treatment") , gen(treatment)
-
-	cf _all using "${Lab5_dtFin}/hh_roster.dta"
-
-* Have a lovely day!
+// End of dofile

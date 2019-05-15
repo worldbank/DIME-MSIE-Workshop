@@ -184,9 +184,5 @@
    *
    * ******************************************************************** *
 
-   // Lab 2: Stata Coding for Reproducible Research
-     if (1) do "${Lab1}/cleaning.do"
-     if (1) do "${Lab1}/analysis.do"
-
 *iefolder*3*End_RunDofiles******************************************************
 *iefolder will not work properly if the line above is edited

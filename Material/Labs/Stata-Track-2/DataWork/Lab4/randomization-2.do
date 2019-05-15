@@ -1,62 +1,54 @@
-* Suggested solution for Lab 5
+// Suggested solution for Lab 4
 
-	* Setup
+  // Setup
+    version 12.1
+    di c(version)
+    set seed 580917 // <- generated on Random.org at Timestamp: 2018-06-09 22:20:43 UTC
 
-		clear all
-		ieboilstart, v(12.0)
-		`r(version)'
+  // Load the data
+    use "${Lab4}/hh_roster.dta", clear
+      isid hh_id mem_id , sort // Confirm unique sort
+      drop hh_treatment // Drop the existing treatment assignment
 
-		 di `c(version)'
+  // Randomize a new treatment at the individual level
+    gen random = runiform(0,1)
+    xtile group = random , n(5)
 
-		 set seed 580916 // <- generated on Random.org at Timestamp: 2018-06-09 22:20:43 UTC
+    recode group ///
+      (1=0 "Control") ///
+      (2=1 "Treatment A") ///
+      (3=2 "Treatment B") ///
+      (4=3 "Treatment C") ///
+      (5=4 "Treatment D") ///
+    , gen(treatment)
 
-	* Load the data
+  // Save
+  saveold "${Lab4}/hh_roster_randomized.dta", replace v(12)
+      use "${Lab4}/hh_roster_randomized.dta" , clear
 
-		use "${Lab5_dtInt}/hh_roster.dta", clear
+// With [randtreat]
 
-			isid hh_id mem_id , sort
+  ssc install randtreat , replace
 
-		* Drop the existing treatment assignment
+  // No misfits
 
-			drop hh_treatment
+    set seed 580916
+    use "${Lab4}/hh_roster.dta", clear
+      isid hh_id mem_id , sort
+      drop hh_treatment
 
-	* Randomize a new treatment at the individual level
+    randtreat , generate(treatment) multiple(5)
 
-		gen random = runiform(0,1)
-		xtile group = random , n(5)
+  // Misfits
 
-		recode group (1=0 "Control") ///
-			(2=1 "Treatment A")(3=2 "Treatment B")(4=3 "Treatment C")(5=4 "Treatment D") ///
-		, gen(treatment)
+    set seed 580916
+    use "${Lab4}/hh_roster.dta", clear
+      isid hh_id mem_id , sort
+      drop hh_treatment
 
-	* Save it
+    randtreat ///
+    , generate(treatment) ///
+      multiple(5) ///
+      misfits(global)
 
-		saveold "${Lab5_dtFin}/hh_roster.dta", replace v(12)
-			use "${Lab5_dtFin}/hh_roster.dta" , clear
-
-* With [randtreat]
-
-	ssc install randtreat
-
-	* No misfits
-
-		set seed 580916
-		use "${Lab5_dtInt}/hh_roster.dta", clear
-			isid hh_id mem_id , sort
-			drop hh_treatment
-
-		randtreat , generate(treatment) multiple(5)
-
-	* Misfits
-
-		set seed 580916
-		use "${Lab5_dtInt}/hh_roster.dta", clear
-			isid hh_id mem_id , sort
-			drop hh_treatment
-
-		randtreat ///
-		, generate(treatment) ///
-			multiple(5) ///
-			misfits(global)
-
-* Have a lovely day!
+// End of dofile
