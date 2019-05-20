@@ -1,0 +1,130 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Stata Lab ?: Title Title Title}
+\author{DIME Analytics \\ dimeanalytics@worldbank.org}
+\date{11 June 2019}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{upquote}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\renewcommand{\FancyVerbFormatLine}{\color{violet}}
+\DefineShortVerb{\|}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{marginfigure}%
+  \includegraphics[width=\linewidth]{light.png}
+\end{marginfigure}
+
+\begin{abstract}
+Write a short description of the objective of the exercise here. List the specific items you will cover in the list below.
+
+\bigskip\noindent \textbf{Exercise Objectives}:
+\begin{enumerate}
+  \item Specific item 1
+  \item Specific item 2
+  \item Specific item 3
+\end{enumerate}
+\end{abstract}
+
+%\printclassoptions
+\section{Part 1: Part with text and short code example}
+
+Write the description of your exercise here. Write brief but assume little pre-existing knowledge, meaning that make sure to mention and explain all concepts needed at the same time as you make it possible for someone already familiar with the topics to skip ahead. One way to accomplish that is to have titles and text highlights (bold and italic) that gives someone reading the text quickly a good idea about what each paragraph is about.
+
+A short \textbf{code example} is easily written like this:
+
+\begin{Verbatim}
+  /users/bbdaniels/Dropbox/MSIE 2019/
+\end{Verbatim}
+
+
+Use a lot of code examples as people doing the exercise often get stuck on small syntax errors. Triple-check that your code as no typos, as they are very confusing for anyone trying to follow the exercise who is not already an expert on the topic.
+
+%\printclassoptions
+\section{Part 2: Part with side note}
+Referencing more detailed resources or citing sources you used is a great way to make the exercise helpful no matter what level the person doing the exercise, as more advanced people can follow these links and learn more. The DIME Wiki\sidenote{The DIME Wiki lists best practices based on experiences in DIME at the World Bank - \url{https://dimewiki.worldbank.org}} is an example of a great tool. The side notes will update their numbering automatically and they will float nicely at the side of the page.
+
+
+%\printclassoptions
+\section{Part 3: Part with longer code}
+Often code examples are longer than just a line or two. When we want to write longer sections of code we can use the \verb|[frame=leftline,numbers=left]| option to Verbatim and we the code will be formatted like a section of code and all lines will be numbered so that can be easily referenced from the text. As in, \textit{see how the master-do file run other do-files on line 11 and 12}.
+
+\begin{Verbatim}[frame=leftline,numbers=left]
+*iefolder*3*RunDofiles**********************************************************
+*iefolder will not work properly if the line above is edited
+
+* ******************************************************************** *
+*
+*       PART 3: - RUN DOFILES CALLED BY THIS MASTER DOFILE
+*
+* ******************************************************************** *
+
+// Lab 2: Stata Coding for Reproducible Research
+if (1) do "${Lab1}/cleaning.do"
+if (1) do "${Lab1}/analysis.do"
+\end{Verbatim}
+
+%\printclassoptions
+\section{Part 4: Part with imported do-file}
+
+For long do-files and scripts it might be easier to write them in a separate file. Imported files looks slightly different but the principle is the same and the line numbering is still there. This might be an easier way to keep track of more complicated code examples, and longer code examples can more quickly be included without a lot of time spent on editing.
+
+\begin{figure*}
+{\setstretch{0.7}
+\VerbatimInput[frame=lines,numbers=left,label=master.do]{./master.do}}
+\end{figure*}
+
+\end{document}
