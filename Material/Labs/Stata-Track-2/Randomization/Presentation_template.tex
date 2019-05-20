@@ -1,0 +1,479 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+
+
+\title{Reproducible Randomization}
+\date{\today}
+\author{Benjamin Daniels} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{green},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+{
+	\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+	\maketitle
+}
+
+\begin{frame}{Why do we randomize?}
+
+	\begin{itemize}[<default overlay specification>]
+		\item<1> We want to assign the intervention of our projects so that the control group is as similar as possible to the treatment group as possible. 
+			\newline - This is called a balanced treatment assignment. 
+			\newline - Randomization is the most common tool to achieve that.
+			\newline - With randomization, we know that the treatment is uncorrelated with the outcome ex ante.
+		\item<1> Each observation needs to have the same probability to end up in the each treatment arm, and all groups need to be statistically similar. 
+	\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Background?}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> Pure random assignment guarantees that the treatment and control groups, on average, will have identical characteristics. 
+	\item<1> In any particular random allocation, the two groups will differ along some dimensions, with the probability that such differences are large, falling with sample.
+		\newline - Confounders. 
+		\newline - Efficiency (e.g. unequal group size). 
+	\item<1> Small-scale experiments (30 to 100 observations). 
+	\item<1> What options exist and what to do?
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Review: Balance tries to establish a counterfactual}
+\begin{multicols}{2}	
+	
+	\textbf{What we know:}
+	\newline Good randomization methods produce an unbiased estimate for treatment in the average randomization.
+	
+	\textbf{What we don’t know:}
+	\newline Good randomization methods produce an unbiased estimate for treatment in the average randomization.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=75mm]{img/Balance}
+	\end{figure}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Pure RCTs are balanced – in the average assignment}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> No matter what statistics you are going by, if a (conditional) means difference has p=0.05, a difference of that size will be realized in 5\% of draws. That’s the definition.
+	\item<1> The average randomized treatment assignment produces statistically identical groups across treatments.
+	\item<1> But, a p=0.05 tail draws happen one time in 20. 
+	\item<1> You only get one draw on your randomization!
+	\item<1> We’d like balance tests to show ours was a “good” one, so that “real” differences must be due to treatment assignment.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Balance leads to unbiasedness: Need a model and an assumption}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> Model – Asymptotically normal OLS
+		\newline - T-statistics of “closeness” to the average randomization depend on large-sample properties.
+	\item<1> Assumption – no omitted variables in regression
+		\newline Unless all x’s in X are in the model, balance on observables doesn’t imply that expected outcomes for treated and untreated are equal.
+		\newline If you are wrong, biases are of unknown magnitude and direction depending on the omitted variable’s actual correlation with treatment and outcome variables (classical OVB).
+		\newline In small samples especially, can’t guarantee that treatment randomization  produces zero expected differences for all omitted covariates.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{What we often do: block/stratify the experiment}
+\begin{multicols}{2}	
+	
+\begin{itemize}[<default overlay specification>]	
+	\item<1>  Meets our core criteria:
+		\newline - Randomization process is fixed over real data.
+		\newline - Counterfactuals (zero treatment effect) has a distribution that can be simulated exactly.
+	
+	\item<1>  Allows use of “randomization inference” statistics that do not depend on extrapolation from model.
+\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=75mm]{img/Balance2}
+	\end{figure}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{Especially valuable when N is small:}
+\begin{multicols}{2}	
+	
+	\begin{itemize}[<default overlay specification>]	
+		\item<1>  Key idea:
+		\newline - Reducing the number of possible randomizations to those where the treatment and control are intentionally similar reduces the possible variation in estimate of the true treatment effect.
+		\newline - Moderate sample size reduces the advantage, but it depends critically on underlying dispersion of outcomes (Bruhn and McKenzie 2009).
+	\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=75mm]{img/Small_N}
+	\end{figure}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Types of Randomization}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> Simple
+		\newline - Each individual person is assigned either Treatment or Control with some probability.
+	\item<1> Cluster
+		\newline - Randomization happens on group level (village, school etc. ) and all individuals in a group are assigned the same treatment. 
+	\item<1> Stratified
+		\newline - Sub-sets of similar observations (rich/poor, male/female etc.) are determined in advance, and randomization is done separately within each sub-set. 
+		\newline - Guarantees that equal number of similar observations (rich/poor, male/female etc.) are assigned to be each treatment and control.
+	\item<1> Pairwise
+		\newline - Extreme form of stratification. 
+		\newline - All units are matched to make pairs that are as similar as possible and one unit from each pair is assigned to be T or C.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Methods of randomization}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> Good:
+		\newline - Field Based.
+		\newline -Stata, especially via programming a randomization command. 
+		\newline - R, Python, or other replicable software.
+	\item<1> Never use:
+		\newline - Excel – and other non-replicable software.
+		\newline - Excel and many other software has random generators, but they do not allow a controlled randomization. 
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Randomization: Field vs Computer}
+\begin{multicols}{2}	
+
+\begin{figure}
+	\centering
+	\includegraphics[width=75mm]{img/Randomization}
+\end{figure}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=75mm]{img/Randomization2}
+\end{figure}
+
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Prepare randomization in Stata}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> Define randomization design
+		\newline - Unit of randomization (cluster).
+		\newline - Number \& size of treatment arms. 
+		\newline - Stratification.
+		\newline - Variables of interest to test balance.
+	\item<1> Obtain a list of observations to be randomized.
+	\item<1> Randomize and document using Stata!
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Ex 1: Basic Randomization in Stata}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> We have 10 students and we want half of them to be treatment and control.
+	\item<1> What is our randomization rule?
+	\item<1> How do we randomize in Stata such that it is random but replicable?
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Simplified example of randomization}
+\begin{multicols}{2}	
+	
+	\begin{enumerate}[<default overlay specification>]	
+		\item<1>  Start with a list of observations you want to randomize. Generate random numbers.
+		\item<1> Sort the observations after these random number. The order of the observations are now randomly sorted.
+		\item<1> Assign 0 (control) to the first half of the observations, and assign 1 (treatment) to the second half.
+	\end{enumerate}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=75mm]{img/Randomization3}
+	\end{figure}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{The 3 rules of replicable randomization}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1> We should make our randomization to be replicable and get the same results for research transparency.
+	\item<1> Three rules of replicable randomization in Stata.
+		\newline - Same Stata version.
+		\newline - Same seed. 
+		\newline - Sample ordered in same way.
+	\item<1> The next slides explains the meaning of these rules and why it matters.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 1: Same Stata version}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=75mm]{img/Randomization4}
+	\end{figure}
+	
+	\begin{itemize}[<default overlay specification>]	
+		\item<1>  Stata has pre-calculated list of random numbers. However, each Stata version has a different list of random numbers. 
+		\item<1> Any list is equally good for our randomization, but we need to use only one list to get the same result. You can pick one by specifying which Stata version to use in randomization (older version can be used, but not newer). 
+		\item<1> In reality these lists are billions of items long, instead of 8 as in the example above. 
+	\end{itemize}
+	
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 1: Same Stata version}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=75mm]{img/Randomization5}
+\end{figure}
+
+\begin{itemize}[<default overlay specification>]	
+	\item<1>  Stata goes through the lists and assigns the 1st value to the first observation, 2nd to the second observation, etc.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 2: Same seed}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=75mm]{img/Randomization6}
+\end{figure}
+
+\begin{itemize}[<default overlay specification>]	
+	\item<1>  Setting the seed change the starting place in the list.
+	\item<1>  Stata has its default seed at the time of launching
+	\item<1>  You should set the seed to certain number to make it replicable as well as unique to your study.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}[fragile]{Rule 2: Same seed}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=75mm]{img/Randomization7}
+\end{figure}
+
+\begin{itemize}[<default overlay specification>]	
+	\item<1>  Setting the seed change the starting place in the list.
+	\item<1>  Stata has its default seed at the time of launching
+	\item<1>  You should set the seed to certain number to make it replicable as well as unique to your study.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{The 3 rules of replicable randomization]}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Randomization8}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{The 3 rules of replicable randomization}
+\begin{multicols}{2}	
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  Same Stata version.
+		\newline - Guarantees the same list.
+		\newline - See commands [ieboilstart] or [version] in Stata.
+	\item<1>  Same seed.
+		\newline - Guarantees the same starting point in the list.
+		\newline - Choose a random number outside Stata (ex. random.org).
+		\newline - Large number (6-digit or longer) recommended.
+		\newline - See command [set seed].
+	\item<1>  Sample ordered in same way.
+		\newline - Guarantees that the same observation gets the same random number from the list.
+		\newline - Sort the data in a way that will remain constant even if someone else change the sort order of the data set you are using (use [isid varlist, sort], NOT [sort varlist, stable]).
+		\newline - Be aware that changing the data set, adding or removing observations, changes the sort order and therefore the entire randomization.
+\end{itemize}
+
+\end{multicols}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
+\sectionpic{Data Management}{img/section_slide}
+
+\begin{frame}{First Frame}
+Content here!
+\end{frame}
+
+
+\begin{frame}{Second Frame}
+Content here!
+\end{frame}
+
+\begin{frame}[fragile]{Testing Stata code and Text}
+\begin{multicols}{2}
+	\begin{lstlisting}
+	// Data
+	sysuse census.dta, clear
+	
+	// Basic Regression
+	reg divorce marriage pop
+	est sto reg1
+	
+	// Basic Regression 2
+	reg medage popurban
+	est sto reg2
+	
+	// Indicator Regression
+	reg divorce marriage pop i.region
+	est sto reg3
+	
+	// Interaction Regression
+	gen binary = rnormal() > 0
+	lab def binary 0 "No" 1 "Yes"
+	lab val binary binary
+	label var binary "Indicator"
+	reg divorce marriage pop i.region#i.binary
+	est sto reg4
+	\end{lstlisting}
+	\parbox{\linewidth}{
+		This is where you write content describing the Stata code in the text box to the left. Try not to place too much code in the text box. The Stat code is written in the lines before this.
+		\newline \newline
+		More information about the Stata, giving time for the participants to write the code themselves and run it.
+		\newline \newline
+		More information about the Stata code and the different ways to code it.
+	}
+\end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+\begin{frame}{Conclusion}
+
+Wrap up final contents of presentation
+
+\vspace{20mm}
+For more information or further questions please contact:
+\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{The End}{img/section_slide}
+
+
+
+
+
+
+\end{document} 
