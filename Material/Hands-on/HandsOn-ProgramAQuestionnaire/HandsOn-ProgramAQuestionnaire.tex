@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Hands-On Session: Program a Questionnaire}
+\author{DIME Analytics \\ dimeanalytics@worldbank.org}
+\date{11 June 2019}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{upquote}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\renewcommand{\FancyVerbFormatLine}{\color{violet}}
+\DefineShortVerb{\|}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{marginfigure}%
+  \includegraphics[width=\linewidth]{light.png}
+\end{marginfigure}
+
+\begin{abstract}
+This Exercise will allow you to practice the basics of how to add questions to an already started SurveyCTO form. This is a task you would do if you are asked to edit a section of an already programmed questionnaire, or if you were to add a new section.
+
+
+\bigskip\noindent \textbf{Exercise Objectives}:
+\begin{enumerate}
+  \item Understand how to read SurveyCTO format code
+  \item Take a question in paper based format and turn it into SurveyCTO syntax
+  \item Add the following type of questions:
+  \begin{enumerate}
+  	\item Simple text and number questions
+  	\item Multiple choice questions
+  	\item Repeated questions
+	\item Hidden calculation fields
+  \end{enumerate}
+\end{enumerate}
+\end{abstract}
+
+%\printclassoptions
+\section{Intro and context for the exercise}
+
+Your team is planning to conduct a survey based on the paper questionnaire (the PDF provided). Your team decided to use tablets instead of paper. One of the most common way to do this is to use the survey CTO, which uses excel format to construct the survey questionnaire. 
+
+The excel form you are provided with is already mostly filled in accordance with the paper questionnaire. Using the other section already in the form as examples, please complete the excel form so that you can upload the file and check if the form is working properly. You have 1 hour to complete the task. Please focus on the section1 before moving on to the rest of the exercise. 
+
+This exercise will use this paper based questionnaire and this SurveyCTO code that is already started for you. Starting a new questionnaire from scratch is not covered in this session.
+
+%\printclassoptions
+\section{Part 1: Add fields}
+In this section, you will need to input appropriate information into the blank cells to complete the form. If you complete this section, the form should be done, and ready to be uploaded to the survey CTO site. If the site returns error, some information is still missing. Please complete the form accordingly. Once the form is uploaded, you can check if the survey form works correctly. 
+
+\begin{enumerate}
+	\item General: Some information in the excel format is missing. Please find where these missing spots are and complete missing information. (For instance, in row 18 the value in column \textit{type} is missing. Please add the appropriate type to this column in this case.) 
+	\item Repeat: Module E uses two repeat patterns. One of them is incomplete. Please fill the cells to complete the repeat section.
+	\item Calculate field: Module E uses calculation function for name of medicine section. Please complete the missing cells. Why do we need this calculation? (Hint: Row 66 and 67 is a part of the incomplete calculation function.)
+\end{enumerate}
+
+%\printclassoptions
+\section{Part 2: Disscuss what some code means}
+In this section, you can demonstrate your understanding on the appearance and logic patterns. Logic patterns are important because they make mistakes like inputting wrong numbers by accident much less likely. For example, for a question \textit{What is your age?}, constraint \textit{.>=0 and .<200} (in human language, this means \textit{input must be greater than or equal to zero, and less than 200.}) prevents inputs like \textit{-9} or \textit{9999}. 
+
+\begin{enumerate}
+	\item Row 27 has appearance \textit{label}, which is different from the following row 28-34. Please explain what row 27 is doing.
+	\item Row 38 has constraint \verb|.<=100 and .>0 or .=-77 or .=-99|. In human language, what does this constraint mean?
+	\item Row 46 has relevance  \verb|selected(${d2},'-88')|. In human language, what does this mean? 
+	\item Row 60 has a calculation  \verb|if(${e1}>5,5,${e1}|. What does this calculation do? (Hint: this is for medicine\_torepeat. See where medicine\_torepeat is used)
+\end{enumerate}
+
+
+\end{document}
