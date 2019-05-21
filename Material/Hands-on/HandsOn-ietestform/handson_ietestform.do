@@ -20,7 +20,7 @@
 **Replace the empty srting in `c(username)' == "" with your
 * usernane. Type di `c(username)' to see the username in the
 * Stata you are using
-    if `c(username)' == "" {
+    if "`c(username)'" == "" {
 
     **Replace the empty string with the full path to folder
     * where you keep "CTO_testform_2.xlsx"
