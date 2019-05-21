@@ -122,9 +122,10 @@ if (1) do "${Lab1}/analysis.do"
 
 For long do-files and scripts it might be easier to write them in a separate file. Imported files looks slightly different but the principle is the same and the line numbering is still there. This might be an easier way to keep track of more complicated code examples, and longer code examples can more quickly be included without a lot of time spent on editing.
 
-\begin{figure*}
-{\setstretch{0.7}
-\VerbatimInput[frame=lines,numbers=left,label=master.do]{./master.do}}
-\end{figure*}
+\begin{minipage}{1.5\textwidth}
+	\vspace{.5cm}
+	{\setstretch{0.7}
+		\VerbatimInput[frame=lines,numbers=left,label=master.do,samepage=true]{./master.do}}
+\end{minipage}
 
 \end{document}
