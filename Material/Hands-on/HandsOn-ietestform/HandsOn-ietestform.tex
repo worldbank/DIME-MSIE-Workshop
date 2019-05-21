@@ -170,7 +170,56 @@ without a label in the [label] colum:
 	\end{minipage}
 
 %\printclassoptions
+\section{Part 3: Common tests}
 
+	For this exercise we have prepared a questionnaire form where we intentionally have included a lot of different type of things that |ietestform| will report on. Part 4 will discuss how to use the documentation to understand more uncommon cases once you encounter them, but this section will focus on more common cases.
+	
+	SurveyCTO's server perform a test when you are uploading a questionnaire. However, in order for them to allow innovative ways of coding they cannot make that test too strict. And that test only reports direct syntax errors that the software does not know how to run. There is no middle ground for warnings for risky practices, or warnings for practices that sometimes are correct but often are unintentional and can cause major complications while in the field. That is where this command comes in. 
+	
+	|ietestofrm| is not a substitute to the test on SurveyCTO's server, it is a compliment. The questionnaire form used in this exercise uploads without errors to SurveyCTO's server, but as you will see, it is full of practices that can lead to complications.
+
+\subsection{MISSING LIST LABELS}
+	Find the \textit{TEST: MISSING LIST LABELS} in the report you generated and find these cases in the Excel questionnaire form. Remember that the column row list which Excel row this case can be found at. Answer the following questions, and use the documentation linked to in the report for this test when you do not know the answer:
+	
+	\begin{enumerate}
+		\item What could go wrong if this case is not addressed?
+		\item Is there a case when this will not be found during testing? 
+		\item For a language like Spanish - which is used in this example - it is likely that the person coding the questionnaire will speak the language and test in all languages. Will that be the case for all local languages in the type of countries where we operate?
+	\end{enumerate}
+
+\subsection{REQUIRED NOTE TYPE FIELD}
+	Find the \textit{TEST: REQUIRED NOTE TYPE FIELD} in the report you generated and find these cases in the Excel questionnaire form.
+	
+	\begin{enumerate}
+		\item What could go wrong if this case is not addressed?
+		\item Can you come up with one case when it is correct to intentionally have a required field of type note?
+	\end{enumerate}
+
+\subsection{UNUSED CHOICE LISTS}
+	Find the \textit{TEST: UNUSED CHOICE LISTS} in the report you generated and find these cases in the Excel questionnaire form.
+	
+	\begin{enumerate}
+		\item What is a case found by this test usually a sign of? 
+	\end{enumerate}
+	
+	\noindent It is not always wrong to have a form with some unused choice list. But as in all coding, you are much less likely to make mistake if you keep your code cleaned up.
+
+\subsection{DUPLICATED LABEL WITHIN LIST}
+	Find the \textit{TEST: DUPLICATED LABEL WITHIN LIST} in the report you generated and find these cases in the Excel questionnaire form.
+	
+	\begin{enumerate}
+		\item What could go wrong if this case is not addressed?  
+	\end{enumerate}
+
+\subsection{SPACES BEFORE OR AFTER STRING (choice sheet)}
+	Find the \textit{TEST: SPACES BEFORE OR AFTER STRING (choice sheet)} in the report you generated and find these cases in the Excel questionnaire form.
+	
+	\begin{enumerate}
+		\item What could go wrong if this case is not addressed?   
+		\item Will this be an error in all use cases? 
+	\end{enumerate}
+
+	SurveyCTO's does not assume that the data will be analyzed in any specific software, so their test does not test for anything that will be an issue first when the data is imported to - for example - Stata. This is an example where |ietestform| test the SurveyCTO code based on the assumption that it will eventually be imported into Stata.
 
 %\printclassoptions
 \section{Part 3: Use the documentation}
