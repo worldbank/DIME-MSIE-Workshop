@@ -102,7 +102,11 @@ Referencing more detailed resources or citing sources you used is a great way to
 \section{Part 3: Part with longer code}
 Often code examples are longer than just a line or two. When we want to write longer sections of code we can use the \verb|[frame=leftline,numbers=left]| option to Verbatim and we the code will be formatted like a section of code and all lines will be numbered so that can be easily referenced from the text. As in, \textit{see how the master-do file run other do-files on line 11 and 12}.
 
-\begin{Verbatim}[frame=leftline,numbers=left]
+\begin{Verbatim}[frame=lines,
+		numbers=left,
+		label=ietestform-header,
+		samepage=true,
+		baselinestretch=0.75]
 *iefolder*3*RunDofiles**********************************************************
 *iefolder will not work properly if the line above is edited
 
