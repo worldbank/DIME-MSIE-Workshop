@@ -111,6 +111,65 @@ This Exercise will introduce new users to the features of the command \textbf{ie
 %\printclassoptions
 \section{Part 2: Read the output}
 
+	If the code ran successfully a report will have been created in the folder location you specified in the do-file. In the output window in Stata there will also be a hyper link to the file. Open the report either by clicking the link of clicking the file in the folder. 
+	
+	At the top of the file there are a section of meta-information on the how the report was generated. The first line indicates the username of the computer used to generate this report, when it was done and that it was ietestform that generated the report. This will be useful when a member of the research team in the future is looking at this report.
+	
+	Then there are two links to documentation, and lastly there is meta data about the form. Apart from the \textit{Form File} all these values are taken from the settings tab in the Excel file form definition. The \textit{Form File} value is the name of the file specified in the do-file when running |ietestform|.
+
+	\begin{minipage}{1.5\textwidth}
+		\vspace{.5cm}
+	 	\begin{Verbatim}[frame=lines,
+						numbers=left,
+						label=ietestform-header,
+						samepage=true,
+						baselinestretch=0.75]
+
+This report was created by user kbrkb on 15May2019 using the Stata command ietestform
+
+Use either of these links to read more about this command:
+	https://github.com/worldbank/iefieldkit
+	https://dimewiki.worldbank.org/wiki/Ietestform
+
+	Form ID      GHANA_instrument
+	Form Title   GHANA_instrument
+	Form Version 1905141904
+	Form File    CTO_testform_2.xls
+		\end{Verbatim}
+		\vspace{.5cm}
+ 	\end{minipage}
+ 
+	\noindent The rest of the report is organized in small section where each section corresponds to the result of a test. Tests that did not generate any results are not shown, so there are no "empty" sections. Each section follow the same format. First a title with the name of the test, then a sort description of which variables in which sheet the test found this case reported on, and then there is a section listing the cases found. Often this is a table like in the example below, but that is not aways applicable. The variable row does not exist in the Excel file, it is just a reference to the row in the excel sheet.
+	
+	Finally there is a link to the wiki page for this command where both the test and the underlaying best practice is explained in more detail. Whenever you are not sure why something is in the report of |ietestform| always start by reading the information on the linked wiki page. Not all cases found by |ietestform| are necessarily errors, but they should always be followed up on.
+ 	
+	\begin{minipage}{1.5\textwidth}
+	 	\vspace{.5cm}
+	 	\begin{Verbatim}[frame=lines,
+	 					numbers=left,
+	 					label=ietestform-test-section-example,
+	 					samepage=true,
+	 					baselinestretch=0.75]
+	 	
+----------------------------------------------------------------------
+TEST: MISSING LIST LABELS
+----------------------------------------------------------------------
+There non-missing values in the [name] column of the choice sheet 
+without a label in the [label] colum:
+ 
+  row list_name name label        labelSpanish 
+  12  exam      2    BP Apparatus 
+  18  exam      7                 Pulse_2
+ 
+ Read more about this test and why this is an error or does not follow 
+ the best practices we recommend here:
+ https://dimewiki.worldbank.org/wiki/Ietestform#Missing_Labels_or_Value.2FName_in_Choice_Lists
+
+		\end{Verbatim}
+		\vspace{.3cm}
+	\end{minipage}
+
+%\printclassoptions
 
 
 %\printclassoptions
