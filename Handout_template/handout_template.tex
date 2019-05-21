@@ -124,8 +124,13 @@ For long do-files and scripts it might be easier to write them in a separate fil
 
 \begin{minipage}{1.5\textwidth}
 	\vspace{.5cm}
-	{\setstretch{0.7}
-		\VerbatimInput[frame=lines,numbers=left,label=master.do,samepage=true]{./master.do}}
+	\VerbatimInput[frame=lines, % line above and below code section
+			numbers=left, %Line number
+			label=master.do, %name of code section
+			samepage=true, %Do not allow the code to be broken across pages
+			baselinestretch=0.75 %Use line space more similat to line space in code editors
+			]{./master.do} %Write the relative file path and the name of the file to be included
+	\vspace{.3cm}
 \end{minipage}
 
 \end{document}
