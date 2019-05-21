@@ -99,10 +99,12 @@ Other examples are test that no fields of type \textit{note} are required, test 
 
 	\begin{minipage}{1.5\textwidth}
 	\vspace{.5cm}
-	 	{	
-	 		\setstretch{0.75}
-	 		\VerbatimInput[frame=lines,numbers=left,label=handson\_ietestform.do,samepage=true]{./handson_ietestform.do}
- 		}
+	\VerbatimInput[frame=lines, % line above and below code section
+	 			   numbers=left, %Line number
+	 			   label=handson\_ietestform.do, %name of code section
+	 			   samepage=true, %Do not allow the code to be broken across pages
+	 			   baselinestretch=0.75 %Use line space more similat to line space in code editors
+	 			  ]{./handson_ietestform.do}
  	\end{minipage}
 
 
