@@ -1,0 +1,276 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{fontspec}
+\usepackage{hyperref}
+\hypersetup{urlcolor=DarkBlue}
+
+\title{Topic 7 - Track 1 \newline Data Visualization}
+\date{\today}
+\author{Author of Session here!} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{mygreen},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mymauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+	{
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+		\maketitle
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\begin{frame}[fragile]{Tables give all the details}
+
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item What’s happening in this regression table? What’s important?		
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/regtable}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{But figures tell the story}
+
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item This is the data that generates those estimates.
+		\item You can see exactly what is happening very quickly!
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/line}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Examples: comparing means}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item What is the main story in this graph? 
+		\item We need more context to say something detailed about this, but what has the person creating the graph highlighted for us?
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/boxplot1}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Stata Default Graphs}
+	\begin{figure}
+		\centering
+		\includegraphics[width= 2 in]{img/boxplot2}
+		\includegraphics[width= 2 in]{img/histogram1}
+		\includegraphics[width= 2 in]{img/scatter1}
+	\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Stata has three core built-in graph functions}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item /* graph graphtype */
+				\begin{itemize}
+					\item graphs which plot one or more variables on one axis
+				\end{itemize}
+		\item /* twoway graphtype */
+				\begin{itemize}
+					\item graphs which plot two variables  together on an x,y axis
+				\end{itemize}
+		\item /* histogram */ , /* kdensity */ , /* lowess */
+				\begin{itemize}
+					\item Essential distributional commands 
+				\end{itemize}
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/graphcommand}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Oneway [graph] plots can be very informative}
+\begin{multicols}{2}	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/oneway1}
+	\end{figure}
+	\begin{itemize}
+		\item Figure 1. \url{https://github.com/qutubproject/lancetid2015/blob/master/tables_figures.do}
+	\end{itemize}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/oneway2}
+	\end{figure}
+	\begin{itemize}
+		\item Figure 2. \url{https://github.com/qutubproject/lancetid2016/blob/master/tables_figures.do}
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{ [twoway] graphs}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Each point in the graph represents a combination of the y-axis and the x-axis
+		\item Can be many types of graphs. This is a scatter plot, but it can be areas, lines, bars, etc.
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/twoway1}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{ Multiple twoway graphs in one graph}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item You can add multiple graphs in the same graph and format the data points slightly differently
+		\item Syntax: \newline [tw /// \newline (type var1 var2 , opts) /// \newline(type var3 var4 , opts) /// \newline, opts]
+		\item More on this in Track 2
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/twoway2}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Graphs can be combined and exported}
+\begin{multicols}{2}	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/grcombine}
+	\end{figure}
+	\begin{itemize}
+		\item graph export ///\newline “filename” /// (.png or .eps) \newline, replace
+		\item With .png, specify “width(1000)” for higher resolution
+		\item .eps files can scale to any size on most modern software (but hard to preview on older systems)
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{DIME Resources (please contribute!)}
+\begin{multicols}{2}	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/visualie}
+	\end{figure}
+	\begin{itemize}
+		\item \url{https://worldbank.github.io/Stata-IE-Visual-Library/ }
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/visualie2}
+	\end{figure}
+	\begin{itemize}
+		\item\url{https://worldbank.github.io/stata/}
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+\begin{frame}{Conclusion}
+
+
+\vspace{20mm}
+For more information or further questions please contact:
+\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{Thank You!}{img/section_slide}
+
+
+
+
+
+
+\end{document} 

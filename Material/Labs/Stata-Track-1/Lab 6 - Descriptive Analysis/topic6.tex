@@ -1,0 +1,345 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{fontspec}
+\usepackage{hyperref}
+\hypersetup{urlcolor=DarkBlue}
+
+\title{Topic 6 - Track 1 \newline Descriptive Statistics: \newline Creating Tables}
+\date{\today}
+\author{Author of Session here!} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{mygreen},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mymauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+	{
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+		\maketitle
+	}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\begin{frame}[fragile]{What are descriptive statistics?}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Numbers or figures that paint a picture of what a given dataset looks like
+		\item They begin to help us understand the important features of our dataset, and can be useful in directing us towards areas of further analysis
+		\item We will also show how to make basic regression outputs
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/descriptivecartoon}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}[fragile]{Descriptive statistics are NOT regressions}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item This is “Anscombe’s Quartet”
+		\item Every set here has: 
+			\begin{itemize}
+				\item The same means (x and y)
+				\item The same variances (x and y)
+				\item The same correlation coefficient
+				\item The same regression coefficient
+				\item The same regression R2 
+			\end{itemize}
+		\item Regression analysis tells you nothing about the world if you don’t understand the shape of the world you are in!
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/graphpanel1}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Data can take any shape}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/datashape}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{This really matters for impact analysis}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item In this case, for example, simply running a regression on the data would give a very wrong impression about the strength of the relationship 
+		\item And real data has many more than two dimensions!
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/incomeinequality}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Task 1: Summarize and Tabulate}
+\begin{itemize}
+	\item These two commands are often used to get a quick idea of the data
+	\item Summarize all the income variables, inc\_01, inc\_02, … inc\_17
+		\begin{itemize}
+			\item Do you see anything that stands out?
+			\item Use option detail for inc\_02
+		\end{itemize}
+	\item Use tabulate to see the distribution of categorical variables
+		\begin{itemize}
+			\item Gender of the first person listed in the HH roster
+			\item tab pl\_sex\_1
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Share what we learn about the data }
+\begin{itemize}
+	\item summarize and tabulate are great for your quick understanding, but you need a way to share that understanding with the rest of your team
+	\item summarize and tabulate do not provide a great option for this, and that is why we want to introduce some more advanced tools for that
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Three most common types of tables}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Summary statistics
+			\begin{itemize}
+				\item Show an overview of variable distributions, possible for multiple groups
+			\end{itemize}
+		\item Balance tests
+			\begin{itemize}
+				\item Show a direct comparison of variable means across treatment arms
+			\end{itemize}
+	\end{itemize}
+
+	\begin{itemize}
+		\item /*sumStats*/
+		\begin{itemize}
+			\item \url{https://github.com/worldbank/stata/tree/master/src/sumStats}
+		\end{itemize}
+		\item /*iebaltab*/
+		\begin{itemize}
+			\item \url{https://worldbank.github.io/ietoolkit}
+		\end{itemize}
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}[fragile]{Summary statistics with [sumStats]}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item /*sumStats*/ is a command that will output anything you can get from [tabstat]
+			\begin{figure}
+				\centering
+				\includegraphics[width=\linewidth]{img/sumstats}
+			\end{figure}
+		\item It also allows multiple [if]-restrictions with different variable lists
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/sumstats2}
+		\end{figure}
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+
+
+\begin{frame}{Task 2a}
+\begin{itemize}
+	\item Run the code as it is in the 2a section and open the file generated. (You need to include the sections where the locals are defined)
+		\begin{itemize}
+			\item Only the mean is in the table
+		\end{itemize}
+	\item Add the two outcome locals to the varlist
+	\item Add more statistics to the table. Type help sumStats and click the stats\_list link to see all options you can use
+		\begin{itemize}
+			\item Add, for example, mean, number of observation, standard deviation, median, max and min
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Multiple levels or groups are easy}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Village statistics can be called with [if tag\_village == 1]
+		\item Treatment group can be called with [if hh\_treatment == 1]
+		\item And so on, with only one line of code in Stata
+	\end{itemize}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/table1}
+		\end{figure}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Task 2b}
+\begin{itemize}
+	\item In the Task 2b section, start by adding the outcome variables, and the additional statistics you added to the table in Task 2a
+	\item Restrict the first part of the table to control observations, and the second part of the table to treatment observations
+	\item Run the section for Task 2b and open the table. (Remember to include the section where the locals are defined)
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Balance tables with [iebaltab]}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Balance tables feature in almost every impact evaluation
+		\item We use balance tables to show that there was no difference between our control and treatment group in the baseline before the intervention
+		\item To us [iebaltab], list all the variables you want to test balance in, and use the option [grpvar()] to indicate which group each observation is in. 
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/iedbaltab}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Task 3: Balance table}
+\begin{itemize}
+	\item Run the examples
+		\begin{itemize}
+			\item Add the other inc\_?? Variables
+			\item Manually edit more row label names in the row
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 3}
+\begin{itemize}
+	\item Run the first iebaltab section
+	\begin{itemize}
+		\item Click the link in the result window to see the table generated
+	\end{itemize}
+	\item Add all the income variables, inc\_01, inc\_02 … inc\_17, and re-run the first two graphs
+	\item Run the third iebaltab section
+	\item Write some manual labels for one or a few of the income variables you added, and re-run the last iebaltab section again
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Helpful checklist before sending tables to PI}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Does the number of observations for each regression or summary statistic make sense?
+		\item Do the magnitude and sign of each coefficient/summary statistic seem reasonable?
+		\item Did you delete the constant term and add the control mean in the regression table?
+		\item Did you check for joint significance of your covariates?
+		\item Did you label the dependent variables/columns?
+		\item Did you label the covariates/rows?
+		\item \url{https://blogs.worldbank.org/impactevaluations/generating-regression-and-summary-statistics-tables-stata-checklist-and-code}
+	\end{itemize}
+
+	\begin{itemize}
+		\item Did you add a title?
+		\item Is it clear what the estimation procedure is (e.g. regression vs. probit)?
+		\item Are the column widths the right size so as not to cut off text?
+		\item Is the bordering consistent with your other tables?
+		\item Are the numbers rounded to an appropriate level, so you don’t display too many decimal places?
+		\item Do the notes to the table clearly indicate how standard errors have been estimated, and what control \item variables if any have been included but not shown?
+	\end{itemize}
+\end{multicols}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+\begin{frame}{Conclusion}
+
+
+\vspace{20mm}
+For more information or further questions please contact:
+\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{Thank You!}{img/section_slide}
+
+
+
+
+
+
+\end{document} 
