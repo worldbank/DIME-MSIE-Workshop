@@ -5,9 +5,13 @@ foreach command in ietoolkit iefieldkit {
     if _rc == 111 ssc install `command'
 }
 
-*This excerices requires a more recent version of iefieldkit than 1.0
+*This excerices requires iefieldkit version 1.1 or more recent
 iefieldkit
-if `r(version)' == 1 adoupdate iefieldkit, update
+if `r(version)' < 1.0 adoupdate iefieldkit, update
+
+*This excerices requires ietoolkit version 6.0 or more recent
+ietoolkit
+if `r(version)' < 6.0 adoupdate ietoolkit, update
 
 *Use ieboilstart to set your boilerplate code
 ieboilstart, version(12)
@@ -25,3 +29,4 @@ if `c(username)' == "" {
 
 *Run the command
 ietestform, surveyform("${folder}\CTO_testform_2.xlsx") report("${folder}\report.csv")
+ 
