@@ -94,6 +94,10 @@ passwords/
 !Material/Data/2018-data/*.dta
 !Material/Labs/Stata-Track-*/Data/*.dta
 
+#Unignore imgfiles for beamer presentations
+!Material/Labs/Stata-Track-*/**/img/*.png
+!Material/Labs/Stata-Track-*/**/img/*.pdf
+
 #Unignore files needed for the webpage
 !MSIE-Presenter-Page/*.yml
 
