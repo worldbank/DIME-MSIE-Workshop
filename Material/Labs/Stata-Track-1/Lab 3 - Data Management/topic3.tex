@@ -1,0 +1,598 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{fontspec}
+
+
+\title{Topic 3 - Track 1 \newline Data Management and Cleaning}
+\date{\today}
+\author{Author of Session here!} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{mygreen},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mymauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+{
+	\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+	\maketitle
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\sectionpic{Think reproducible}{img/section_slide}
+
+
+\begin{frame}{Outline}
+	\begin{itemize}
+		\item 1. Folder organization
+		\item 2. Master do-files
+		\item 3. iefolder
+		\item 4. First overview of a data set
+		\item 5. Master data sets
+		\item 6. Basic data cleaning tasks:
+			\begin{itemize}
+				\item Unique id, 
+				\item Variable and value labels
+				\item Missing values
+				\item Check for outliers
+			\end{itemize}		
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Data Management}
+
+\begin{itemize}
+	\item The first part of this presentation will introduce you to some data management practices that might seem very advanced
+	\item Don’t worry about how to set up what we will talk about on the next slides. We have developed easy-to-use tools that will do that for you
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Folder Organization \newline Sample Folder Structure}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/folderstructure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[fragile]{Text and Image}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item Raw data with identifying information should be stored in the EncryptedData folder
+		\item All data in the Intermediate or the Final folder should be de-identified
+		\item Use boxcryptor or truecrypt to encrypt the EncryptedData folder
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/folderstructure2}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{What is a Master do-file?}
+\begin{itemize}
+	\item You can make a do-file run other dofiles
+		\begin{itemize}
+			\item 	First, run do-file 1
+			\item Then, run do-file 2 
+			\item Then, run do-file 3, etc.
+		\end{itemize}
+	\item This (and a few secondary but still important things) is what a master do-file does.
+	\item Without a master do-file, you either need one extremely long do-file, or write instructions in which order to run all the do-files
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exempt from a Master do-file}
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/master}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}{Master do-file \newline The map to all data work}
+\begin{itemize}
+	\item At the end of every round of a project:
+	\begin{itemize}
+		\item 	You should be able to reproduce all your work from raw data to all outputs with one click in this do-file
+		\item Anyone should be able to follow and to reproduce all your work form raw data to all outputs with one click in this do-file, after adding only their root folder path
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Master do-file \newline Allows easy collaboration}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item If we share a project over DropBox or OneDrive all team member have the same folder structure.
+		
+		\item A master do-file allows multiple people to set their own global to the project folder.
+		
+		\item This way anyone sharing the project folder can easily run your do-files.
+		
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/master2}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{iefolder}
+\begin{itemize}
+	\item Sounds complicated to set up? Don’t worry, we have a command that sets that up for you
+	\item It is called iefolder and it creates the folders and master do-files we have spoken about for you
+	\item Part of ietoolkit. If you have not installed that package yet, then type ssc install ietoolkit in Stata
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 1}
+\begin{itemize}
+	\item Create a folder on your computer and call it the project folder
+	\item Create a global called projectfolder to that folder. A shortcut to get the folder path is by clicking in the navigation bar of that folder
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/task1}
+		\end{figure}
+	\item Now create a new data work folder using iefolder like this:
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/task1_2}
+		\end{figure}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{iefolder - rounds}
+\begin{itemize}
+	\item Inside the data work folder you create folders for each round. A round is a data collection exercise
+		\begin{itemize}
+			\item 	Example of round is baseline, endline etc.
+			\item If you have simultaneous data collections on different unit of observations, for example students and schools, then create separate rounds for them
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 2.}
+\begin{itemize}
+	\item Now we want to create a round called baseline. We can use the same global projectfolder.
+	\item create the data work folder inside that folder using iefolder like this:
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/task2}
+		\end{figure}
+	\item Did you do this in a do-file? What happens if you run the same code again?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Task 3.}
+\begin{itemize}
+	\item Now we want to use the folders and the master do-files created by iefolder.
+	\item create the data work folder inside that folder using iefolder like this:
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/task2}
+	\end{figure}
+	\item Did you do this in a do-file? What happens if you run the same code again?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Task 4.}
+\begin{itemize}
+	\item Now save the do-file you used in the last task with the name load\_imported\_data.do in this folder: baseline\\Dofiles\\Cleaning
+	\item Now open the baseline\_cleaning\_MasterDofile.do file in the dofiles folder. Look for the part that says and replace the parts in red:
+		\begin{itemize}
+			\item 	*do "\$baseline\_doCln/dofile1.do“
+			\item do "\$baseline\_doCln/load\_imported\_data.do“
+		\end{itemize}
+	\item Now run the baseline\_cleaning\_MasterDofile.do  file again and see how the data set is opened again
+	\item Now save all your files and close Stata. Re-open stata and open the do-files Project\_MasterDofile.do and baseline\_MasterDofile.do. Run both files in that order and notice that your data set is opened again. 
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Keep using the folder you created}
+\begin{itemize}
+	\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file.	
+	\item That would be similar to how we want you to run a DIME project. More on this in track 2.
+	\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project 
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Explore a new data set}
+\begin{itemize}
+	\item What is the first thing you want to look for every single time you open a new data set for the first time?
+		\begin{itemize}
+			\item Unit of observation
+			\item Uniquely and fully identifying ID variable
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Explore a raw data set}
+\begin{itemize}
+	\item Household\_data.csv
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/raw1}
+	\end{figure}
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Explore a raw data set}
+\begin{itemize}
+	\item Clinic\_data.csv
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/raw2}
+	\end{figure}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{First thing to check}
+\begin{itemize}
+	\item Unit of observation check list when opening a new data set:
+	\begin{itemize}
+		\item What does each row represent?
+		\item Which variable do you think is the main ID uniquely identifying each row?
+		\item Test that the variable indeed is uniquely and fully identifying
+			\begin{itemize}
+				\item Stata commands: isid and codebook
+			\end{itemize}		
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 5}
+\begin{itemize}
+	\item Re-run the baseline master do-file that you created in the last task. Make sure that after it runs you have  endline\_data\_raw.dta open.
+	\begin{itemize}
+		\item What is the unit of observation, i.e. what does each row represents?		
+		\item Which variable do you think is the variable that uniquely and fully identifies the data set?		
+		\item Test the variable to make sure that is the unique ID variable.
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{What is a Master data sets?}
+\begin{itemize}
+	\item With multiple data set you need to have a tool to keep track of your observations across different data collections and over time. You guessed it – that tool is master data sets!
+	\item A master data set should include all observations the project has ever encountered. Not just observations assigned to treatment or sampled for data collection.
+	\item A master data set should include information relevant across data set that is constant across the project
+	\begin{itemize}
+		\item Uniquely identifying ID
+		\item Treatment assignment
+		\item Sampling
+		\item Monitor status		
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}[fragile]{Data Management  Master Data}
+\begin{multicols}{2}	
+	\begin{itemize}
+		\item For each unit of observation you have one encrypted master data set, and one available to all
+		\item The encrypted has unique ID and identifying information
+		\item The other one should not include any identifying information
+	\end{itemize}
+	\begin{figure}
+		\centering
+		\includegraphics[width=\linewidth]{img/datamanage1}
+	\end{figure}
+\end{multicols}
+\end{frame}
+
+\begin{frame}{Role division in cleaning the data}
+\begin{itemize}
+	\item Field Coordinator / Research Assistants
+		\begin{itemize}
+			\item No one will look at the data as much as the FC/RA
+			\item Irregularities in the data that the FC/RA does not identify will often never be discovered
+		\end{itemize}
+	\item Principle Investigators
+		\begin{itemize}
+			\item In charge of deciding which irregularities will be corrected and how
+			\item Never make any decision on data reformatting without talking to PIs
+			\item PIs completely depend on FCs/RAs to identify irregularities and get the information to make the best call
+			\item Of course, this all comes up when the PI starts writing up the analysis
+			\item E.g. we sampled 4,567 HHs and we only have 3,897 in the regressions …
+	\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Data Cleaning Tasks }
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/formatting}
+\end{figure}
+\end{frame}
+
+\begin{frame}{Naming conventions}
+	\begin{itemize}
+		\item 	Do not change the names of variables coming from a survey
+		\item Keep all variables collected with survey data the same as in the questionnaire. Even if you do not like the naming conventions used in the questionnaire
+		\item Exception: In a loop over, for example, crops where a variable like harvest is asked for each crop and automatically named, harvest\_1, harvest\_2 etc., then those can be renamed to harvest\_crop1, harvest\_crop2 etc., or harvest\_c1, harvest\_c2 etc.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{No string variables in the final data }
+	\begin{itemize}
+		\item Exceptions:
+			\begin{itemize}
+					\item Proper nouns that are not categories
+					\item Digits with leading zeros or long IDs (over 15 digits)
+			\end{itemize}
+		\item Categorical string variables must be made numeric with value labels
+			\begin{itemize}
+				\item See encode
+				\item Best practice using encode includes using both the label() and the noextend option.
+			\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Variable and value labels }
+	\begin{itemize}
+		\item We already introduced labels in the first lab. When cleaning a data set you should also make sure that all variables are properly labeled.
+		\item Check all variables have variable labels (in English)
+		\item Check all that all categorical variables have value labels (in English)
+		\item Useful commands: label variable , label define, label value, label dir, label list
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Standardize units }
+\begin{itemize}
+	\item Quantity variables should be converted into standardized units. One unit for weight (usually kg), length/distance (usually meter), etc. 
+	\item Often a difficult task due to usage of local non-standardized units. Use field team to collect as much information about local units and then decide on a conversion rate together with your PI	
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Missing values / Survey codes}
+\begin{itemize}
+	\item During surveys missing answers are recorded using different codes. Like -88 for “I do not know” or -999 for “Declined to answer”
+	\item We need to turn these survey codes to missing values since -88 or -999 will distort averages and other calculations
+	\item Use any value of .a, .b etc. to represent “I do not know”, another one for “Declined to answer”, and another for each other missing answer code you have
+	\item Be consistent across your data set. If you pick .a for “Do not know” then use .a to represent that in all variables in your data set
+	\item Use the command summarize is efficient to find codes for missing answer as they stand out as negative values (that is why we use negative values as missing answer codes)
+\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{Outliers - identifying}
+\begin{itemize}
+	\item We do not want our results to be driven by a few individuals. For example, the village leaders get all benefits
+	
+	\item No exact rule for what is an outlier.  Ask if your PI for preference of specific rule
+	
+	\item Identifying outliers often comes down to common sense.
+	
+	\item Can the outlier be explained by typos? Especially common when selecting units from multiple choice lists
+	
+	\item Useful commands: sum detail, tabulate, inspect, assert, histogram
+	
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Outliers \newline How to deal with outliers?}
+	\begin{itemize}
+		\item This is ultimately the decision of the researcher.
+		\item The goal is to deal with them while losing as little information as possible.
+			\begin{itemize}
+				\item Delete observations 
+					\begin{itemize}
+						\item Almost never desired as it loses a lot of information in variables that were correct
+					\end{itemize}
+				\item Delete specific data point (i.e. replace to missing)
+					\begin{itemize}
+						\item Frequently used but the observation would be dropped in regressions using that variable
+					\end{itemize}
+				\item Winsorization is a method were observations are not dropped, neither from the data set or from regressions			
+			\end{itemize}		
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Outliers - Winsorization}
+\begin{itemize}
+	\item This method assumes that an upper tail outlier is still some large number
+	\item We set all values larger than the 99th percentile to the 99th percentile
+	\item The outliers will still be a large number, but it will no longer greatly bias the estimators
+	\item Can be applied in both upper and lower tail
+	\item Can be set to other limits than the 99th percentile
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Saving files – naming conventions}
+\begin{itemize}
+	\item Static file names
+		\begin{itemize}
+			\item 	Do not use \_v1, \_v2 etc. for any final files. This leads to bugs in do-files that depend on these files when a new versions is added.
+			\item OK to use \_v1, \_v2 etc. for old versions of files
+		\end{itemize}
+	\item Make sure all output files, datasets and others are clearly and uniquely labeled
+		\begin{itemize}
+			\item  i.e.: “desc\_stats\_tmt\_only.xls” \newline	“input\_plan\_adm\_data.dta”
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Task 6}
+\begin{itemize}
+	\item The district variable  pl\_id\_09 is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us. 
+		\begin{itemize}
+			\item encode  pl\_id\_09,  gen(pl\_id\_09\_code)
+		\end{itemize}
+	\item See the result. Stata has assigned the codes 1-4 in alphabetic order. What if we already had the following codes? 44 for Burera, 41  for Gicumbi, 54 for Kayonza,  41 for Rulindo, 51 for Rwamagana. Replace your code with this:
+		\begin{itemize}
+			\item 	label define dist 44 "Burera" 41 "Gicumbi" 54 "Kayonza" 41 "Rulindo" 51 "Rwamagana"
+			\item   encode  pl\_id\_09,  gen(pl\_id\_09\_code) label(dist)
+		\end{itemize}
+	\item Move the new variable next to the old variable. Add this after your code
+		\begin{itemize}
+			\item order pl\_id\_09\_code, after(pl\_id\_09)
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+	
+\begin{frame}{Task 7}
+\begin{itemize}
+	\item Variable ag\_08\_1\_1 is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
+	\item Summarize ag\_08\_1\_1 to get the mean. Is the value between 1 and 0 like you expect a percentage in decimal form to be?
+		\begin{itemize}
+			\item 	Why not? Look at min and max
+		\end{itemize}
+	\item We need to replace the survey code -99 with a missing value. Let’s use .a.
+		\begin{itemize}
+			\item 	replace ag\_08\_1\_1 = .a if ag\_08\_1\_1 == -99
+		\end{itemize}
+	\item Summarize the variable again. This looks like we expected. 
+		\begin{itemize}
+			\item 	Look what happened to the number of observations. Why did that happen?
+		\end{itemize}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Task 8}
+\begin{itemize}
+	\item Variables aa\_02\_1, aa\_02\_2, aa\_02\_3, aa\_02\_4, aa\_02\_5, aa\_02\_6, aa\_02\_7, aa\_02\_8, aa\_02\_9,  and aa\_02\_10 lists purchases of common animals. Let’s check for outliers
+	\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character 
+		\begin{itemize}
+			\item summarize aa\_02\_1 aa\_02\_2 aa\_02\_3 aa\_02\_4 aa\_02\_5 aa\_02\_6 aa\_02\_7 aa\_02\_8 aa\_02\_9 aa\_02\_10, detail
+			\item summarize aa\_02\_?, detail
+		\end{itemize}	
+	\item Do you see any implausible values? What can we do to fix this? There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Task 9}
+\begin{itemize}
+	\item Winsorize the income variable
+		\begin{itemize}
+			\item 	Winsorizing works better at large estimated values like, income, harvest value, land area etc.
+			\item 	Winsorizing works less great on small exactly counted number like number of visit at a clinic, animals owned etc. and is never a good idea on a dummy
+		\end{itemize}
+	\item Summrize the inc\_01 variable. Use detail option. Or do a histogram (we will speak about that tomorrow)
+	\item Winsorize inc\_01 to the 95th percentile. Like this:
+		\begin{itemize}
+			\item 	ssc install winsor
+			\item winsor inc\_01, gen(inc\_01\_w) high p(.05)
+			\item The option high means we are only winsorizing the values that are too large. We are not concerned about values close to 0, and a variable like revenue cannot be negative.
+		\end{itemize}
+	\item Compare winsorized vs. non-winsorized means
+\end{itemize}
+\end{frame}
+	
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+\begin{frame}{Conclusion}
+
+
+\vspace{20mm}
+For more information or further questions please contact:
+\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{Thank You!}{img/section_slide}
+
+
+
+
+
+
+\end{document} 
