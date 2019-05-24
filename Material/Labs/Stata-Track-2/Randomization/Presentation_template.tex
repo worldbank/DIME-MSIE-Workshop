@@ -409,62 +409,274 @@
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
-\sectionpic{Data Management}{img/section_slide}
-
-\begin{frame}{First Frame}
-Content here!
+\begin{frame}{Basic Randomization in Stata}
+	
+	\begin{itemize}[<default overlay specification>]
+		\item<1>  We have 100 students and we want half of them to be treatment and control.
+		\item<1>  What are our randomization rules?
+		\item<1>  Let’s see an example of a replicable randomization under the given sample and design.
+	\end{itemize}
+	
 \end{frame}
 
 
-\begin{frame}{Second Frame}
-Content here!
+\begin{frame}{Three Rules of Randomization in Stata}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Randomization9}
+\end{figure}
+
 \end{frame}
 
-\begin{frame}[fragile]{Testing Stata code and Text}
-\begin{multicols}{2}
-	\begin{lstlisting}
-	// Data
-	sysuse census.dta, clear
+
+\begin{frame}{Basic Randomization in Stata}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Randomization10}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Multi-arm randomization in Stata}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Randomization11}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Other common randomization}
+\begin{multicols}{2}	
 	
-	// Basic Regression
-	reg divorce marriage pop
-	est sto reg1
+	\begin{itemize}[<default overlay specification>]
+		\item<1>  There are other issues which make randomization more complicated, such as.
+			\newline - Groups of different sizes: For example, assigning 40\% to control and 30\% to each of the two treatment arms.
+			\newline - Clustering: Randomization is assigned to “clusters” of units at once, such as a household-level treatment.
+			\newline - Stratification: Randomization within each subgroup in sample: male/female, rich/poor, regions, etc..
+			\newline - Odd total sample size: The number of observations is not evenly divisible with the number of treatment arms in each strata. 
+		\item<1>  What kind of code do these require to be random and reproducible?.
+		\item<1>  [randtreat] is a user-written Stata command which can help handle all the issues above. We will practice this command in the exercise.
+	\end{itemize}
 	
-	// Basic Regression 2
-	reg medage popurban
-	est sto reg2
-	
-	// Indicator Regression
-	reg divorce marriage pop i.region
-	est sto reg3
-	
-	// Interaction Regression
-	gen binary = rnormal() > 0
-	lab def binary 0 "No" 1 "Yes"
-	lab val binary binary
-	label var binary "Indicator"
-	reg divorce marriage pop i.region#i.binary
-	est sto reg4
-	\end{lstlisting}
-	\parbox{\linewidth}{
-		This is where you write content describing the Stata code in the text box to the left. Try not to place too much code in the text box. The Stat code is written in the lines before this.
-		\newline \newline
-		More information about the Stata, giving time for the participants to write the code themselves and run it.
-		\newline \newline
-		More information about the Stata code and the different ways to code it.
-	}
 \end{multicols}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+%%%%%%%%%%%% heading of section 1 %%%%%%%%%%%%%%%%%%%
+\sectionpic{How To Run A Randomization Ceremony}{img/section_slide}
+
+\begin{frame}{Stratified Randomization}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  Ensures randomization achieves a balance re: several dimensions.
+	\item<1>  Example: draw for the World Cup: 32 qualified countries grouped into 4 urns/strata  according to FIFA ranking and assigned to 8 different groups.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{But first . . . Cluster or stratum?}
+\begin{multicols}{2}	
+	
+	\begin{itemize}[<default overlay specification>]
+		\item<1>  Cluster: Units that are grouped and may share similar characteristics; sometimes used as the level of randomization (i.e., treatment assigned v. individual students).
+			\newline - The advantage of cluster randomization is that it reduces the likelihood of treatment contamination, but requires more participants to achieve the same statistical power.
+		\item<1>  Strata: Groups made up of individuals sharing the same characteristics (i.e., females, males) from which a random sample is drawn.
+			\newline - Ensures balance across treatment groups with respect to stratifying variables. Makes it possible to draw inferences about outcomes within each group.
+	\end{itemize}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Examples of clusters}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Clusters}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Stratified Randomization}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Clusters2}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Stratified Randomization}
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\linewidth]{img/Clusters3}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Guiding Principles }
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  Maximum number of strata depends on the sample size, the expected size of each strata and the importance of the stratification factors.
+	\item<1>  According to simulations, between 22 and 48 strata for a sample size of 100 seems appropriate (individual level randomization). 
+	\item<1>  Select covariates that are strongly related to the outcomes of interest, such as geographic region dummies, and variables for which subgroup analysis is desired.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Example: Savings, Grants, Training}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  In the context of new rural roads, we study the impact of complementary interventions for increasing productivity:
+	\item<1>  Mechanisms for facilitating access to capital for investment . . .
+	
+		\begin{figure}
+			\centering
+			\includegraphics[width=50mm]{img/Grants}
+		\end{figure}
+	
+	\item<1>  Developing the soft skills necessary to be a successful entrepreneur.
+	
+		\begin{figure}
+			\centering
+			\includegraphics[width=50mm]{img/Grants2}
+		\end{figure}
+	
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Example: Savings, Grants, Training}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  We want to randomize into the following 6 arms.
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=60mm]{img/Grants4}
+	\end{figure}
+	
+	\item<1>  Which variables should we stratify by?
+			\newline - Proximity to a rehabilitated road (yes, no)
+			\newline - Income (high, medium, low)
+			\newline - Gender of HH head (male, female)
+			\newline - Municipality (10 different municipalities)
+	
+	\item<1>  How many strata do we have?
+	
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Why is this important?}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  Transparency, transparency, transparency.
+	\item<1>  There can be no doubt as to whether treatment was assigned to one household in lieu of another due to favoritism.
+	\item<1>  Especially, when benefits include something like cash.
+	\item<1>  This procedure is designed to be conducted in the company of government counterparts.
+	\item<1> Conducting the randomization ceremony and documenting it ensure there is no doubt as to whether assignment was random.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Why is this important?}
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=110mm]{img/Transparency}
+	\end{figure}
+	
+\begin{itemize}[<default overlay specification>]
+	\item<1>  During visits to offer the training, we made it extremely clear that participants were chosen randomly.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Randomization Procedure}
+\begin{multicols}{2}	
+	
+	\begin{itemize}[<default overlay specification>]
+		\item<1>  Assignment of 2,802 households to the 5 treatment groups and the control group.
+		\item<1> Each HH has the following probabilities of being selected to receive each treatment:
+			\newline - T1: Productive bonus: 200/2802 (7.1\%) (= 0)
+			\newline - T2: Simple savings account: 800 / 2,802 (28.6\%) (= 1)
+			\newline - T3: Account plus paired subsidy: 300 / 2,802 (10.7\%) (= 2)
+			\newline - T4: Training "personal initiative": 350 / 2,802 (12.5\%) (= 3)
+			\newline - T5: Account plus grant + training: 350 / 2,802 (12.5\%) (= 4)
+			\newline - T6: Control: 800 / 2,802 (28.6\%) (= 5)
+	   \item<1> The last two homes are assigned at random to T1-T6.
+	   \item<1> Then we allocate 200/301 other homes "just in case."
+
+	\end{itemize}
+	
+\end{multicols}
+\end{frame}
+
+
+\begin{frame}{Background}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  Random number tables have been used for a long time. Nowadays, computational random number generators are employed.
+	\item<1>  Stata’s random-number generation functions, such as uniform(), follow deterministic algorithms that are pseudorandom-number functions. 
+	\item<1>  The sequences these functions produce are determined by the seed.
+	\item<1>  Different seeds produce different sequences.
+\end{itemize}
+
+\end{frame}
+
+
+\begin{frame}{Example: unsorted}
+
+\begin{figure}
+	\centering
+	\includegraphics[width= 90mm]{img/Unsorted}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Example: HHs ordered according to ordering}
+
+\begin{figure}
+	\centering
+	\includegraphics[width= 90mm]{img/Unsorted2}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}{Randomization in Practice}
+
+\begin{itemize}[<default overlay specification>]
+	\item<1>  We randomly draw the seed three times:
+		\newline  - Actual Randomization
+	\item<1>  Show that each time randomization outcome is different one from the next. 
+	\item<1>  To make this easy, we will each time show results for a single household and compare afterwards.
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%% Final thougts section %%%%%%%%%%%%%%%%%%%
 \begin{frame}{Conclusion}
 
-Wrap up final contents of presentation
+Thank you!
 
 \vspace{20mm}
 For more information or further questions please contact:
-\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+\newline Benjamin Daniels (\url{bdaniels@worldbank.org}) 
 
 \end{frame}
 
