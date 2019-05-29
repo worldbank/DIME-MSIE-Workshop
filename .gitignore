@@ -103,3 +103,6 @@ MSIE-Presenter-Page/site/
 #Un-ignore images needed for the beamer template
 !Beamer_template\img\*.png
 !Beamer_template\img\*.pdf
+
+#Track 2 image files
+!Material/Labs/Stata-Track-2/**/img/*.*
