@@ -65,30 +65,28 @@
 	\setbeamertemplate{section page}[mytheme]
 }
 
-%%% The command below allows for the text that contains Stata code
-\lstset{ %
-	backgroundcolor=\color{white},
-	basicstyle=\tiny,
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	commentstyle=\color{mygreen},
-	escapeinside={\%*}{*)},
-	extendedchars=true,
-	frame=single,
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{gray},
-	rulecolor=\color{black},
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{mymauve},
-	tabsize=2,
-	title=\lstname,
-	morekeywords={not,\},\{,preconditions,effects },
-	deletekeywords={time}
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+%Fancyvrb docs: http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/fancyvrb/doc/fancyvrb-doc.pdf
+\fvset{fontsize=\scriptsize} % The font size of all verbatim text can be changed here
+
+%So we can use option FloatBarrier, which is similar to [H] but is an
+%alternative solition when the algorithm can't solce [H] as too many
+%settings are going on. [H] seems to get stuck in infinite loop
+%https://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned
+\usepackage{placeins}
+\newcommand{\codeexample}[2]{
+	\begin{figure}
+		\VerbatimInput[
+		framesep=3mm,
+		frame=lines, % line above and below code section
+		numbers=left, %Line number
+		label= #1, %name of code section
+		baselinestretch=0.90, %Use line space more similat to line space in code editors
+		]{#2} %Write the relative file path and the name of the file to be included
+	\end{figure}
+	\FloatBarrier
 }
+
 
 %% The below command creates the ligh bulb logos in the top right corner of the 
 \begin{document}
@@ -307,18 +305,14 @@ Can I use Excel? \newline
 \sectionpic{An introduction to Stata: \newline Generating new variables and labeling them}{img/section_slide}
 
 \begin{frame}[fragile]{Create new variables}
-You create new variables using the command generate 
 
-\begin{multicols}{2}	
 	\begin{itemize}
-		\item Calculate the household income by household size which is the per capita income of all beneficiaries in the sample.
-		\item Generate a dummy variable that is 1 if per capita of income is more than 10,000 KG.
+		\item \texttt{generate} a variable with the household income by household size 
+		\item \texttt{generate} a dummy variable that is 1 if per capita of income is more than 10,000 KG.
 	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/generate}
-	\end{figure}
-\end{multicols}
+
+	\codeexample{generate.do}{code/generate.do}
+
 \end{frame}
 
 \begin{frame}[fragile]{Label variables you create}
@@ -326,10 +320,8 @@ You create new variables using the command generate
 	\item You will thank yourself if you carefully document what you do. You will not remember everything a month later.
 	\item Label all variables you create, so that future you and others understand.
 \end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/label}
-\end{figure}
+	\vspace{.5cm}
+	\codeexample{variable-labels.do}{code/variable-labels.do}
 \end{frame}
 
 \begin{frame}[fragile]{Value labels}
@@ -337,26 +329,17 @@ You create new variables using the command generate
 	\item For all categorical variables, you should also create value labels, to indicate what each category stand for.
 	\item In the example below we apply a label explaining the dummy we just created. This variable will now be very clear to anyone using this data set.
 \end{itemize}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/cat_label}
-\end{figure}
+	\vspace{.5cm}
+	\codeexample{value-labels.do}{code/value-labels.do}
 \end{frame}
 
 \begin{frame}{Lab Task 3}
 \begin{itemize}
-	\item The variable inc\_01 indicates the household income from on-farm enterprise in Rwanda Francs. Create a new variable that depicts it in US dollars. About 0.0012 USD exchanges to 1 Rwanda franc. Call the new variable inc\_01\_USD. 
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/exchange}
-	\end{figure}
-	\item Use the same code and create the variable inc\_01\_EUR0. (1 RWF= .0010 Euro.)
-	\item Label the variable inc\_01\_USD like this:
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/exchange_label}
-	\end{figure}
-	\item Create a label for inc\_01\_EURO as well.
+	\item The variable inc\_01 indicates the household income from on-farm enterprise in Rwanda Francs. Create a new variable that depicts it in US dollars. About 0.0012 USD exchanges to 1 Rwanda franc. Call the new variable inc\_01\_USD. And label is appropriately.
+\end{itemize}
+	\codeexample{task-3.do}{code/task-3.do}
+\begin{itemize}
+	\item Use the same code and create the variable inc\_01\_EUR0. (1 RWF= .0010 Euro.) Remember to also label it!
 	\item Create a dummy variable for high on-farm enterprise income in the same way high\_income was created. Use the cut of 100  Euros. Remember to label it!
 \end{itemize}
 \end{frame}
@@ -378,13 +361,13 @@ You create new variables using the command generate
 	\item Open up a new do-file. Window -> Do-file Editor -> New Do-file Editor. Or click the shortcut highlighted below:
 		\begin{figure}
 			\centering
-			\includegraphics[width=\linewidth]{img/dofilewindow1}
+			\includegraphics[width=.6\linewidth]{img/dofilewindow1}
 		\end{figure}
 	\item Treat the do-file similarly to how you treat the command window. But instead of copying and running one line of code at the time, a do-file lets you do that with any number of lines of code.
 	\item Running the code in your do-file using menus: Tools -> Execute (Do). Or Ctrl+D (Windows) or this short cut:
 	\begin{figure}
 		\centering
-		\includegraphics[width=\linewidth]{img/dofilewindow2}
+		\includegraphics[width=.5\linewidth]{img/dofilewindow2}
 	\end{figure}
 \end{itemize}
 \end{frame}
@@ -435,38 +418,28 @@ You create new variables using the command generate
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Defining macros}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/macro1}
-\end{figure}
-\begin{itemize}
-	\item This creates a variable that is 12. (3 * 5) – 3 = 12
-\end{itemize}
+\begin{frame}{Defining macros - locals}
 
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/macro2}
-\end{figure}
+When running the code this becomes \texttt{generate result\_var = (3 * 5) – 3}
+\codeexample{macros-local.do}{code/macros-local.do}
+
+\end{frame}
+
+\begin{frame}{Defining macros - globals}
+
+This create two variables:
 \begin{itemize}
-	\item This creates two variables. 
-		\begin{itemize}
-			\item One that is called country\_GAFSP and with the value Kenya for all observations
-			\item Another that is called donor\_GAFSP with the value World Bank for all observations
-	\end{itemize}
+	\item One variable that is called \texttt{country\_GAFSP} and with the value Kenya for all observations.
+	\item One variable that is called \texttt{donor\_GAFSP} with the value World Bank for all observations.
 \end{itemize}
+\codeexample{macros-global.do}{code/macros-global.do}
+
 \end{frame}
 
 \begin{frame}{Setting directories using macros}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/paths1}
-\end{figure}
-The code above and below is the same to Stata. But the part that is the identical in use and save is stored in and referenced from a global below
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/paths2}
-\end{figure}
+\codeexample{filepaths-1.do}{code/filepaths-1.do}
+\small The code above and below is the same to Stata. But the part that is the identical in use and save is stored in and referenced from a global below
+\codeexample{filepaths-2.do}{code/filepaths-2.do}
 \end{frame}
 
 \begin{frame}{Lab Task 5}
@@ -474,15 +447,11 @@ The code above and below is the same to Stata. But the part that is the identica
 	\item Open the do-file you created in the previous task and create a global to the folder where you have been saving your work. Call the global folder\_Lab1
 	\item To check what is stored in your global, type this in the command window and hit enter:
 		\begin{itemize}
-			\item display "\$folder\_Lab1“
+			\item \texttt{display "\$folder\_Lab1“}
 		\end{itemize}
-	\item Update the use and save commands in your do-file with the global you created. Like this:
-		\begin{figure}
-			\centering
-			\includegraphics[width=\linewidth]{img/pathslab}
-		\end{figure}
-	\item Now, run your do-file again and test that it works
+	\item Update the use and save commands in your do-file with the global you created. See example blow. Then re-run your code to make sure that it works with the new file paths!
 \end{itemize}
+\codeexample{filepath-example.do}{code/filepath-example.do}
 \end{frame}
 
 
@@ -530,11 +499,8 @@ The code above and below is the same to Stata. But the part that is the identica
 	\item Use the drop down menu to save your data under a different name, for example endline\_data\_int.dta. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
 	\item Copy the code generated when using the menu to your do-file. Run again. Did you get an error?
 		\begin{itemize}
-			\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace. Like this:
-				\begin{figure}
-					\centering
-					\includegraphics[width=\linewidth]{img/savedata}
-				\end{figure}
+			\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace. 
+			\item \texttt{save "\$\{folder\_Lab1\}/endline\_data\_raw.dta", replace}
 		\end{itemize}
 	\item Run your code again. Now you both have a final version of your data set and the instructions on how to get there. When your supervisor wants to see your work, share both of these! 
 \end{itemize}
