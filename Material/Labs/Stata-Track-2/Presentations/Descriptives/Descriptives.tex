@@ -233,14 +233,14 @@
 	\begin{multicols}{2}	
 		
 		\begin{itemize}[<default overlay specification>]
-			\item<1> (sumStats) is a command that will output anything you can get from [tabstat].
+			\item<1> \texttt{sumStats} is a command that will output anything you can get from \texttt{tabstat}.
 			
 			\begin{figure}
 				\centering
 				\includegraphics[width=50mm]{img/Table4}
 			\end{figure}
 			
-			\item<1> It also allows multiple [if]-restrictions with different variable lists.
+			\item<1> It also allows multiple \texttt{if}-restrictions with different variable lists.
 		\end{itemize}
 		
 		\begin{figure}
@@ -256,14 +256,14 @@
 	\begin{multicols}{2}	
 		
 		\begin{itemize}[<default overlay specification>]
-			\item<1> Village statistics can be called with (if tag\_village == 1)
+			\item<1> Village statistics can be called with \texttt{if tag\_village == 1}
 			
 			\begin{figure}
 				\centering
 				\includegraphics[width=70mm]{img/Table6}
 			\end{figure}
 			
-			\item<1> Treatment group can be called with [if treatment == 1].
+			\item<1> Treatment group can be called with \texttt{if treatment == 1}.
 			\item<1> And so on, with only one line of code in Stata.
 		\end{itemize}
 		
@@ -282,7 +282,7 @@
 		\begin{itemize}[<default overlay specification>]
 			\item<1> Balance tables feature in almost every impact evaluation.
 			\item<1> We use balance tables to show that there was no difference between our control and treatment group in the baseline before the intervention. 
-			\item<1> To us [iebaltab], list all the variables you want to test balance in, and use the option [grpvar()] to indicate which group each observation is in.
+			\item<1> To us \texttt{iebaltab}, list all the variables you want to test balance in, and use the option \texttt{grpvar()} to indicate which group each observation is in.
 		\end{itemize}
 		
 		\begin{figure}
@@ -299,7 +299,7 @@
 		
 		\begin{itemize}[<default overlay specification>]
 			\item<1> \textbf{Powerful regression engine:} automatically aligns regression coefficients across models.
-			\item<1> \textbf{Accepts arbitrary matrices:} Very easy to hack [xmltab] into doing whatever you want. 
+			\item<1> \textbf{Accepts arbitrary matrices:} Very easy to hack \texttt{xmltab} into doing whatever you want. 
 			\item<1> \textbf{Flexible formatting syntax:} Allows reasonable customization of decimal places, stars, etc. via Excel formatting styles.
 		\end{itemize}
 		

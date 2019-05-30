@@ -219,7 +219,6 @@
 		\newline - Guarantees that equal number of similar observations (rich/poor, male/female etc.) are assigned to be each treatment and control.
 	\item<1> Pairwise
 		\newline - Extreme form of stratification. 
-		\newline - All units are matched to make pairs that are as similar as possible and one unit from each pair is assigned to be T or C.
 \end{itemize}
 
 \end{frame}
@@ -393,15 +392,15 @@
 \begin{itemize}[<default overlay specification>]
 	\item<1>  Same Stata version.
 		\newline - Guarantees the same list.
-		\newline - See commands [ieboilstart] or [version] in Stata.
+		\newline - See commands \texttt{ieboilstart} or \texttt{version} in Stata.
 	\item<1>  Same seed.
 		\newline - Guarantees the same starting point in the list.
 		\newline - Choose a random number outside Stata (ex. random.org).
 		\newline - Large number (6-digit or longer) recommended.
-		\newline - See command [set seed].
+		\newline - See command \texttt{set seed}.
 	\item<1>  Sample ordered in same way.
 		\newline - Guarantees that the same observation gets the same random number from the list.
-		\newline - Sort the data in a way that will remain constant even if someone else change the sort order of the data set you are using (use [isid varlist, sort], NOT [sort varlist, stable]).
+		\newline - Sort the data in a way that will remain constant even if someone else change the sort order of the data set you are using use \texttt{isid varlist, sort}, NOT \texttt{sort varlist, stable}.
 		\newline - Be aware that changing the data set, adding or removing observations, changes the sort order and therefore the entire randomization.
 \end{itemize}
 
@@ -460,7 +459,7 @@
 			\newline - Stratification: Randomization within each subgroup in sample: male/female, rich/poor, regions, etc..
 			\newline - Odd total sample size: The number of observations is not evenly divisible with the number of treatment arms in each strata. 
 		\item<1>  What kind of code do these require to be random and reproducible?.
-		\item<1>  [randtreat] is a user-written Stata command which can help handle all the issues above. We will practice this command in the exercise.
+		\item<1>  \texttt{randtreat} is a user-written Stata command which can help handle all the issues above. We will practice this command in the exercise.
 	\end{itemize}
 	
 \end{multicols}
@@ -484,7 +483,8 @@
 	
 	\begin{itemize}[<default overlay specification>]
 		\item<1>  Cluster: Units that are grouped and may share similar characteristics; sometimes used as the level of randomization (i.e., treatment assigned v. individual students).
-			\newline - The advantage of cluster randomization is that it reduces the likelihood of treatment contamination, but requires more participants to achieve the same statistical power.
+			\newline - The advantage of cluster randomization is that it reduces the likelihood of treatment contamination, but requires more participants to achieve the same statistical power.
+
 		\item<1>  Strata: Groups made up of individuals sharing the same characteristics (i.e., females, males) from which a random sample is drawn.
 			\newline - Ensures balance across treatment groups with respect to stratifying variables. Makes it possible to draw inferences about outcomes within each group.
 	\end{itemize}
@@ -507,7 +507,7 @@
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{img/Clusters2}
+	\includegraphics[width=125mm]{img/Clusters2}
 \end{figure}
 
 \end{frame}
@@ -517,7 +517,7 @@
 
 \begin{figure}
 	\centering
-	\includegraphics[width=\linewidth]{img/Clusters3}
+	\includegraphics[width=125mm]{img/Clusters3}
 \end{figure}
 
 \end{frame}
@@ -629,7 +629,8 @@
 \begin{frame}{Background}
 
 \begin{itemize}[<default overlay specification>]
-	\item<1>  Random number tables have been used for a long time. Nowadays, computational random number generators are employed.
+	\item<1>  Random number tables have been used for a long time. Nowadays, computational random number generators are employed.
+
 	\item<1>  Stata’s random-number generation functions, such as uniform(), follow deterministic algorithms that are pseudorandom-number functions. 
 	\item<1>  The sequences these functions produce are determined by the seed.
 	\item<1>  Different seeds produce different sequences.

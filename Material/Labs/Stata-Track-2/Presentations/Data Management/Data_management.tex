@@ -12,7 +12,7 @@
 \usepackage{helvet}
 \usepackage{booktabs}
 \usepackage{threeparttable}
-
+\usepackage{upquote}
 
 \title{Data Management for \newline Reproducible Research}
 \date{\today}
@@ -372,8 +372,8 @@
 	\begin{enumerate}[<default overlay specification>]
 		\item<1> Once data collection is done, your project looks something like this.
 		\item<1> Head on over to worldbank.github.io/ietoolkit
-		\item<1> Or do [ssc install ietoolkit]
-		\item<1> Then, [iefolder] will set up your folders.
+		\item<1> Or do \texttt{ssc install ietoolkit}.
+		\item<1> Then, \texttt{iefolder} will set up your folders.
 	\end{enumerate}
 	
 	\begin{figure}
@@ -448,8 +448,7 @@
 	\begin{itemize}[<default overlay specification>]
 		\item<1> This crucial component allows a new user to point the entire analysis at the correct (cloned or synced) iteration of the folder.
 		\item<1> If this is not available, new users will spend a long time changing filepaths scattered throughout the dofiles.
-		\item<1>  ALWAYS USE “/” 
-		\item<1>  NEVER USE ["/"] 
+		\item<1>  ALWAYS USE \texttt{"/"} 
 	\end{itemize}
 	
 	\begin{figure}

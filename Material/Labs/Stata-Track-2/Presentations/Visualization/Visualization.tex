@@ -12,7 +12,7 @@
 \usepackage{helvet}
 \usepackage{booktabs}
 \usepackage{threeparttable}
-
+\usepackage{upquote}
 
 \title{Data Visualization}
 \date{\today}
@@ -206,11 +206,11 @@
 	\begin{multicols}{2}	
 			
 			\begin{itemize}[<default overlay specification>]
-			\item<1> \textbf{[graph graphtype]}.
+			\item<1> \texttt{graph graphtype}
 				\newline - Graph which plot one or more variables on one axis.
-			\item<1> \textbf{[twoway graphtype]}.
+			\item<1>  \texttt{twoway graphtype}
 				\newline - Graph which two plot variables together on an x,y axis.
-			\item<1> \textbf{[histogram kdensity lowess]}.
+			\item<1>  \texttt{histogram, kdensity, lowess}
 				\newline - Essential distributional commands.
 		\end{itemize}
 		
@@ -223,7 +223,7 @@
 \end{frame}
 
 
-\begin{frame}{Oneway [graph] plots can be very informative}
+\begin{frame}{Oneway  \texttt{graph} plots can be very informative}
 	
 	\begin{figure}
 		\centering
@@ -233,12 +233,17 @@
 \end{frame}
 
 
-\begin{frame}{[twoway] graphs can be stacked up}
+\begin{frame}{ \texttt{twoway} graphs can be stacked up}
 	\begin{multicols}{2}	
 		
 		\begin{itemize}[<default overlay specification>]
 			\item<1> The axes are abstract, so you do not need to use the same variables or the same units for each graph!
-			\item<1> Each can have its own if/in and options.
+			\item<1> Syntax: 
+				\newline \texttt{tw ///}
+				\newline \texttt{type var1 var2, opts ///}
+				\newline \texttt{type var3 var4, opts ///}
+				\newline \texttt{,opts}
+			\item<1> Each can have its own  \texttt{if/in} and options.
 		\end{itemize}
 		
 		\begin{figure}
@@ -372,12 +377,12 @@
 \begin{frame}{Every graph starts from the basics}
 	\begin{multicols}{2}	
 		
-		\leavevmode 	\newline  tw ///
-		 	\newline   (qfitci length weight) ///
-		 	\newline  (scatter length weight 
-		 	\newline  if foreign == 0) ///
-		 	\newline  (scatter length weight 
-		 	\newline  if foreign == 1) 
+		\leavevmode 	\newline  \texttt{tw ///}
+		 	\newline  \texttt{ (qfitci length weight) ///}
+		 	\newline  \texttt{(scatter length weight} 
+		 	\newline  \texttt{ if foreign == 0) ///}
+		 	\newline  \texttt{(scatter length weight} 
+		 	\newline  \texttt{if foreign == 1) }
 		
 		\begin{figure}
 			\centering
@@ -403,9 +408,11 @@
 \begin{frame}{Graphs can be combined and exported}
 	\begin{multicols}{2}	
 		
-		\leavevmode 	\newline  graph export ///
-		\leavevmode 	\newline    “filename” /// (.png or .eps)
-		\leavevmode		\newline  (, replace 
+		\leavevmode 	\newline \texttt{graph export ///}
+
+		\leavevmode 	\newline  \texttt{  "filename" /// (.png or .eps)}
+		\leavevmode		\newline  \texttt{ (, replace}
+ 
 		\leavevmode		\newline  With .png, specify “width(1000)” for higher resolution
 		\newline  .eps files can scale to any size on most modern software (but hard to preview on older systems)
 		
