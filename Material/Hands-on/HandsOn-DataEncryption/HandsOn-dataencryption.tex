@@ -25,7 +25,7 @@
 \setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
 \graphicspath{{graphics/}}
 
-\title{Stata Lab ?: Title Title Title}
+\title{Hands-On Session: Data Encryption}
 \author{DIME Analytics \\ dimeanalytics@worldbank.org}
 \date{11 June 2019}  % if the \date{} command is left out, the current date will be used
 
@@ -50,6 +50,13 @@
 % Provides paragraphs of dummy text
 \usepackage{lipsum}
 
+% Allows clickable links
+\usepackage[colorlinks = true,
+linkcolor = blue,
+urlcolor  = blue,
+citecolor = blue,
+anchorcolor = blue]{hyperref}
+
 % These commands are used to pretty-print LaTeX commands
 \newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
 \newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
@@ -69,62 +76,63 @@
 \end{marginfigure}
 
 \begin{abstract}
-Write a short description of the objective of the exercise here. List the specific items you will cover in the list below.
+In this exercise we will encrypt a dataset and attempt to access the data in an encrypted folder
 
-\bigskip\noindent \textbf{Exercise Objectives}:
+\bigskip\noindent \textbf{Exercise Objectives}: On completing this exercise you will be able to
 \begin{enumerate}
-  \item Specific item 1
-  \item Specific item 2
-  \item Specific item 3
+  \item Set up VeraCrypt
+  \item Encrypt files
+  \item Access encrypted files
 \end{enumerate}
 \end{abstract}
 
 %\printclassoptions
-\section{Part 1: Part with text and short code example}
+\section{Part 1: Set up VeraCrypt}
 
-Write the description of your exercise here. Write brief but assume little pre-existing knowledge, meaning that make sure to mention and explain all concepts needed at the same time as you make it possible for someone already familiar with the topics to skip ahead. One way to accomplish that is to have titles and text highlights (bold and italic) that gives someone reading the text quickly a good idea about what each paragraph is about.
+First we will install VeraCrypt. Note that this needs to be done only once. Anyone accessing a file encrypted using VeraCrypt requires the software installed on their computer.
 
-A short \textbf{code example} is easily written like this:
-
-\begin{Verbatim}
-  /users/bbdaniels/Dropbox/MSIE 2019/
-\end{Verbatim}
-
-
-Use a lot of code examples as people doing the exercise often get stuck on small syntax errors. Triple-check that your code as no typos, as they are very confusing for anyone trying to follow the exercise who is not already an expert on the topic.
-
-%\printclassoptions
-\section{Part 2: Part with side note}
-Referencing more detailed resources or citing sources you used is a great way to make the exercise helpful no matter what level the person doing the exercise, as more advanced people can follow these links and learn more. The DIME Wiki\sidenote{The DIME Wiki lists best practices based on experiences in DIME at the World Bank - \url{https://dimewiki.worldbank.org}} is an example of a great tool. The side notes will update their numbering automatically and they will float nicely at the side of the page.
-
+\begin{enumerate}
+	\item Install \href{https://www.veracrypt.fr/en/Downloads.html}{Veracrypt}. (eServices request on a Bank desktop/laptop)
+	\item Create an encrypted folder (volume) titled 'Encrypted Data' with a strong password.\sidenote{Add suggestions for how to make strong passwords} \\
+	\textit{Note that, you can use any drive of your choice.}\sidenote{Add sub-steps for this (maybe with pictures)}
+	\item Go to the location where you created the folder to confirm the folder exists.
+	Double click on the folder to try and open it directly. Confirm that it doesn't open!
+\end{enumerate}
 
 %\printclassoptions
-\section{Part 3: Part with longer code}
-Often code examples are longer than just a line or two. When we want to write longer sections of code we can use the \verb|[frame=leftline,numbers=left]| option to Verbatim and we the code will be formatted like a section of code and all lines will be numbered so that can be easily referenced from the text. As in, \textit{see how the master-do file run other do-files on line 11 and 12}.
+\section{Part 2: Encrypting files}
+\begin{enumerate}
+	\item Open VeraCrypt.
+	\item Mount the encrypted volume created onto drive K. \\
+	\textit{Note that, you can use any drive of your choice.}
+	\item This will now open an empty folder titled 'Encrypted Data'. Save a copy of the data sets titled endline\_data\_raw\_2018.dta and endline\_data\_raw\_nodup\_2018.dta\sidenote{Update to final dataset once ready} in the folder. \\
+	\textit{This is very similar to using a new USB/flash drive and adding files to it.}
+	\item Open VeraCrypt and dismount the drive.
+	\item Share the password securely with team members.\sidenote{Add something about securely sharing passwords}
+	
+\end{enumerate}
 
-\begin{Verbatim}[frame=leftline,numbers=left]
-*iefolder*3*RunDofiles**********************************************************
-*iefolder will not work properly if the line above is edited
-
-* ******************************************************************** *
-*
-*       PART 3: - RUN DOFILES CALLED BY THIS MASTER DOFILE
-*
-* ******************************************************************** *
-
-// Lab 2: Stata Coding for Reproducible Research
-if (1) do "${Lab1}/cleaning.do"
-if (1) do "${Lab1}/analysis.do"
-\end{Verbatim}
 
 %\printclassoptions
-\section{Part 4: Part with imported do-file}
+\section{Part 3: Access encrypted files}
+\begin{enumerate}
+	\item Open VeraCrypt.
+	\item Mount the encrypted volume created onto drive K. \\
+	\textit{Note that, you can use any drive of your choice.}
+	\item This will now open a folder titled 'Encrypted Data' which contains the data sets titled endline\_data\_raw\_2018.dta and endline\_data\_raw\_nodup\_2018.dta\sidenote{Update to final dataset once ready}.
+	\item Open VeraCrypt and dismount the drive   
+\end{enumerate}
 
-For long do-files and scripts it might be easier to write them in a separate file. Imported files looks slightly different but the principle is the same and the line numbering is still there. This might be an easier way to keep track of more complicated code examples, and longer code examples can more quickly be included without a lot of time spent on editing.
-
-\begin{figure*}
-{\setstretch{0.7}
-\VerbatimInput[frame=lines,numbers=left,label=master.do]{./master.do}}
-\end{figure*}
+NOTE: When calling a file in the encrypted folder on Stata the file path used will be that of the mounted drive and not that of where the encrypted file is stored. 
+Example: Encrypted folder is stored in Dropbox at\sidenote{add pictures to explain}. It will be used in Stata using mounted drive and not the filepath of the Dropbox folder. add stata example on file path for mounted drive, but do not worry about doing it in the big master dofile
+\section{Extra - If time permits}
+Pair up with another person in the room and try to create, share, and access encrypted data.
+\begin{enumerate}
+	\item Create a shared Dropbox/Box/Onedrive folder.
+	\item Create one encrypted folder for each of you within this shared folder.
+	\item Place the data in your folder in that shared folder.
+	\item Share the password with partner
+	\item Access partner's encrypted file
+\end{enumerate}
 
 \end{document}
