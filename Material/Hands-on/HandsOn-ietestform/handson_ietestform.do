@@ -23,9 +23,10 @@
     if "`c(username)'" == "" {
 
     **Replace the empty string with the full path to folder
-    * where you keep "CTO_testform_2.xlsx"
+    * where you keep "ietestform-handson-session-cto-form.xls"
         global folder ""
     }
 
 *Run the command
-    ietestform, surveyform("${folder}\CTO_testform_2.xlsx") report("${folder}\report.csv")
+    ietestform, surveyform("${folder}\ietestform-handson-session-cto-form.xls") ///
+		report("${folder}\report.csv")
