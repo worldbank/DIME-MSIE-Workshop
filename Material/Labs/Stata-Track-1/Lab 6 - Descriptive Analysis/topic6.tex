@@ -25,10 +25,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
 	\end{picture}%
 }
 
@@ -95,27 +95,30 @@
 \begin{document}
 	
 	{
-		\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
 		\maketitle
 	}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
 \begin{frame}[fragile]{What are descriptive statistics?}
-\begin{multicols}{2}	
+\begin{columns}[c]
+	\column{.5\textwidth}
 	\begin{itemize}
 		\item Numbers or figures that paint a picture of what a given dataset looks like
 		\item They begin to help us understand the important features of our dataset, and can be useful in directing us towards areas of further analysis
 		\item We will also show how to make basic regression outputs
 	\end{itemize}
+\column{.5\textwidth}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{img/descriptivecartoon}
 	\end{figure}
-\end{multicols}
+\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Descriptive statistics are NOT regressions}
-\begin{multicols}{2}	
+\begin{columns}[c]
+	\column{.5\textwidth}	
 	\begin{itemize}
 		\item This is “Anscombe’s Quartet”
 		\item Every set here has: 
@@ -128,11 +131,12 @@
 			\end{itemize}
 		\item Regression analysis tells you nothing about the world if you don’t understand the shape of the world you are in!
 	\end{itemize}
+	\column{.5\textwidth}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{img/graphpanel1}
 	\end{figure}
-\end{multicols}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Data can take any shape}
@@ -143,16 +147,18 @@
 \end{frame}
 
 \begin{frame}[fragile]{This really matters for impact analysis}
-\begin{multicols}{2}	
+\begin{columns}[c]
+	\column{.5\textwidth}	
 	\begin{itemize}
 		\item In this case, for example, simply running a regression on the data would give a very wrong impression about the strength of the relationship 
 		\item And real data has many more than two dimensions!
 	\end{itemize}
+\column{.5\textwidth}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{img/incomeinequality}
 	\end{figure}
-\end{multicols}
+\end{columns}
 \end{frame}
 
 \begin{frame}{Task 1: Summarize and Tabulate}
@@ -335,7 +341,7 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{img/section_slide}
+\sectionpic{Thank You!}{../img/section_slide}
 
 
 
