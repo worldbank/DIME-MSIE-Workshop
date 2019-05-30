@@ -17,7 +17,7 @@
 
 \title{Topic 2 - Track 1 \newline Coding for Reproducible Research}
 \date{\today}
-\author{Author of Session here!} % Name of author(s) of session here
+\author{Kristoffer Bjarkefur} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
 \setbeamercolor{background canvas}{bg=white}	% Sets background color
 
@@ -100,8 +100,11 @@
 \sectionpic{Excel vs. Stata}{img/section_slide}
 
 
-\begin{frame}{First Frame}
-Can I use Excel? \newline
+\begin{frame}{Why do we use Stata?}
+\begin{center}
+	\huge Can I use Excel? 
+\end{center}
+
 \end{frame}
 
 
@@ -241,33 +244,11 @@ Can I use Excel? \newline
 	\begin{itemize}
 		\item N, mean, standard deviation, min, max
 		\item tabulate : frequencies
+		\item \texttt{summarize, detail} : percentiles, variance, skewness, kurtosis
 	\end{itemize}
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Exploring a new dataset - more}
-\begin{itemize}
-\item \textit{codebook}: for each variable, displays:
-	\begin{itemize}
-		\item Type (more detail than describe)
-		\item Number of unique values
-		\item Number of missing values
-		\item Range and units
-		\item Examples of values (strings); tabulations (categorical); or mean, sd and percentiles (continuous)
-		\item Warnings if embedded blanks (may or may not be ok)
-	\end{itemize}
-\item \textit {labelbook}: for each stored value label, displays:
-	\begin{itemize}
-		\item Label definitions
-		\item what variables labels are applied to
-	\end{itemize}
-\item \textit {list}: lists all variables and observations. 
-	\begin{itemize}
-		\item Can qualify: “list if inc\_01<500000”, “list in 1/10”
-	\end{itemize}
-\item \textit summarize, detail: percentiles, variance, skewness, kurtosis
-\end{itemize}
-\end{frame}
 
 \begin{frame}{Types of variables}
 \begin{itemize}
@@ -534,8 +515,7 @@ This create two variables:
 \begin{itemize}
 	\item Use the drop down menus to import the village\_codes.xls data to Stata. After you select Excel Spreadsheet you get a new window with all import excel options. For now, only use browse to select the file and then click OK.
 		\begin{itemize}
-			\item Use describe, tabulate, browse or any other tools you have learnt to explore the data
-			\item What are your key observations?
+			\item Use describe, tabulate, browse or any other tools you have learned to explore the data. What are your key observations?
 		\end{itemize}
 	\item In excel the first row can be used as variable names, but in Stata the first row is always data. Use the drop down menus to open up the window with the import excel options again. Is there any option you see that you think will solve this?
 		\begin{itemize}
@@ -553,7 +533,7 @@ This create two variables:
 
 \vspace{20mm}
 For more information or further questions please contact:
-\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+\newline Kristoffer Bjarkefur (\url{kbjarkefur@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
 
 \end{frame}
 
