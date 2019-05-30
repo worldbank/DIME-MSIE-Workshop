@@ -12,6 +12,7 @@
 \usepackage{helvet}
 \usepackage{booktabs}
 \usepackage{threeparttable}
+\usepackage{upquote}
 
 
 \title{Stata Coding for \newline Reproducible Research }
@@ -134,7 +135,7 @@
 		
 		\begin{itemize}[<default overlay specification>]
 			\item<1> It is much easier to maintain files \textbf{modularly} from the outset than to clean up “everything dofiles”.
-			\item<1>  Cleaning is \textbf{separated} from analysis so that each analysis step begins with [use].
+			\item<1>  Cleaning is \textbf{separated} from analysis so that each analysis step begins with \texttt{use}.
 			\item<1>  The final product then only consists of keeping the analysis files that are used in the paper and \textbf{archiving} the rest.
 		\end{itemize}
 	
@@ -231,21 +232,20 @@
 \begin{multicols}{2}	
 	
 	\begin{itemize}[<default overlay specification>]
-		\item<1>  \textbf {``Stata quotes’’}
+		\item<1>  \texttt{\textbf {"Stata quotes"}}
 			\newline - Will break lots of programming tools because the backtick ` is a special character.
 			\newline - Are really important to get right. 
-			\newline - `NAME’ calls a local macro.
-			\newline - local NAME ”STRING” stores STRING in `NAME’. 
-			\newline - local NAME `” “STRING” “’ stores “STRING” in `NAME’. 
-			\newline - local NAME `=2+2’ stores 4 : this works anywhere, like yline(`=`beta’*`r(mean)’’).
-		\item<1>  \textbf {``Equals sign =’’}
+			\newline -  \texttt{`NAME’} calls a local macro.
+			\newline - local NAME  \texttt{"STRING”} stores STRING in  \texttt{`NAME’}. 
+			\newline - local NAME  \texttt{`"STRING"'} stores  \texttt{"STRING"} in  \texttt{`NAME’}. 
+			\newline - local NAME  \texttt{`=2+2’} stores 4 : this works anywhere, like  \texttt{yline`=`beta’*`r(mean)’’)}.
+		\item<1>   \texttt{`Equals sign =’}
 			\newline - When used with a macro, they evaluate what comes after
-			\newline - local NAME = min(2,3,4) stores 2 in `NAME’
-			\newline - local NAME = “min(2,3,4)” stores min(2,3,4) in `NAME’
-		\item<1>  \textbf {Backslash "[/]"}
+			\newline - local NAME  \texttt{= min(2,3,4)} stores 2 in `NAME’
+		\item<1>   \texttt{Backslash "/"}
 			\newline - never use in filepaths: /users/dropbox/
-			\newline - “Escapes” functional characters:
-			\newline - local NAME = “\`OTHERNAME’” stores `OTHERNAME’, not the contents of the local `OTHERNAME’
+			\newline -  \texttt{"Escapes"} functional characters:
+			\newline - local NAME  \texttt{= "\ `OTHERNAME’"} stores  \texttt{`OTHERNAME’}, not the contents of the local  \texttt{`OTHERNAME’}.
 	\end{itemize}
 	
 \end{multicols}
@@ -255,7 +255,7 @@
 \begin{multicols}{2}	
 	
 	\begin{itemize}[<default overlay specification>]
-		\item<1> “Macros” (this is what programmers call “variables”) hold information within a Stata session.
+		\item<1> \texttt{“Macros”} (this is what programmers call “variables”) hold information within a Stata session.
 		\item<1>  Difference in scope – Use them appropriately according to scope.
 		\item<1>  Only define globals in the master do-file.
 		\item<1>  Use locals everywhere else (varlists, loops, estimation results)… they are deleted after the dofile finishes. 
@@ -319,7 +319,7 @@ Use locals to shorten variable names and make them more explanatory.
 		\item<1>  Because variables are the core of Stata, it knows a lot about them.
 		\item<1>  Extended functions access that information.
 		\item<1> They pull information about variables (types, labels, etc), locals, and other Stata native objects into macros.
-		\item<1>  local theLabel : val lab foreign
+		\item<1>  \texttt{local theLabel : val lab foreign}
 	\end{itemize}
 	
 	\begin{figure}
@@ -332,9 +332,9 @@ Use locals to shorten variable names and make them more explanatory.
 
 
 
-\begin{frame}[fragile]{Stored results and [return], [ereturn], [creturn]}
+\begin{frame}[fragile]{Stored results and \texttt{return}, \texttt{ereturn}, \texttt{creturn}}
 \begin{multicols}{2}
-	\begin{lstlisting}
+	\begin{lstlisting}[numbers=none]
 	// clear
 	sysuse auto
 	
@@ -350,15 +350,18 @@ Use locals to shorten variable names and make them more explanatory.
 	// return list
 	mat result = r(table)
 	matlist results 
-	
+
 	*returns holds estimates
 	
 	ereturn list
 	di "`e(N)'"
 	count if e(sapmple) == 1
+	\end{lstlisting}
 	
+	\begin{lstlisting}[numbers=none]
 	*creturn holds system information
 	
+		\begin{lstlisting}[numbers=none]
 	creturn list 
 	
 		foreach letter in `c(alpha)' {
@@ -434,11 +437,11 @@ One should never have to scroll horizontally to be able to read code
 Two recommended ways to break up lines:
 
 	\begin{enumerate}[<default overlay specification>]
-	\item<1>  "///"
+	\item<1>  \texttt{"///"}
 		\leavevmode 	\newline Everything on the same row will be interpreted as a comment and the following row will be interpreted as if it was the same row.
 		\leavevmode 	\newline Good for breaking a long line of code into a few rows.
 	
-	\item<1>  {\#}delimit ;  and {\#}delimit cr 
+	\item<1>  \texttt{{\#}delimit;}  and \texttt{{\#}delimit cr} 
 		\leavevmode 	\newline Everything between {\#}delimit ; and  {\#}delimit cr is executed as one line unless it is manually specified using a semicolon.
 		\leavevmode 	\newline  Good for breaking a very long line of code into many rows
 	\end{enumerate}
@@ -460,8 +463,8 @@ Two recommended ways to break up lines:
 \begin{multicols}{2}	
 	
 	\begin{itemize}[<default overlay specification>]
-		\item<1>  Throughout the rest of the training sessions (and your programming life), you will need [help]!
-		\item<1>  Type [help commandname] in Stata at any time.
+		\item<1>  Throughout the rest of the training sessions (and your programming life), you will need \texttt{help}!
+		\item<1>  Type \texttt{help commandname} in Stata at any time.
 		\item<1>  Or, google “commandname statalist” for the user-contributed help group. 
 		\item<1>  Let’s read this one together:
 	\end{itemize}
