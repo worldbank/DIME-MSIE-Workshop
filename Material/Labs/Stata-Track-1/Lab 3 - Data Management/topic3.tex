@@ -106,10 +106,9 @@
 	\begin{itemize}
 		\item 1. Folder organization
 		\item 2. Master do-files
-		\item 3. iefolder
-		\item 4. First overview of a data set
-		\item 5. Master data sets
-		\item 6. Basic data cleaning tasks:
+		\item 3. First overview of a data set
+		\item 4. Master data sets
+		\item 5. Basic data cleaning tasks:
 			\begin{itemize}
 				\item Unique id, 
 				\item Variable and value labels
@@ -190,76 +189,13 @@
 		\item This way anyone sharing the project folder can easily run your do-files.
 		
 	\end{itemize}
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/master2}
-	\end{figure}
-\end{multicols}
 \end{frame}
 
-
-\begin{frame}{iefolder}
-\begin{itemize}
-	\item Sounds complicated to set up? Don’t worry, we have a command that sets that up for you
-	\item It is called iefolder and it creates the folders and master do-files we have spoken about for you
-	\item Part of ietoolkit. If you have not installed that package yet, then type ssc install ietoolkit in Stata
-\end{itemize}
+\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
+	\codeexample{master-dofile-rootpath.do}{code/master-dofile-rootpath.do}
 \end{frame}
 
-
-\begin{frame}{Task 1}
-\begin{itemize}
-	\item Create a folder on your computer and call it the project folder
-	\item Create a global called projectfolder to that folder. A shortcut to get the folder path is by clicking in the navigation bar of that folder
-		\begin{figure}
-			\centering
-			\includegraphics[width=\linewidth]{img/task1}
-		\end{figure}
-	\item Now create a new data work folder using iefolder like this:
-		\begin{figure}
-			\centering
-			\includegraphics[width=\linewidth]{img/task1_2}
-		\end{figure}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{iefolder - rounds}
-\begin{itemize}
-	\item Inside the data work folder you create folders for each round. A round is a data collection exercise
-		\begin{itemize}
-			\item 	Example of round is baseline, endline etc.
-			\item If you have simultaneous data collections on different unit of observations, for example students and schools, then create separate rounds for them
-		\end{itemize}
-\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Task 2.}
-\begin{itemize}
-	\item Now we want to create a round called baseline. We can use the same global projectfolder.
-	\item create the data work folder inside that folder using iefolder like this:
-		\begin{figure}
-			\centering
-			\includegraphics[width=\linewidth]{img/task2}
-		\end{figure}
-	\item Did you do this in a do-file? What happens if you run the same code again?
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Task 3.}
-\begin{itemize}
-	\item Now we want to use the folders and the master do-files created by iefolder.
-	\item create the data work folder inside that folder using iefolder like this:
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/task2}
-	\end{figure}
-	\item Did you do this in a do-file? What happens if you run the same code again?
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Task 4.}
+\begin{frame}{Task 4. - iefolder was removed before this}
 \begin{itemize}
 	\item Now save the do-file you used in the last task with the name load\_imported\_data.do in this folder: baseline\\Dofiles\\Cleaning
 	\item Now open the baseline\_cleaning\_MasterDofile.do file in the dofiles folder. Look for the part that says and replace the parts in red:
