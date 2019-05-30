@@ -25,10 +25,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
 	\end{picture}%
 }
 
@@ -66,36 +66,32 @@
 	\setbeamertemplate{section page}[mytheme]
 }
 
-%%% The command below allows for the text that contains Stata code
-\lstset{ %
-	backgroundcolor=\color{white},
-	basicstyle=\tiny,
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	commentstyle=\color{mygreen},
-	escapeinside={\%*}{*)},
-	extendedchars=true,
-	frame=single,
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{gray},
-	rulecolor=\color{black},
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{mymauve},
-	tabsize=2,
-	title=\lstname,
-	morekeywords={not,\},\{,preconditions,effects },
-	deletekeywords={time}
-}
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+%Fancyvrb docs: http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/fancyvrb/doc/fancyvrb-doc.pdf
+\fvset{fontsize=\scriptsize} % The font size of all verbatim text can be changed here
 
+%So we can use option FloatBarrier, which is similar to [H] but is an
+%alternative solition when the algorithm can't solce [H] as too many
+%settings are going on. [H] seems to get stuck in infinite loop
+%https://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned
+\usepackage{placeins}
+\newcommand{\codeexample}[2]{
+	\begin{figure}
+		\VerbatimInput[
+		framesep=3mm,
+		frame=lines, % line above and below code section
+		numbers=left, %Line number
+		label= #1, %name of code section
+		baselinestretch=0.90, %Use line space more similat to line space in code editors
+		]{#2} %Write the relative file path and the name of the file to be included
+	\end{figure}
+	\FloatBarrier
+}
 %% The below command creates the ligh bulb logos in the top right corner of the 
 \begin{document}
 	
 	{
-		\usebackgroundtemplate{\includegraphics[height=55mm, right]{img/top_right_corner.pdf}}
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
 		\maketitle
 	}
 
@@ -233,19 +229,21 @@
 \end{frame}
 
 
-\begin{frame}[fragile]{Descriptive statistics are NOT regressions}
-\begin{multicols}{2}	
-		\begin{figure}
+\begin{frame}[fragile]{Ex 1: Basic Randomization in Stata}
+\begin{columns}[c]
+	\column{.60\textwidth}	
+	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{img/randomeg1}
 	\end{figure}
-
-	\begin{itemize}
-		\item Start with a sorted list of observations you want to randomize. Generate a random number.
-		\item Sort the observations after this random number. The order of the observations are now randomly sorted.
-		\item Assign 0 (control) to the first half of the observations, and assign 1 (treatment) to the second half.		
-	\end{itemize}
-\end{multicols}
+	
+	\column{.40\textwidth}
+	\begin{enumerate}
+		\item \small Start with a sorted list of observations you want to randomize. Generate a random number.
+		\item \small Sort the observations after this random number. The order of the observations are now randomly sorted.
+		\item \small Assign 0 (control) to the first half of the observations, and assign 1 (treatment) to the second half.		
+	\end{enumerate}
+\end{columns}
 \end{frame}
 
 
@@ -263,40 +261,50 @@
 \end{frame}
 
 \begin{frame}{Rule 1: Set the version of Stata}
+\begin{columns}[c]
+	\column{.65\textwidth}
 	\begin{figure}
 		\centering
 		\includegraphics[width=\linewidth]{img/rule1}
 	\end{figure}
+	\column{.35\textwidth}
 	\begin{itemize}
 		\item Stata goes through the lists and assigns the 1st value to the first observation, 2nd to the second observation, etc.
 	\end{itemize}
+\end{columns}
 \end{frame}
 
 
 \begin{frame}{Rule 2: Set the seed}
+\begin{columns}[c]
+	\column{.65\textwidth}
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{img/rule2}
 \end{figure}
+\column{.35\textwidth}
 \begin{itemize}
-	\item Setting the seed change the starting place in the list
-	\item Randomly selecting a seed means randomizing the starting point
-	\item If no seed is set, a seed is randomized each time you run the code, this means random but not replicable
+	\item \small Setting the seed change the starting place in the list
+	\item \small Randomly selecting a seed means randomizing the starting point
+	\item \small If no seed is set, a seed is randomized each time you run the code, this means random but not replicable
 \end{itemize}
+\end{columns}
 \end{frame}
 
 
-\begin{frame}{Rule 3: Stable sort}
-\begin{multicols}{2}	
+\begin{frame}{Rule 3: Stable sort}	
+\begin{columns}[c]
+	\column{.65\textwidth}
 \begin{figure}
 	\centering
 	\includegraphics[width=\linewidth]{img/rule3}
 \end{figure}
+\column{.35\textwidth}
 \begin{itemize}
 	\item The two data sets to the left are sorted differently, and while the same random numbers were picked, the result of the randomization is different.
 	\item Adding and removing observations can change the sort order
 \end{itemize}
-\end{multicols}
+\end{columns}
 \end{frame}
 
 
@@ -333,37 +341,32 @@
 \end{frame}
 
 
-\begin{frame}{Ex 1: Basic Randomization in Stata}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/randomisation_stata}
-\end{figure}
+\begin{frame}{Ex 1: Basic Randomization in Stata - Step 1}
+	Apply the three rules of randomization. Can you spot them?
+	\codeexample{randomization-1.do}{code/randomization-1.do}
 \end{frame}
 
-
-\begin{frame}{Ex 1: Basic Randomization in Stata}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/randomisation_stata_2}
-\end{figure}
+\begin{frame}{Ex 1: Basic Randomization in Stata - Step 2}
+	After the three rules are set, generate treatment variable
+	\codeexample{randomization-2.do}{code/randomization-2.do}
 \end{frame}
 
-\begin{frame}{Ex 2: Randomization in Stata}
+\begin{frame}{Ex 2: Multi-Arm Randomization in Stata}
 \begin{itemize}
 	\item Multiple treatment arms
 	\item We have 1067 households and we want one third of them to be control and two treatment arms with one third in each
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Ex 1: Basic Randomization in Stata}
-\begin{figure}
-	\centering
-	\includegraphics[width=\linewidth]{img/randomisation_stata_3}
-\end{figure}
-\begin{itemize}
-	\item Similar to Ex 1, but we assign the households to 4 groups
-\end{itemize}
+\begin{frame}{Ex 2: Multi-Arm Randomization in Stata - Step 1}
+	Start over and apply the three rules again
+	\codeexample{randomization-1.do}{code/randomization-1.do}
 \end{frame}
+
+\begin{frame}{Ex 2: Multi-Arm Randomization in Stata - Step 1}
+	\codeexample{randomization-multi-arm.do}{code/randomization-multi-arm.do}
+\end{frame}
+
 
 \begin{frame}{Real life issues}
 \begin{itemize}
@@ -418,7 +421,7 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{img/section_slide}
+\sectionpic{Thank You!}{../img/section_slide}
 
 
 
