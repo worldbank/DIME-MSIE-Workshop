@@ -93,6 +93,10 @@ passwords/
 #Unignore the main data folder and all lab session data folders. All changes to the data should be tracked
 !Material/Data/2018-data/*.dta
 
+#Unignore imgfiles for beamer presentations
+!Material/Labs/Stata-Track-*/**/img/*.png
+!Material/Labs/Stata-Track-*/**/img/*.pdf
+
 #Unignore files needed for the webpage
 !MSIE-Presenter-Page/*.yml
 
