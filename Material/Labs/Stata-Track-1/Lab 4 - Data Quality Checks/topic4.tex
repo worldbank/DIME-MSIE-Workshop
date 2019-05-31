@@ -103,55 +103,55 @@
 \begin{frame}{Objectives}
 	\begin{itemize}
 		\item Duplicates
-			\begin{itemize}
-				\item Run a prepared file using ‘ieduplicates’ command and understand the output
-			\end{itemize}
+		\begin{itemize}
+			\item Run a prepared file using \texttt{ieduplicates} command and understand the output
+		\end{itemize}
 		\item Survey Log
-			\begin{itemize}
-				\item Provide the team with clear progress reports
-			\end{itemize}
+		\begin{itemize}
+			\item Provide the team with clear progress reports
+		\end{itemize}
 		\item Back checks 
-			\begin{itemize}
-				\item Set up bcstats, run it and interpret the results
-			\end{itemize}
+		\begin{itemize}
+			\item Set up bcstats, run it and interpret the results
+		\end{itemize}
 		\item Other Manual HFC
-			\begin{itemize}
-				\item Run a prepared HFC file and learn to edit it
-			\end{itemize}
+		\begin{itemize}
+			\item Run a prepared HFC file and learn to edit it
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{ieduplicates}
-\begin{itemize}
-	\item Exercise 1
 	\begin{itemize}
-		\item install ieduplicates
-		\item learn how to use ieduplicates
-		\item practice identifying and correcting duplicates
+		\item Exercise 1
+		\begin{itemize}
+			\item \texttt{ssc install ieduplicates}
+			\item learn how to use \texttt{ieduplicates}
+			\item practice identifying and correcting duplicates
+		\end{itemize}
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{HFC}
-\begin{itemize}
-	\item Given that you are in track 1, you are usually not expected to know how to write this, so we will focus on how to interpret
-	\item We will not cover everything as that is responsibility of person writing
 	\begin{itemize}
-		\item There are templates that help with this
+		\item Given that you are in track 1, you are usually not expected to know how to write this, so we will focus on how to interpret
+		\item We will not cover everything as that is responsibility of person writing
+		\begin{itemize}
+			\item There are templates that help with this
 			\begin{itemize}
 				\item IPA
 				\item DIME is working
 			\end{itemize}
+		\end{itemize}
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 
 \begin{frame}{3. Survey Log}
-\begin{itemize}
-	\item Make sure to keep records in the field that is updated very day with how many interviews that were completed
-	\item Make sure that the number of observations on the server matches these records.
-	\item Purpose: 
+	\begin{itemize}
+		\item Make sure to keep records in the field that is updated very day with how many interviews that were completed
+		\item Make sure that the number of observations on the server matches these records.
+		\item Purpose: 
 		\begin{itemize}
 			\item Provide your team a quick overview of progress on the field
 			\item Detect enumerators who are slacking
@@ -162,103 +162,103 @@
 
 
 \begin{frame}{3. Survey Log}
-\begin{itemize}
-	\item Exercise 2 – Practice checking survey progress. Assume you’ve verified that the server matches the field log, i.e. no submissions are missing. 
-\end{itemize}
+	\begin{itemize}
+		\item Exercise 2 – Practice checking survey progress. Assume you’ve verified that the server matches the field log, i.e. no submissions are missing. 
+	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{4. Back checks}
-\begin{itemize}
-	\item Purpose
+	\begin{itemize}
+		\item Purpose
 		\begin{itemize}
 			\item To monitor the quality of field work: Do some enumerators need extra support from supervisors?
 			\item To understand whether your questionnaire accurately captures the key outcomes of your study: Do respondents understand the questions the way we intended to?
 		\end{itemize}
-	\item Best practices:
+		\item Best practices:
 		\begin{itemize}
 			\item ~ 10\% of surveys, 20\% in the first 2 weeks of field work
 			\item Every team and every surveyor must be back checked 
 			\item The back check sample must include a proportional number of missing and replacement respondents. 
 			\item Selection of households for back checks must be random
 		\end{itemize}
-\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{Selecting Back Check Questions}
-\begin{itemize}
-	\item Type 1 variables 
+	\begin{itemize}
+		\item Type 1 variables 
 		\begin{itemize}
 			\item Straightforward questions where we expect very little variation
 			\item E.g. education level, marital status, occupation, has children
 		\end{itemize}
-	\item Type 2 variables
+		\item Type 2 variables
 		\begin{itemize}
 			\item Questions where we expect capable enumerators to get the true answer
 		\end{itemize}
-	\item Type 3 variables
+		\item Type 3 variables
 		\begin{itemize}
 			\item Questions that we expect to be difficult. 
 			\item Want to understand if these questions were interpreted in the field as intended		
 		\end{itemize}
-	\item Identifying Respondent and Interview Information
+		\item Identifying Respondent and Interview Information
 		\begin{itemize}
 			\item Check if we have the right person; if the interview took place \& when
 		\end{itemize}
-\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{bcstats}
-\begin{itemize}
-	\item ssc install bcstats, replace
-	\item Purpose:
 	\begin{itemize}
-		\item compares back check data and survey data, producing a data set of comparisons
-		\item completes enumerator checks and stability checks for variables
-	\end{itemize}
-\end{itemize}
-\end{frame}
-
-\begin{frame}{Using bcstats report to improve data quality}
-\begin{itemize}
-	\item Type 1
+		\item \texttt{ssc install bcstats}
+		\item Purpose:
 		\begin{itemize}
-			\item If >10\% discrepancies  - give surveyor a warning
-			\item 20-30\% discrepancies - 2nd backcheck to determine who made errors
-			\item If error is by surveyor  - audit 3 additional surveys by that surveyor in same week 
-			\item if 20-30\% discrepancies -  put him/her on probation
-			\item >40\% discrepancies - 2nd backcheck to determine who made errors and maybe re-survey HH 
-			\item If surveyor made errors - re-survey HH \& audit all surveys done by surveyor in this batch
-			\item If one more survey has 40\% discrepancies - fire surveyor immediately \& redo all his/her surveys with 20\% or more discrepancies
+			\item compares back check data and survey data, producing a data set of comparisons
+			\item completes enumerator checks and stability checks for variables
+		\end{itemize}
 	\end{itemize}
-\end{itemize}
 \end{frame}
 
 \begin{frame}{Using bcstats report to improve data quality}
-\begin{itemize}
-	\item Type 2
+	\begin{itemize}
+		\item Type 1
+			\begin{itemize}
+				\item If >10\% discrepancies  - give surveyor a warning
+				\item 20-30\% discrepancies - 2nd backcheck to determine who made errors
+				\item If error is by surveyor  - audit 3 additional surveys by that surveyor in same week 
+				\item if 20-30\% discrepancies -  put him/her on probation
+				\item >40\% discrepancies - 2nd backcheck to determine who made errors and maybe re-survey HH 
+				\item If surveyor made errors - re-survey HH \& audit all surveys done by surveyor in this batch
+				\item If one more survey has 40\% discrepancies - fire surveyor immediately \& redo all his/her surveys with 20\% or more discrepancies
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Using bcstats report to improve data quality}
+	\begin{itemize}
+		\item Type 2
 		\begin{itemize}
 			\item >10\% discrepancies -> Consider re-training
 			\item If one surveyor is responsible for more than 30\% of the errors in a single question, follow the steps for Type 1
 		\end{itemize}
-	\item Type 3
+		\item Type 3
 		\begin{itemize}
 			\item Discuss >10\% with your survey team and your PIs. 
 			\item PIs may decide to edit survey or add additional rounds
 		\end{itemize}
-\end{itemize}
+	\end{itemize}
 \end{frame}
 
 \begin{frame}{4. Backchecks}
-\begin{itemize}
-	\item Exercise 3
+	\begin{itemize}
+		\item Exercise 3
 		\begin{itemize}
 			\item Install bcstats
 			\item Learn how to use bcstats
 			\item Distinguish between types of backcheck variables 
 			\item Explore bcstats output
 		\end{itemize}
-\end{itemize}
+	\end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
