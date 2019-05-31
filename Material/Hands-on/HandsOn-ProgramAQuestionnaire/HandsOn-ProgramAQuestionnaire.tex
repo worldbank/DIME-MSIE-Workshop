@@ -89,7 +89,7 @@ This Exercise will allow you to practice the basics of how to add questions to a
 %\printclassoptions
 \section{Intro and context for the exercise}
 
-Your team is planning to conduct a survey based on the paper questionnaire (the PDF called \textit{Handson-paper-form-example.pdf} provided). Your team decided to use tablets instead of paper. One of the most common way to do this is to use the survey CTO, which uses excel format to construct the survey questionnaire. 
+Your team is planning to conduct a survey based on the paper questionnaire (the PDF called \textit{Handson-paper-form-example.pdf} provided). Your team decided to use tablets instead of paper. One of the most common way to do this is to use the SurveyCTO, which uses excel format to construct the survey questionnaire. 
 
 The excel form you are provided with is already mostly filled in accordance with the paper questionnaire. Using the other section already in the form as examples, please complete the excel form so that you can upload the file and check if the form is working properly. You have 1 hour to complete the task. Please focus on the section1 before moving on to the rest of the exercise. 
 
@@ -97,7 +97,9 @@ This exercise will use this paper based questionnaire and this SurveyCTO code th
 
 %\printclassoptions
 \section{Part 1: Add fields}
-In this section, you will need to input appropriate information into the blank cells to complete the form. If you complete this section, the form should be done, and ready to be uploaded to the survey CTO site. If the site returns error, some information is still missing. Please complete the form accordingly. Once the form is uploaded, you can check if the survey form works correctly. 
+In this section, you will need to input appropriate information into the blank cells to complete the form. If you complete this section, the form should be done, and ready to be uploaded to the SurveyCTO site. If the site returns error, some information is still missing. Please complete the form accordingly. Once the form is uploaded, you can check if the survey form works correctly. 
+
+You do not have to work on Module B yet. The last exercise in this session is to code that module without any help.
 
 \begin{enumerate}
 	\item General: Some information in the excel format is missing. Please find where these missing spots are and complete missing information. (For instance, in row 18 the value in column \textit{type} is missing. Please add the appropriate type to this column in this case.) 
@@ -106,7 +108,7 @@ In this section, you will need to input appropriate information into the blank c
 \end{enumerate}
 
 %\printclassoptions
-\section{Part 2: Disscuss what some code means}
+\section{Part 2: Discuss what some code means}
 In this section, you can demonstrate your understanding on the appearance and logic patterns. Logic patterns are important because they make mistakes like inputting wrong numbers by accident much less likely. For example, for a question \textit{What is your age?}, constraint \textit{.>=0 and .<200} (in human language, this means \textit{input must be greater than or equal to zero, and less than 200.}) prevents inputs like \textit{-9} or \textit{9999}. 
 
 \begin{enumerate}
@@ -116,5 +118,8 @@ In this section, you can demonstrate your understanding on the appearance and lo
 	\item Row 60 has a calculation  \verb|if(${e1}>5,5,${e1}|. What does this calculation do? (Hint: this is for medicine\_torepeat. See where medicine\_torepeat is used)
 \end{enumerate}
 
+\section{Part 3: Add Module B}
+
+This part of the exercise is optional and only intended for those who finish the previous two parts early. Module B in the paper questionnaire is still missing from your SurveyCTO form. Go ahead and add that module to your SurveyCTO form! 
 
 \end{document}
