@@ -276,7 +276,7 @@
 		\item Learn more about the variable \texttt{numplots}. What values does it take on? What is minimum? Maximum? Mean? How many unique values?
 		\begin{itemize}
 			\item \texttt{tabulate numplots}
-			\item \texttt{summarize numplots} OR \texttt{summarize numplots, detail}
+			\item \texttt{summarize numplots} or \texttt{summarize numplots, detail}
 			\item \texttt{codebook numplots}
 		\end{itemize}
 	\end{itemize}
@@ -382,6 +382,18 @@
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Task 5}
+	\begin{itemize}
+		\item Comment your code! It is really important to get into a habit of commenting code really well if you want to become a really good programmer!
+		\item Comment your code so far as much as possible, but make sure to use each comment type at least once:
+	\end{itemize}
+	\begin{itemize}
+		\item \texttt{/* ...comment... */}
+		\item \texttt{* ...comment...}
+		\item \texttt{// ...comment...}
+	\end{itemize}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \sectionpic{Other features of Stata: - Using macros (globals, locals and scalars)}{../../img/section_slide}
@@ -417,16 +429,16 @@
 	\codeexample{filepaths-2.do}{code/filepaths-2.do}
 \end{frame}
 
-\begin{frame}{Lab Task 5}
-\begin{itemize}
-	\item Open the do-file you created in the previous task and create a global to the folder where you have been saving your work. Call the global \texttt{folder\_Lab1}
-	\item To check what is stored in your global, type this in the command window and hit enter:
-		\begin{itemize}
-			\item \texttt{display "\$folder\_Lab1“}
-		\end{itemize}
-	\item Update the use and save commands in your do-file with the global you created. See example blow. Then re-run your code to make sure that it works with the new file paths!
-\end{itemize}
-\codeexample{filepath-example.do}{code/filepath-example.do}
+\begin{frame}{Lab Task 6}
+	\begin{itemize}
+		\item Open the do-file you created in the previous task and create a global to the folder where you have been saving your work. Call the global \texttt{folder\_Lab1}
+		\item To check what is stored in your global, type this in the command window and hit enter:
+			\begin{itemize}
+				\item \texttt{display "\$folder\_Lab1“}
+			\end{itemize}
+		\item Update the use and save commands in your do-file with the global you created. See example blow. Then re-run your code to make sure that it works with the new file paths!
+	\end{itemize}
+	\codeexample{filepath-example.do}{code/filepath-example.do}
 \end{frame}
 
 
@@ -473,7 +485,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Lab Task 6}
+\begin{frame}{Lab Task 7 - Missing values}
 	\begin{itemize}
 		\item Make sure that you have the \texttt{endline\_data\_raw.dta} open.
 		\begin{itemize}
@@ -491,7 +503,7 @@
 
 \sectionpic{An introduction to Stata: \newline Saving your datasets}{../../img/section_slide}
 
-\begin{frame}{Saving Stata datasets/Lab Task 7}
+\begin{frame}{Lab Task 8 - Saving Stata datasets}
 	\begin{itemize}
 		\item Use the drop down menu to save your data under a different name, for example endline\_data\_int.dta. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
 		\item Copy the code generated when using the menu to your do-file. Run again. Did you get an error?
@@ -530,19 +542,19 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Lab Task 8 - MAKE SMALLER}
+\begin{frame}{Lab Task 9 - Import other types of data}
 	\begin{itemize}
-		\item Use the drop down menus to import the \texttt{village\_codes.xls} data to Stata. After you select Excel Spreadsheet you get a new window with all import excel options. For now, only use browse to select the file and then click OK.
+		\item \small Use the drop down menus to import the \texttt{village\_codes.xls} data to Stata. After you select Excel Spreadsheet you get a new window with all import excel options. For now, only use browse to select the file and then click OK.
 		\begin{itemize}
-			\item Use \texttt{describe}, \texttt{tabulate}, \texttt{browse} or any other tools you have learned to explore the data. What are your key observations?
+			\item \small Use \texttt{describe}, \texttt{tabulate}, \texttt{browse} or any other tools you have learned to explore the data. What are your key observations?
 		\end{itemize}
-		\item In excel the first row can be used as variable names, but in Stata the first row is always data. Use the drop down menus to open up the window with the import excel options again. Is there any option you see that you think will solve this?
+		\item \small In excel the first row can be used as variable names, but in Stata the first row is always data. Use the drop down menus to open up the window with the import excel options again. Is there any option you see that you think will solve this?
 		\begin{itemize}
-			\item Use the option you think will solve this. Then explore the data again.
-			\item See that the columns that stored text in Excel are imported as strings, and the columns that stored numbers in Excel are imported as numeric
+			\item \small Use the option you think will solve this. Then explore the data again.
+			\item \small See that the columns that stored text in Excel are imported as strings, and the columns that stored numbers in Excel are imported as numeric
 		\end{itemize}
-		\item In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end.
-		\item It is a very good practice to use the drop down menus and the command window to experiment with your code until you are happy with it. When you are happy with the code Stata generates to import \texttt{village\_code.xls}, copy that line of code to your do-file and use the global you created in Task 6 to shorten the file path
+		\item \small In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end.
+		\item \small It is a very good practice to use the drop down menus and the command window to experiment with your code until you are happy with it. When you are happy with the code Stata generates to import \texttt{village\_code.xls}, copy that line of code to your do-file and use the global you created in Task 6 to shorten the file path
 	\end{itemize}
 \end{frame}
 
