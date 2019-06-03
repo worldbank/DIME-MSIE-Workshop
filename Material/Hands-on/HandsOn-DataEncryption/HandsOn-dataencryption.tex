@@ -75,95 +75,101 @@ In this exercise we will encrypt a dataset and attempt to access the data in an 
 
 \bigskip\noindent \textbf{Exercise Objectives}: On completing this exercise you will be able to
 \begin{enumerate}
-  \item Set up VeraCrypt
-  \item Encrypt files
-  \item Access encrypted files
+  \item Download and install VeraCrypt
+  \item Set up a secure folder using VeraCrypt
+  \item Encrypting files in the secure folder
+  \item Access the encrypted files in the secure folder
 \end{enumerate}
 \end{abstract}
 
 %\printclassoptions
-\section{Part 1: Set up VeraCrypt}
+\section{Part 1: Download and install VeraCrypt}
 
-First we will install VeraCrypt. Note that this needs to be done only once. Anyone accessing a file encrypted using VeraCrypt requires the software installed on their computer.
+VeraCrypt is the software that we recommend when encrypting data on your computer, regardless if it is an a non-shared folder, or a shared folder like DropBox. VeraCrypt is a free open-source software so you can use it without having to pay for it.
+
+The first time we use VeraCrypt we need to download and install the software. If you are using a World Bank desktop, then you must make an \textit{eServices} request and have an IT person installing the software for you.
+
+If you are not using World Bank computer, then you can download the software here: \url{https://www.veracrypt.fr/en/Downloads.html}. For Mac computers there is the installer version, chose that one. For Windows users there are 4 version, chose the \textit{installer}-version. After you have downloaded the installer file, open it and follow the instructions. Most people do not need to change any of the default values.
+
+Anyone in your team that want to access the files you encrypt with VeraCrypt will also have to download the software to be able to access the files.
+
+\section{Part 2: Set up VeraCrypt}
+
+Before you can encrypt any files on your computer you must use VeraCrypt to create a special folder. In VeraCrypt this is called a \textit{Volume} but think of this as a very secure folder that you access in a different way.
 
 \begin{enumerate}
-	\item Install \href{https://www.veracrypt.fr/en/Downloads.html}{Veracrypt}. (eServices request on a Bank desktop/laptop)
-	\item Create an encrypted folder (volume) titled 'Encrypted Data' with a strong password.\sidenote{Add suggestions for how to make strong passwords} \\
-	\textit{Note that, you can use any drive of your choice.}\sidenote{Add sub-steps for this (maybe with pictures)}
-	\begin{itemize}
-		\item  Click Create Volume (marked with a red rectangle for clarity)
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_1.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-	\item  The VeraCrypt Volume Creation Wizard window should appear.
-	In this step you need to choose where you wish the VeraCrypt volume to be created.In this session, we will choose the first option and create a VeraCrypt volume within a file.
-	\end{itemize}
-	\begin{figure}
-		\includegraphics[width=\linewidth]{img/vc_install_2.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  In this step you need to choose whether to create a standard or hidden VeraCrypt volume. In this tutorial, we will choose the former option and create a standard VeraCrypt volume.
-	\end{itemize}
-	\begin{figure}
-		\includegraphics[width=\linewidth]{img/vc_install_3.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  In this step you have to specify where you wish the VeraCrypt volume (file container) to be created. Note that a VeraCrypt container is just like any normal file. It can be, for example, moved or deleted as any normal file. It also needs a filename, which you will choose in the next step.  Click Select File.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_4.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  Select the desired path (where you wish the container to be created) in the file selector. Type the desired container file name in the Filename box.
-	Click Save.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_5.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  In the Volume Creation Wizard window, click Next.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_6.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  Here we specify that we wish the size of our VeraCrypt container to be 250 megabyte. You may, of course, specify a different size. After you type the desired size in the input field (marked with a red rectangle), click Next.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_7.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  This is one of the most important steps. Here you have to choose a good volume password. Read carefully the information displayed in the Wizard window about what is considered a good password.
-		After you choose a good password, type it in the first input field. Then re-type it in the input field below the first one and click Next.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_8.png}
-	\end{figure}
-	\FloatBarrier
-	\begin{itemize}
-		\item  Move your mouse as randomly as possible within the Volume Creation Wizard window at least until the randomness indicator becomes green. The longer you move the mouse, the better (moving the mouse for at least 30 seconds is recommended). This significantly increases the cryptographic strength of the encryption keys (which increases security).
-		Click Format.
-	\end{itemize}
-	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_install_9.png}
-	\end{figure}
-	\FloatBarrier
 
-		\item Go to the location where you created the folder to confirm the folder exists.
-	Double click on the folder to try and open it directly. Confirm that it doesn't open!
+	\item If you have VeraCrypt open, start by closing it, and re-open it. All our instructions will start from the opening page.
+	\item On the opening page click \textit{Create Volume} (marked in read in the image below). Remember that \textit{Volume} in VeraCrypt means secure folder.
+	\begin{figure}%
+		\includegraphics[width=.9\linewidth]{img/vc_install_1.png}
+	\end{figure}
+	\FloatBarrier
+		
+	\item In \textit{The VeraCrypt Volume Creation Wizard} you have three options. VeraCrypt has many very advanced options, but for the type of work we do we will only use the simplest option which is creating \textit{encrypted file container} type of volumes which is the default option.
+	
+	\begin{figure}
+		\includegraphics[width=.9\linewidth]{img/vc_install_2.png}
+	\end{figure}
+	\FloatBarrier
+	
+	\newpage
+	
+	\item In the next step we will again chose the simplest options and create a \textit{Standard VeraCrypt volume} and then click \textit{Next}.
+	\begin{figure}
+		\includegraphics[width=.75\linewidth]{img/vc_install_3.png}
+	\end{figure}
+	\FloatBarrier
+	
+	\item Next you have to specify where you want to create the secure folder \textit{volume}. The volume behaves as a folder where you can store files, but technically it is a file (you do not need to understand how it works). So chose a location and give the volume file a name. Click select file. \sidenote{Note that a VeraCrypt container is just like any normal file. It can be, for example, moved or deleted as any normal file.}
+	\begin{figure}%
+		\includegraphics[width=.75\linewidth]{img/vc_install_4.png}
+	\end{figure} 
+	\FloatBarrier
+	
+	\newpage
+	
+	\item Select the desired path in the file selector,. If you intend to share this folder, for example through DropBox, then this should be inside your DropBox folder. If you are using DIME Analytics' folder set-up then you should create this inside the encrypted folder.\sidenote{\url{https://dimewiki.worldbank.org/wiki/DataWork_Folder\#Survey_Encrypted_Data}}. Then type the name of the secure folder in the \textit{file name} box (remember the secure folder volume is actually a file), and then click \textit{Save}.
+	
+	\begin{figure}%
+		\includegraphics[width=.8\linewidth]{img/vc_install_5.png}
+	\end{figure}
+	\FloatBarrier
+	
+	
+	\item Back in the \textit{Volume Creation Wizard} window, click \textit{Next}.
+	\begin{figure}%
+		\includegraphics[width=.8\linewidth]{img/vc_install_6.png}
+	\end{figure}
+	\FloatBarrier
+	
+	\newpage
+	
+	\item One of the restrictions of VeraCrypt is that you already at this stage need to decide what the maximum size of the secure folder will be. Do not exaggerate to much, as the secure folder will always take up this much disk space, even when it is empty.\sidenote{If you end up choosing too small volume size you can in the future create a new larger volume and move the files there.} In this example, chose 250 megabyte and then click \textit{Next}.
+	\begin{figure}%
+		\includegraphics[width=.7\linewidth]{img/vc_install_7.png}
+	\end{figure}
+	\FloatBarrier
+	
+	
+	\item In the next step you need to create a secure password.\sidenote{We recommend using a password manager like LastPass \url{https://www.lastpass.com/}. If you are working in a World Bank project you can get access to LastPass Premium version for free, but the basic version that is free for everyone will suit all your needs for this purpose.} Read VeraCrypt's instructions for what is a good password. After you have chosen your password, type it in the first input field and then re-type it in the second input field, and then click \textit{Next}.
+	\begin{figure}%
+		\includegraphics[width=.7\linewidth]{img/vc_install_8.png}
+	\end{figure}
+	\FloatBarrier
+	
+	
+	\item To make the encryption completely unpredictable, VeraCrypt use your mouse movement to get a random input. Move your mouse inside the VeraCrypt window until the randomness indicator becomes green. The longer you move the mouse, the better. Then click \textit{Format}.
+	\begin{figure}%
+		\includegraphics[width=.7\linewidth]{img/vc_install_9.png}
+	\end{figure}
+	\FloatBarrier
 \end{enumerate}
 
+	\noindent You have now created the secure folder. Go to the location where you created the folder to confirm it exists. It does not look like a folder, as it is technically a file. Double click on the folder to try and open it directly. Confirm that it doesn't open and you cannot do anything with it. Also see that the file is about 250MB big (or whatever value you chose) despite it is still empty.
+
 %\printclassoptions
-\section{Part 2: Encrypting files}
+\section{Part 2: Adding files to your secure folder}
 \begin{enumerate}
 	\item Open VeraCrypt.
 	\item Mount the encrypted volume created onto drive M. \\
