@@ -101,50 +101,48 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
 \begin{frame}[fragile]{Tables give all the details}
-
-\begin{columns}[c]
-	\column{.30\textwidth}		
-	\begin{itemize}
-		\item What’s happening in this regression table?
-		\item What’s important?		
-	\end{itemize}
-	\column{.70\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/regtable}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.30\textwidth}		
+		\begin{itemize}
+			\item What’s happening in this regression table?
+			\item What’s important?		
+		\end{itemize}
+		\column{.70\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/regtable}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{But figures tell the story}
-
-\begin{columns}[c]
-	\column{.35\textwidth}		
-	\begin{itemize}
-		\item This is the data that generates those estimates.
-		\item You can see exactly what is happening very quickly!
-	\end{itemize}
-	\column{.65\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/line}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.35\textwidth}		
+		\begin{itemize}
+			\item This is the data that generates those estimates.
+			\item You can see exactly what is happening very quickly!
+		\end{itemize}
+		\column{.65\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/line}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Examples: comparing means}
-\begin{columns}[c]
-	\column{.40\textwidth}	
-	\begin{itemize}
-		\item What is the main story in this graph? 
-		\item We need more context to say something detailed about this, but what has the person creating the graph highlighted for us?
-	\end{itemize}
-\column{.60\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/boxplot1}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.40\textwidth}	
+		\begin{itemize}
+			\item What is the main story in this graph? 
+			\item We need more context to say something detailed about this, but what has the person creating the graph highlighted for us?
+		\end{itemize}
+		\column{.60\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/boxplot1}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 \begin{frame}{Stata Default Graphs}
@@ -157,120 +155,116 @@
 \end{frame}
 
 \begin{frame}[fragile]{Stata has three core built-in graph functions}
-\begin{columns}[c]
-	\column{.40\textwidth}		
-	\begin{itemize}
-		\item \texttt{graph graphtype} - graphs which plot one or more variables on one axis
-		\item \texttt{twoway graphtype} - graphs which plot two variables together on an x,y axis
-		\item \texttt{histogram}, \texttt{kdensity}, \texttt{lowess} - essential distributional commands 
-	\end{itemize}
-\column{.60\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/graphcommand}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.40\textwidth}		
+		\begin{itemize}
+			\item \texttt{graph graphtype} - graphs which plot one or more variables on one axis
+			\item \texttt{twoway graphtype} - graphs which plot two variables together on an x,y axis
+			\item \texttt{histogram}, \texttt{kdensity}, \texttt{lowess} - essential distributional commands 
+		\end{itemize}
+		\column{.60\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/graphcommand}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Oneway [graph] plots can be very informative}
-\begin{columns}[c]
-	\column{.50\textwidth}		
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/oneway1}
-	\end{figure}
-	Figure 1. \url{https://github.com/qutubproject/lancetid2015/blob/master/tables_figures.do}
-
-	\column{.50\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/oneway2}
-	\end{figure}
-	Figure 2. \url{https://github.com/qutubproject/lancetid2016/blob/master/tables_figures.do}
-	
-\end{columns}
+	\begin{columns}[c]
+		\column{.50\textwidth}		
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/oneway1}
+		\end{figure}
+		Figure 1. \url{https://github.com/qutubproject/lancetid2015/blob/master/tables_figures.do}
+		\column{.50\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/oneway2}
+		\end{figure}
+		Figure 2. \url{https://github.com/qutubproject/lancetid2016/blob/master/tables_figures.do}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{ [twoway] graphs}
-\begin{columns}[c]
-	\column{.50\textwidth}	
-	\begin{itemize}
-		\item Each point in the graph represents a combination of the y-axis and the x-axis
-		\item Can be many types of graphs. This is a scatter plot, but it can be areas, lines, bars, etc.
-	\end{itemize}
-\column{.50\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/twoway1}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.50\textwidth}	
+		\begin{itemize}
+			\item Each point in the graph represents a combination of the y-axis and the x-axis
+			\item Can be many types of graphs. This is a scatter plot, but it can be areas, lines, bars, etc.
+		\end{itemize}
+		\column{.50\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/twoway1}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 
 \begin{frame}[fragile]{ Multiple twoway graphs in one graph}
-\begin{columns}[c]
-	\column{.50\textwidth}	
-	\begin{itemize}
-		\item You can add multiple graphs in the same graph and format the data points slightly differently
-		\item \texttt{tw (type var1 var2 , opts) (type var3 var4 , opts), opts}
-		\item More on this in Track 2
-	\end{itemize}
-\column{.50\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth,frame]{img/twoway2}
-	\end{figure}
-\end{columns}
+	\begin{columns}[c]
+		\column{.50\textwidth}	
+		\begin{itemize}
+			\item You can add multiple graphs in the same graph and format the data points slightly differently
+			\item \texttt{tw (type var1 var2 , opts) (type var3 var4 , opts), opts}
+			\item More on this in Track 2
+		\end{itemize}
+		\column{.50\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth,frame]{img/twoway2}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 \begin{frame}[fragile]{Graphs can be combined and exported}
-\begin{columns}[c]
-	\column{.50\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/grcombine}
-	\end{figure}
-
-	\column{.50\textwidth}
-
-	\begin{enumerate}
-		\item \texttt{graph combine graph-1 graph-2 graph-3} 
-		\item \texttt{graph export “filename.png", replace}
-	\end{enumerate}	
-	\begin{itemize}
-		\item use .png or .eps
+	\begin{columns}[c]
+		\column{.50\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/grcombine}
+		\end{figure}
+	
+		\column{.50\textwidth}
+		\begin{enumerate}
+			\item \texttt{graph combine graph-1 graph-2 graph-3} 
+			\item \texttt{graph export “filename.png", replace}
+		\end{enumerate}	
 		\begin{itemize}
-			\item With .png, specify \texttt{width(1000)} for higher resolution
-			\item .eps files can scale to any size on most modern software (but hard to preview in older systems)
+			\item use .png or .eps
+			\begin{itemize}
+				\item With .png, specify \texttt{width(1000)} for higher resolution
+				\item .eps files can scale to any size on most modern software (but hard to preview in older systems)
+			\end{itemize}
 		\end{itemize}
-	\end{itemize}
-\end{columns}
+	\end{columns}
 \end{frame}
 
 
 \begin{frame}[fragile]{DIME Resources (please contribute!)}
-\begin{columns}[c]
-	\column{.35\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/visualie}
-	\end{figure}
-
-	\column{.30\textwidth}
-
-	\small <- \newline \url{https://worldbank.github.io/Stata-IE-Visual-Library/}
+	\begin{columns}[c]
+		\column{.35\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/visualie}
+		\end{figure}
 	
-	\vspace{.8cm}
+		\column{.30\textwidth}
 	
-	\small -> \newline \url{https://worldbank.github.io/stata/}
-
-	\column{.35\textwidth}	
-	\begin{figure}
-		\centering
-		\includegraphics[width=\linewidth]{img/visualie2}
-	\end{figure}
+		\small <- \newline \url{https://worldbank.github.io/Stata-IE-Visual-Library/}
+		
+		\vspace{.8cm}
+		
+		\small -> \newline \url{https://worldbank.github.io/stata/}
 	
-\end{columns}
+		\column{.35\textwidth}	
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/visualie2}
+		\end{figure}
+	\end{columns}
 \end{frame}
 
 
