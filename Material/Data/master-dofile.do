@@ -15,7 +15,7 @@
     * Install user written commands
 
     *Loop over all needed commands
-    local user_commands ietoolkit       //Fill this list will all user-written commands this project requires
+    local user_commands ietoolkit iefieldkit      //Fill this list will all user-written commands this project requires
     foreach command of local user_commands {
 
         *Check if already installed, if not, install it
@@ -53,10 +53,10 @@
     * and then make edits as needed. The data master dofile takes
     * that data set and applies any changes needed to be done to
     * that data set as the labs keeps developing.
-    do "$mtrl_fldr/Data/data-master-dofile.do"
-	
+    do "$mtrl_fldr/Data/do-files/data-master-dofile.do"
+
 	**This dofile copies the data files created above to each Stata
-	* track. Then it runs all solutions do-files for each topic to 
-	* make sure that they all run, and that each topic correctly 
+	* track. Then it runs all solutions do-files for each topic to
+	* make sure that they all run, and that each topic correctly
 	*builds on each other and that the results are correct.
-    do "$mtrl_fldr/Labs/labs-master-dofile.do"
+    do "$mtrl_fldr/Data/do-files/labs-master-dofile.do"
