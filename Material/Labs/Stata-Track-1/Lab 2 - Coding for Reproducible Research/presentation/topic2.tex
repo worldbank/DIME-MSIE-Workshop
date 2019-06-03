@@ -24,10 +24,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../../img/i2i}}}
 	\end{picture}%
 }
 
@@ -50,14 +50,14 @@
 		\insertsectionhead\\[-1ex]
 		\insertsubsectionhead
 		\usebeamertemplate*{progress bar in section page}
-		
+
 	\end{minipage}
 	\par
 	\vspace{\baselineskip}
 }
 \makeatother
 
-%%% Define a command to include picture in section, 
+%%% Define a command to include picture in section,
 %%% make section, and revert to old template
 \newcommand{\sectionpic}[2]{
 	\setbeamertemplate{section page}[mytheme][#2]
@@ -88,21 +88,21 @@
 }
 
 
-%% The below command creates the ligh bulb logos in the top right corner of the 
+%% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
-	
+
 {
-	\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
+	\usebackgroundtemplate{\includegraphics[height=55mm, right]{../../img/top_right_corner.pdf}}
 	\maketitle
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
-\sectionpic{Excel vs. Stata}{../img/section_slide}
+\sectionpic{Excel vs. Stata}{../../img/section_slide}
 
 
 \begin{frame}{Why do we use Stata?}
 \begin{center}
-	\huge Can I use Excel? 
+	\huge Can I use Excel?
 \end{center}
 
 \end{frame}
@@ -122,7 +122,7 @@
 
 \begin{frame}{The main reason we use Stata (or R)}
 \begin{itemize}
-	
+
 	\item In Excel you make changes \underline{directly to the data} and \underline{save new versions of the data set}
 
 	\item In Stata you make changes \underline{to the instructions} on how to get from the raw data to the final analysis and save \underline{new versions of the instructions}
@@ -130,7 +130,7 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\sectionpic{How to open up a data set in Stata}{../img/section_slide}
+\sectionpic{How to open up a data set in Stata}{../../img/section_slide}
 
 \begin{frame}{}
 	\begin{figure}
@@ -187,7 +187,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\sectionpic{An introduction to Stata: Stata interface (what are all those windows)}{../img/section_slide}
+\sectionpic{An introduction to Stata: Stata interface (what are all those windows)}{../../img/section_slide}
 
 \begin{frame}{}
 	\begin{figure}
@@ -199,25 +199,25 @@
 \begin{frame}{Review Window}
 
 \begin{itemize}
-	\item In the last task we asked you to copy and paste from the result window. That works, but the best practice way to do it is using the review window. 
-	
+	\item In the last task we asked you to copy and paste from the result window. That works, but the best practice way to do it is using the review window.
+
 	\item Double click on a command you want to use again and it will appear in your command window
 	\begin{itemize}
 		\item You can also click in command window and select the commands in the result window by using PageUp/PageDown buttons
 		\item fn+ArrowUp/ fn+ArrowDown on Mac
 	\end{itemize}
-	\item If a command is red in the review window, it means it hit an error and did not finish	
+	\item If a command is red in the review window, it means it hit an error and did not finish
 \end{itemize}
 \end{frame}
 
 \begin{frame}[fragile]{Text and Image}
 	\begin{columns}[c]
-		\column{.6\textwidth}	
+		\column{.6\textwidth}
 		\begin{itemize}
 			\item Both the variable window and the review will soon be very crowded. You can then search both of them
 			\item If you do not see the search bar, click the little funnel symbol
 		\end{itemize}
-	
+
 		\column{.4\textwidth}
 		\begin{figure}
 			\centering
@@ -228,7 +228,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\sectionpic{An introduction to Stata: \newline Exploring a data set opened for the first time}{../img/section_slide}
+\sectionpic{An introduction to Stata: \newline Exploring a data set opened for the first time}{../../img/section_slide}
 
 
 \begin{frame}{Exploring a new dataset}
@@ -256,9 +256,9 @@
 		\item string (text) – values are red when browsing.
 		\item numeric (number) – values are black or blue when browsing
 	\end{itemize}
-	\item Numbers can be stored as text, but text cannot be stored as number. 
+	\item Numbers can be stored as text, but text cannot be stored as number.
 	\begin{itemize}
-		\item 	However, not possible to do computations on numbers stored as text 
+		\item 	However, not possible to do computations on numbers stored as text
 	\end{itemize}
 	\item Categorical variables should be stored as numeric variables and have labels.
 \end{itemize}
@@ -267,11 +267,11 @@
 \begin{frame}{Lab Task 2}
 	\begin{itemize}
 		\item Open \texttt{endline\_data\_raw.dta} again.
-		\item Which variables are string and which are numeric?	
+		\item Which variables are string and which are numeric?
 		\begin{itemize}
-			\item \texttt{browse} – see the different colors in the columns.		
+			\item \texttt{browse} – see the different colors in the columns.
 			\item \texttt{describe} – see the column storage type.
-			\item \texttt{summarize} – why is there no mean for the variable \texttt{lwh\_group}?		
+			\item \texttt{summarize} – why is there no mean for the variable \texttt{lwh\_group}?
 		\end{itemize}
 		\item Learn more about the variable \texttt{numplots}. What values does it take on? What is minimum? Maximum? Mean? How many unique values?
 		\begin{itemize}
@@ -282,12 +282,12 @@
 	\end{itemize}
 \end{frame}
 
-\sectionpic{An introduction to Stata: - Generating new variables and labeling them}{../img/section_slide}
+\sectionpic{An introduction to Stata: - Generating new variables and labeling them}{../../img/section_slide}
 
 \begin{frame}[fragile]{Create new variables}
 
 	\begin{itemize}
-		\item \texttt{generate} a variable with the household income by household size 
+		\item \texttt{generate} a variable with the household income by household size
 		\item \texttt{generate} a dummy variable that is 1 if per capita of income is more than 10,000 KG.
 	\end{itemize}
 
@@ -324,15 +324,15 @@
 	\end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\sectionpic{An introduction to Stata: \newline How to share your work with your team}{../img/section_slide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{An introduction to Stata: \newline How to share your work with your team}{../../img/section_slide}
 
 \begin{frame}{You are asked to share your work}
 	\begin{itemize}
 		\item How would you share the work you have done so far?
 		\item Send only the data set? That would be like Excel and only share the latest version of the data.
 		\item In research we need to share more than the latest version of the data. We need to show what we did.
-		\item Yes, you guessed it, it is time to introduce the do-file.	
+		\item Yes, you guessed it, it is time to introduce the do-file.
 	\end{itemize}
 \end{frame}
 
@@ -382,9 +382,9 @@
 	\end{itemize}
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\sectionpic{Other features of Stata: - Using macros (globals, locals and scalars)}{../img/section_slide}
+\sectionpic{Other features of Stata: - Using macros (globals, locals and scalars)}{../../img/section_slide}
 
 \begin{frame}{Macros}
 	\begin{itemize}
@@ -430,10 +430,10 @@
 \end{frame}
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
-\sectionpic{Other Features of Stata: \newline White Space}{../img/section_slide}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{Other Features of Stata: \newline White Space}{../../img/section_slide}
 
-\sectionpic{Other Features of Stata: \newline Missing values}{../img/section_slide}
+\sectionpic{Other Features of Stata: \newline Missing values}{../../img/section_slide}
 
 \begin{frame}{Missing Values}
 	\begin{itemize}
@@ -442,7 +442,7 @@
 				\item 	Missing values are represented in Stata with a dot, like this: \texttt{.}
 				\item You can also use \texttt{.a} or \texttt{.b} etc. to \texttt{.z} for missing values and you will learn later how these can be used.
 			\end{itemize}
-		\item Stata can’t use missing values in computations (averages, regressions etc.) so it skips observations with missing values.  
+		\item Stata can’t use missing values in computations (averages, regressions etc.) so it skips observations with missing values.
 		\item Missing values changes the analysis as observations with missing values are excluded from commands like summarize and regress.
 		\item Good practice to always check for missing values when tabulating variables.
 	\end{itemize}
@@ -453,50 +453,50 @@
 		\item Make sure that you have the \texttt{endline\_data\_raw.dta} open.
 		\begin{itemize}
 			\item Type \texttt{summarize inc\_*} into the command window. Look at the column obs in the output. What do you notice?
-			\item There are  1,067 observations in the data set, but less than 1,067 observations were included in the output for the income variables. Why is that? 		
+			\item There are  1,067 observations in the data set, but less than 1,067 observations were included in the output for the income variables. Why is that?
 		\end{itemize}
 		\item \texttt{misstable summarize} identifies and reports missing values in all the variables in your data set. Use the \texttt{misstable summarize} command on the income variables. It reports exactly 105 missing observations for all of the household income variables. That explains all observations missing in the summarize output in number 1 above.
 		\item Another way to investigate the missing observations is to tabulate variable \texttt{education\_1}.
 		\begin{itemize}
 			\item Test first: \texttt{tabulate inc\_zero}
 			\item Then test: \texttt{tabulate inc\_zero, missing}
-		\end{itemize}	 
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\sectionpic{An introduction to Stata: \newline Saving your datasets}{../img/section_slide}
+\sectionpic{An introduction to Stata: \newline Saving your datasets}{../../img/section_slide}
 
 \begin{frame}{Saving Stata datasets/Lab Task 7}
 	\begin{itemize}
 		\item Use the drop down menu to save your data under a different name, for example endline\_data\_int.dta. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
 		\item Copy the code generated when using the menu to your do-file. Run again. Did you get an error?
 			\begin{itemize}
-				\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace. 
+				\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace.
 				\item \texttt{save "\$\{folder\_Lab1\}/endline\_data\_raw.dta", replace}
 			\end{itemize}
-		\item Run your code again. Now you both have a final version of your data set and the instructions on how to get there. When your supervisor wants to see your work, share both of these! 
+		\item Run your code again. Now you both have a final version of your data set and the instructions on how to get there. When your supervisor wants to see your work, share both of these!
 	\end{itemize}
 \end{frame}
 
 
-\sectionpic{Other features of Stata: \newline Open non-Stata data sets}{../img/section_slide}
+\sectionpic{Other features of Stata: \newline Open non-Stata data sets}{../../img/section_slide}
 
 \begin{frame}[fragile]{Importing data from .xls/.xslx or .csv}
-	\begin{columns}[c]	
-		
+	\begin{columns}[c]
+
 		\column{.5\textwidth}
 		\begin{itemize}
 			\item Always start by using the drop down menus if you do not know the command!
-			\item Select the format of your file: 
+			\item Select the format of your file:
 			\begin{itemize}
 				\item Excel (.xls,.xlsx)
 				\item plain text delimited (.txt)
 				\item comma separated (.csv)
-			\end{itemize}		
+			\end{itemize}
 			\item Select the appropriate choice in the menu and follow the instructions.
-			\item Copy the code Stata Generates for you and put it in your do-file. 
+			\item Copy the code Stata Generates for you and put it in your do-file.
 		\end{itemize}
-	
+
 		\column{.5\textwidth}
 		\begin{figure}
 			\centering
@@ -515,8 +515,8 @@
 		\begin{itemize}
 			\item Use the option you think will solve this. Then explore the data again.
 			\item See that the columns that stored text in Excel are imported as strings, and the columns that stored numbers in Excel are imported as numeric
-		\end{itemize}	 
-		\item In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end. 
+		\end{itemize}
+		\item In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end.
 		\item It is a very good practice to use the drop down menus and the command window to experiment with your code until you are happy with it. When you are happy with the code Stata generates to import \texttt{village\_code.xls}, copy that line of code to your do-file and use the global you created in Task 6 to shorten the file path
 	\end{itemize}
 \end{frame}
@@ -532,6 +532,6 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{../img/section_slide}
+\sectionpic{Thank You!}{../../img/section_slide}
 
-\end{document} 
+\end{document}

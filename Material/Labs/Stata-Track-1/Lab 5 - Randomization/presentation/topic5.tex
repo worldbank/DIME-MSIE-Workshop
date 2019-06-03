@@ -25,10 +25,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../../img/i2i}}}
 	\end{picture}%
 }
 
@@ -51,14 +51,14 @@
 		\insertsectionhead\\[-1ex]
 		\insertsubsectionhead
 		\usebeamertemplate*{progress bar in section page}
-		
+
 	\end{minipage}
 	\par
 	\vspace{\baselineskip}
 }
 \makeatother
 
-%%% Define a command to include picture in section, 
+%%% Define a command to include picture in section,
 %%% make section, and revert to old template
 \newcommand{\sectionpic}[2]{
 	\setbeamertemplate{section page}[mytheme][#2]
@@ -87,11 +87,11 @@
 	\end{figure}
 	\FloatBarrier
 }
-%% The below command creates the ligh bulb logos in the top right corner of the 
+%% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
-	
+
 	{
-		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../../img/top_right_corner.pdf}}
 		\maketitle
 	}
 
@@ -231,17 +231,17 @@
 
 \begin{frame}[fragile]{Ex 1: Basic Randomization in Stata}
 	\begin{columns}[c]
-		\column{.60\textwidth}	
+		\column{.60\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\linewidth]{img/randomeg1}
 		\end{figure}
-		
+
 		\column{.40\textwidth}
 		\begin{enumerate}
 			\item \small Start with a sorted list of observations you want to randomize. Generate a random number.
 			\item \small Sort the observations after this random number. The order of the observations are now randomly sorted.
-			\item \small Assign 0 (control) to the first half of the observations, and assign 1 (treatment) to the second half.		
+			\item \small Assign 0 (control) to the first half of the observations, and assign 1 (treatment) to the second half.
 		\end{enumerate}
 	\end{columns}
 \end{frame}
@@ -253,7 +253,7 @@
 		\item To achieve that in Stata we have three rules:
 		\begin{itemize}
 			\item Set the version of Stata
-			\item Set the seed 
+			\item Set the seed
 			\item Stable sort
 		\end{itemize}
 		\item The next slides explains the meaning of these rules and why it matters
@@ -309,7 +309,7 @@
 \end{frame}
 
 
-\begin{frame}{Rule 3: Stable sort}	
+\begin{frame}{Rule 3: Stable sort}
 	\begin{columns}[c]
 		\column{.65\textwidth}
 		\begin{figure}
@@ -332,7 +332,7 @@
 			\item Guarantees the same list of random numbers
 			\item See commands ieboilstart or version in Stata
 		\end{itemize}
-		\item Set the seed 
+		\item Set the seed
 		\begin{itemize}
 			\item 	Guarantees the same starting point in that list
 			\item See command set seed. Randomize a seed at least 6 digits long (for example at \url{www.random.org})
@@ -387,7 +387,7 @@
 
 \begin{frame}{Real life issues}
 	\begin{itemize}
-		\item The example we have covered here is a school book example, but in real life, there are many common issues that makes randomization more complicated 
+		\item The example we have covered here is a school book example, but in real life, there are many common issues that makes randomization more complicated
 		\item There are commands that take care of these types of issues. Among them we recommend \texttt{randtreat}. To use this in a real life example, see track 2
 		\item But if you do not understand the school book example, you are likely to not know how to use \texttt{randtreat} properly
 	\end{itemize}
@@ -438,11 +438,11 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{../img/section_slide}
+\sectionpic{Thank You!}{../../img/section_slide}
 
 
 
 
 
 
-\end{document} 
+\end{document}

@@ -25,10 +25,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../../img/i2i}}}
 	\end{picture}%
 }
 
@@ -51,14 +51,14 @@
 		\insertsectionhead\\[-1ex]
 		\insertsubsectionhead
 		\usebeamertemplate*{progress bar in section page}
-		
+
 	\end{minipage}
 	\par
 	\vspace{\baselineskip}
 }
 \makeatother
 
-%%% Define a command to include picture in section, 
+%%% Define a command to include picture in section,
 %%% make section, and revert to old template
 \newcommand{\sectionpic}[2]{
 	\setbeamertemplate{section page}[mytheme][#2]
@@ -91,11 +91,11 @@
 	deletekeywords={time}
 }
 
-%% The below command creates the ligh bulb logos in the top right corner of the 
+%% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
-	
+
 	{
-		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
+		\usebackgroundtemplate{\includegraphics[height=55mm, right]{../../img/top_right_corner.pdf}}
 		\maketitle
 	}
 
@@ -118,16 +118,16 @@
 
 \begin{frame}[fragile]{Descriptive statistics are NOT regressions}
 	\begin{columns}[c]
-		\column{.5\textwidth}	
+		\column{.5\textwidth}
 		\begin{itemize}
 			\item This is “Anscombe’s Quartet”
-			\item Every set here has: 
+			\item Every set here has:
 			\begin{itemize}
 				\item The same means (x and y)
 				\item The same variances (x and y)
 				\item The same correlation coefficient
 				\item The same regression coefficient
-				\item The same regression R2 
+				\item The same regression R2
 			\end{itemize}
 			\item Regression analysis tells you nothing about the world if you don’t understand the shape of the world you are in!
 		\end{itemize}
@@ -148,9 +148,9 @@
 
 \begin{frame}[fragile]{This really matters for impact analysis}
 	\begin{columns}[c]
-		\column{.5\textwidth}	
+		\column{.5\textwidth}
 		\begin{itemize}
-			\item In this case, for example, simply running a regression on the data would give a very wrong impression about the strength of the relationship 
+			\item In this case, for example, simply running a regression on the data would give a very wrong impression about the strength of the relationship
 			\item And real data has many more than two dimensions!
 		\end{itemize}
 		\column{.5\textwidth}
@@ -185,7 +185,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Three most common types of tables}
-	\begin{columns}[c]	
+	\begin{columns}[c]
 		\column{.5\textwidth}
 		\begin{itemize}
 			\item Summary statistics
@@ -197,7 +197,7 @@
 				\item Show a direct comparison of variable means across treatment arms
 			\end{itemize}
 		\end{itemize}
-	
+
 		\column{.5\textwidth}
 		\begin{itemize}
 			\item \texttt{sumStats}
@@ -249,7 +249,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Multiple levels or groups are easy}
-	\begin{columns}[c]	
+	\begin{columns}[c]
 		\column{.5\textwidth}
 		\begin{itemize}
 			\item Village statistics can be called with \texttt{if tag\_village == 1}
@@ -280,7 +280,7 @@
 		\begin{itemize}
 			\item Balance tables feature in almost every impact evaluation
 			\item We use balance tables to show that there was no difference between our control and treatment group in the baseline before the intervention
-			\item To us \texttt{iebaltab}, list all the variables you want to test balance in, and use the option \texttt{grpvar()} to indicate which group each observation is in. 
+			\item To us \texttt{iebaltab}, list all the variables you want to test balance in, and use the option \texttt{grpvar()} to indicate which group each observation is in.
 		\end{itemize}
 		\column{.5\textwidth}
 		\begin{figure}
@@ -317,7 +317,7 @@
 
 \begin{frame}[fragile]{Helpful checklist before sending tables to PI}
 	\begin{columns}[t]
-		\column{.5\textwidth}	
+		\column{.5\textwidth}
 		\begin{itemize}
 			\item \scriptsize Does the number of observations for each regression or summary statistic make sense?
 			\item \scriptsize Do the magnitude and sign of each coefficient/summary statistic seem reasonable?
@@ -351,11 +351,11 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{../img/section_slide}
+\sectionpic{Thank You!}{../../img/section_slide}
 
 
 
 
 
 
-\end{document} 
+\end{document}

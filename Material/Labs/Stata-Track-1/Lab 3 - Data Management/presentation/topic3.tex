@@ -24,10 +24,10 @@
 % The below command places the World Bank logo and DIME logo to the right corner
 \titlegraphic{%
 	\begin{picture}(0,0)
-	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../img/WB_logo}}}
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{../../img/WB_logo}}}
 	\end{picture}%
 	\begin{picture}(0,0)
-	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../img/i2i}}}
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{../../img/i2i}}}
 	\end{picture}%
 }
 
@@ -50,14 +50,14 @@
 		\insertsectionhead\\[-1ex]
 		\insertsubsectionhead
 		\usebeamertemplate*{progress bar in section page}
-		
+
 	\end{minipage}
 	\par
 	\vspace{\baselineskip}
 }
 \makeatother
 
-%%% Define a command to include picture in section, 
+%%% Define a command to include picture in section,
 %%% make section, and revert to old template
 \newcommand{\sectionpic}[2]{
 	\setbeamertemplate{section page}[mytheme][#2]
@@ -88,16 +88,16 @@
 }
 
 
-%% The below command creates the ligh bulb logos in the top right corner of the 
+%% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
-	
+
 {
-	\usebackgroundtemplate{\includegraphics[height=55mm, right]{../img/top_right_corner.pdf}}
+	\usebackgroundtemplate{\includegraphics[height=55mm, right]{../../img/top_right_corner.pdf}}
 	\maketitle
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
-\sectionpic{Think reproducible}{../img/section_slide}
+\sectionpic{Think reproducible}{../../img/section_slide}
 
 
 \begin{frame}{Outline}
@@ -108,11 +108,11 @@
 		\item 4. Master data sets
 		\item 5. Basic data cleaning tasks:
 			\begin{itemize}
-				\item Unique id, 
+				\item Unique id,
 				\item Variable and value labels
 				\item Missing values
 				\item Check for outliers
-			\end{itemize}		
+			\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -139,7 +139,7 @@
 			\item All data in the Intermediate or the Final folder should be de-identified
 			\item Use boxcryptor or truecrypt to encrypt the EncryptedData folder
 		\end{itemize}
-		
+
 		\column{.55\linewidth}
 		\begin{figure}
 			\centering
@@ -153,7 +153,7 @@
 		\item You can make a do-file run other dofiles
 			\begin{itemize}
 				\item First, run do-file 1
-				\item Then, run do-file 2 
+				\item Then, run do-file 2
 				\item Then, run do-file 3, etc.
 			\end{itemize}
 		\item This (and a few secondary but still important things) is what a master do-file does.
@@ -178,7 +178,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Master do-file - Allows easy collaboration}	
+\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
 	\begin{itemize}
 		\item If we share a project over DropBox or OneDrive all team member have the same folder structure.
 		\item A master do-file allows multiple people to set their own global to the project folder.
@@ -199,16 +199,16 @@
 			\item \texttt{do "\$baseline\_doCln/load\_imported\_data.do“}
 		\end{itemize}
 		\item Now run the \texttt{baseline\_cleaning\_MasterDofile.do} file again and see how the data set is opened again
-		\item Now save all your files and close Stata. Re-open stata and open the do-files \texttt{Project\_MasterDofile.do} and \texttt{baseline\_MasterDofile.do}. Run both files in that order and notice that your data set is opened again. 
+		\item Now save all your files and close Stata. Re-open stata and open the do-files \texttt{Project\_MasterDofile.do} and \texttt{baseline\_MasterDofile.do}. Run both files in that order and notice that your data set is opened again.
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Keep using the folder you created}
 	\begin{itemize}
-		\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file.	
+		\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file.
 		\item That would be similar to how we want you to run a DIME project. More on this in track 2.
-		\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project 
+		\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project
 	\end{itemize}
 \end{frame}
 
@@ -258,7 +258,7 @@
 			\item Test that the variable indeed is uniquely and fully identifying
 			\begin{itemize}
 				\item Stata commands: \texttt{isid} and \texttt{codebook}
-			\end{itemize}		
+			\end{itemize}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -268,8 +268,8 @@
 	\begin{itemize}
 		\item Re-run the baseline master do-file that you created in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open.
 		\begin{itemize}
-			\item What is the unit of observation, i.e. what does each row represents?		
-			\item Which variable do you think is the variable that uniquely and fully identifies the data set?		
+			\item What is the unit of observation, i.e. what does each row represents?
+			\item Which variable do you think is the variable that uniquely and fully identifies the data set?
 			\item Test the variable to make sure that is the unique ID variable.
 		\end{itemize}
 	\end{itemize}
@@ -285,22 +285,22 @@
 			\item Uniquely identifying ID
 			\item Treatment assignment
 			\item Sampling
-			\item Monitor status		
+			\item Monitor status
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}[fragile]{Data Management - Master Data}
-	\begin{columns}[c]	
-		
+	\begin{columns}[c]
+
 		\column{.45\linewidth}
 		\begin{itemize}
 			\item For each unit of observation you have one encrypted master data set, and one available to all
 			\item The encrypted has unique ID and identifying information
 			\item The other one should not include any identifying information
 		\end{itemize}
-	
+
 		\column{.55\linewidth}
 		\begin{figure}
 			\centering
@@ -368,8 +368,8 @@
 
 \begin{frame}{Standardize units }
 	\begin{itemize}
-		\item Quantity variables should be converted into standardized units. One unit for weight (usually kg), length/distance (usually meter), etc. 
-		\item Often a difficult task due to usage of local non-standardized units. Use field team to collect as much information about local units and then decide on a conversion rate together with your PI	
+		\item Quantity variables should be converted into standardized units. One unit for weight (usually kg), length/distance (usually meter), etc.
+		\item Often a difficult task due to usage of local non-standardized units. Use field team to collect as much information about local units and then decide on a conversion rate together with your PI
 	\end{itemize}
 \end{frame}
 
@@ -393,7 +393,7 @@
 	\item Identifying outliers often comes down to common sense.
 	\item Can the outlier be explained by typos? Especially common when selecting units from multiple choice lists
 	\item Useful commands: \texttt{sum detail}, \texttt{tabulate}, \texttt{inspect}, \texttt{assert}, \texttt{histogram}
-	
+
 \end{itemize}
 \end{frame}
 
@@ -403,7 +403,7 @@
 		\item This is ultimately the decision of the researcher.
 		\item The goal is to deal with them while losing as little information as possible.
 		\begin{itemize}
-			\item Delete observations 
+			\item Delete observations
 			\begin{itemize}
 				\item Almost never desired as it loses a lot of information in variables that were correct
 			\end{itemize}
@@ -411,8 +411,8 @@
 			\begin{itemize}
 				\item Frequently used but the observation would be dropped in regressions using that variable
 			\end{itemize}
-			\item Winsorization is a method were observations are not dropped, neither from the data set or from regressions			
-		\end{itemize}		
+			\item Winsorization is a method were observations are not dropped, neither from the data set or from regressions
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
@@ -442,7 +442,7 @@
 
 \begin{frame}{Task 6}
 	\begin{itemize}
-		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us. 
+		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us.
 		\begin{itemize}
 			\item \texttt{encode  pl\_id\_09,  gen(pl\_id\_09\_code)}
 		\end{itemize}
@@ -457,7 +457,7 @@
 		\end{itemize}
 	\end{itemize}
 \end{frame}
-	
+
 \begin{frame}{Task 7}
 	\begin{itemize}
 		\item Variable \texttt{ag\_08\_1\_1} is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
@@ -469,7 +469,7 @@
 			\begin{itemize}
 				\item replace \texttt{ag\_08\_1\_1 = .a if ag\_08\_1\_1 == -99}
 			\end{itemize}
-		\item Summarize the variable again. This looks like we expected. 
+		\item Summarize the variable again. This looks like we expected.
 			\begin{itemize}
 				\item Look what happened to the number of observations. Why did that happen?
 			\end{itemize}
@@ -479,11 +479,11 @@
 \begin{frame}{Task 8}
 	\begin{itemize}
 		\item Variables \texttt{aa\_02\_1}, \texttt{aa\_02\_2}, \texttt{aa\_02\_3}, \texttt{aa\_02\_4}, \texttt{aa\_02\_5}, \texttt{aa\_02\_6}, \texttt{aa\_02\_7}, \texttt{aa\_02\_8}, \texttt{aa\_02\_9}, and \texttt{aa\_02\_10} list purchases of common animals. Let’s check for outliers
-		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character 
+		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character
 		\begin{itemize}
 			\item \texttt{summarize aa\_02\_1 aa\_02\_2 aa\_02\_3 aa\_02\_4 aa\_02\_5 aa\_02\_6 aa\_02\_7 aa\_02\_8 aa\_02\_9 aa\_02\_10, detail}
 			\item \texttt{summarize aa\_02\_? aa\_02\_10, detail}
-		\end{itemize}	
+		\end{itemize}
 		\item Do you see any implausible values? What can we do to fix this? There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI.
 	\end{itemize}
 \end{frame}
@@ -505,7 +505,7 @@
 		\item Compare winsorized vs. non-winsorized means
 	\end{itemize}
 \end{frame}
-	
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
 \begin{frame}{Conclusion}
 
@@ -517,11 +517,11 @@ For more information or further questions please contact:
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
-\sectionpic{Thank You!}{../img/section_slide}
+\sectionpic{Thank You!}{../../img/section_slide}
 
 
 
 
 
 
-\end{document} 
+\end{document}
