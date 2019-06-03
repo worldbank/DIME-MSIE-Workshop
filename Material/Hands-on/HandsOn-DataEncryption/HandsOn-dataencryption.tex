@@ -95,7 +95,66 @@ First we will install VeraCrypt. Note that this needs to be done only once. Anyo
 	\item Install \href{https://www.veracrypt.fr/en/Downloads.html}{Veracrypt}. (eServices request on a Bank desktop/laptop)
 	\item Create an encrypted folder (volume) titled 'Encrypted Data' with a strong password.\sidenote{Add suggestions for how to make strong passwords} \\
 	\textit{Note that, you can use any drive of your choice.}\sidenote{Add sub-steps for this (maybe with pictures)}
-	\item Go to the location where you created the folder to confirm the folder exists.
+	\begin{itemize}
+		\item  Click Create Volume (marked with a red rectangle for clarity)
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_1.png}
+	\end{figure}
+	\begin{itemize}
+	\item  The VeraCrypt Volume Creation Wizard window should appear.
+	In this step you need to choose where you wish the VeraCrypt volume to be created.In this session, we will choose the first option and create a VeraCrypt volume within a file.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_2.png}
+	\end{figure}
+	\begin{itemize}
+		\item  In this step you need to choose whether to create a standard or hidden VeraCrypt volume. In this tutorial, we will choose the former option and create a standard VeraCrypt volume.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_3.png}
+	\end{figure}
+	\begin{itemize}
+		\item  In this step you have to specify where you wish the VeraCrypt volume (file container) to be created. Note that a VeraCrypt container is just like any normal file. It can be, for example, moved or deleted as any normal file. It also needs a filename, which you will choose in the next step.  Click Select File.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_4.png}
+	\end{figure}
+	\begin{itemize}
+		\item  Select the desired path (where you wish the container to be created) in the file selector. Type the desired container file name in the Filename box.
+	Click Save.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_5.png}
+	\end{figure}
+	\begin{itemize}
+		\item  In the Volume Creation Wizard window, click Next.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_6.png}
+	\end{figure}
+	\begin{itemize}
+		\item  Here we specify that we wish the size of our VeraCrypt container to be 250 megabyte. You may, of course, specify a different size. After you type the desired size in the input field (marked with a red rectangle), click Next.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_7.png}
+	\end{figure}
+	\begin{itemize}
+		\item  This is one of the most important steps. Here you have to choose a good volume password. Read carefully the information displayed in the Wizard window about what is considered a good password.
+		After you choose a good password, type it in the first input field. Then re-type it in the input field below the first one and click Next.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_8.png}
+	\end{figure}
+	\begin{itemize}
+		\item  Move your mouse as randomly as possible within the Volume Creation Wizard window at least until the randomness indicator becomes green. The longer you move the mouse, the better (moving the mouse for at least 30 seconds is recommended). This significantly increases the cryptographic strength of the encryption keys (which increases security).
+		Click Format.
+	\end{itemize}
+	\begin{figure}%
+		\includegraphics[width=\linewidth]{img/vc_install_9.png}
+	\end{figure}
+
+		\item Go to the location where you created the folder to confirm the folder exists.
 	Double click on the folder to try and open it directly. Confirm that it doesn't open!
 \end{enumerate}
 
