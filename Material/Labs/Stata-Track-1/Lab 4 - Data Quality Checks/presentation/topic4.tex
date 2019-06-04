@@ -102,46 +102,99 @@
 		\item Duplicates
 		\begin{itemize}
 			\item Run a prepared file using \texttt{ieduplicates} command and understand the output
+			\item \texttt{Purpose:} Make sure you can identify the respondent while the enumerator still remember the interview
 		\end{itemize}
-		\item Survey Log
+		\item Survey Log / Progress Report
 		\begin{itemize}
-			\item Provide the team with clear progress reports
+			\item List the number of completed interviews
+			\item \texttt{Purpose:} Make sure we are making enough progress to complete sample before money runs out
 		\end{itemize}
-		\item Back checks
+		\item High Frequency Checks (HFC)
 		\begin{itemize}
-			\item Set up bcstats, run it and interpret the results
+			\item Download and use IPA's framework for HFCs
+			\item \texttt{Purpose:} Make sure we are collecting data without a lot of errors reducing the quality of the data
 		\end{itemize}
-		\item Other Manual HFC
+	\end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{Duplicates}{../../img/section_slide}
+
+\begin{frame}{Why do we have duplicates?}
+	\begin{itemize}
+		\item To develop a quick but still secure way of dealing with any issue, we must first have a model for understanding the reasons that cause this issue
+		\item Once we have a good model of the reasons for the issue, we will be able to develop a good methodology for how to solve the issues
+		\item What type of reasons do we have for the duplicates in the ID variable we find in primary data?
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Why do we have duplicates?}
+	\begin{itemize}
+		\item Type 1 - Double submissions of same observation and the same data
 		\begin{itemize}
-			\item Run a prepared HFC file and learn to edit it
+			\item First upload from tablet not complete due to bad internet
+		\end{itemize}
+		\item Type 2 - Double submissions of same observation but with modified data.
+		\begin{itemize}
+			\item Answers modified after submission, and then re-submitted
+			\item Bad practice, more transparent to write correction in a do-file
+			\item Many survey software have features preventing this.
+		\end{itemize}
+		\item Type 3 - Incorrectly assigned ID. Two respondents are given the same ID
+		\begin{itemize}
+			\item Typo in field when entering respondent ID
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{How can we identify the types of duplicates?}
+	\begin{itemize}
+		\item Type 1 - Double submissions of same observation and the same data
+		\begin{itemize}
+			\item Few variables differs between the duplicates and differences are in submission data
+			\item (\texttt{submission data} = submission time, submission ID, file attachment name etc.)
+		\end{itemize}
+		\item Type 2 - Double submissions of same observation but with modified data.
+		\begin{itemize}
+			\item Some variables differs between the duplicates and some of them are in observation data
+			\item (\texttt{observation data} = age of respondent, professional occupancy, marital status, crops grown, what did you eat yesterday etc.)
+		\end{itemize}
+		\item Type 3 - Incorrectly assigned ID. Two respondents are given the same ID
+		\begin{itemize}
+			\item Many variables differs between the duplicates and many of the differences are in observation data
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{ieduplicates}
+	
+	Wouldn't it be great if there was an command in Stata that would identify all duplicates and provide you with the information needed to determine which type it is?
+
 	\begin{itemize}
-		\item Exercise 1
+		\item We have written: \texttt{ieduplicates}
 		\begin{itemize}
-			\item \texttt{ssc install ieduplicates}
-			\item learn how to use \texttt{ieduplicates}
-			\item practice identifying and correcting duplicates
+			\item Part of the \texttt{ietoolkit} package. Installation \texttt{ssc install ietoolkit}
+			\item Used in Stata but generates a report in Excel that team members not proficient in Stata can interact with
+			\item The report is interactive, so you write your corrections in the Excel report, and the command will then apply those corrections
+			\item Returns the data without the duplicates until they are solved
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{HFC}
-	\begin{itemize}
-		\item Given that you are in track 1, you are usually not expected to know how to write this, so we will focus on how to interpret
-		\item We will not cover everything as that is responsibility of person writing
-		\begin{itemize}
-			\item There are templates that help with this
-			\begin{itemize}
-				\item IPA
-				\item DIME is working
-			\end{itemize}
-		\end{itemize}
-	\end{itemize}
+\begin{frame}{ieduplicates - output}
+	\begin{figure}
+		\centering
+		\includegraphics[width=.9\linewidth]{img/ieduplicates-output.png}
+	\end{figure}
 \end{frame}
+
+\begin{frame}{ieduplicates - output}
+	Attend the hands-on session on \texttt{ieduplicates} and \texttt{ietestform} to learn the details on how to best use \texttt{ieduplicates}. We will introduce some new features that were released only last month!
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{Survey Log}{../../img/section_slide}
+
 
 
 \begin{frame}{3. Survey Log}
