@@ -217,97 +217,154 @@
 	\end{itemize}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{HFC}{../../img/section_slide}
 
-\begin{frame}{4. Back checks}
+\begin{frame}
 	\begin{itemize}
-		\item Purpose
+		\item We are recommending IPA's (Innovation for Poverty Action \url{http://poverty-action.org}) framework for high frequency checks. 
 		\begin{itemize}
-			\item To monitor the quality of field work: Do some enumerators need extra support from supervisors?
-			\item To understand whether your questionnaire accurately captures the key outcomes of your study: Do respondents understand the questions the way we intended to?
+			\item \url{https://github.com/PovertyAction/high-frequency-checks}
 		\end{itemize}
-		\item Best practices:
+		\item Like anything technical, there is a fixed cost to learn how to use
 		\begin{itemize}
-			\item ~ 10\% of surveys, 20\% in the first 2 weeks of field work
-			\item Every team and every surveyor must be back checked
-			\item The back check sample must include a proportional number of missing and replacement respondents.
-			\item Selection of households for back checks must be random
+			\item However, if you are in the profession if primary data collection through interviews, then you need to learn or set up your own system for HFC. 
+			\item And this is the easiest to learn system that include the most number of features that we have come across, and it is definitely easier than setting up your own system of the same level of quality.
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Selecting Back Check Questions}
+\begin{frame}{IPA's HFC Framework}
 	\begin{itemize}
-		\item Type 1 variables
-		\begin{itemize}
-			\item Straightforward questions where we expect very little variation
-			\item E.g. education level, marital status, occupation, has children
-		\end{itemize}
-		\item Type 2 variables
-		\begin{itemize}
-			\item Questions where we expect capable enumerators to get the true answer
-		\end{itemize}
-		\item Type 3 variables
-		\begin{itemize}
-			\item Questions that we expect to be difficult.
-			\item Want to understand if these questions were interpreted in the field as intended
-		\end{itemize}
-		\item Identifying Respondent and Interview Information
-		\begin{itemize}
-			\item Check if we have the right person; if the interview took place \& when
-		\end{itemize}
+		\item We will not have time to cover all features today, so we will cover the a few examples of what we find most useful and important
+		\item You should explore all the other features in this frame work after you feel comfortable with these basic examples.
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{bcstats}
+\begin{frame}{Installing IPA's HFC Framework}
+
+	Go to \url{https://github.com/PovertyAction/high-frequency-checks\#installation} and follow the installation instructions
+	
+	\vspace{.5cm}
+	
+	If you run in to errors (especially on a World Bank computer), let us know!
+
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+
+Alternative installation fir WB computers
+
+\end{frame}
+
+
+\begin{frame}{Installing IPA's HFC Framework}
+
+	Then set up a folder for this exercise and create a global for that folder. And after that run the set up command \texttt{ipacheck} to that folder. You can use nay name in the option \texttt{surveys()}
+	
+	\codeexample{set-up-hfc.do}{code/set-up-hfc.do}
+	
+	If this does not work, you can unzip the zip file provided for this session. You still need to create teh folder global.
+
+\end{frame}
+
+
+\begin{frame}{Installing IPA's HFC Framework}
+
+	Before continuing make sure you have a folder set-up inside you folder that looks like this:
+
+	\begin{figure}
+		\centering
+		\includegraphics[width=.6\linewidth]{img/ipacheck-folders.png}
+	\end{figure}
+
+	Explore the folders. Inside the folders you will find text files that describe the purpose of each folder. We will in this exercise only use \texttt{02\_dofiles}, \texttt{04\_checks}, and \texttt{05\_data}.
+
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+
+	Next, open up the do-file \texttt{02\_dofiles/master\_check.do}. Find the section shown below and add your folder global to the file path like the example below. Do not run the file yet.
+	
+	\codeexample{use-global-in-mastercheck.do}{code/use-global-in-mastercheck.do}
+
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+	
+	\begin{columns}[c]
+		
+		\column{.22\linewidth}
+		\small Next, open up the excel file \texttt{hfc\_inputs.xlsm} in \texttt{02\_checks/01\_inputs}. 
+		
+		\vspace{.2cm}
+		
+		Go to the sheet called \texttt{0. Setup}. And copy these settings:
+		
+		\column{.78\linewidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/ipacheck-setup-1.png}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+
+\begin{frame}{Installing IPA's HFC Framework}
+	\begin{columns}[c]
+		
+		\column{.22\linewidth}
+		\small Then copy these settings:
+		
+		\column{.78\linewidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/ipacheck-setup-2.png}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+	\begin{columns}[c]
+		
+		\column{.22\linewidth}
+		\small And then copy these settings:
+		
+		\column{.78\linewidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/ipacheck-setup-3.png}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+	\begin{columns}[c]
+		
+		\column{.22\linewidth}
+		\small And finally make sure that only these options are checked:
+		
+		\column{.78\linewidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/ipacheck-setup-4.png}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Installing IPA's HFC Framework}
+
 	\begin{itemize}
-		\item \texttt{ssc install bcstats}
-		\item Purpose:
-		\begin{itemize}
-			\item compares back check data and survey data, producing a data set of comparisons
-			\item completes enumerator checks and stability checks for variables
-		\end{itemize}
+		\item As the very last step copy the data set \texttt{endline\_data\_raw.dta} to the folder \texttt{05\_data/02\_survey}. 
+		\item Then after you have closed the Excel file, go back to \texttt{master\_check.do} and run the file!
+		\item After the file is done running (could take a few moments), check out the three files that are created in the folder \texttt{04\_checks/02\_outputs}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Using bcstats report to improve data quality}
+\begin{frame}{Finals notes on HFC}
 	\begin{itemize}
-		\item Type 1
-			\begin{itemize}
-				\item If >10\% discrepancies  - give surveyor a warning
-				\item 20-30\% discrepancies - 2nd backcheck to determine who made errors
-				\item If error is by surveyor  - audit 3 additional surveys by that surveyor in same week
-				\item if 20-30\% discrepancies -  put him/her on probation
-				\item >40\% discrepancies - 2nd backcheck to determine who made errors and maybe re-survey HH
-				\item If surveyor made errors - re-survey HH \& audit all surveys done by surveyor in this batch
-				\item If one more survey has 40\% discrepancies - fire surveyor immediately \& redo all his/her surveys with 20\% or more discrepancies
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{Using bcstats report to improve data quality}
-	\begin{itemize}
-		\item Type 2
-		\begin{itemize}
-			\item >10\% discrepancies -> Consider re-training
-			\item If one surveyor is responsible for more than 30\% of the errors in a single question, follow the steps for Type 1
-		\end{itemize}
-		\item Type 3
-		\begin{itemize}
-			\item Discuss >10\% with your survey team and your PIs.
-			\item PIs may decide to edit survey or add additional rounds
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}{4. Backchecks}
-	\begin{itemize}
-		\item Exercise 3
-		\begin{itemize}
-			\item Install bcstats
-			\item Learn how to use bcstats
-			\item Distinguish between types of backcheck variables
-			\item Explore bcstats output
-		\end{itemize}
+		\item While manually coded HFC checks created by the project team will always be more specific to your project then an off-the-shelf framework will ever be, the main advantages of using an established framework like IPA's is that it reduces the risk that you forget to include a common and important test.
+		\item Once you learn to set up IPA's framework quickly, then you will have time to add manually coded test specific to your own project, and that is what we see very experienced field coordinator doing.
 	\end{itemize}
 \end{frame}
 
