@@ -129,7 +129,7 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 	
 	\newpage
 	
-	\item Select the desired path in the file selector,. If you intend to share this folder, for example through DropBox, then this should be inside your DropBox folder. If you are using DIME Analytics' folder set-up then you should create this inside the encrypted folder.\sidenote{\url{https://dimewiki.worldbank.org/wiki/DataWork_Folder\#Survey_Encrypted_Data}}. Then type the name of the secure folder in the \textit{file name} box (remember the secure folder volume is actually a file), and then click \textit{Save}.
+	\item Select the desired path in the file selector. If you intend to share this folder, for example through DropBox, then this should be inside your DropBox folder. If you are using DIME Analytics' folder set-up then you should create this inside the encrypted folder.\sidenote{\url{https://dimewiki.worldbank.org/wiki/DataWork_Folder\#Survey_Encrypted_Data}}. Then type the name of the secure folder in the \textit{file name} box (remember the secure folder volume is actually a file). The rest of these examples assumes you call the file \textit{EncryptedData}. Then click \textit{Save}.
 	
 	\begin{figure}%
 		\includegraphics[width=.8\linewidth]{img/vc_install_5.png}
@@ -166,60 +166,62 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 	\FloatBarrier
 \end{enumerate}
 
-	\noindent You have now created the secure folder. Go to the location where you created the folder to confirm it exists. It does not look like a folder, as it is technically a file. Double click on the folder to try and open it directly. Confirm that it doesn't open and you cannot do anything with it. Also see that the file is about 250MB big (or whatever value you chose) despite it is still empty.
+	\noindent You have now created the secure folder. Go to the location where you created the folder to confirm it exists. It does not look like a folder, as it is technically a file. Double click on the folder to try and open it directly. Confirm that it doesn't open and you cannot do anything with it. Also see that the file is about 250MB big (or whatever value you chose) despite it is still empty. Next part shows you how to use the secure folder.
 
 %\printclassoptions
 \section{Part 2: Adding files to your secure folder}
+
+	In this part we will learn how to use VeraCrypt to make the secure folder appear like a folder and not like a file. This is called \textit{mounting} the volume. The secure folder will never be exactly like a normal folder, but after mounting it you can access it the same way you usually access files using, for example, Stata.
+	
+	You need to re-mount the secure folder each time you start the computer and this is an important feature that makes your secure folder secure. Since you should not keep all your data files in the secure folder, only the data files with identifying or otherwise sensitive data, so the process of mounting and re-mounting the secure folder should not be too burdensome.
+
 \begin{enumerate}
-	\item Open VeraCrypt.
-	\item Mount the encrypted volume created onto drive M. \\
-	\textit{Note that, you can use any drive of your choice.}
-	\begin{itemize}
-		\item  Select a drive letter from the list (marked with a red rectangle). This will be the drive letter to which the VeraCrypt container will be mounted.
-	\end{itemize}
+	\item If you have VeraCrypt open, start by closing it, and re-open it. All our instructions will start from the opening page.
+	
+	\item First you need to select a drive that will be used when you mount your secure folder. Even though the file you created in the last part might be stored on the \textit{C:} you need to select a different drive when mounting it. You can select any drive, but the examples in the rest of this exercise assumes that you select \textit{M:} as your drive.
 	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_mount_1.png}
+		\includegraphics[width=.8\linewidth]{img/vc_mount_1.png}
 	\end{figure}
 	\FloatBarrier
-	\begin{itemize}
-		\item  Click Select File.
-	\end{itemize}
+	
+	\item Then click \textit{Select File}.
 	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_mount_2.png}
+		\includegraphics[width=.8\linewidth]{img/vc_mount_2.png}
 	\end{figure}
 	\FloatBarrier	
-	\begin{itemize}
-		\item In the file selector, browse to the container file (which we created earlier)and select it. Click Open (in the file selector window).
-	\end{itemize}
+	
+	\item In the file selector, browse to the volume file that we created in the last part and select it. Then click \textit{Open}.
 	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_mount_3.png}
+		\includegraphics[width=.85\linewidth]{img/vc_mount_3.png}
 	\end{figure}
 	\FloatBarrier
-	\begin{itemize}
-		\item In the main VeraCrypt window, click Mount. Password prompt dialog window should appear.
-	\end{itemize}
+	
+
+	\item Back in the opening VeraCrypt window, click \textit{Mount}.
 	\begin{figure}%
-		\includegraphics[width=\linewidth]{img/vc_mount_4.png}
+		\includegraphics[width=.85\linewidth]{img/vc_mount_4.png}
 	\end{figure}
 	\FloatBarrier
-	\begin{itemize}
-		\item Type the password (which you specified in Step 10) in the password input field (marked with a red rectangle). Click OK.
-	\end{itemize}
+	
+	\newpage
+	
+	\item Type the password you created when you created the secure folder then click \textit{OK}.
 	\begin{figure}%
 		\includegraphics[width=\linewidth]{img/vc_mount_5.png}
 	\end{figure}
 	\FloatBarrier
-	\begin{itemize}
-		\item If the password is correct, we will have successfully mounted on the container as a virtual disk M:. Double click on the disk M: to open the container. 
-	\end{itemize}
+	
+	\item If the password is correct, we will have successfully mounted on the container as a virtual disk \textit{M:}. Double click on the disk \textit{M:} to open the container. 
 	\begin{figure}%
 		\includegraphics[width=\linewidth]{img/vc_mount_6.png}
 	\end{figure}
 	\FloatBarrier
-	\item This will now open an empty folder titled 'Encrypted Data'. Save a copy of the data sets titled endline\_data\_raw\_2018.dta and endline\_data\_raw\_nodup\_2018.dta\sidenote{Update to final dataset once ready} in the folder. \\
-	\textit{This is very similar to using a new USB/flash drive and adding files to it.}
-	\item Open VeraCrypt and dismount the drive.
-	\item Share the password securely with team members.\sidenote{Add something about securely sharing passwords}
+	
+	\item This will now open an empty folder in your file explorer. This empty folder has the file path \textit{M:}. This is very similar to when you plug in a USB/flash drive to your computer. 
+	
+	\item Save some files in the empty folder. This could be any type of files even though we will most often store data files in this folder. If you have access to the data sets used in DIME Analytics' \textit{Manage Successful Impact Evaluation Workshop}'s test files, then copy of the data sets titled \texttt{endline\_data\_raw.dta} and \texttt{panel\_data.dta} to the folder.
+	
+	\item You have now stored the files you added to the secure drive. However, as long as you have the secure folder mounted it can freely be accessed on \textit{M:} drive by anyone who has access to your computer. So go back to VeraCrypt, make sure that the mounted drive is highlighted and then click \textit{Dismount}. Once you do that, then there is no way to access these files without the password you used when creating the secure folder volume, even if someone gets access to your computer or your hard drive.
 	
 	
 \end{enumerate}
