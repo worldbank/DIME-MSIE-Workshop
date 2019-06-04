@@ -12,8 +12,7 @@
    if c(username) == "wb506743" {
 		global track_1_folder "C:/Users/wb506743/Dropbox/FC Training/June 2018/Manage Successful Impact Evaluations - 2018 Course Materials (public)/Stata Lab Track 1"
    }
-   *
-
+   
    * Project folder globals
    * ---------------------
 	global track_1_data        "$track_1_folder/data"
