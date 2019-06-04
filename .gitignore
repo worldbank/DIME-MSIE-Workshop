@@ -104,5 +104,8 @@ passwords/
 MSIE-Presenter-Page/site/
 
 #Un-ignore images needed for the beamer template
-!Beamer_template\img\*.png
-!Beamer_template\img\*.pdf
+!Beamer_template/img/*.png
+!Beamer_template/img/*.pdf
+
+#Images in hands-on sessions
+!**/img/*.png
