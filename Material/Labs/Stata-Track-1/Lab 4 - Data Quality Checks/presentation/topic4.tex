@@ -66,29 +66,26 @@
 	\setbeamertemplate{section page}[mytheme]
 }
 
-%%% The command below allows for the text that contains Stata code
-\lstset{ %
-	backgroundcolor=\color{white},
-	basicstyle=\tiny,
-	breakatwhitespace=false,
-	breaklines=true,
-	captionpos=b,
-	commentstyle=\color{mygreen},
-	escapeinside={\%*}{*)},
-	extendedchars=true,
-	frame=single,
-	numbers=left,
-	numbersep=5pt,
-	numberstyle=\tiny\color{gray},
-	rulecolor=\color{black},
-	showspaces=false,
-	showstringspaces=false,
-	showtabs=false,
-	stringstyle=\color{mymauve},
-	tabsize=2,
-	title=\lstname,
-	morekeywords={not,\},\{,preconditions,effects },
-	deletekeywords={time}
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+%Fancyvrb docs: http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/fancyvrb/doc/fancyvrb-doc.pdf
+\fvset{fontsize=\scriptsize} % The font size of all verbatim text can be changed here
+
+%So we can use option FloatBarrier, which is similar to [H] but is an
+%alternative solition when the algorithm can't solce [H] as too many
+%settings are going on. [H] seems to get stuck in infinite loop
+%https://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned
+\usepackage{placeins}
+\newcommand{\codeexample}[2]{
+	\begin{figure}
+		\VerbatimInput[
+		framesep=3mm,
+		frame=lines, % line above and below code section
+		numbers=left, %Line number
+		label= #1, %name of code section
+		baselinestretch=0.90, %Use line space more similat to line space in code editors
+		]{#2} %Write the relative file path and the name of the file to be included
+	\end{figure}
+	\FloatBarrier
 }
 
 %% The below command creates the ligh bulb logos in the top right corner of the
