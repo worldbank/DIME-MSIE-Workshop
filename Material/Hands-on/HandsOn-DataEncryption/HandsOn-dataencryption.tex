@@ -26,8 +26,8 @@
 \graphicspath{{graphics/}}
 
 \title{Hands-On Session: Data Encryption}
-\author{DIME Analytics \\ dimeanalytics@worldbank.org}
-\date{11 June 2019}  % if the \date{} command is left out, the current date will be used
+\author{DIME Analytics \\ \href{mailto:dimeanalytics@worldbank.org}{dimeanalytics@worldbank.org}}
+\date{12 June 2019}  % if the \date{} command is left out, the current date will be used
 
 % The following package makes prettier tables.  We're all about the bling!
 \usepackage{booktabs}
@@ -77,7 +77,7 @@ In this exercise we will encrypt a dataset and attempt to access the data in an 
 \begin{enumerate}
   \item Download and install VeraCrypt
   \item Set up a secure folder using VeraCrypt
-  \item Encrypting files in the secure folder
+  \item Encrypt files in the secure folder
   \item Access the encrypted files in the secure folder
 \end{enumerate}
 \end{abstract}
@@ -85,7 +85,7 @@ In this exercise we will encrypt a dataset and attempt to access the data in an 
 %\printclassoptions
 \section{Part 1: Download and install VeraCrypt}
 
-VeraCrypt is the software that we recommend when encrypting data on your computer, regardless if it is an a non-shared folder, or a shared folder like DropBox. VeraCrypt is a free open-source software so you can use it without having to pay for it.
+VeraCrypt is the software that we recommend for use when encrypting data on your computer, regardless if it is an a non-shared folder, or a shared folder like DropBox. VeraCrypt is a free open-source software so you can use it without having to pay for it.
 
 The first time we use VeraCrypt we need to download and install the software. If you are using a World Bank desktop, then you must make an \textit{eServices} request and have an IT person installing the software for you.
 
@@ -101,6 +101,8 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 
 	\item If you have VeraCrypt open, start by closing it, and re-open it. All our instructions will start from the opening page.
 	\item On the opening page click \textit{Create Volume} (marked in read in the image below). Remember that \textit{Volume} in VeraCrypt means secure folder.
+
+
 	\begin{figure}%
 		\includegraphics[width=.9\linewidth]{img/vc_install_1.png}
 	\end{figure}
@@ -152,7 +154,7 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 	\FloatBarrier
 	
 	
-	\item In the next step you need to create a secure password.\sidenote{We recommend using a password manager like LastPass \url{https://www.lastpass.com/}. If you are working in a World Bank project you can get access to LastPass Premium version for free, but the basic version that is free for everyone will suit all your needs for this purpose.} Read VeraCrypt's instructions for what is a good password. After you have chosen your password, type it in the first input field and then re-type it in the second input field, and then click \textit{Next}.
+	\item In the next step you need to create a secure password.\sidenote{We recommend using a password manager like LastPass \url{https://www.lastpass.com/} to store and share passwords, especially complicated and long passwords required by softwares like VeraCrypt. If you are working in a World Bank project you can get access to LastPass \href{https://worldbankgroup.sharepoint.com/sites/ITS/cybersecurity-blog/Pages/Last-Pass-03062019-161721.aspx?deliveryName=DM10667}{Premium version} for free, but the basic version that is free for everyone will suit all your needs for this purpose.} Read VeraCrypt's instructions for what is a good password. After you have chosen your password, type it in the first input field and then re-type it in the second input field, and then click \textit{Next}.
 	\begin{figure}%
 		\includegraphics[width=.7\linewidth]{img/vc_install_8.png}
 	\end{figure}
@@ -166,10 +168,10 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 	\FloatBarrier
 \end{enumerate}
 
-	\noindent You have now created the secure folder. Go to the location where you created the folder to confirm it exists. It does not look like a folder, as it is technically a file. Double click on the folder to try and open it directly. Confirm that it doesn't open and you cannot do anything with it. Also see that the file is about 250MB big (or whatever value you chose) despite it is still empty. Next part shows you how to use the secure folder.
+	\noindent You have now created the secure folder. Go to the location where you created the folder to confirm it exists. It does not look like a folder, as it is technically a file. Double click on the folder to try and open it directly. Confirm that it doesn't open and you cannot do anything with it. Also see that the file is about 250MB big (or whatever value you chose) despite being still empty. Next part shows you how to use the secure folder.
 
 %\printclassoptions
-\section{Part 2: Adding files to your secure folder}
+\section{Part 3: Add files to your secure folder}
 
 	In this part we will learn how to use VeraCrypt to make the secure folder appear like a folder and not like a file. This is called \textit{mounting} the volume. The secure folder will never be exactly like a normal folder, but after mounting it you can access it the same way you usually access files using, for example, Stata.
 	
@@ -228,7 +230,7 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 
 
 %\printclassoptions
-\section{Part 3: Access encrypted files}
+\section{Part 4: Access encrypted files}
 
 In this part we will learn how to access the files in the secure folder. This is very similar to how we added files to the secure folder.
 
@@ -241,7 +243,7 @@ In this part we will learn how to access the files in the secure folder. This is
 
 \newpage
 
-\section{Part 4: Pair up and share a secure folder with someone else (If time permits)}
+\section{Part 5: Pair up and share a secure folder with someone else (If time permits)}
 Pair up with another person in the room and try to create, share, and access encrypted data.
 \begin{enumerate}
 	\item Create a shared Dropbox/Box/Onedrive folder.
@@ -250,7 +252,7 @@ Pair up with another person in the room and try to create, share, and access enc
 	\item Mount the secure folder in your computer and place some files in your secure folder in the shared Dropbox/Box/Onedrive folder.
 	\item While you both have your own secure folder mounted, does the file look different when you look at it in the shared folder? Can you tell if files were added or not? Can you tell if someone else has the file mounted?
 	\item Now share the password with your partner. How do you securely share a password?
-	\item Access your partner's encrypted file by mounting it in VeraCrypt using the password your partner shared with you.
+	\item Access your partner's encrypted file by mounting it on VeraCrypt using the password your partner shared with you.
 \end{enumerate}
 
 \end{document}
