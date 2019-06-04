@@ -229,24 +229,28 @@ Before you can encrypt any files on your computer you must use VeraCrypt to crea
 
 %\printclassoptions
 \section{Part 3: Access encrypted files}
+
+In this part we will learn how to access the files in the secure folder. This is very similar to how we added files to the secure folder.
+
 \begin{enumerate}
-	\item Open VeraCrypt.
-	\item Mount the encrypted volume created onto drive K. \\
-	\textit{Note that, you can use any drive of your choice.}
-	\item This will now open a folder titled 'Encrypted Data' which contains the data sets titled endline\_data\_raw\_2018.dta and endline\_data\_raw\_nodup\_2018.dta\sidenote{Update to final dataset once ready}.
-	\item Open VeraCrypt and dismount the drive   
+	\item If you have VeraCrypt open, start by closing it, and re-open it. All our instructions will start from the opening page.
+	\item Mount the encrypted volume you created onto drive \textit{M:} but you can select any drive any time you mount the drive. However, as you will see soon it will be easier for you when you access the files in, for example, Stata if you are using the same drive for the same folder each time.
+	\item Double click the mounted volume in the VeraCrypt window and see that the folder contains the folder you encrypted in the last part. If you were to access one of these files in Stata then you would use the file path \texttt{M:/endline\_data\_raw.dta} (if \textit{M:} was the drive that you chose). Not that even though you created the secure folder volume file somewhere on the \textit{C:} drive, the only way Stata can read it is through the mounted drive \textit{M:} (or whichever drive you chose).
+	\item Once you are done working with the file containing identifying data that you keep in your secure folder, always make sure to directly unmount it in VeraCrypt.   
 \end{enumerate}
 
-NOTE: When calling a file in the encrypted folder on Stata the file path used will be that of the mounted drive and not that of where the encrypted file is stored. 
-Example: Encrypted folder is stored in Dropbox at\sidenote{add pictures to explain}. It will be used in Stata using mounted drive and not the filepath of the Dropbox folder. add stata example on file path for mounted drive, but do not worry about doing it in the big master dofile
-\section{Extra - If time permits}
+\newpage
+
+\section{Part 4: Pair up and share a secure folder with someone else (If time permits)}
 Pair up with another person in the room and try to create, share, and access encrypted data.
 \begin{enumerate}
 	\item Create a shared Dropbox/Box/Onedrive folder.
-	\item Create one encrypted folder for each of you within this shared folder.
-	\item Place the data in your folder in that shared folder.
-	\item Share the password with partner
-	\item Access partner's encrypted file
+	\item Create one secure  folder each in this shared folder. Use a simple password this time you do not mind sharing with the person you paired up with, but do not share the password yet.
+	\item Look at your own and each other's file on the shared drive.
+	\item Mount the secure folder in your computer and place some files in your secure folder in the shared Dropbox/Box/Onedrive folder.
+	\item While you both have your own secure folder mounted, does the file look different when you look at it in the shared folder? Can you tell if files were added or not? Can you tell if someone else has the file mounted?
+	\item Now share the password with your partner. How do you securely share a password?
+	\item Access your partner's encrypted file by mounting it in VeraCrypt using the password your partner shared with you.
 \end{enumerate}
 
 \end{document}
