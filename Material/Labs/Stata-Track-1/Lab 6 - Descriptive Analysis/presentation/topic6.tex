@@ -153,7 +153,7 @@
 			\item In this case, for example, simply running a regression on the data would give a very wrong impression about the strength of the relationship
 			\item And real data has many more than two dimensions!
 		\end{itemize}
-		\column{.5\textwidth}
+		\column{.45\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\linewidth]{img/incomeinequality}
@@ -196,6 +196,10 @@
 			\begin{itemize}
 				\item Show a direct comparison of variable means across treatment arms
 			\end{itemize}
+			\item Analysis results
+				\begin{itemize}
+					\item Show regression outputs in easy to read format
+				\end{itemize}
 		\end{itemize}
 
 		\column{.5\textwidth}
@@ -208,8 +212,37 @@
 			\begin{itemize}
 				\item \url{https://worldbank.github.io/ietoolkit}
 			\end{itemize}
+			\item \texttt{estout}
+			\begin{itemize}
+				\item \url{http://repec.org/bocode/e/estout/esttab.html}
+			\end{itemize}
 		\end{itemize}
 	\end{columns}
+\end{frame}
+
+\begin{frame}[fragile]{Summary statistics with [tabstat]}
+	\color{red}{Do we want a prettier image?}
+	\begin{columns}[c]
+		\column{.5\textwidth}
+		\begin{itemize}
+			\item \texttt{tabstat} gives you the ability specify exactly what statistics you want in your output
+			\item By default, \texttt{tabstat} only displays the mean. 
+			\item We can add a whole range of statistics using the option \texttt{statistics()}. 			
+		\end{itemize}
+		\column{.5\textwidth}
+		\begin{figure}
+			\centering
+			\includegraphics[width=\linewidth]{img/tabstat}
+		\end{figure}
+	\end{columns}
+\end{frame}
+
+\begin{frame}{Task 2}
+	\begin{itemize}
+		\item Use \texttt{tabstat} to createa a table of the mean of all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
+		\item Create a table displaying the mean, standard deviation, the median, and the number of observations for all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}. Type \texttt{help tabstat} and click the \texttt{statname} link to see all options you can use
+		\item Try to display these statistics separately for male and female headed households
+	\end{itemize}
 \end{frame}
 
 
@@ -234,9 +267,9 @@
 
 
 
-\begin{frame}{Task 2a}
+\begin{frame}{Task 3a}
 	\begin{itemize}
-		\item Run the code as it is in the 2a section and open the file generated. (You need to include the sections where the locals are defined)
+		\item Run the code as it is in the 3a section and open the file generated. (You need to include the sections where the locals are defined)
 		\begin{itemize}
 			\item Only the mean is in the table
 		\end{itemize}
@@ -265,11 +298,11 @@
 \end{frame}
 
 
-\begin{frame}{Task 2b}
+\begin{frame}{Task 3b}
 	\begin{itemize}
-		\item In the Task 2b section, start by adding the outcome variables, and the additional statistics you added to the table in Task 2a
+		\item In the Task 3b section, start by adding the outcome variables, and the additional statistics you added to the table in Task 3a
 		\item Restrict the first part of the table to control observations, and the second part of the table to treatment observations
-		\item Run the section for Task 2b and open the table. (Remember to include the section where the locals are defined)
+		\item Run the section for Task 3b and open the table. (Remember to include the section where the locals are defined)
 	\end{itemize}
 \end{frame}
 
@@ -280,7 +313,7 @@
 		\begin{itemize}
 			\item Balance tables feature in almost every impact evaluation
 			\item We use balance tables to show that there was no difference between our control and treatment group in the baseline before the intervention
-			\item To us \texttt{iebaltab}, list all the variables you want to test balance in, and use the option \texttt{grpvar()} to indicate which group each observation is in.
+			\item To use \texttt{iebaltab}, list all the variables you want to test balance in, and use the option \texttt{grpvar()} to indicate which group each observation is in.
 		\end{itemize}
 		\column{.5\textwidth}
 		\begin{figure}
@@ -291,7 +324,8 @@
 \end{frame}
 
 
-\begin{frame}{Task 3: Balance table}
+\begin{frame}{Task 4: Balance table}
+	\color{red}{I think this slide can be dropped}
 	\begin{itemize}
 		\item Run the examples
 		\begin{itemize}
@@ -302,18 +336,41 @@
 \end{frame}
 
 
-\begin{frame}{Task 3}
+\begin{frame}{Task 4}
 	\begin{itemize}
 		\item Run the first iebaltab section
 		\begin{itemize}
 			\item Click the link in the result window to see the table generated
 		\end{itemize}
-		\item Add all the income variables, \texttt{inc\_01}, \texttt{inc\_02} … \texttt{inc\_17}, and re-run the first two graphs
+		\item Add 
 		\item Run the third \texttt{iebaltab} section
 		\item Write some manual labels for one or a few of the income variables you added, and re-run the last \texttt{iebaltab} section again
 	\end{itemize}
 \end{frame}
 
+\begin{frame}{Analysis Tables}
+	\begin{itemize}
+		\item Regressions are integral part of all analyses
+		\item The \texttt{estout} package includes several commands which can be used to output regression results
+		\item It is a 2-step process to export regression results in a presentable format using the the \texttt{estout} package
+		\begin{itemize}
+			\item First we store the regression results using the \texttt{eststo} command
+			\item Next we export the regression results  using the \texttt{esttab} command
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 5: Analysis tables}
+	\begin{itemize}
+		\item Run the first analysis tables section
+		\begin{itemize}
+			\item Click the link in the result window to see the table generated
+		\end{itemize}
+		\item Using variable labels instead of variable names as row names
+	\end{itemize}
+\color{red}{If we need to fill time we can add more exercises playing around with esttab options}
+\end{frame}
 
 \begin{frame}[fragile]{Helpful checklist before sending tables to PI}
 	\begin{columns}[t]
