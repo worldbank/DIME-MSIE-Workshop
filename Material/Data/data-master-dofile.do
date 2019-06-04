@@ -46,7 +46,10 @@
 
 	************************
 	*Make changes to the endline data set here
-	
+
+	gen    submissiondate_num = clock(submissiondate, "MDYhms")
+	format submissiondate_num %tc clock("20060125110215", "YMDhms")
+	order submissiondate_num , after(submissiondate)
 	
 	
 	************************
