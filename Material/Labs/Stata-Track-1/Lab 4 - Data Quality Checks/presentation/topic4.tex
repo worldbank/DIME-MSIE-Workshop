@@ -417,10 +417,10 @@ Alternative installation fir WB computers
 \begin{frame}{IPA's HFC: Add more tests}
 	Do all of the next steps in \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm}
 	\begin{itemize}
-		\item In \texttt{6. logic}, add \texttt{unit\_harvest\_1\_1\_1 amount\_harvest\_1\_1\_1} in the variable column, \texttt{unit\_harvest\_1\_1\_1 == "N/A"} in the assert column, and \texttt{amount\_harvest\_1\_1\_1 == 0} in the if-statement column.
+		\item In \texttt{6. logic}, add \texttt{crp\_08\_0\_1\_1\_1 amount\_harvest\_1\_1\_1} in the variable column, \texttt{!missing(crp\_08\_0\_1\_1\_1)} in the assert column, and \texttt{amount\_harvest\_1\_1\_1 == 0} in the if-statement column.
 		\item In \texttt{7. all miss}, replace \texttt{\_all} with \texttt{health\_report\_01}, \texttt{health\_report\_02},..., \texttt{health\_report\_05}, 01-05 in the variable column. \texttt{\_all} would include all variables which is sometimes very useful, but some survey (like our example) has repeat patterns that create a lot of variables with all missing.
 		\item In \texttt{8. constraints}, add all \texttt{pl\_aga\_01},\texttt{pl\_aga\_02},...,\texttt{pl\_aga\_15}, 01-15, and 0 as \texttt{hard\_min} and \texttt{soft\_min}, 90 as \texttt{soft\_max} and 150 as \texttt{hard\_max},
-		\item In \texttt{11. outliers}, add all the \texttt{inc\_01},\texttt{inc\_02},...,\texttt{inc\_17} variables. See that both variable and multiplier is green so both are required. Set all multipliers to 2.
+		\item In \texttt{11. outliers}, add all the \texttt{inc\_01},\texttt{inc\_02},...,\texttt{inc\_17} variables. See that both variable and multiplier is green so both are required. Set all multipliers to 3.
 	\end{itemize}
 \end{frame}
 
