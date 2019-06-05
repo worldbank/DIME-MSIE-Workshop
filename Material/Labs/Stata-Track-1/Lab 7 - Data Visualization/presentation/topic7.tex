@@ -91,6 +91,30 @@
 	deletekeywords={time}
 }
 
+\usepackage{fancyvrb} % Allows customization of verbatim environments
+%Fancyvrb docs: http://mirrors.ibiblio.org/CTAN/macros/latex/contrib/fancyvrb/doc/fancyvrb-doc.pdf
+\fvset{fontsize=\scriptsize} % The font size of all verbatim text can be changed here
+
+%So we can use option FloatBarrier, which is similar to [H] but is an
+%alternative solition when the algorithm can't solce [H] as too many
+%settings are going on. [H] seems to get stuck in infinite loop
+%https://tex.stackexchange.com/questions/2275/keeping-tables-figures-close-to-where-they-are-mentioned
+\usepackage{placeins}
+\newcommand{\codeexample}[2]{
+	\begin{figure}
+		\VerbatimInput[
+		framesep=3mm,
+		frame=lines, % line above and below code section
+		numbers=left, %Line number
+		label= #1, %name of code section
+		baselinestretch=0.90, %Use line space more similat to line space in code editors
+		]{#2} %Write the relative file path and the name of the file to be included
+	\end{figure}
+	\FloatBarrier
+}
+
+
+
 %% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
 
@@ -222,39 +246,77 @@
 \begin{frame}[fragile]{Task 1: Histogram}
 	\begin{itemize}
 		\item Create a histogram for the variable \texttt{ag\_16\_x\_16\_1}
+		\codeexample{hist1.do}{code/hist1.do}
 		\item Make changes to the histogram to make it look presentable
 		\begin{itemize}
 			\item Find reasonable viewing range
-			\item Make the y-axis depict frequencies
-			\item Change the width of the bins
-			\item Change the titles for the graph and the x-axis
+			\codeexample{hist2.do}{code/hist2.do}
 		\end{itemize}
-		\item Save the final graph created
 	\end{itemize}
 \end{frame}
+  
+
+ 
+\begin{frame}[fragile]{Task 1}
+ \begin{itemize}
+ 		\item Make changes to the histogram to make it look presentable
+		 \begin{itemize}	
+	  		\item Make the y-axis depict frequencies \& change the width of the bins
+	 		\codeexample{hist3.do}{code/hist3.do}
+ 	\end{itemize}
+ 	\item Change the titles for the graph and the x-axis and save the final graph created
+ 		\codeexample{hist4.do}{code/hist4.do}
+ \end{itemize}
+\end{frame}
+
 
 \begin{frame}[fragile]{Task 2: Bar graph}
 	\begin{itemize}
 		\item Create a bar graph for the variable \texttt{ag\_17\_x\_16\_1}
+		\codeexample{bar1.do}{code/bar1.do}
 		\item Make changes to the bar graph to make it look presentable
 		\begin{itemize}
 			\item Graph it over the various categories of \texttt{gr\_16}
-			\item Make the y-axis depict frequencies
-			\item Change the options for the titles and labels
-			\item Change it to a horizontal bar graph
+			\codeexample{bar2.do}{code/bar2.do}
 		\end{itemize}
-		\item Save the final graph created
 	\end{itemize}
 \end{frame}
+
+\begin{frame}[fragile]{Task 2}
+\begin{itemize}
+	\item Make changes to the bar graph to make it look presentable
+	\begin{itemize}
+		\item Change the options for the titles and labels
+		\item Change it to a horizontal bar graph
+	\end{itemize}
+	\item Save the final graph created
+	\codeexample{bar3.do}{code/bar3.do}
+\end{itemize}
+\end{frame}
+
 
 
 \begin{frame}[fragile]{Task 3: Scatter plots}
 	\begin{itemize}
-		\item Let's make a scatter plot for the variables \texttt{ag\_18\_x\_16\_1} and \texttt{ag\_16\_x\_16\_1}
+		\item Let's make a scatter plot for the variables \texttt{ag\_18\_x\_16\_1} and \texttt{ag\_16\_x\_16\_1} only for the control group
+		\codeexample{scatter1.do}{code/scatter1.do}
 		\item Add a fitted line 
-		\item Play around with the way the points look for the scatter plot (change the color, convert the circles to triangles etc)
-		\item Separate out scatter points by treatment arm
+		\codeexample{scatter1.do}{code/scatter2.do}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Task 3}
+	\begin{itemize}	 	
+		\item Play around with the way the points look for the scatter plot (change the color, convert the circles to triangles etc.)
+		\codeexample{scatter3.do}{code/scatter3.do}
+	\end{itemize}
+\end{frame}
+		
+\begin{frame}[fragile]{Task 3}		
+	\begin{itemize}
+		\item Create scatter plot and fitted line separated by treatment arm
 		\item Save the final graph created
+		\codeexample{scatter4.do}{code/scatter4.do}
 	\end{itemize}
 \end{frame}
 
@@ -287,6 +349,7 @@
 		\item Combine the histogram, bar graph, and scatter plot created earlier in this exercise
 		\item Save the combined graph as a png file
 	\end{itemize}
+	\codeexample{combine-graphs.do}{code/combine-graphs.do}
 \end{frame}
 
 \begin{frame}[fragile]{DIME Resources (please contribute!)}
