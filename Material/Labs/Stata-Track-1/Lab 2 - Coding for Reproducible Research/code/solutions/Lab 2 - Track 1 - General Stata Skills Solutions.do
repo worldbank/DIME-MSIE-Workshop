@@ -175,7 +175,9 @@
 * 				2.6 Lab Task 5
 *-------------------------------------------------------------------------------
 
-	di "${track_1_data}"
+	global folder_Lab1 ""
+
+	di "${folder_Lab1}"
 
 	*Load original data
 	use "${track_1_data}\endline_data_raw.dta", clear
