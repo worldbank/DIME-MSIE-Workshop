@@ -47,13 +47,34 @@
 	************************
 	*Make changes to the endline data set here
 
+	* Generate numeric version of submission data  for HFC
 	gen    submissiondate_num = clock(submissiondate, "MDYhms")
 	format submissiondate_num %tc clock("20060125110215", "YMDhms")
 	order submissiondate_num , after(submissiondate)
-	
-	
+
+
+	*This is the coordinates of the world bank HQ for HFC
+	sort key id_05 // Stable sort
+	gen longitude = -77.04 if _n != 456 | _n != 743
+	gen latitude = 38.89   if _n != 456
+
+    * Gen 5 all missing values for HFC
+	gen health_report_01 = (runiform()<.3)
+	gen health_report_02 = .
+	gen health_report_03 = .
+	gen health_report_04 = .
+	gen health_report_05 = .
+	order health_report_?? , before(decisionmaker)
+
+    *Change one unit to unexpected unit for HFC
+	bys amount_harvest_1_1_1 : replace unit_harvest_1_1_1 = "kg" if amount_harvest_1_1_1 == 0 & _n == 2
+
+	*Change one unit to unexpected age for HFC
+	replace pl_age_1 = -9 if _n == 657
+
 	************************
 	*Save data set to use
+	sort key id_05
 	compress
     save "${data2use}/endline_data_raw.dta" ,replace
 	
