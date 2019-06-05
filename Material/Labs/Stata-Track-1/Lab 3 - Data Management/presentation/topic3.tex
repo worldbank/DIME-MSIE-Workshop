@@ -137,7 +137,7 @@
 		\begin{itemize}
 			\item Raw data with identifying information should be stored in the EncryptedData folder
 			\item All data in the Intermediate or the Final folder should be de-identified
-			\item Use boxcryptor or truecrypt to encrypt the EncryptedData folder
+			\item Use Boxcryptor or Veracrypt to encrypt the EncryptedData folder
 		\end{itemize}
 
 		\column{.55\linewidth}
@@ -162,9 +162,9 @@
 \end{frame}
 
 \begin{frame}{Exempt from a Master do-file}
-	This do-file first run the do-file \texttt{cleaning.do} and then the \texttt{analysis.do}.
+	This do-file first run the do-file \texttt{cleaning.do} and then the \texttt{analysis.do}
 		\codeexample{run-do-from-do.do}{code/run-do-from-do.do}
-	This tells both Stata and humans reading the code which order the files should be run in.
+	This tells both, Stata and humans reading the code which order the files should be run in
 \end{frame}
 
 
@@ -180,9 +180,9 @@
 
 \begin{frame}[fragile]{Master do-file - Allows easy collaboration}
 	\begin{itemize}
-		\item If we share a project over DropBox or OneDrive all team member have the same folder structure.
-		\item A master do-file allows multiple people to set their own global to the project folder.
-		\item This way anyone sharing the project folder can easily run your do-files.
+		\item If we share a project over DropBox or OneDrive all team member have the same folder structure
+		\item A master do-file allows multiple people to set their own global to the project folder
+		\item This way anyone sharing the project folder can easily run your do-files
 	\end{itemize}
 \end{frame}
 
@@ -199,14 +199,14 @@
 			\item \texttt{do "\$baseline\_doCln/load\_imported\_data.do“}
 		\end{itemize}
 		\item Now run the \texttt{baseline\_cleaning\_MasterDofile.do} file again and see how the data set is opened again
-		\item Now save all your files and close Stata. Re-open stata and open the do-files \texttt{Project\_MasterDofile.do} and \texttt{baseline\_MasterDofile.do}. Run both files in that order and notice that your data set is opened again.
+		\item Now save all your files and close Stata. Re-open stata and open the do-files \texttt{Project\_MasterDofile.do} and \texttt{baseline\_MasterDofile.do}. Run both files in that order and notice that your data set is opened again
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}{Keep using the folder you created}
 	\begin{itemize}
-		\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file.
+		\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file
 		\item That would be similar to how we want you to run a DIME project. More on this in track 2.
 		\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project
 	\end{itemize}
@@ -266,26 +266,26 @@
 
 \begin{frame}{Task 5}
 	\begin{itemize}
-		\item Re-run the baseline master do-file that you created in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open.
+		\item Re-run the baseline master do-file that you created in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open
 		\begin{itemize}
 			\item What is the unit of observation, i.e. what does each row represents?
 			\item Which variable do you think is the variable that uniquely and fully identifies the data set?
-			\item Test the variable to make sure that is the unique ID variable.
+			\item Test the variable to make sure that is the unique ID variable
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
-\begin{frame}{What is a Master data sets?}
+\begin{frame}{What is a Master data set?}
 	\begin{itemize}
 		\item With multiple data set you need to have a tool to keep track of your observations across different data collections and over time. You guessed it – that tool is master data sets!
-		\item A master data set should include all observations the project has ever encountered. Not just observations assigned to treatment or sampled for data collection.
+		\item A master data set should include all observations the project has ever encountered. Not just observations assigned to treatment or sampled for data collection
 		\item A master data set should include information relevant across data set that is constant across the project
 		\begin{itemize}
 			\item Uniquely identifying ID
 			\item Treatment assignment
 			\item Sampling
-			\item Monitor status
+			\item Monitoring status
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -297,7 +297,7 @@
 		\column{.45\linewidth}
 		\begin{itemize}
 			\item For each unit of observation you have one encrypted master data set, and one available to all
-			\item The encrypted has unique ID and identifying information
+			\item The encrypted data set has unique ID and identifying information
 			\item The other one should not include any identifying information
 		\end{itemize}
 
@@ -328,6 +328,34 @@
 \end{frame}
 
 \begin{frame}{Data Cleaning Tasks}
+\color{red}{I added the text from the next slide in tex format. If this doesn't look as appealing please keep just the next slide.}
+
+	\begin{columns}[c]
+		\column{.5\textwidth}
+		\underline{	Format the data set}
+		\begin{itemize}
+			\item Make the data easier to work with for yourself, your team and other researchers
+			\item Document the knowledge you have about the data now. You will soon forget
+		\end{itemize}
+		\begin{enumerate}
+			\item Rename variables
+			\item Remove strings
+			\item Variable and value labels
+		\end{enumerate}
+	\column{.5\textwidth}
+	\underline{Edit the dataset}
+		\begin{itemize}
+			\item Remove data points that will bias the analysis or make the analysis invalid in any other way
+		\end{itemize}
+		\begin{enumerate}
+			\item Standardize units
+			\item Handle missing values
+			\item Check for outliers
+		\end{enumerate}	
+	\end{columns}
+\end{frame}
+	
+\begin{frame}{Data Cleaning Tasks}
 	\begin{figure}
 		\centering
 		\includegraphics[width=.9\linewidth]{img/formatting}
@@ -352,14 +380,14 @@
 		\item Categorical string variables must be made numeric with value labels
 		\begin{itemize}
 			\item See \texttt{encode}
-			\item Best practice using encode includes using both the \texttt{label()} and the \texttt{noextend} option.
+			\item Best practice using encode includes using both the \texttt{label()} and the \texttt{noextend} option
 		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}{Variable and value labels }
 	\begin{itemize}
-		\item We already introduced labels in the first lab. When cleaning a data set you should also make sure that all variables are properly labeled.
+		\item We already introduced labels in the first lab. When cleaning a data set you should also make sure that all variables are properly labeled
 		\item Check all variables have variable labels (in English or the language used in the research team)
 		\item Check all that all categorical variables have value labels (in English or the language used in the research team)
 		\item Useful commands: \texttt{label variable}, \texttt{label define}, \texttt{label value}, \texttt{label dir}, \texttt{label list}
@@ -390,7 +418,7 @@
 \begin{itemize}
 	\item We do not want our results to be driven by a few individuals. For example, the village leaders get all benefits
 	\item No exact rule for what is an outlier.  Ask if your PI for preference of specific rule
-	\item Identifying outliers often comes down to common sense.
+	\item Identifying outliers often comes down to common sense
 	\item Can the outlier be explained by typos? Especially common when selecting units from multiple choice lists
 	\item Useful commands: \texttt{sum detail}, \texttt{tabulate}, \texttt{inspect}, \texttt{assert}, \texttt{histogram}
 
@@ -400,8 +428,8 @@
 
 \begin{frame}{Outliers \newline How to deal with outliers?}
 	\begin{itemize}
-		\item This is ultimately the decision of the researcher.
-		\item The goal is to deal with them while losing as little information as possible.
+		\item This is ultimately the decision of the researcher
+		\item The goal is to deal with them while losing as little information as possible
 		\begin{itemize}
 			\item Delete observations
 			\begin{itemize}
@@ -430,7 +458,7 @@
 	\begin{itemize}
 		\item Static file names
 		\begin{itemize}
-			\item 	Do not use \texttt{\_v1}, \texttt{\_v2} etc. for any final file names. This leads to bugs in do-files that depend on these files when a new versions is added.
+			\item 	Do not use \texttt{\_v1}, \texttt{\_v2} etc. for any final file names. This leads to bugs in do-files that depend on these files when a new versions is added
 			\item OK to use \texttt{\_v1}, \texttt{\_v2} etc. for old versions of files
 		\end{itemize}
 		\item Make sure all output files, datasets and others are clearly and uniquely labeled
@@ -442,13 +470,13 @@
 
 \begin{frame}{Task 6}
 	\begin{itemize}
-		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us.
+		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us
 		\begin{itemize}
 			\item \texttt{encode  pl\_id\_09,  gen(pl\_id\_09\_code)}
 		\end{itemize}
-		\item See the result. Stata has assigned the codes 1-4 in alphabetic order. What if we already had the following codes? 44 for Burera, 41  for Gicumbi, 54 for Kayonza,  41 for Rulindo, 51 for Rwamagana. Replace your code with this:
+		\item See the result. Stata has assigned the codes 1-4 in alphabetic order. What if we already had the following codes? 44 for Burera, 41  for Gicumbi, 54 for Kayonza,  55 for Rulindo, 51 for Rwamagana. Replace your code with this:
 		\begin{enumerate}
-			\item 	\texttt{label define dist 44 "Burera" 41 "Gicumbi" 54 "Kayonza" 41 "Rulindo" 51 "Rwamagana"}
+			\item 	\texttt{label define dist 44 "Burera" 41 "Gicumbi" 54 "Kayonza" 55 "Rulindo" 51 "Rwamagana"}
 			\item   \texttt{encode  pl\_id\_09,  gen(pl\_id\_09\_code) label(dist)}
 		\end{enumerate}
 		\item Move the new variable next to the old variable. Add this after your code
@@ -469,7 +497,7 @@
 			\begin{itemize}
 				\item replace \texttt{ag\_08\_1\_1 = .a if ag\_08\_1\_1 == -99}
 			\end{itemize}
-		\item Summarize the variable again. This looks like we expected.
+		\item Summarize the variable again. This looks like we expected
 			\begin{itemize}
 				\item Look what happened to the number of observations. Why did that happen?
 			\end{itemize}
@@ -484,7 +512,7 @@
 			\item \texttt{summarize aa\_02\_1 aa\_02\_2 aa\_02\_3 aa\_02\_4 aa\_02\_5 aa\_02\_6 aa\_02\_7 aa\_02\_8 aa\_02\_9 aa\_02\_10, detail}
 			\item \texttt{summarize aa\_02\_? aa\_02\_10, detail}
 		\end{itemize}
-		\item Do you see any implausible values? What can we do to fix this? There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI.
+		\item Do you see any implausible values? What can we do to fix this? There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI
 	\end{itemize}
 \end{frame}
 
@@ -500,7 +528,7 @@
 			\begin{itemize}
 				\item \texttt{ssc install winsor}
 				\item \texttt{winsor inc\_01, gen(inc\_01\_w) high p(.05)}
-				\item The option high means we are only winsorizing the values that are too large. We are not concerned about values close to 0, and a variable like revenue cannot be negative.
+				\item The option high means we are only winsorizing the values that are too large. We are not concerned about values close to 0, and a variable like revenue cannot be negative
 			\end{itemize}
 		\item Compare winsorized vs. non-winsorized means
 	\end{itemize}
