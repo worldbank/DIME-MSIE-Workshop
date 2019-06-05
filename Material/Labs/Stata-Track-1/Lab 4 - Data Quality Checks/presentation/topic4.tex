@@ -253,7 +253,15 @@
 
 \begin{frame}{Installing IPA's HFC Framework}
 
-Alternative installation fir WB computers
+	If you for any reason cannot install with \texttt{net install} using an URL (the case on World Bank computers) you can do the following:
+	\begin{itemize}
+		\item \url{https://github.com/PovertyAction/high-frequency-checks} and click the \texttt{Clone or download} button and select \texttt{Download ZIP}.
+		\item You only need these files temporary so save them in your downloads folder or desktop and then un-zip the file and find the folder called \texttt{ado} in it. 
+		\item Copy the file path to that ado folder and use that instead of the URL instead, see code example below.
+		\item After you done this you can delete the zip file and the unzipped folders
+	\end{itemize}
+
+	\codeexample{install-from-local-pkg.do}{code/install-from-local-pkg.do}
 
 \end{frame}
 
