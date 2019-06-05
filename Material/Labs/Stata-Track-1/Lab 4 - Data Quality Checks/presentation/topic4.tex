@@ -293,14 +293,14 @@ Alternative installation fir WB computers
 \begin{frame}{IPA's HFC: Use folder global in master\_check}
 	\begin{columns}[c]
 	
-		\column{.25\linewidth}
+		\column{.28\linewidth}
 		\small Also in \texttt{master\_check.do} find this section and comment it out, i.e. add the two lines with \texttt{HERE}, line 2 and 20.
 		
 		\vspace{.2cm}
 		
-		There is nothing wrong with this section, it is just out of the scope of this exercise to set it up.
+		\small There is nothing wrong with this section, the advanced version of the progress report is just out of the scope of this exercise to set it up.
 	
-		\column{.75\linewidth}
+		\column{.68\linewidth}
 		\codeexample{progreport-not-use.do}{code/progreport-not-use.do}
 	\end{columns}
 \end{frame}
@@ -308,10 +308,10 @@ Alternative installation fir WB computers
 \begin{frame}{IPA's HFC: Use folder global in master\_check}
 \begin{columns}[c]
 	
-	\column{.25\linewidth}
+	\column{.23\linewidth}
 	\small Similarly, still in \texttt{master\_check.do} find this section and comment it out, i.e. add the two lines with \texttt{HERE}, line 4 and 11.
 	
-	\column{.75\linewidth}
+	\column{.73\linewidth}
 	\codeexample{dups-not-use.do}{code/dups-not-use.do}
 \end{columns}
 \end{frame}
@@ -388,13 +388,13 @@ Alternative installation fir WB computers
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{IPA's HFC: Adding more test}
+\begin{frame}{IPA's HFC: Add no-miss test}
 
 	\begin{itemize}
 		\item \small Now open the \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
 		\item \small In the variable column, on separate rows, add the two variables \texttt{longitude} and \texttt{latitude}, and then in the \texttt{0. setup} sheet, select no miss like in the image below
 		\item \small Coordinates of the respondents dwelling is an example of a variable we want to never be missing.
-		\item Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} 
+		\item \small Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} 
 	\end{itemize}
 
 	\begin{figure}
@@ -403,10 +403,43 @@ Alternative installation fir WB computers
 	\end{figure}
 \end{frame}
 
+\begin{frame}{IPA's HFC: Add more tests}
+	\begin{itemize}
+		\item \small Now open the \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
+		\item \small In the variable column, on separate rows, add the two variables \texttt{longitude} and \texttt{latitude}, and then in the \texttt{0. setup} sheet, select no miss like in the image below
+		\item \small Coordinates of the respondents dwelling is an example of a variable we want to never be missing.
+		\item \small Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} 
+	\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}{IPA's HFC: Add more tests}
+	Do all of the next steps in \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm}
+	\begin{itemize}
+		\item In \texttt{6. logic}, add \texttt{unit\_harvest\_1\_1\_1 amount\_harvest\_1\_1\_1} in the variable column, \texttt{unit\_harvest\_1\_1\_1 == "N/A"} in the assert column, and \texttt{amount\_harvest\_1\_1\_1 == 0} in the if-statement column.
+		\item In \texttt{7. all miss}, replace \texttt{\_all} with \texttt{health\_report\_01}, \texttt{health\_report\_02},..., \texttt{health\_report\_05}, 01-05 in the variable column. \texttt{\_all} would include all variables which is sometimes very useful, but some survey (like our example) has repeat patterns that create a lot of variables with all missing.
+		\item In \texttt{8. constraints}, add all \texttt{pl\_aga\_01},\texttt{pl\_aga\_02},...,\texttt{pl\_aga\_15}, 01-15, and 0 as \texttt{hard\_min} and \texttt{soft\_min}, 90 as \texttt{soft\_max} and 150 as \texttt{hard\_max},
+		\item In \texttt{11. outliers}, add all the \texttt{inc\_01},\texttt{inc\_02},...,\texttt{inc\_17} variables. See that both variable and multiplier is green so both are required. Set all multipliers to 2.
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{IPA's HFC: Add more tests}	
+	\begin{itemize}
+		\item Then go to the \texttt{6. logic} sheet and select all tests we are now using (see image below)
+		\item Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} again.
+	\end{itemize}
+	
+	\begin{figure}
+		\centering
+		\includegraphics[width=.75\linewidth]{img/ipacheck-setup-add4.png}
+	\end{figure}
+\end{frame}
 
 \begin{frame}{Finals notes on HFC}
 	\begin{itemize}
 		\item While manually coded HFC checks created by the project team will always be more specific to your project then an off-the-shelf framework will ever be, the main advantages of using an established framework like IPA's is that it reduces the risk that you forget to include a common and important test.
+		\item You should explore the other tests in IPA's framework. It offers an impressive amount of flexibility.
 		\item Once you learn to set up IPA's framework quickly, then you will have time to add manually coded test specific to your own project, and that is what we see very experienced field coordinator doing.
 	\end{itemize}
 \end{frame}
