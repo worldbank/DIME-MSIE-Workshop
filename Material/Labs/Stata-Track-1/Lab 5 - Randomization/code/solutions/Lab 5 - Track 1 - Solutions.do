@@ -101,3 +101,10 @@
 	*  the treatment vars we generated
 	sort 	id_05
 	browse 	id_05 treatment treatment_multi
+
+	********************************************************************************
+	*    Task 3 : Save data
+	********************************************************************************
+
+	* Save data after topic 5
+	save "${ST1_dtInt}/endline_data_post_topic5.dta",  clear
