@@ -101,19 +101,19 @@
 
 
 \begin{frame}{Outline}
-	\begin{itemize}
-		\item 1. Folder organization
-		\item 2. Master do-files
-		\item 3. First overview of a data set
-		\item 4. Master data sets
-		\item 5. Basic data cleaning tasks:
+	\begin{enumerate}
+		\item Folder organization
+		\item Master do-files
+		\item First overview of a data set
+		\item Master data sets
+		\item Basic data cleaning tasks:
 			\begin{itemize}
-				\item Unique id,
+				\item Unique ID
 				\item Variable and value labels
 				\item Missing values
 				\item Check for outliers
 			\end{itemize}
-	\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 
@@ -121,7 +121,7 @@
 	\begin{itemize}
 		\item The first part of this presentation will introduce you to some data management practices
 		\item We have one standard almost all projects are following. You do not have to follow exactly our model, but you MUST have one model and organize your project accordingly, otherwise you will make mistakes in your data
-		\item We have tools and manuals for how to set up our model, but they are out of the scope of this training, but we will explain what any model should include by using our model as an example.
+		\item We have tools and manuals for how to set up our model, but they are out of the scope of this training, but we will explain what any model should include by using our model as an example
 	\end{itemize}
 \end{frame}
 
@@ -157,7 +157,7 @@
 				\item Then, run do-file 2
 				\item Then, run do-file 3, etc.
 			\end{itemize}
-		\item Using master do-files as a map to the DataWork folder, the person writing the do-files can tell a person trying to understand the do-files which order to read and run them.
+		\item Using master do-files as a map to the DataWork folder, the person writing the do-files can tell a person trying to understand the do-files which order to read and run them
 		\item Without a master do-file, you either need one extremely long do-file, or write instructions in which order to run all the do-files
 	\end{itemize}
 \end{frame}
@@ -192,9 +192,9 @@
 
 \begin{frame}{Task 1 - Set up the Master do file}
 	\begin{itemize}
-		\item See the folder called \texttt{ST1} that we have provided. It is a simplified example of our folder structure the way our command \texttt{iefolder} sets up. How to use \texttt{iefolder} and all features of our folder structure set up is out of the scope for this session. That is why we provide a simplified version.
-		\item Copy this folder to somewhere on the computer you are using. All the work we will do from now, will be in this folder. 
-		\item Find the do-file \texttt{ST1\_MasterDofile.do} file in this folder and open it, find the root-path section shown below and update it with your root-path.
+		\item See the folder called \texttt{ST1} that we have provided. It is a simplified example of our folder structure the way our command \texttt{iefolder} sets up. How to use \texttt{iefolder} and all features of our folder structure set up is out of the scope for this session. That is why we provide a simplified version
+		\item Copy this folder to somewhere on the computer you are using. All the work we will do from now, will be in this folder 
+		\item Find the do-file \texttt{ST1\_MasterDofile.do} file in this folder and open it, find the root-path section shown below and update it with your root-path
 	\end{itemize}
 
 \codeexample{master-dofile-rootpath-short.do}{code/master-dofile-rootpath-short.do}
@@ -202,7 +202,7 @@
 
 \begin{frame}{Task 1 - Set up the Master do file}
 	\begin{itemize}
-		\item Keep working in \texttt{ST1\_MasterDofile.do}. Find the section below. After \texttt{\$\string{ST1\_do/\string}} enter the name of the do-file you write for topic 2 in the previous session.
+		\item Keep working in \texttt{ST1\_MasterDofile.do}. Find the section below. After \texttt{\$\string{ST1\_do/\string}} enter the name of the do-file you write for topic 2 in the previous session
 		\item Now you must move the do-file from topic 2 to the location that \texttt{\$\string{ST1\_do/\string}} is pointing to. To find what that location is, you must follow the globals defined above this section.
 		\item When you have moved the do-file, change the local \texttt{topic2} to 1 and run your do-file. What happened? Did you also run your do-file from topic 2?
 	\end{itemize}
@@ -213,17 +213,19 @@
 
 \begin{frame}{Task 2 - Update the topic 2 do-file}
 	\begin{itemize}
-		\item Move the data set \texttt{endline\_data\_raw.dta} to the \texttt{ST1/DataSets/Deidentified} folder.
+		\item Move the data set \texttt{endline\_data\_raw.dta} to the \texttt{ST1/DataSets/Deidentified} folder
 		\item In your do-file for topic 2, where you have \newline \texttt{use "\$\string{folder\_Lab1\string}/Data/endline\_data\_raw.dta", clear} replace the global to use the \texttt{\$\string{ST1\_dtDeID\string}} global created in your master do-file, and remove the \texttt{Data/} part of the path, i.e. \newline  \texttt{use "\$\string{ST1\_dtDeID\string}/endline\_data\_raw.dta", clear}
-		\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_lab2.dta", replace} to the \texttt{\$\string{ST1\_dtInt\string}} global, i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", replace}
+		\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_lab2.dta", replace} \\
+		to the \texttt{\$\string{ST1\_dtInt\string}} global, \\
+		i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", replace}
 	\end{itemize}
 
 \end{frame}
 
 \begin{frame}{Keep using the folder you created}
 	\begin{itemize}
-		\item Through the rest of this training we recommend that you can create a do-file for each topic, and add them all to the master do-file. Soon our tasks will depend on edits you made to your data set in a previous topic, and then it is great that you can replicate your data sets.
-		\item This is similar to how we want you to run a DIME project. More on how this is set up in an actual project in track 2, but the principles are the same as shown here.
+		\item Through the rest of this training we recommend that you can create a do-file for each topic, and add them all to the master do-file. Soon our tasks will depend on edits you made to your data set in a previous topic, and then it is great that you can replicate your data sets
+		\item This is similar to how we want you to run a DIME project. More on how this is set up in an actual project in track 2, but the principles are the same as shown here
 		\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project
 	\end{itemize}
 \end{frame}
