@@ -1,164 +1,119 @@
 
-********************************************************************************
-* 							PART 1: FilePaths
-*******************************************************************************/
+	*Standardize settings accross users
+    ieboilstart, version(12.0)
+    `r(version)'
 
-   * Users
-   * -----
-   if c(username) == "kbrkb" {
-		global track_1_folder "C:/Users/kbrkb/Dropbox/FC Training/June 2018/Manage Successful Impact Evaluations - 2018 Course Materials (public)/Stata Lab Track 1"
-	}
+    * USe data saved in topic 5
+	use "${ST1_dtInt}/endline_data_post_topic5.dta",  clear
 
-   if c(username) == "wb506743" {
-		global track_1_folder "C:/Users/wb506743/Dropbox/FC Training/June 2018/Manage Successful Impact Evaluations - 2018 Course Materials (public)/Stata Lab Track 1"
-   }
-   
-   * Project folder globals
-   * ---------------------
-	global track_1_data        "$track_1_folder/data"
-	global track_1_lab_5       "$track_1_folder/labs/Lab 5 - Randomization"
-	global track_1_lab_6       "$track_1_folder/labs/Lab 6 - Descriptive Analysis"
-	global output		       "$track_1_lab_6/output"
+    ********************************************************************************
+	*    Task 1 : Repeat ways to explore data
+	********************************************************************************
 
-********************************************************************************
-* 							PART 2: Descriptive 
-*******************************************************************************/
-	
-	* Load the data. If you managed to save the data set with the duplicates removed in lab 5, use that data set, otherwise use the data set we prepared for you
-	use "${track_1_data}/endline_data_rand.dta",  clear
-	use "${track_1_lab_5}/endline_data_post_lab5.dta",  clear
-	
-	
-	*-------------------------------------------------------------------------------
-	* 						2.1 Task 1 - Summarize & tabulate
-	*-------------------------------------------------------------------------------
-	
-	* Summarize
-	* ---------
-		* Create variable locals
+	* Create variable locals
+    local income_vars
 
-			local income_vars 
-		
-		* Summarize 
-			
-			summarize /* add more variables here or use the local above */
-		
-		* Summarize with detailed descriptive statistics
-			
-			/* add commmand here */
+	* Remove missing codes, and replace by missing values
+	recode `income_vars' (-88 = .b)
+	recode `income_vars' (-66 = .c)
 
-	* Tabulate
-	* --------	
-		*Tabulate the gender of the first person listed in the household
-		
-			tab /* add the variable name here */
-		
-	*-------------------------------------------------------------------------------
-	* 						2.2 Task 2 - Tabstat
-	*-------------------------------------------------------------------------------
-		* Tabstat with mean
-			
-			tabstat /* add more variables here or use the local above */
-		
-		* Tabstat with multiple statistics
-			
-			/* add commmand here */
-			
-		* Tabstat for groups
-			
-			/* add commmand here */
-			
-	*-------------------------------------------------------------------------------
-	* 						2.3 Task 3 - sumStats
-	*-------------------------------------------------------------------------------
-	
+    * Summarize incomce vars
+
+
+	*Tabulate the gemder of the first person listed in the household
+
+    ********************************************************************************
+    *    Task 2 : tabstat
+    ********************************************************************************
+
+    * Show the mean of all income variables
+    tabstat
+
+    * Show the mean, the standard deviation and the median of all income variables
+    tabstat
+
+    ********************************************************************************
+    *    Task 3 : sumstat
+    ********************************************************************************
+
 	* Summarize food security
 
-		* Install programs
+	* Install programs
+	net install "https://raw.githubusercontent.com/worldbank/stata/master/wb_git_install/wb_git_install.pkg"
+	wb_git_install sumStats
+	wb_git_install xml_tab
 
-			net install ///
-				"https://raw.githubusercontent.com/worldbank/stata/master/wb_git_install/wb_git_install.pkg"
+    * Create locals of varlists to use
+	local controls fs_01 fs_03 fs_05 inc_01 inc_02
+	local outcome1 inc_08 // Livestock sales
+	local outcome2 inc_12 // LWH terracing
 
-			wb_git_install sumStats
-			wb_git_install xml_tab
-			
-		* Create variable locals
-		
-			local controls fs_01 fs_03 fs_05 inc_01 inc_02
-			local outcome1 inc_08 // Livestock sales
-			local outcome2 inc_12 // LWH terracing		
+    * Task 3a : regular sumstat
+	sumStats ( `controls' `outcome1' `outcome2' ) ///
+		using "${ST1_outRaw}/sumstats_1.xls"         ///
+	  , replace stats(N mean median sd min max)
 
-	* Task 3a
-	* -------
-	
-		sumStats ///
-			( `controls' /*add the other locals here*/ ) ///
-			using "${output}/task1_1.xls" ///
-		, replace stats(mean /*add more stats here*/)
-	
-  	* Task 3b
-	* -------
-	
-		* Summarize by treatment/control
+    * Task 3b : sumstat by treatment/control
+	sumStats ///
+            ///
+		using "${ST1_outRaw}/sumstats_2.xls"                       ///
+	  , replace stats(N mean median sd min max)
 
-		sumStats ///
-			(`controls' /*add the other locals here*/  if /*restrict to control here*/ ) ///
-			(`controls' /*add the other locals here*/  if /*restrict to control here*/ ) ///
-			using "${output}/task1_2.xls" ///
-		, replace stats(mean /*add more stats here*/)
-   
-	*-------------------------------------------------------------------------------
-	* 						2.4 Task 4 - Balance Tables
-	*-------------------------------------------------------------------------------
-		
-		* Create variable locals		
-			
-			local balancevars inc_01 inc_02 /* add more variables here */
-		
-		* Create balance table 
-			* Testing difference between treatment & control for all the income variables
-			
-			iebaltab  `balancevars' if !missing(inc_t) , grpvar(hh_treatment) ///
-			save("$output/balance_1") replace	
-		
-		* Update balance table 
-			* Using variable labels instead of variable names as row names
-			* Adding a column for total sample 
+    ********************************************************************************
+    *    Task 4 : Balance tables
+    ********************************************************************************
 
-			iebaltab  `balancevars' if !missing(inc_t), grpvar(hh_treatment) total 	///
-			save("$output/balance_2") replace rowvarlabel
-		
-		* Update balance table 
-			* Manually entering row labels for hh_hhsize and hh_head_gender 
-			* Treating missing values as 0s instead of dropping them
-			* Adding an F-test for joint difference 
-			
-			iebaltab `balancevars' if !missing(inc_t), grpvar(hh_treatment) total 	///
-				balmiss(zero) ftest													///
-				save("$output/balance_3") replace rowvarlabel						///
-				rowlabels("inc_01 Enterprise Income from Farm Activities @ inc_02 Enterprise Income from Non-Farm Activities" /* add more label descriptions here */ )
+	* Balance tables
 
+		local balancevars inc_01 inc_02
 
-	*-------------------------------------------------------------------------------
-	* 						2.5 Task 5 - Analysis Tables
-	*-------------------------------------------------------------------------------
-		
-		* Create variable locals		
-			
-			local depvar	inc_08
-			local indepvar	pl_hhsize numplots /* add more variables here */
-						
-		* Run regression
-			
-			eststo: reg `depvar' `indepvar'
-			
-		* Export regression tables
-			esttab using "$output/analysis_1.csv", replace
-			
-			eststo clear
-			
-		* Update regression
-			* Using variable labels instead of variable names as row names
-			esttab using "$output/analysis_1.csv", replace label
-			
-			
+		**This is a balance table testing differences between treatment and control
+		* for all the income variables
+		iebaltab  `balancevars' if !missing(inc_t) , grpvar(treatment) ///
+			save("${ST1_outRaw}/balance_1") replace
+
+		**The same balance table as above but sthe variable labels are used as row
+		* names instead of the variable names. A column for the total sample
+		* (treatment and control combined) is also added
+		iebaltab  `balancevars' if !missing(inc_t), grpvar(treatment) total 	///
+			save("${ST1_outRaw}/balance_2") replace rowvarlabel
+
+        **The same balance table as above but row labels for inc_01 and inc_02
+		* are entered manually. rowvarlabels is still used so the variable label would be used
+		* for all any other variable added. Some observations has missing values in the income
+		* variables. balmiss(zero) treats those missing values as zero instead of dropping
+		* the observation from the table. An ftest for joint difference is also added at
+		* the bottom of the table.
+		iebaltab `balancevars' if !missing(inc_t), grpvar(treatment) total 	///
+			balmiss(zero) ftest														///
+			save("${ST1_outRaw}/balance_3") replace rowvarlabel						///
+			rowlabels("inc_01 Enterprise Income from Farm Activities @ inc_02 Enterprise Income from Non-Farm Activities")
+
+    ********************************************************************************
+    *    Task 5 : Simple regression output
+    ********************************************************************************
+
+    * install the package
+        ssc install estout
+
+    * Create variable locals
+        local depvar	inc_08
+        local indepvar	pl_hhsize numplots /* add more variables here */
+
+    * Run regression
+        eststo: reg `depvar' `indepvar'
+
+    * Export regression tables
+        esttab using "${ST1_outRaw}/regress_1.csv", replace
+        eststo clear
+
+    * Update regression
+        * Using variable labels instead of variable names as row names
+        esttab using "${ST1_outRaw}/regress_2.csv", replace
+
+    ********************************************************************************
+    *    Task 6 : Save data
+    ********************************************************************************
+
+    * Save data after topic 5
+	save "${ST1_dtInt}/endline_data_post_topic6.dta",  replace
