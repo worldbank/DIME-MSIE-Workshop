@@ -1,2 +1,3 @@
 * Load original data
-use "${folder_Lab1}/endline_data_raw.dta", clear
+global folder_Lab1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1""
+use "${folder_Lab1}/Data/endline_data_raw.dta", clear

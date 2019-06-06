@@ -1,5 +1,5 @@
 * Load original data
-use "C:/Users/WB462869/FCtraining/Lab1/endline_data_raw.dta", clear
+use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta"
     //  ... Work on your data here ...
 * Save final data
-save "C:/Users/WB462869/FCtraining/Lab1/endline_data_raw.dta", replace
+save "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_modified.dta"
