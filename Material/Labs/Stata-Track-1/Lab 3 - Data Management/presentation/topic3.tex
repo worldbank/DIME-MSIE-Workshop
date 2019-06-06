@@ -211,6 +211,15 @@
 \end{frame}
 
 
+\begin{frame}{Task 2 - Update the topic 2 do-file}
+\begin{itemize}
+	\item Move the data set \texttt{endline\_data\_raw.dta} to the \texttt{ST1/DataSets/Deidentified} folder.
+	\item In your do-file for topic 2, where you have \newline \texttt{use "\$\string{folder\_Lab1\string}/Data/endline\_data\_raw.dta", clear} replace the global to use the \texttt{\$\string{ST1\_dtDeID\string}} global created in your master do-file, and remove the \texttt{Data/} part of the path, i.e. \newline  \texttt{use "\$\string{ST1\_dtDeID\string}/endline\_data\_raw.dta", clear}
+	\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_lab2.dta", replace} to the \texttt{\$\string{ST1\_dtInt\string}} global, i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", replace}
+\end{itemize}
+
+\end{frame}
+
 \begin{frame}{Keep using the folder you created}
 	\begin{itemize}
 		\item Through the rest of this training we recommend that you can create a do-file for each topic, and add them all to the master do-file. Soon our tasks will depend on edits you made to your data set in a previous topic, and then it is great that you can replicate your data sets.

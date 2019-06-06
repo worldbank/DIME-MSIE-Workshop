@@ -2,33 +2,36 @@
 ********************************************************************************
 *    Task 1: Open file and file paths
 ********************************************************************************
-	
+
 	*Open the data set
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
 	*Open the second data set
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/panel_data.dta", clear
 
 	* After task 6, replace the code above with the code below
-	
+
 	* Project folder and Stata Track 1 Folder
     global MSIE 	"C:/Users/kbrkb/Dropbox/MSIE-workshop"
-    global track_1  "${MSIE}/Material/Labs/Stata-Track-1"	
-	
+    global track_1  "${MSIE}/Material/Labs/Stata-Track-1"
+
 	*Open the data set
 	use "${track_1}/Data/endline_data_raw.dta", clear
 	*Open the second data set
 	use "${track_1}/Data/panel_data.dta", clear
-	
+
 ********************************************************************************
 *    Task 2: Explore the data
 ********************************************************************************
 
 	*Open the data set - In task 2
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
-	
+
 	*Open the data set - After updated in task 6
 	global folder_Lab1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
 	use "${folder_Lab1}/Data/endline_data_raw.dta", clear
+
+	* After updated in task 2 in topic 3
+	use "${ST1_dtDeID}/endline_data_raw.dta", clear
 
 	*Browse the data
 	browse
@@ -102,7 +105,7 @@
 	*yeild is more than 4,000lbs.
 	generate high_farm_income_EURO = 0
 	replace  high_farm_income_EURO = 1 if inc_01_EURO > 5000
-	
+
 	*Tabulate the result
 	tabulate high_farm_income_EURO
 
@@ -144,7 +147,7 @@
 	*Use globals
 	gen country_${project} 	= "Kenya"
 	gen donor_${project} 	= "World Bank"
-	
+
 ********************************************************************************
 *    Task 6: Comments
 ********************************************************************************
@@ -171,6 +174,9 @@
 
 	*Save final data
     save "${folder_Lab1}/Data/endline_data_post_lab2.dta", replace
+
+	* After updated in task 2 in topic 3
+	save "${ST1_dtInt}/endline_data_post_lab2.dta", replace
 
 ********************************************************************************
 *    Task 9: Open data from other sources
