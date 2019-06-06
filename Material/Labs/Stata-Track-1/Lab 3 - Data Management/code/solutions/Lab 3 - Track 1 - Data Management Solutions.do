@@ -16,7 +16,7 @@
 ********************************************************************************
 
     *Open that data
-    use "${ST1_dtDeID}/endline_data_rand.dta",  clear
+    use "${ST1_dtInt}/endline_data_post_lab2.dta",  clear
 
     *Use codebook to explore ID variable candidate
         codebook id_05
@@ -74,3 +74,10 @@
 	*Compare the original variable with the winsorized one
 		sum inc_01 inc_01_w
 		sum inc_01 inc_01_w, d
+
+********************************************************************************
+*    Task 8: Save data
+********************************************************************************
+
+    * Save data after topic 3
+    save "${ST1_dtInt}/endline_data_post_topic3.dta",  clear

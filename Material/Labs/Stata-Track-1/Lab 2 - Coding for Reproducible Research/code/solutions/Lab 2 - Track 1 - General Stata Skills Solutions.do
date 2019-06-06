@@ -173,10 +173,10 @@
 ********************************************************************************
 
 	*Save final data
-    save "${folder_Lab1}/Data/endline_data_post_lab2.dta", replace
+    save "${folder_Lab1}/Data/endline_data_post_topic2.dta", replace
 
 	* After updated in task 2 in topic 3
-	save "${ST1_dtInt}/endline_data_post_lab2.dta", replace
+	save "${ST1_dtInt}/endline_data_post_topic2.dta", replace
 
 ********************************************************************************
 *    Task 9: Open data from other sources
