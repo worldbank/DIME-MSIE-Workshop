@@ -40,7 +40,7 @@
 *iefolder will not work properly if the line above is edited
 
    *Install all packages that this project requires:
-   local user_commands ietoolkit       //Fill this list will all commands this project requires
+   local user_commands ietoolkit iefieldkit      //Fill this list will all commands this project requires
    foreach command of local user_commands {
        cap which `command'
        if _rc == 111 {
