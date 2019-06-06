@@ -35,7 +35,19 @@
 	************************
 	*Save data set to use
 	compress
-    save "${data2use}/back_check.dta", replace
+	
+	**Use different save depeding on Stata version used c(stata_version) is 
+	* not changed by ieboilstart, only c(version) is
+	if `c(stata_version)' < 13 {
+		save "${data2use}/back_check.dta" , replace 
+	} 
+	else if `c(stata_version)' < 14 {
+		saveold "${data2use}/back_check.dta" , replace 
+	} 
+	else if `c(stata_version)' < 16 {
+		saveold "${data2use}/back_check.dta" , replace v(12)
+	}	
+
 
 
     ***********************
@@ -76,7 +88,18 @@
 	*Save data set to use
 	sort key id_05
 	compress
-    save "${data2use}/endline_data_raw.dta" ,replace
+	
+	**Use different save depeding on Stata version used c(stata_version) is 
+	* not changed by ieboilstart, only c(version) is
+	if `c(stata_version)' < 13 {
+		save "${data2use}/endline_data_raw.dta" , replace 
+	} 
+	else if `c(stata_version)' < 14 {
+		saveold "${data2use}/endline_data_raw.dta" , replace 
+	} 
+	else if `c(stata_version)' < 16 {
+		saveold "${data2use}/endline_data_raw.dta" , replace v(12)
+	}		
 
 	*Dropping the varibles
 	iedropone if key == "uuid:932bb696-285d-XXXX-aed2-8c9b1f76d4cc"
@@ -86,7 +109,19 @@
 	************************
 	*Save data set to use
 	compress
-    save "${data2use}/endline_data_raw_nodup.dta" ,replace
+	
+	**Use different save depeding on Stata version used c(stata_version) is 
+	* not changed by ieboilstart, only c(version) is
+	if `c(stata_version)' < 13 {
+		save "${data2use}/endline_data_raw_nodup.dta" , replace 
+	} 
+	else if `c(stata_version)' < 14 {
+		saveold "${data2use}/endline_data_raw_nodup.dta" , replace 
+	} 
+	else if `c(stata_version)' < 16 {
+		saveold "${data2use}/endline_data_raw_nodup.dta" , replace v(12)
+	}		
+
 
 
     ***********************
@@ -105,4 +140,16 @@
 	************************
 	*Save data set to use
 	compress
-    save "${data2use}/panel_data.dta", replace
+	
+		**Use different save depeding on Stata version used c(stata_version) is 
+	* not changed by ieboilstart, only c(version) is
+	if `c(stata_version)' < 13 {
+		save "${data2use}/panel_data.dta" , replace 
+	} 
+	else if `c(stata_version)' < 14 {
+		saveold "${data2use}/panel_data.dta" , replace 
+	} 
+	else if `c(stata_version)' < 16 {
+		saveold "${data2use}/panel_data.dta" , replace v(12)
+	}	
+
