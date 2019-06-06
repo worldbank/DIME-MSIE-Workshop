@@ -282,7 +282,7 @@
 \end{frame}
 
 
-\begin{frame}{Task 2 - Test of unit of observation}
+\begin{frame}{Task 3 - Test of unit of observation}
 	\begin{itemize}
 		\item Re-run \texttt{ST1\_MasterDofile.do} that you edited in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open
 		\begin{itemize}
@@ -290,7 +290,9 @@
 			\item Which variable do you think is the variable that uniquely and fully identifies the data set?
 			\item Test the variable to make sure that is the unique ID variable
 		\end{itemize}
-		\item Create a new do-file for this session. Save it in the same location as the do-file from topic 2, and then make sure that the new do-file also runs from the master do-file. Then add to the new do-file the tests you do to verify which variable is the ID variable in the data set.
+		\item Create a new do-file for this session. Save it in the same location as the do-file from topic 2, and then make sure that the new do-file also runs from the master do-file. 
+		\item Then in that do-file, open the data using \texttt{use "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", clear}
+		\item Then add to the new do-file the tests you do to verify which variable is the ID variable in the data set.
 	\end{itemize}
 \end{frame}
 
@@ -474,7 +476,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 3}
+\begin{frame}{Task 4}
 	\begin{itemize}
 		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us
 		\begin{itemize}
@@ -492,7 +494,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 4}
+\begin{frame}{Task 5}
 	\begin{itemize}
 		\item Variable \texttt{ag\_08\_1\_1} is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
 		\item Summarize \texttt{ag\_08\_1\_1} to get the mean. Is the value between 1 and 0 like you expect a percentage in decimal form to be?
@@ -510,7 +512,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 5}
+\begin{frame}{Task 6}
 	\begin{itemize}
 		\item Variables \texttt{aa\_02\_1}, \texttt{aa\_02\_2}, \texttt{aa\_02\_3}, \texttt{aa\_02\_4}, \texttt{aa\_02\_5}, \texttt{aa\_02\_6}, \texttt{aa\_02\_7}, \texttt{aa\_02\_8}, \texttt{aa\_02\_9}, and \texttt{aa\_02\_10} list purchases of common animals. Let’s check for outliers
 		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character
@@ -522,7 +524,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 6}
+\begin{frame}{Task 7}
 	\begin{itemize}
 		\item Winsorize the income variable
 		\begin{itemize}
