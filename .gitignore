@@ -92,6 +92,7 @@ passwords/
 
 #Unignore the main data folder and all lab session data folders. All changes to the data should be tracked
 !Material/Data/2018-data/*.dta
+!Material/Data/2018-data/*.xls
 
 #Unignore imgfiles for beamer presentations
 !Material/Labs/Stata-Track-*/**/img/*.png

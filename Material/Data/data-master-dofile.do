@@ -153,3 +153,9 @@
 		saveold "${data2use}/panel_data.dta" , replace v(12)
 	}	
 
+	
+	***********************
+    * Excel file
+    ***********************
+	
+	copy "${data2018}/village_codes_2018.xls" "${data2use}/village_codes.xls", replace
