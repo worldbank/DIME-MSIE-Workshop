@@ -1,7 +1,7 @@
-graph combine ///
-	"${output}/task1.gph" ///
-	"${output}/task2.gph" ///
-	"${output}/task3.gph", ///
-	graphregion(color(white))
+graph combine                 ///
+    "${ST1_outRaw}/task1.gph" ///
+    "${ST1_outRaw}/task2.gph" ///
+    "${ST1_outRaw}/task3.gph" ///
+  , graphregion(color(white))
 
-graph export "${output}/lab7.png" , replace width(1000)
+graph export "${ST1_outRaw}/lab7.png" , replace width(1000)
