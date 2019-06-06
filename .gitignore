@@ -96,6 +96,7 @@ passwords/
 
 #unignore the ipacheck folder backup zip
 !**/code/ipacheck-setup/ipacheck.zip
+!**/code/solutions/hfc_inputs.xlsm
 
 #Unignore imgfiles for beamer presentations
 !Material/Labs/Stata-Track-*/**/img/*.png
