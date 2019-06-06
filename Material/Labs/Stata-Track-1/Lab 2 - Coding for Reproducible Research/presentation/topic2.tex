@@ -487,16 +487,15 @@
 
 \begin{frame}{Lab Task 7 - Missing values}
 	\begin{itemize}
-		\item Make sure that you have the \texttt{endline\_data\_raw.dta} open.
+		\item Make sure that you have the \texttt{endline\_data\_raw.dta} with the edits you already made open.
 		\begin{itemize}
 			\item Type \texttt{summarize inc\_*} into the command window. Look at the column obs in the output. What do you notice?
 			\item There are  1,067 observations in the data set, but less than 1,067 observations were included in the output for the income variables. Why is that?
 		\end{itemize}
 		\item \texttt{misstable summarize} identifies and reports missing values in all the variables in your data set. Use the \texttt{misstable summarize} command on the income variables. It reports exactly 105 missing observations for all of the household income variables. That explains all observations missing in the summarize output in number 1 above.
-		\item Another way to investigate the missing observations is to tabulate variable \texttt{education\_1}.
+		\item Another way to investigate the missing observations is to tabulate variable \texttt{inc\_zero}.
 		\begin{itemize}
-			\item Test first: \texttt{tabulate inc\_zero}
-			\item Then test: \texttt{tabulate inc\_zero, missing}
+			\item Test first: \texttt{tabulate inc\_zero}, then test: \texttt{tabulate inc\_zero, missing}
 		\end{itemize}
 	\end{itemize}
 \end{frame}
