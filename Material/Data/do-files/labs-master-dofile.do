@@ -28,11 +28,11 @@
 	* ******************************************************************** */
 
 	*Add the files needed to be copies to
-	local track_1_data_needed endline_data_raw panel_data
+	local track_1_data_needed endline_data_raw.dta panel_data.dta village_codes.xls
 
 	foreach file of local track_1_data_needed {
 		di "Copying file ${data2use}/`file'.dta to Stata Track 1 Data folder"
-		copy "${data2use}/`file'.dta" "${stata_track_1}/Data/`file'.dta", replace
+		copy "${data2use}/`file'" "${stata_track_1}/Data/`file'", replace
 	}
 
 
@@ -84,11 +84,11 @@
 	* ******************************************************************** */
 
 	*Add the files needed to be copies to
-	local track_2_data_needed endline_data_raw
+	local track_2_data_needed endline_data_raw.dta
 
 	foreach file of local track_1_data_needed {
 		di "Copying file ${data2use}/`file'.dta to Stata Track 2 Data folder"
-		copy "${data2use}/`file'.dta" "${stata_track_2}/Data/`file'.dta", replace
+		copy "${data2use}/`file'" "${stata_track_2}/Data/`file'", replace
 	}
 
 
