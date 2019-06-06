@@ -1,42 +1,34 @@
 
 ********************************************************************************
-* 							PART 1: FilePaths
-*******************************************************************************/
-
-   * Users
-   * -----
-   if c(username) == "kbrkb" {
-		global track_1_folder "C:\Users\kbrkb\Dropbox\FC Training\June 2018\Manage Successful Impact Evaluations - 2018 Course Materials (public)\Stata Lab Track 1"
-	}
-
-   if c(username) == "wb506743" {
-		global track_1_folder "C:\Users\wb506743\Dropbox\FC Training\June 2018\Manage Successful Impact Evaluations - 2018 Course Materials (public)\Stata Lab Track 1"
-   }
-   *
-
-   * Project folder globals
-   * ---------------------
-   global track_1_data        "$track_1_folder\data"
-   global track_1_lab_2       "$track_1_folder\labs\Lab 2 - Coding for Reproducible Research"
-
-
-*-------------------------------------------------------------------------------
-* 						2.1 Lab Task 1
-*-------------------------------------------------------------------------------
-
+*    Task 1: Open file and file paths
+********************************************************************************
+	
 	*Open the data set
-	use "$track_1_data\endline_data_raw.dta", clear
-
-
+	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
 	*Open the second data set
-	use "$track_1_data\panel_data.dta", clear
+	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/panel_data.dta", clear
 
-*-------------------------------------------------------------------------------
-* 						2.2 Lab Task 2
-*-------------------------------------------------------------------------------
-
+	* After task 6, replace the code above with the code below
+	
+	* Project folder and Stata Track 1 Folder
+    global MSIE 	"C:/Users/kbrkb/Dropbox/MSIE-workshop"
+    global track_1  "${MSIE}/Material/Labs/Stata-Track-1"	
+	
 	*Open the data set
-	use "$track_1_data\endline_data_raw.dta", clear
+	use "${track_1}/Data/endline_data_raw.dta", clear
+	*Open the second data set
+	use "${track_1}/Data/panel_data.dta", clear
+	
+********************************************************************************
+*    Task 2: Explore the data
+********************************************************************************
+
+	*Open the data set - In task 2
+	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
+	
+	*Open the data set - After updated in task 6
+	global folder_Lab1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
+	use "${folder_Lab1}/Data/endline_data_raw.dta", clear
 
 	*Browse the data
 	browse
@@ -59,9 +51,9 @@
 	*Codebook for Crop type
 	codebook numplots 			// There are 0 missing values
 
-*-------------------------------------------------------------------------------
-* 			Code included in slides between task 2 and 3
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Code included in slides between task 2 and 3
+********************************************************************************
 
 	*Generate a variable that is HH total income by size
 	generate inc_per_hh_member = inc_t / pl_hhsize
@@ -91,9 +83,9 @@
 	tabulate high_income
 	browse	 high_income inc_per_hh_member
 
-*-------------------------------------------------------------------------------
-* 						2.3 Lab Task 3
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Task 3: Generate new variables
+********************************************************************************
 
 	*Create a new variable that exchanges HH farm enterprise income to USD
 	generate inc_01_USD = inc_01 * 0.0012
@@ -123,15 +115,21 @@
 	*Apply the label to the variable
 	label value high_farm_income_EURO high_farm_EURO_lab
 
-*-------------------------------------------------------------------------------
-* 						2.4 Lab Task 4
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Task 4: Start using do-files
+********************************************************************************
 
-	*change the code above
+	*Done in code above
 
-*-------------------------------------------------------------------------------
-* 				Code for slides between task 4 and 5
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Task 5: Comments
+********************************************************************************
+
+	*Done in code above
+
+********************************************************************************
+*    Code for slides between task 5 & 6
+********************************************************************************
 
 	*Define locals
 	local numberA 3
@@ -146,48 +144,16 @@
 	*Use globals
 	gen country_${project} 	= "Kenya"
 	gen donor_${project} 	= "World Bank"
+	
+********************************************************************************
+*    Task 6: Comments
+********************************************************************************
 
-	/*
-	*Load original data
-	use "C:\Users\wb506743\Dropbox\FC Training\June 2018\Manage Successful Impact Evaluations - 2018 Course Materials (public)\Stata Lab Track 1\data\endline_data_raw.dta", clear
+	* See edits to Task 2
 
-		*Work on your data here
-
-	*Save final data
-	save "C:\Users\wb506743\Dropbox\FC Training\June 2018\Manage Successful Impact Evaluations - 2018 Course Materials (public)\Stata Lab Track 1\labs\Lab 2 - Coding for Reproducible Research\endline_data_post_lab2.dta", replace
-
-
-	*Set folder global
-	global training_folder	"C:\Users\wb506743\Dropbox\FC Training\June 2018"
-	global public_folder	"${training_folder}\Manage Successful Impact Evaluations - 2018 Course Materials (public)"
-	global track_1_folder 	"${public_folder}\Stata Lab Track 1"
-	global lab_2		 	"${track_1_folder}\labs\Lab 2 - Coding for Reproducible Research"
-
-	*Load original data
-	use "$track_1_folder\data\endline_data_raw.dta", clear
-
-		*Work on your data here
-
-	save "$lab_2\endline_data_post_lab2.dta", replace
-	*/
-
-*-------------------------------------------------------------------------------
-* 				2.6 Lab Task 5
-*-------------------------------------------------------------------------------
-
-	global folder_Lab1 ""
-
-	di "${folder_Lab1}"
-
-	*Load original data
-	use "${track_1_data}\endline_data_raw.dta", clear
-
-*-------------------------------------------------------------------------------
-* 				2.7 Lab Task 6
-*-------------------------------------------------------------------------------
-
-	*Open the data set
-	use "${track_1_data}\endline_data_raw.dta", clear
+********************************************************************************
+*    Task 7: Missing Values
+********************************************************************************
 
 	*Summarize the data
 	summarize inc_*
@@ -199,20 +165,19 @@
 	tabulate inc_zero
 	tabulate inc_zero, missing
 
-*-------------------------------------------------------------------------------
-* 				2.5 Lab Task 7
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Task 8: Saving data sets
+********************************************************************************
 
 	*Save final data
-   save "$track_1_lab_2\endline_data_post_lab2.dta", replace
+    save "${folder_Lab1}/Data/endline_data_post_lab2.dta", replace
 
-
-*-------------------------------------------------------------------------------
-* 				2.8 Lab Task 8
-*-------------------------------------------------------------------------------
+********************************************************************************
+*    Task 9: Open data from other sources
+********************************************************************************
 
 	*Importing excel (if you are using and older version of Stata this code might look different)
-	import excel "${track_1_data}\village_codes.xls", sheet("Sheet1") firstrow clear
+	import excel "${folder_Lab1}/Data/village_codes.xls", sheet("Sheet1") firstrow clear
 
 
 ************************ End of do-file *************************************
