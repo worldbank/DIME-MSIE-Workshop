@@ -3,6 +3,10 @@
 *    Task 1: Open file and file paths
 ********************************************************************************
 
+	*Alwasys start
+	ieboilstart , version(12.0) noclear
+	`r(version)'
+
 	*Open the data set
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
 	*Open the second data set
@@ -22,6 +26,7 @@
 ********************************************************************************
 *    Task 2: Explore the data
 ********************************************************************************
+
 
 	*Open the data set - In task 2
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear

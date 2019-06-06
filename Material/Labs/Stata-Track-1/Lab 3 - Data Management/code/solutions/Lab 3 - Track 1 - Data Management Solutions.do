@@ -15,6 +15,10 @@
 *    Task 3: Test unit of ovbservation
 ********************************************************************************
 
+    *Alwasys start 
+    ieboilstart , version(12.0) noclear
+    `r(version)'
+
     *Open that data
     use "${ST1_dtInt}/endline_data_post_lab2.dta",  clear
 
