@@ -119,8 +119,9 @@
 
 \begin{frame}{Data Management}
 	\begin{itemize}
-		\item The first part of this presentation will introduce you to some data management practices that might seem very advanced
-		\item Don’t worry about how to set up what we will talk about on the next slides. We have developed easy-to-use tools that will do that for you
+		\item The first part of this presentation will introduce you to some data management practices
+		\item We have one standard almost all projects are following. You do not have to follow exactly our model, but you MUST have one model and organize your project accordingly, otherwise you will make mistakes in your data
+		\item We have tools and manuals for how to set up our model, but they are out of the scope of this training, but we will explain what any model should include by using our model as an example.
 	\end{itemize}
 \end{frame}
 
@@ -131,13 +132,13 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Text and Image}
+\begin{frame}[fragile]{Where to put data?}
 	\begin{columns}[c]
 		\column{.45\linewidth}
 		\begin{itemize}
 			\item Raw data with identifying information should be stored in the EncryptedData folder
 			\item All data in the Intermediate or the Final folder should be de-identified
-			\item Use Boxcryptor or Veracrypt to encrypt the EncryptedData folder
+			\item Use VeraCrypt to encrypt the EncryptedData folder
 		\end{itemize}
 
 		\column{.55\linewidth}
@@ -150,13 +151,13 @@
 
 \begin{frame}{What is a Master do-file?}
 	\begin{itemize}
-		\item You can make a do-file run other dofiles
+		\item You can make a do-file run other do-files. This is the most important thing a master do-file does.
 			\begin{itemize}
 				\item First, run do-file 1
 				\item Then, run do-file 2
 				\item Then, run do-file 3, etc.
 			\end{itemize}
-		\item This (and a few secondary but still important things) is what a master do-file does.
+		\item Using master do-files as a map to the DataWork folder, the person writing the do-files can tell a person trying to understand the do-files which order to read and run them.
 		\item Without a master do-file, you either need one extremely long do-file, or write instructions in which order to run all the do-files
 	\end{itemize}
 \end{frame}
@@ -164,11 +165,14 @@
 \begin{frame}{Exempt from a Master do-file}
 	This do-file first run the do-file \texttt{cleaning.do} and then the \texttt{analysis.do}
 		\codeexample{run-do-from-do.do}{code/run-do-from-do.do}
-	This tells both, Stata and humans reading the code which order the files should be run in
+	This tells both, Stata and humans reading the code in which order the do-files should be run
 \end{frame}
 
+\begin{frame}[fragile]{Master do-file : Allows easy collaboration}
+\codeexample{master-dofile-rootpath.do}{code/master-dofile-rootpath.do}
+\end{frame}
 
-\begin{frame}{Master do-file - The map to all data work}
+\begin{frame}{Master do-file - The map to all data work}
 	\begin{itemize}
 		\item At the end of every round of a project:
 		\begin{itemize}
@@ -178,7 +182,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
+\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
 	\begin{itemize}
 		\item If we share a project over DropBox or OneDrive all team member have the same folder structure
 		\item A master do-file allows multiple people to set their own global to the project folder
