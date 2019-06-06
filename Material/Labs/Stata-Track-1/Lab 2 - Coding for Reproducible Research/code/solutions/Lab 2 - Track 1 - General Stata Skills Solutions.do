@@ -92,7 +92,7 @@
 
 	*Create a new variable that measures
 	*the maize yield in pounds
-	generate inc_01_EURO = inc_01 *  0.0010
+	generate inc_01_EURO = inc_01 *  0.0001
 
 	*Label variables maize_tons_annual
 	label variable inc_01_USD	"On-Farm Enterprise Income (USD)"
@@ -101,8 +101,8 @@
 	*Generate a dummy that 1 if the harvest
 	*yeild is more than 4,000lbs.
 	generate high_farm_income_EURO = 0
-	replace  high_farm_income_EURO = 1 if inc_01_EURO > 100  // This will be changed to 3500 in Task 4
-
+	replace  high_farm_income_EURO = 1 if inc_01_EURO > 5000
+	
 	*Tabulate the result
 	tabulate high_farm_income_EURO
 
@@ -110,7 +110,7 @@
 	label variable high_farm_income_EURO	"On-Farm Enterprise Income (EURO) "
 
 	*Create the label
-	label define high_farm_EURO_lab 1 "Income  >100 Euros" 0 "Income  <100 Euros"
+	label define high_farm_EURO_lab 1 "Income  >5000 Euros" 0 "Income  <5000 Euros"
 
 	*Apply the label to the variable
 	label value high_farm_income_EURO high_farm_EURO_lab
