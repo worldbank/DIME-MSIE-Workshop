@@ -279,12 +279,12 @@
 
 \begin{frame}{Rule 1: Set the version of Stata}
 	\begin{columns}[c]
-		\column{.65\textwidth}
+		\column{.7\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\linewidth]{img/rule1}
 		\end{figure}
-		\column{.35\textwidth}
+		\column{.3\textwidth}
 		\begin{itemize}
 			\item \small Stata goes through the lists and assigns the 1st value to the first observation, 2nd to the second observation, etc.
 		\end{itemize}
@@ -294,12 +294,12 @@
 
 \begin{frame}{Rule 2: Set the seed}
 	\begin{columns}[c]
-		\column{.65\textwidth}
+		\column{.7\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\linewidth]{img/rule2}
 		\end{figure}
-		\column{.35\textwidth}
+		\column{.3\textwidth}
 		\begin{itemize}
 			\item \small Setting the seed change the starting place in the list
 			\item \small Randomly selecting a seed means randomizing the starting point
@@ -311,12 +311,12 @@
 
 \begin{frame}{Rule 3: Stable sort}
 	\begin{columns}[c]
-		\column{.65\textwidth}
+		\column{.7\textwidth}
 		\begin{figure}
 			\centering
 			\includegraphics[width=\linewidth]{img/rule3}
 		\end{figure}
-		\column{.35\textwidth}
+		\column{.3\textwidth}
 		\begin{itemize}
 			\item \small The two data sets to the left are sorted differently, and while the same random numbers were picked, the result of the randomization is different.
 			\item \small Adding and removing observations can change the sort order
@@ -348,40 +348,48 @@
 
 
 
-\begin{frame}{Ex 1: Basic Randomization in Stata}
+\begin{frame}{Task 1 - Basic Randomization in Stata}
 	\begin{itemize}
 		\item Open \texttt{endline\_data\_raw.dta}
 		\item We have 1067 households and we want half of them to be treatment and control
 		\item What is our randomization rule?
-		\item Let’s see an example of a replicable randomization of this
+		\item Start a new do-file for this topic and add it to the master do-file
 	\end{itemize}
 \end{frame}
 
-
-\begin{frame}{Ex 1: Basic Randomization in Stata - Step 1}
+\begin{frame}{Task 1 - Basic Randomization in Stata - Step 1}
 	Apply the three rules of randomization. Can you spot them?
 	\codeexample{randomization-1.do}{code/randomization-1.do}
 \end{frame}
 
-\begin{frame}{Ex 1: Basic Randomization in Stata - Step 2}
+\begin{frame}{Task 1 - Basic Randomization in Stata - Step 2}
 	After the three rules are set, generate treatment variable
 	\codeexample{randomization-2.do}{code/randomization-2.do}
 \end{frame}
 
-\begin{frame}{Ex 2: Multi-Arm Randomization in Stata}
+\begin{frame}{Task 2 - Multi-Arm Randomization in Stata}
 	\begin{itemize}
 		\item Multiple treatment arms
 		\item We have 1067 households and we want one third of them to be control and two treatment arms with one third in each
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Ex 2: Multi-Arm Randomization in Stata - Step 1}
+\begin{frame}{Task 2 - Multi-Arm Randomization in Stata - Step 1}
 	Start over and apply the three rules again
 	\codeexample{randomization-1.do}{code/randomization-1.do}
 \end{frame}
 
-\begin{frame}{Ex 2: Multi-Arm Randomization in Stata - Step 1}
+\begin{frame}{Task 2 - Multi-Arm Randomization in Stata - Step 2}
 	\codeexample{randomization-multi-arm.do}{code/randomization-multi-arm.do}
+\end{frame}
+
+
+\begin{frame}{Task 3 - Save your data}
+\begin{itemize}
+	\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global.
+\end{itemize}
+
+\codeexample{save-topic5.do}{code/save-topic5.do}
 \end{frame}
 
 

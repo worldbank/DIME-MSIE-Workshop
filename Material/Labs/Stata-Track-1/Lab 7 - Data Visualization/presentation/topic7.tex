@@ -243,81 +243,64 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Task 1: Histogram}
-	\begin{itemize}
-		\item Create a histogram for the variable \texttt{ag\_16\_x\_16\_1}
-		\codeexample{hist1.do}{code/hist1.do}
-		\item Make changes to the histogram to make it look presentable
-		\begin{itemize}
-			\item Find reasonable viewing range
-			\codeexample{hist2.do}{code/hist2.do}
-		\end{itemize}
-	\end{itemize}
+\begin{frame}[fragile]{Task 1 - Histogram}
+	1. Create a histogram for the variable \texttt{ag\_16\_x\_16\_1}
+	\codeexample{hist1.do}{code/hist1.do}
+	
+	2. Histograms are great to spot outliers. But we also want to use histograms to explore the distribution of the non-outlier observations. Find a reasonable range for values to do that.
+	\codeexample{hist2.do}{code/hist2.do}
 \end{frame}
   
 
  
-\begin{frame}[fragile]{Task 1}
- \begin{itemize}
- 		\item Make changes to the histogram to make it look presentable
-		 \begin{itemize}	
-	  		\item Make the y-axis depict frequencies \& change the width of the bins
-	 		\codeexample{hist3.do}{code/hist3.do}
- 	\end{itemize}
- 	\item Change the titles for the graph and the x-axis and save the final graph created
- 		\codeexample{hist4.do}{code/hist4.do}
- \end{itemize}
+\begin{frame}[fragile]{Task 1 - Histogram}
+ 
+ 	Make changes to the histogram to make it look presentable. Make the y-axis depict frequencies \& change the width of the bins
+	\codeexample{hist3.do}{code/hist3.do}
+ 
+ 	Make more formatting edits and save the file. This code is in the example do-file so no need to re-type.
+	\codeexample{hist4.do}{code/hist4.do}
+ 
 \end{frame}
 
 
-\begin{frame}[fragile]{Task 2: Bar graph}
-	\begin{itemize}
-		\item Create a bar graph for the variable \texttt{ag\_17\_x\_16\_1}
-		\codeexample{bar1.do}{code/bar1.do}
-		\item Make changes to the bar graph to make it look presentable
-		\begin{itemize}
-			\item Graph it over the various categories of \texttt{gr\_16}
-			\codeexample{bar2.do}{code/bar2.do}
-		\end{itemize}
-	\end{itemize}
+\begin{frame}[fragile]{Task 2 - Bar graph}
+	1. Create a bar graph for the variable \texttt{ag\_17\_x\_16\_1}
+	\codeexample{bar1.do}{code/bar1.do}
+		
+	2. Make changes to the bar graph to make it look presentable. Graph it over the various categories of \texttt{gr\_16}
+	\codeexample{bar2.do}{code/bar2.do}
+
 \end{frame}
 
 \begin{frame}[fragile]{Task 2}
-\begin{itemize}
-	\item Make changes to the bar graph to make it look presentable
 	\begin{itemize}
-		\item Change the options for the titles and labels
-		\item Change it to a horizontal bar graph
-	\end{itemize}
-	\item Save the final graph created
-	\codeexample{bar3.do}{code/bar3.do}
-\end{itemize}
-\end{frame}
-
-
-
-\begin{frame}[fragile]{Task 3: Scatter plots}
-	\begin{itemize}
-		\item Let's make a scatter plot for the variables \texttt{ag\_18\_x\_16\_1} and \texttt{ag\_16\_x\_16\_1} only for the control group
-		\codeexample{scatter1.do}{code/scatter1.do}
-		\item Add a fitted line 
-		\codeexample{scatter1.do}{code/scatter2.do}
-	\end{itemize}
-\end{frame}
-
-\begin{frame}[fragile]{Task 3}
-	\begin{itemize}	 	
-		\item Play around with the way the points look for the scatter plot (change the color, convert the circles to triangles etc.)
-		\codeexample{scatter3.do}{code/scatter3.do}
-	\end{itemize}
-\end{frame}
-		
-\begin{frame}[fragile]{Task 3}		
-	\begin{itemize}
-		\item Create scatter plot and fitted line separated by treatment arm
+		\item Make changes to the bar graph to make it look nicer.
+		\begin{itemize}
+			\item Change the options for the titles and labels
+			\item Change it to a horizontal bar graph
+		\end{itemize}
 		\item Save the final graph created
-		\codeexample{scatter4.do}{code/scatter4.do}
 	\end{itemize}
+	\codeexample{bar3.do}{code/bar3.do}
+\end{frame}
+
+
+\begin{frame}[fragile]{Task 3 - Scatter plots}
+	Let's make a scatter plot for the variables \texttt{ag\_18\_x\_16\_1} and \texttt{ag\_16\_x\_16\_1} only for the control group
+	\codeexample{scatter1.do}{code/scatter1.do}
+\end{frame}
+
+\begin{frame}[fragile]{Task 3 - Scatter plots}
+
+	Add a fitted line to the last graph. Still only control.
+	\codeexample{scatter2.do}{code/scatter2.do}
+\end{frame}
+
+\begin{frame}[fragile]{Task 3 - Scatter plots}		
+	
+	Include both treatment and control, but generate different scatter plot and lowess graphs in the same grpah so we can tell them apart. Then also save the final graph.
+	\codeexample{scatter3.do}{code/scatter3.do}
 \end{frame}
 
 
@@ -344,7 +327,7 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}[fragile]{Task 4: Combining graphs}
+\begin{frame}[fragile]{Task 4 - Combining graphs}
 	\begin{itemize}
 		\item Combine the histogram, bar graph, and scatter plot created earlier in this exercise
 		\item Save the combined graph as a png file

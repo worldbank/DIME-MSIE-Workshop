@@ -40,7 +40,7 @@
 *iefolder will not work properly if the line above is edited
 
    *Install all packages that this project requires:
-   local user_commands ietoolkit       //Fill this list will all commands this project requires
+   local user_commands ietoolkit iefieldkit      //Fill this list will all commands this project requires
    foreach command of local user_commands {
        cap which `command'
        if _rc == 111 {
@@ -79,7 +79,7 @@
    * ---------------------
 
    if $user == 1 {
-       global projectfolder "C:\Users\wb506743\Dropbox\FC Training\June 2018\Session Materials\Stata Track 1\Lab 3 - Data Management"
+       global projectfolder "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
    }
 
    if $user == 2 {
@@ -93,67 +93,42 @@
 
    global dataWorkFolder         "$projectfolder/DataWork"
 
-*iefolder*1*FolderGlobals*master************************************************
+*iefolder*1*FolderGlobals*ST1**********************************************
 *iefolder will not work properly if the line above is edited
 
-   global mastData               "$dataWorkFolder/MasterData" 
 
-*iefolder*1*FolderGlobals*encrypted*********************************************
-*iefolder will not work properly if the line above is edited
-
-   global encryptFolder          "$dataWorkFolder/EncryptedData" 
-
-*iefolder*1*FolderGlobals*baseline**********************************************
-*iefolder will not work properly if the line above is edited
-
+   *Round sub-folder globals
+   global ST1               "${dataWorkFolder}/ST1"
 
    *Encrypted round sub-folder globals
-   global baseline               "$dataWorkFolder/baseline" 
-
-   *Encrypted round sub-folder globals
-   global baseline_encrypt       "$encryptFolder/Round baseline Encrypted" 
-   global baseline_dtRaw         "$baseline_encrypt/Raw Identified Data" 
-   global baseline_doImp         "$baseline_encrypt/Dofiles Import" 
-   global baseline_HFC           "$baseline_encrypt/High Frequency Checks" 
+   global ST1_encrypt       "${ST1_encrypt}/Raw Identified Data"
+   global ST1_dtRaw         "${ST1_encrypt}/Raw Identified Data"
+   global ST1_doImp         "${ST1_encrypt}/Dofiles Import"
+   global ST1_HFC           "${ST1_encrypt}/High Frequency Checks"
 
    *DataSets sub-folder globals
-   global baseline_dt            "$baseline/DataSets" 
-   global baseline_dtInt         "$baseline_dt/Intermediate" 
-   global baseline_dtFin         "$baseline_dt/Final" 
+   global ST1_dt            "${ST1}/DataSets"
+   global ST1_dtDeID        "${ST1_dt}/Deidentified"
+   global ST1_dtInt         "${ST1_dt}/Intermediate"
+   global ST1_dtFin         "${ST1_dt}/Final"
 
    *Dofile sub-folder globals
-   global baseline_do            "$baseline/Dofiles" 
-   global baseline_doCln         "$baseline_do/Cleaning" 
-   global baseline_doCon         "$baseline_do/Construct" 
-   global baseline_doAnl         "$baseline_do/Analysis" 
+   global ST1_do            "${ST1}/Dofiles"
+   global ST1_doCln         "${ST1_do}/Cleaning"
+   global ST1_doCon         "${ST1_do}/Construct"
+   global ST1_doAnl         "${ST1_do}/Analysis"
 
    *Output sub-folder globals
-   global baseline_out           "$baseline/Output" 
-   global baseline_outRaw        "$baseline_out/Raw" 
-   global baseline_outFin        "$baseline_out/Final" 
+   global ST1_out           "${ST1}/Output"
+   global ST1_outRaw        "${ST1_out}/Raw"
+   global ST1_outFin        "${ST1_out}/Final"
 
    *Questionnaire sub-folder globals
-   global baseline_prld          "$baseline_quest/PreloadData" 
-   global baseline_doc           "$baseline_quest/Questionnaire Documentation" 
+   global ST1_prld          "${ST1_quest}/PreloadData"
+   global ST1_doc           "${ST1_quest}/Questionnaire Documentation"
 
 *iefolder*1*End_FolderGlobals***************************************************
 *iefolder will not work properly if the line above is edited
-
-
-*iefolder*2*StandardGlobals*****************************************************
-*iefolder will not work properly if the line above is edited
-
-   * Set all non-folder path globals that are constant accross
-   * the project. Examples are conversion rates used in unit
-   * standardization, differnt set of control variables,
-   * ado file paths etc.
-
-   do "$dataWorkFolder/global_setup.do" 
-
-
-*iefolder*2*End_StandardGlobals*************************************************
-*iefolder will not work properly if the line above is edited
-
 
 *iefolder*3*RunDofiles**********************************************************
 *iefolder will not work properly if the line above is edited
@@ -163,9 +138,9 @@
    *       PART 3: - RUN DOFILES CALLED BY THIS MASTER DO FILE
    *
    *           -A task master dofile has been created for each high
-   *            level task (cleaning, construct, analyze). By 
-   *            running all of them all data work associated with the 
-   *            baseline should be replicated, including output of 
+   *            level task (cleaning, construct, analyze). By
+   *            running all of them all data work associated with the
+   *            ST1 should be replicated, including output of
    *            tablets, graphs, etc.
    *           -Feel free to add to this list if you have other high
    *            level tasks relevant to your project.
@@ -174,27 +149,11 @@
 
    **Set the locals corresponding to the taks you want
    * run to 1. To not run a task, set the local to 0.
-   local importDo       0
-   local cleaningDo     0
-   local constructDo    0
-   local analysisDo     0
+   local topic2    0
 
-   if (`importDo' == 1) { //Change the local above to run or not to run this file
-       do "$baseline_doImp/baseline_import_MasterDofile.do" 
-   }
-
-   if (`cleaningDo' == 1) { //Change the local above to run or not to run this file
-       do "$baseline_do/baseline_cleaning_MasterDofile.do" 
-   }
-
-   if (`constructDo' == 1) { //Change the local above to run or not to run this file
-       do "$baseline_do/baseline_construct_MasterDofile.do" 
-   }
-
-   if (`analysisDo' == 1) { //Change the local above to run or not to run this file
-       do "$baseline_do/baseline_analysis_MasterDofile.do" 
+   if (`topic2' == 1) { //Change the local above to run or not to run this file
+       do "${ST1_do}/"
    }
 
 *iefolder*3*End_RunDofiles******************************************************
 *iefolder will not work properly if the line above is edited
-

@@ -101,26 +101,27 @@
 
 
 \begin{frame}{Outline}
-	\begin{itemize}
-		\item 1. Folder organization
-		\item 2. Master do-files
-		\item 3. First overview of a data set
-		\item 4. Master data sets
-		\item 5. Basic data cleaning tasks:
+	\begin{enumerate}
+		\item Folder organization
+		\item Master do-files
+		\item First overview of a data set
+		\item Master data sets
+		\item Basic data cleaning tasks:
 			\begin{itemize}
-				\item Unique id,
+				\item Unique ID
 				\item Variable and value labels
 				\item Missing values
 				\item Check for outliers
 			\end{itemize}
-	\end{itemize}
+	\end{enumerate}
 \end{frame}
 
 
 \begin{frame}{Data Management}
 	\begin{itemize}
-		\item The first part of this presentation will introduce you to some data management practices that might seem very advanced
-		\item Don’t worry about how to set up what we will talk about on the next slides. We have developed easy-to-use tools that will do that for you
+		\item The first part of this presentation will introduce you to some data management practices
+		\item We have one standard almost all projects are following. You do not have to follow exactly our model, but you MUST have one model and organize your project accordingly, otherwise you will make mistakes in your data
+		\item We have tools and manuals for how to set up our model, but they are out of the scope of this training, but we will explain what any model should include by using our model as an example
 	\end{itemize}
 \end{frame}
 
@@ -131,13 +132,13 @@
 	\end{figure}
 \end{frame}
 
-\begin{frame}[fragile]{Text and Image}
+\begin{frame}[fragile]{Where to put data?}
 	\begin{columns}[c]
 		\column{.45\linewidth}
 		\begin{itemize}
 			\item Raw data with identifying information should be stored in the EncryptedData folder
 			\item All data in the Intermediate or the Final folder should be de-identified
-			\item Use Boxcryptor or Veracrypt to encrypt the EncryptedData folder
+			\item Use VeraCrypt to encrypt the EncryptedData folder
 		\end{itemize}
 
 		\column{.55\linewidth}
@@ -150,13 +151,13 @@
 
 \begin{frame}{What is a Master do-file?}
 	\begin{itemize}
-		\item You can make a do-file run other dofiles
+		\item You can make a do-file run other do-files. This is the most important thing a master do-file does.
 			\begin{itemize}
 				\item First, run do-file 1
 				\item Then, run do-file 2
 				\item Then, run do-file 3, etc.
 			\end{itemize}
-		\item This (and a few secondary but still important things) is what a master do-file does.
+		\item Using master do-files as a map to the DataWork folder, the person writing the do-files can tell a person trying to understand the do-files which order to read and run them
 		\item Without a master do-file, you either need one extremely long do-file, or write instructions in which order to run all the do-files
 	\end{itemize}
 \end{frame}
@@ -164,11 +165,14 @@
 \begin{frame}{Exempt from a Master do-file}
 	This do-file first run the do-file \texttt{cleaning.do} and then the \texttt{analysis.do}
 		\codeexample{run-do-from-do.do}{code/run-do-from-do.do}
-	This tells both, Stata and humans reading the code which order the files should be run in
+	This tells both, Stata and humans reading the code in which order the do-files should be run
 \end{frame}
 
+\begin{frame}[fragile]{Master do-file : Allows easy collaboration}
+\codeexample{master-dofile-rootpath.do}{code/master-dofile-rootpath.do}
+\end{frame}
 
-\begin{frame}{Master do-file - The map to all data work}
+\begin{frame}{Master do-file - The map to all data work}
 	\begin{itemize}
 		\item At the end of every round of a project:
 		\begin{itemize}
@@ -178,7 +182,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
+\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
 	\begin{itemize}
 		\item If we share a project over DropBox or OneDrive all team member have the same folder structure
 		\item A master do-file allows multiple people to set their own global to the project folder
@@ -186,36 +190,52 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Master do-file - Allows easy collaboration}
-	\codeexample{master-dofile-rootpath.do}{code/master-dofile-rootpath.do}
-\end{frame}
-
-\begin{frame}{Task 4. - iefolder was removed before this}
+\begin{frame}{Task 1 - Set up the Master do file}
 	\begin{itemize}
-		\item Now save the do-file you used in the last task with the name \texttt{load\_imported\_data.do} in this folder: \texttt{baseline/Dofiles/Cleaning}
-		\item Now open the \texttt{baseline\_cleaning\_MasterDofile.do} file in the dofiles folder. Look for the part that says and replace the parts in red:
-		\begin{itemize}
-			\item \texttt{*do "\$baseline\_doCln/dofile1.do“}
-			\item \texttt{do "\$baseline\_doCln/load\_imported\_data.do“}
-		\end{itemize}
-		\item Now run the \texttt{baseline\_cleaning\_MasterDofile.do} file again and see how the data set is opened again
-		\item Now save all your files and close Stata. Re-open stata and open the do-files \texttt{Project\_MasterDofile.do} and \texttt{baseline\_MasterDofile.do}. Run both files in that order and notice that your data set is opened again
+		\item See the folder called \texttt{ST1} that we have provided. It is a simplified example of our folder structure the way our command \texttt{iefolder} sets up. How to use \texttt{iefolder} and all features of our folder structure set up is out of the scope for this session. That is why we provide a simplified version
+		\item Copy this folder to somewhere on the computer you are using. All the work we will do from now, will be in this folder 
+		\item Find the do-file \texttt{ST1\_MasterDofile.do} file in this folder and open it, find the root-path section shown below and update it with your root-path
 	\end{itemize}
+
+\codeexample{master-dofile-rootpath-short.do}{code/master-dofile-rootpath-short.do}
 \end{frame}
 
+\begin{frame}{Task 1 - Set up the Master do file}
+	\begin{itemize}
+		\item Keep working in \texttt{ST1\_MasterDofile.do}. Find the section below. After \texttt{\$\string{ST1\_do/\string}} enter the name of the do-file you write for topic 2 in the previous session
+		\item Now you must move the do-file from topic 2 to the location that \texttt{\$\string{ST1\_do/\string}} is pointing to. To find what that location is, you must follow the globals defined above this section.
+		\item When you have moved the do-file, change the local \texttt{topic2} to 1 and run your do-file. What happened? Did you also run your do-file from topic 2?
+	\end{itemize}
+	
+	\codeexample{master-dofile-rundo.do}{code/master-dofile-rundo.do}
+\end{frame}
+
+
+\begin{frame}{Task 2 - Update the topic 2 do-file}
+	\begin{itemize}
+		\item Move the data set \texttt{endline\_data\_raw.dta} to the \texttt{ST1/DataSets/Deidentified} folder
+		\item In your do-file for topic 2, where you have \newline \texttt{use "\$\string{folder\_Lab1\string}/Data/endline\_data\_raw.dta", clear} replace the global to use the \texttt{\$\string{ST1\_dtDeID\string}} global created in your master do-file, and remove the \texttt{Data/} part of the path, i.e. \newline  \texttt{use "\$\string{ST1\_dtDeID\string}/endline\_data\_raw.dta", clear}
+		\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_lab2.dta", replace} \\
+		to the \texttt{\$\string{ST1\_dtInt\string}} global, \\
+		i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", replace}
+	\end{itemize}
+
+\end{frame}
 
 \begin{frame}{Keep using the folder you created}
 	\begin{itemize}
-		\item If you want to, through the rest of this session you can create a do-file for each task, and run them from the round master do-file
-		\item That would be similar to how we want you to run a DIME project. More on this in track 2.
+		\item Through the rest of this training we recommend that you can create a do-file for each topic, and add them all to the master do-file. Soon our tasks will depend on edits you made to your data set in a previous topic, and then it is great that you can replicate your data sets
+		\item This is similar to how we want you to run a DIME project. More on how this is set up in an actual project in track 2, but the principles are the same as shown here
 		\item A do-file is instructions for a task, and this system of folders and master do-files is how these task instructions becomes instructions for a full project
 	\end{itemize}
 \end{frame}
 
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%55
+\sectionpic{Explore a new data set}{../../img/section_slide}
 
 \begin{frame}{Explore a new data set}
 	\begin{itemize}
+		\item We have already seen some practical commands to explore a data set (\texttt{describe}, \texttt{tabulate} etc.), but this section introduce you to some theoretical concepts equally important when exploring a data set for the first time
 		\item What is the first thing you want to look for every single time you open a new data set for the first time?
 		\begin{itemize}
 			\item Unit of observation
@@ -264,16 +284,22 @@
 \end{frame}
 
 
-\begin{frame}{Task 5}
+\begin{frame}{Task 3 - Test of unit of observation}
 	\begin{itemize}
-		\item Re-run the baseline master do-file that you created in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open
+		\item Re-run \texttt{ST1\_MasterDofile.do} that you edited in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open
 		\begin{itemize}
 			\item What is the unit of observation, i.e. what does each row represents?
 			\item Which variable do you think is the variable that uniquely and fully identifies the data set?
 			\item Test the variable to make sure that is the unique ID variable
 		\end{itemize}
+		\item Create a new do-file for this session. Save it in the same location as the do-file from topic 2, and then make sure that the new do-file also runs from the master do-file. 
+		\item Then in that do-file, open the data using \texttt{use "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", clear}
+		\item Then add to the new do-file the tests you do to verify which variable is the ID variable in the data set.
 	\end{itemize}
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{Master Data Sets}{../../img/section_slide}
 
 
 \begin{frame}{What is a Master data set?}
@@ -309,6 +335,10 @@
 	\end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\sectionpic{Data Cleaning}{../../img/section_slide}
+
+
 \begin{frame}{Role division in cleaning the data}
 	\begin{itemize}
 		\item Field Coordinator / Research Assistants
@@ -328,40 +358,20 @@
 \end{frame}
 
 \begin{frame}{Data Cleaning Tasks}
-\color{red}{I added the text from the next slide in tex format. If this doesn't look as appealing please keep just the next slide.}
-
-	\begin{columns}[c]
-		\column{.5\textwidth}
-		\underline{	Format the data set}
-		\begin{itemize}
-			\item Make the data easier to work with for yourself, your team and other researchers
-			\item Document the knowledge you have about the data now. You will soon forget
-		\end{itemize}
-		\begin{enumerate}
-			\item Rename variables
-			\item Remove strings
-			\item Variable and value labels
-		\end{enumerate}
-	\column{.5\textwidth}
-	\underline{Edit the dataset}
-		\begin{itemize}
-			\item Remove data points that will bias the analysis or make the analysis invalid in any other way
-		\end{itemize}
-		\begin{enumerate}
-			\item Standardize units
-			\item Handle missing values
-			\item Check for outliers
-		\end{enumerate}	
-	\end{columns}
-\end{frame}
+	\begin{center}
+		\begin{tabular}{ p{6.5cm}|p{6.5cm} }			
+			\multicolumn{1}{c}{\Large Format the data set} & \multicolumn{1}{c}{\Large Edit the dataset} \\
+			\hline
+			\textbullet Make the data easier to work with for yourself, your team and other researchers \newline
+			\textbullet Document the knowledge you have about the data now. You will soon forget 
+			& \textbullet Remove data points that will bias the analysis or make the analysis invalid in any other way  \\
+			\hline
+			1. Rename variables \newline 2. Remove strings \newline 3. Variable and value labels & 1. Standardize units \newline 2. Handle missing values \newline 3. Check for outliers  \\
+			\hline  
+		\end{tabular}	
+	\end{center}
+\end{frame}	
 	
-\begin{frame}{Data Cleaning Tasks}
-	\begin{figure}
-		\centering
-		\includegraphics[width=.9\linewidth]{img/formatting}
-	\end{figure}
-\end{frame}
-
 \begin{frame}{Naming conventions}
 	\begin{itemize}
 		\item Do not change the names of variables coming from a survey
@@ -415,14 +425,13 @@
 
 
 \begin{frame}{Outliers - identifying}
-\begin{itemize}
-	\item We do not want our results to be driven by a few individuals. For example, the village leaders get all benefits
-	\item No exact rule for what is an outlier.  Ask if your PI for preference of specific rule
-	\item Identifying outliers often comes down to common sense
-	\item Can the outlier be explained by typos? Especially common when selecting units from multiple choice lists
-	\item Useful commands: \texttt{sum detail}, \texttt{tabulate}, \texttt{inspect}, \texttt{assert}, \texttt{histogram}
-
-\end{itemize}
+	\begin{itemize}
+		\item We do not want our results to be driven by a few individuals. For example, the village leaders get all benefits
+		\item No exact rule for what is an outlier.  Ask if your PI for preference of specific rule
+		\item Identifying outliers often comes down to common sense
+		\item Can the outlier be explained by typos? Especially common when selecting units from multiple choice lists
+		\item Useful commands: \texttt{sum detail}, \texttt{tabulate}, \texttt{inspect}, \texttt{assert}, \texttt{histogram}
+	\end{itemize}
 \end{frame}
 
 
@@ -468,7 +477,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 6}
+\begin{frame}{Task 4}
 	\begin{itemize}
 		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us
 		\begin{itemize}
@@ -486,7 +495,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 7}
+\begin{frame}{Task 5}
 	\begin{itemize}
 		\item Variable \texttt{ag\_08\_1\_1} is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
 		\item Summarize \texttt{ag\_08\_1\_1} to get the mean. Is the value between 1 and 0 like you expect a percentage in decimal form to be?
@@ -504,7 +513,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 8}
+\begin{frame}{Task 6}
 	\begin{itemize}
 		\item Variables \texttt{aa\_02\_1}, \texttt{aa\_02\_2}, \texttt{aa\_02\_3}, \texttt{aa\_02\_4}, \texttt{aa\_02\_5}, \texttt{aa\_02\_6}, \texttt{aa\_02\_7}, \texttt{aa\_02\_8}, \texttt{aa\_02\_9}, and \texttt{aa\_02\_10} list purchases of common animals. Let’s check for outliers
 		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character
@@ -516,7 +525,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 9}
+\begin{frame}{Task 7}
 	\begin{itemize}
 		\item Winsorize the income variable
 		\begin{itemize}
@@ -532,6 +541,15 @@
 			\end{itemize}
 		\item Compare winsorized vs. non-winsorized means
 	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Task 7}
+	\begin{itemize}
+		\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global.
+	\end{itemize}
+
+	\codeexample{save-topic3.do}{code/save-topic3.do}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
