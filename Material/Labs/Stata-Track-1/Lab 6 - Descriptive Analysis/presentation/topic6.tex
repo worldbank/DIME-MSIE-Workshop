@@ -185,7 +185,7 @@
 \end{frame}
 
 \begin{frame}[fragile]{Three most common types of tables}
-	\begin{columns}[c]
+	\begin{columns}[t]
 		\column{.5\textwidth}
 		\begin{itemize}
 			\item Summary statistics
@@ -210,7 +210,7 @@
 			\end{itemize}
 			\item \texttt{iebaltab}
 			\begin{itemize}
-				\item \url{https://worldbank.github.io/ietoolkit}
+				\item \url{https://worldbank.github.io/ietoolkit} \newline
 			\end{itemize}
 			\item \texttt{estout}
 			\begin{itemize}
@@ -237,11 +237,17 @@
 	\end{columns}
 \end{frame}
 
-\begin{frame}{Task 2}
+\begin{frame}{Task 2 - tabstat}
 	\begin{itemize}
 		\item Use \texttt{tabstat} to createa a table of the mean of all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
-		\item Create a table displaying the mean, standard deviation, the median, and the number of observations for all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}. Type \texttt{help tabstat} and click the \texttt{statname} link to see all options you can use
-		\item Try to display these statistics separately for male and female headed households
+		\begin{itemize}
+			\item Like this: \texttt{tabstat inc\_??}
+		\end{itemize}
+		\item Create a table displaying the mean, standard deviation, the median, and the number of observations for all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
+		\begin{itemize}
+			\item Like this: \texttt{tabstat inc\_?? , statistics(mean sd median)} 
+		\end{itemize}
+		\item Use the help file - \texttt{help tabstat} - to try to display these statistics separately for male and female headed households
 	\end{itemize}
 \end{frame}
 
@@ -323,26 +329,12 @@
 	\end{columns}
 \end{frame}
 
-
-\begin{frame}{Task 4: Balance table}
-	\color{red}{I think this slide can be dropped}
-	\begin{itemize}
-		\item Run the examples
-		\begin{itemize}
-			\item Add the other \texttt{inc\_??} variables
-			\item Manually edit more row label names in the row
-		\end{itemize}
-	\end{itemize}
-\end{frame}
-
-
-\begin{frame}{Task 4}
+\begin{frame}{Task 4 - Balance table}
 	\begin{itemize}
 		\item Run the first iebaltab section
 		\begin{itemize}
 			\item Click the link in the result window to see the table generated
 		\end{itemize}
-		\item Add 
 		\item Run the third \texttt{iebaltab} section
 		\item Write some manual labels for one or a few of the income variables you added, and re-run the last \texttt{iebaltab} section again
 	\end{itemize}
