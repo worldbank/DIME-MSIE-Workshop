@@ -177,7 +177,7 @@
 
 \begin{frame}{Task 1 - Open data}
 	\begin{itemize}
-		\item Open Stata and then open data set \texttt{endline\_data\_raw.dta} using the menu: File -> Open. Navigate to where you saved the material for this lab. Select the data set and click Open.
+		\item Open Stata and then open data set \texttt{endline\_data\_raw\_nodup.dta} using the menu: File -> Open. Navigate to where you saved the material for this lab. Select the data set and click Open.
 		\item Browse to check that you have data: Data -> Data Editor -> Data Editor Browse
 		\item Copy the code Stata generated for you and paste it in the command window. Hit enter and then browse the data again.
 		\item Copy and paste the code again. But this time, change the code so that you open \texttt{panel\_data.dta} instead. You do not have to use the menus again, just change the filename in the line of code you just copied. Browse the data!
@@ -266,7 +266,7 @@
 
 \begin{frame}{Task 2 - Explore the data}
 	\begin{itemize}
-		\item Open \texttt{endline\_data\_raw.dta} again.
+		\item Open \texttt{endline\_data\_raw\_nodup.dta} again.
 		\item Which variables are string and which are numeric?
 		\begin{itemize}
 			\item \texttt{browse} – see the different colors in the columns.
@@ -354,15 +354,15 @@
 
 \begin{frame}{Task 4 - Do-files}
 	\begin{itemize}
-		\item Open a new do-file. Save it! Go to the review window and copy the code where you loaded \texttt{endline\_data\_raw.dta}. Now run your do-file.
+		\item Open a new do-file. Save it! Go to the review window and copy the code where you loaded \texttt{endline\_data\_raw\_nodup.dta}. Now run your do-file.
 		\item Next, use the review window to copy to your do-file all the actions you already did:
 		\begin{itemize}
-			\item Open data \texttt{endline\_data\_raw.dta} (done in 1. above).
-			\item Explore the data.
-			\item Generate \texttt{inc\_per\_hh\_member} and \texttt{inc\_01\_USD}.
-			\item Label \texttt{inc\_per\_hh\_member} and \texttt{inc\_01\_USD}.
-			\item Create and label the \texttt{high\_income variable}.
-			\item Now run your do-file again. You have written instructions how to get to the \texttt{endline\_data\_raw.dta} to the final version.
+			\item Open data \texttt{endline\_data\_raw\_nodup.dta} (done in Task 1 above)
+			\item Explore the data
+			\item Generate \texttt{inc\_per\_hh\_member} and \texttt{inc\_01\_USD}
+			\item Label \texttt{inc\_per\_hh\_member} and \texttt{inc\_01\_USD}
+			\item Create and label the \texttt{high\_income variable}
+			\item Now run your do-file again. You have written instructions how to get to the \texttt{endline\_data\_raw\_nodup.dta} to the final version
 		\end{itemize}
 	\end{itemize}
 \end{frame}
@@ -487,7 +487,7 @@
 
 \begin{frame}{Lab Task 7 - Missing values}
 	\begin{itemize}
-		\item Make sure that you have the \texttt{endline\_data\_raw.dta} with the edits you already made open.
+		\item Make sure that you have the \texttt{endline\_data\_raw\_nodup.dta} with the edits you already made open.
 		\begin{itemize}
 			\item Type \texttt{summarize inc\_*} into the command window. Look at the column obs in the output. What do you notice?
 			\item There are  1,067 observations in the data set, but less than 1,067 observations were included in the output for the income variables. Why is that?
@@ -504,11 +504,11 @@
 
 \begin{frame}{Lab Task 8 - Saving Stata datasets}
 	\begin{itemize}
-		\item Use the drop down menu to save your data under a different name, for example endline\_data\_int.dta. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
+		\item Use the drop down menu to save your data under a different name, for example \texttt{endline\_data\_post\_topic2.dta}. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
 		\item Copy the code generated when using the menu to your do-file. Run again. Did you get an error?
 			\begin{itemize}
 				\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace.
-				\item \texttt{save "\$\{folder\_Lab1\}/endline\_data\_raw.dta", replace}
+				\item \texttt{save "\$\{folder\_Lab1\}/endline\_data\_post\_topic2.dta", replace}
 			\end{itemize}
 		\item Run your code again. Now you both have a final version of your data set and the instructions on how to get there. When your supervisor wants to see your work, share both of these!
 	\end{itemize}

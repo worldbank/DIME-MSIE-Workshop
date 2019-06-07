@@ -8,7 +8,7 @@
 	`r(version)'
 
 	*Open the data set
-	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
+	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw_nodup.dta", clear
 	*Open the second data set
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/panel_data.dta", clear
 
@@ -19,7 +19,7 @@
     global track_1  "${MSIE}/Material/Labs/Stata-Track-1"
 
 	*Open the data set
-	use "${track_1}/Data/endline_data_raw.dta", clear
+	use "${track_1}/Data/endline_data_raw_nodup.dta", clear
 	*Open the second data set
 	use "${track_1}/Data/panel_data.dta", clear
 
@@ -29,14 +29,14 @@
 
 
 	*Open the data set - In task 2
-	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw.dta", clear
+	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw_nodup.dta", clear
 
 	*Open the data set - After updated in task 6
 	global folder_Lab1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
-	use "${folder_Lab1}/Data/endline_data_raw.dta", clear
+	use "${folder_Lab1}/Data/endline_data_raw_nodup.dta", clear
 
 	* After updated in task 2 in topic 3
-	use "${ST1_dtDeID}/endline_data_raw.dta", clear
+	use "${ST1_dtDeID}/endline_data_raw_nodup.dta", clear
 
 	*Browse the data
 	browse

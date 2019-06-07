@@ -28,7 +28,7 @@
 	* ******************************************************************** */
 
 	*Add the files needed to be copies to
-	local track_1_data_needed endline_data_raw.dta panel_data.dta village_codes.xls
+	local track_1_data_needed endline_data_raw_nodup.dta panel_data.dta village_codes.xls
 
 	foreach file of local track_1_data_needed {
 		di "Copying file ${data2use}/`file'.dta to Stata Track 1 Data folder"
