@@ -3,8 +3,8 @@
     ieboilstart, version(12.0)
     `r(version)'
 
-    * USe data saved in topic 5
-	use "${ST1_dtInt}/endline_data_post_topic5.dta",  clear
+    * USe data saved in topic 4
+	use "${ST1_dtInt}/endline_data_post_topic4.dta",  clear
 
     ********************************************************************************
 	*    Task 1 : Repeat ways to explore data
@@ -106,11 +106,3 @@
     * Update regression
         * Using variable labels instead of variable names as row names
         esttab using "${ST1_outRaw}/regress_2.csv", replace
-
-    ********************************************************************************
-    *    Task 6 : Save data
-    ********************************************************************************
-
-    * Save data after topic 6
-    compress
-	save "${ST1_dtInt}/endline_data_post_topic6.dta",  replace
