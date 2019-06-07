@@ -3,8 +3,8 @@
     ieboilstart, version(12.0)
     `r(version)'
 
-    * USe data saved in topic 5
-	use "${ST1_dtInt}/endline_data_post_topic5.dta",  clear
+    * USe data saved in topic 4
+	use "${ST1_dtInt}/endline_data_post_topic4.dta",  clear
 
     ********************************************************************************
 	*    Task 1 : Repeat ways to explore data
@@ -12,10 +12,6 @@
 
 	* Create variable locals
     local income_vars inc_01 inc_02 inc_03 inc_06 inc_08 inc_09 inc_12 inc_13 inc_14 inc_15 inc_16 inc_17
-
-	* Remove missing codes, and replace by missing values
-	recode `income_vars' (-88 = .b)
-	recode `income_vars' (-66 = .c)
 
     * Summarize incomce vars
 	summarize `income_vars'
@@ -113,11 +109,3 @@
     * Update regression
         * Using variable labels instead of variable names as row names
         esttab using "${ST1_outRaw}/regress_2.csv", replace label
-
-    ********************************************************************************
-    *    Task 6 : Save data
-    ********************************************************************************
-
-    * Save data after topic 6
-    compress
-	save "${ST1_dtInt}/endline_data_post_topic6.dta",  replace

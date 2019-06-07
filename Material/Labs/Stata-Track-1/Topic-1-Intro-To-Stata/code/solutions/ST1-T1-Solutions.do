@@ -15,27 +15,26 @@
 	* After task 6, replace the code above with the code below
 
 	* Project folder and Stata Track 1 Folder
-    global MSIE 	"C:/Users/kbrkb/Dropbox/MSIE-workshop"
-    global track_1  "${MSIE}/Material/Labs/Stata-Track-1"
+    global MSIE           "C:/Users/kbrkb/Dropbox/MSIE-workshop"
+    global folder_topic1  "${MSIE}/Material/Labs/Stata-Track-1"
 
 	*Open the data set
-	use "${track_1}/Data/endline_data_raw_nodup.dta", clear
+	use "${folder_topic1}/Data/endline_data_raw_nodup.dta", clear
 	*Open the second data set
-	use "${track_1}/Data/panel_data.dta", clear
+	use "${folder_topic1}/Data/panel_data.dta", clear
 
 ********************************************************************************
 *    Task 2: Explore the data
 ********************************************************************************
 
-
 	*Open the data set - In task 2
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw_nodup.dta", clear
 
 	*Open the data set - After updated in task 6
-	global folder_Lab1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
-	use "${folder_Lab1}/Data/endline_data_raw_nodup.dta", clear
+	global folder_topic1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
+	use "${folder_topic1}/Data/endline_data_raw_nodup.dta", clear
 
-	* After updated in task 2 in topic 3
+	* After updated in task 2 in topic 2
 	use "${ST1_dtDeID}/endline_data_raw_nodup.dta", clear
 
 	*Browse the data
@@ -178,17 +177,17 @@
 ********************************************************************************
 
 	*Save final data
-    save "${folder_Lab1}/Data/endline_data_post_topic2.dta", replace
+    save "${folder_topic1}/Data/endline_data_post_topic2.dta", replace
 
-	* After updated in task 2 in topic 3
-	save "${ST1_dtInt}/endline_data_post_topic2.dta", replace
+	* After updated in task 2 in topic 2
+	save "${ST1_dtInt}/endline_data_post_topic1.dta", replace
 
 ********************************************************************************
 *    Task 9: Open data from other sources
 ********************************************************************************
 
 	*Importing excel (if you are using and older version of Stata this code might look different)
-	import excel "${folder_Lab1}/Data/village_codes.xls", sheet("Sheet1") firstrow clear
+	import excel "${folder_topic1}/Data/village_codes.xls", sheet("Sheet1") firstrow clear
 
 
 ************************ End of do-file *************************************

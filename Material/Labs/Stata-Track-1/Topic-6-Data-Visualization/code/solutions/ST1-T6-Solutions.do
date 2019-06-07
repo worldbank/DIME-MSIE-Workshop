@@ -1,6 +1,6 @@
 
-    * Save data after topic 6
-    save "${ST1_dtInt}/endline_data_post_topic6.dta",  replace
+    * Save data after topic 4
+    save "${ST1_dtInt}/endline_data_post_topic4.dta",  replace
 
 
 	* Easy graph defaults (milage varies by version)
@@ -109,4 +109,4 @@
             "${ST1_outRaw}/task3.gph" ///
           , graphregion(color(white))
 
-        graph export "${ST1_outRaw}/lab7.png" , replace width(1000)
+        graph export "${ST1_outRaw}/topic6.png" , replace width(1000)

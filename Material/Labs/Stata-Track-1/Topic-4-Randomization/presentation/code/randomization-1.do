@@ -3,8 +3,8 @@
 ieboilstart , version(12.0)
 `r(version)'
 
-*Load the data. School and district
-use "${ST1_dtInt}/endline_data_post_topic3.dta", clear
+*Load the data from topic 2, we did not save data in topic 3
+use "${ST1_dtInt}/endline_data_post_topic2.dta", clear
 
 ** Setting seed. This is the SECOND RULE for a replicable randomization. Any random number
 *  between 0 and 2^31. Use random.org to create a unique number. Use at least 6 digits
