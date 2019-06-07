@@ -4,4 +4,4 @@ graph combine                 ///
     "${ST1_outRaw}/task3.gph" ///
   , graphregion(color(white))
 
-graph export "${ST1_outRaw}/topic6.png" , replace width(1000)
+graph export "${ST1_outRaw}/combine_graphs_topic6.png" , replace width(1000)

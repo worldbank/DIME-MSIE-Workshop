@@ -39,7 +39,7 @@
 	*  to 1 if the rank is more than half the number
 	*  of total observations in the data set.
 	generate 	treatment = 0
-	replace 	treatment = 1 (if rank > tot_obs/2)
+	replace 	treatment = 1 if (rank > tot_obs/2)
 
 	*Create a label docuementing the treatment variable
 	label define 			treat_lab 0 "Control" 1 "Treatment"
@@ -81,8 +81,8 @@
 	** Create a the treatment variable and assign a third
 	*  of the observations to each treatment.
 	generate 	treatment_multi = 0											//Set all to 0
-	replace 	treatment_multi = 1 if (rank_multi > 1 * tot_obs_multi/3)		//Set the upper two thirds to 1
-	replace 	treatment_multi = 2 if (rank_multi > 2 * tot_obs_multi/3)		//Set the upper third to 2
+	replace 	treatment_multi = 1 if (rank_multi > 1 * tot_obs_multi/3)	//Set the upper two thirds to 1
+	replace 	treatment_multi = 2 if (rank_multi > 2 * tot_obs_multi/3)	//Set the upper third to 2
 
 	*Create a label docuementing the treatment variable
 	label define 				 treat_lab_multi 0 "Ctrl" 1 "Tmt1" 2 "Tmt2"

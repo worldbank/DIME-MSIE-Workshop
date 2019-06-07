@@ -44,7 +44,8 @@
 	describe
 
 	*Summarize the data
-	summarize lwh_group			// Variable is wheher HH is part of a LWH group is a string variable
+	summarize
+	summarize comment			// Variable is a string variable
 
 
 	**Variable Crop type at follow up
