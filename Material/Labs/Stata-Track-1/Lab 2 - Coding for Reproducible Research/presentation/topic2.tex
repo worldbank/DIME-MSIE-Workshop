@@ -87,6 +87,20 @@
 	\FloatBarrier
 }
 
+\newcommand{\tinycodeexample}[2]{
+	\begin{figure}
+		\VerbatimInput[
+		fontsize=\tiny,
+		framesep=3mm,
+		frame=lines, % line above and below code section
+		numbers=left, %Line number
+		label= #1, %name of code section
+		baselinestretch=0.90, %Use line space more similat to line space in code editors
+		]{#2} %Write the relative file path and the name of the file to be included
+	\end{figure}
+	\FloatBarrier
+}
+
 
 %% The below command creates the ligh bulb logos in the top right corner of the
 \begin{document}
@@ -424,8 +438,10 @@
 \end{frame}
 
 \begin{frame}{Setting directories using macros}
-	\codeexample{filepaths-1.do}{code/filepaths-1.do}
-	\small The code above and below is the same to Stata. But the part that is the identical in use and save is stored in and referenced from a global below
+
+	\tinycodeexample{filepaths-1.do}{code/filepaths-1.do}
+
+	\small The code above and below is the same to Stata. But the part that is the identical in use and save is stored in and referenced from a global below, and the line of code is shorter and more readable
 	\codeexample{filepaths-2.do}{code/filepaths-2.do}
 \end{frame}
 
@@ -434,7 +450,7 @@
 		\item Open the do-file you created in the previous task and create a global to the folder where you have been saving your work. Call the global \texttt{folder\_Lab1}
 		\item To check what is stored in your global, type this in the command window and hit enter:
 			\begin{itemize}
-				\item \texttt{display "\$folder\_Lab1“}
+				\item \texttt{display "\$\string{folder\_Lab1\string}“}
 			\end{itemize}
 		\item Update the use and save commands in your do-file with the global you created. See example blow. Then re-run your code to make sure that it works with the new file paths!
 	\end{itemize}
