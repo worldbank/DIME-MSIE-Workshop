@@ -1,5 +1,5 @@
 * Create the label
-label define high_income_lab 1 "Per Capita Income >500K" 0 "Per Capita Income <500K"
+label define high_income_lab 1 "Per Capita Income >500K" 0 "Per Capita Income <=500K"
 
 * Appy the label to the variable
 label value high_income high_income_lab

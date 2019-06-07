@@ -75,13 +75,13 @@
 	*Generate a dummy that 1 if per capita income is
 	*is greater than than 500,000 francs.
 	generate high_income = 0
-	replace  high_income = 1 if inc_per_hh_member > 500000
+	replace  high_income = 1 if (inc_per_hh_member > 500000) & !missing(inc_per_hh_member)
 
 	*Tabulate the result
 	tabulate high_income
 
 	*Create the label
-	label define high_income_lab 1 "Per Capita Income >500K" 0 "Per Capita Income <500K"
+	label define high_income_lab 1 "Per Capita Income >500K" 0 "Per Capita Income <=500K"
 
 	*Appy the label to the variable
 	label value high_income high_income_lab
@@ -167,7 +167,7 @@
 	summarize inc_*
 
 	*Produce a table over variables with missing values
-	misstable summarize   inc_*
+	misstable summarize inc_*
 
 	*Tabulate missing values
 	tabulate inc_zero
