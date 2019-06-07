@@ -15,8 +15,8 @@
 *    Task 3: Test unit of ovbservation
 ********************************************************************************
 
-    *Open that data
-    use "${ST1_dtDeID}/endline_data_rand.dta",  clear
+    *Open data from last topic
+    use "${ST1_dtInt}/endline_data_post_topic1.dta",  clear
 
 ********************************************************************************
 *    Task 4: Destring and encode
