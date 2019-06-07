@@ -166,6 +166,7 @@
 		\item These two commands are often used to get a quick idea of the data
 		\item Summarize all the income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
 		\begin{itemize}
+			\item Create a local of all the main income variables again \newline \texttt{local income\_vars inc\_0? inc\_1?}
 			\item Do you see anything that stands out?
 			\item Use option detail for \texttt{inc\_02}
 		\end{itemize}
@@ -240,11 +241,11 @@
 	\begin{itemize}
 		\item Use \texttt{tabstat} to createa a table of the mean of all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
 		\begin{itemize}
-			\item Like this: \texttt{tabstat inc\_??}
+			\item Use the local you already created, like this: \texttt{tabstat `income\_vars'}
 		\end{itemize}
-		\item Create a table displaying the mean, standard deviation, the median, and the number of observations for all income variables, \texttt{inc\_01}, \texttt{inc\_02}, … \texttt{inc\_17}
+		\item Create a table displaying the mean, standard deviation, the median, and the number of observations for main all income variables
 		\begin{itemize}
-			\item Like this: \texttt{tabstat inc\_?? , statistics(mean sd median)} 
+			\item Like this: \texttt{tabstat `income\_vars' , statistics(mean sd median)} 
 		\end{itemize}
 		\item Use the help file - \texttt{help tabstat} - to try to display these statistics separately for male and female headed households
 	\end{itemize}
@@ -290,8 +291,8 @@
 	\begin{columns}[c]
 		\column{.5\textwidth}
 		\begin{itemize}
-			\item Village statistics can be called with \texttt{if tag\_village == 1}
-			\item Treatment group can be called with \texttt{if hh\_treatment == 1}
+			\item Village statistics can be called with \texttt{if (village\_code == 1)}
+			\item Treatment group can be called with \texttt{if (treatment == 1)}
 			\item And so on, with only one line of code in Stata
 		\end{itemize}
 		\column{.5\textwidth}
