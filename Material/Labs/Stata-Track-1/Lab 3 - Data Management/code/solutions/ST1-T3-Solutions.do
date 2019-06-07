@@ -20,7 +20,7 @@
     `r(version)'
 
     *Open that data
-    use "${ST1_dtInt}/endline_data_post_lab2.dta",  clear
+    use "${ST1_dtInt}/endline_data_post_topic2.dta",  clear
 
     *Use codebook to explore ID variable candidate
         codebook id_05
