@@ -8,7 +8,7 @@
 	`r(version)'
 
 	*Open the data set
-	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw_nodup.dta", clear
+	use "C:\Users\wb519128\Documents\GitHub\DIME-MSIE-Workshop\Material\Labs\Stata-Track-1\Data\endline_data_raw_nodup.dta", clear
 	*Open the second data set
 	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/panel_data.dta", clear
 
@@ -21,21 +21,21 @@
 	*Open the data set
 	use "${folder_topic1}/Data/endline_data_raw_nodup.dta", clear
 	*Open the second data set
-	use "${folder_topic1}/Data/panel_data.dta", clear
+	use "${folder_topic1}/Data/panel_data.dta", clear 
 
 ********************************************************************************
 *    Task 2: Explore the data
 ********************************************************************************
 
 	*Open the data set - In task 2
-	use "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1/Data/endline_data_raw_nodup.dta", clear
+	use "C:\Users\wb519128\Documents\GitHub\DIME-MSIE-Workshop\Material\Labs\Stata-Track-1\Data\endline_data_raw_nodup.dta", clear
 
 	*Open the data set - After updated in task 6
-	global folder_topic1 "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
+	global folder_topic1 "C:\Users\wb519128\Documents\GitHub\DIME-MSIE-Workshop\Material\Labs\Stata-Track-1"
 	use "${folder_topic1}/Data/endline_data_raw_nodup.dta", clear
 
 	* After updated in task 2 in topic 2
-	use "${ST1_dtDeID}/endline_data_raw_nodup.dta", clear
+	//use "${ST1_dtDeID}/endline_data_raw_nodup.dta", clear // This global is not defined anywhere
 
 	*Browse the data
 	browse
@@ -177,10 +177,10 @@
 ********************************************************************************
 
 	*Save final data
-    save "${folder_topic1}/Data/endline_data_post_topic2.dta", replace
+    save "${folder_topic1}/Data/endline_data_post_topic1.dta", replace
 
 	* After updated in task 2 in topic 2
-	save "${ST1_dtInt}/endline_data_post_topic1.dta", replace
+	//save "${ST1_dtInt}/endline_data_post_topic1.dta", replace  // This global is not defined anywhere
 
 ********************************************************************************
 *    Task 9: Open data from other sources
