@@ -7,7 +7,7 @@
 
 *This excerices requires iefieldkit version 1.1 or more recent
     iefieldkit
-    if `r(version)' < 1.0 adoupdate iefieldkit, update
+    if `r(version)' < 1.2 adoupdate iefieldkit, update
 
 *This excerices requires ietoolkit version 6.0 or more recent
     ietoolkit
