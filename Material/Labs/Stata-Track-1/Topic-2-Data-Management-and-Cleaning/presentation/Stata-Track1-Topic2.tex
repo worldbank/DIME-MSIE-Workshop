@@ -15,9 +15,9 @@
 \usepackage{fontspec}
 
 
-\title{Topic 3 - Track 1 \newline Data Management and Cleaning}
+\title{Stata Track 1 - Topic 2 \newline Data Management and Cleaning}
 \date{\today}
-\author{Author of Session here!} % Name of author(s) of session here
+\author{Meyhar Mohammed, Kristoffer Bjarkefur} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
 \setbeamercolor{background canvas}{bg=white}	% Sets background color
 
@@ -202,22 +202,20 @@
 
 \begin{frame}{Task 1 - Set up the Master do file}
 	\begin{itemize}
-		\item Keep working in \texttt{ST1\_MasterDofile.do}. Find the section below. After \texttt{\$\string{ST1\_do/\string}} enter the name of the do-file you write for topic 2 in the previous session
-		\item Now you must move the do-file from topic 2 to the location that \texttt{\$\string{ST1\_do/\string}} is pointing to. To find what that location is, you must follow the globals defined above this section.
-		\item When you have moved the do-file, change the local \texttt{topic2} to 1 and run your do-file. What happened? Did you also run your do-file from topic 2?
+		\item Keep working in \texttt{ST1\_MasterDofile.do}. Find the section below. After \texttt{\$\string{ST1\_do/\string}} enter the name of the do-file you write for topic 1 in the previous session
+		\item Now you must move the do-file from topic 1 to the location that \texttt{\$\string{ST1\_do/\string}} is pointing to. To find what that location is, you must follow the globals defined above this section.
+		\item When you have moved the do-file, change the local \texttt{topic1} to 1 and run your do-file. What happened? Did you also run your do-file from topic 1?
 	\end{itemize}
 	
 	\codeexample{master-dofile-rundo.do}{code/master-dofile-rundo.do}
 \end{frame}
 
 
-\begin{frame}{Task 2 - Update the topic 2 do-file}
+\begin{frame}{Task 2 - Update the topic 1 do-file}
 	\begin{itemize}
-		\item Move the data set \texttt{endline\_data\_raw.dta} to the \texttt{ST1/DataSets/Deidentified} folder
-		\item In your do-file for topic 2, where you have \newline \texttt{use "\$\string{folder\_Lab1\string}/Data/endline\_data\_raw.dta", clear} replace the global to use the \texttt{\$\string{ST1\_dtDeID\string}} global created in your master do-file, and remove the \texttt{Data/} part of the path, i.e. \newline  \texttt{use "\$\string{ST1\_dtDeID\string}/endline\_data\_raw.dta", clear}
-		\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_lab2.dta", replace} \\
-		to the \texttt{\$\string{ST1\_dtInt\string}} global, \\
-		i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", replace}
+		\item Move the data set \texttt{endline\_data\_raw\_nodup.dta} to the \texttt{ST1/DataSets/Deidentified} folder
+		\item In your do-file for topic 1, where you have \newline \texttt{use "\$\string{folder\_Lab1\string}/Data/endline\_data\_raw\_nodup.dta", clear} replace the global to use the \texttt{\$\string{ST1\_dtDeID\string}} global created in your master do-file, and remove the \texttt{Data/} part of the path, i.e. \newline  \texttt{use "\$\string{ST1\_dtDeID\string}/endline\_data\_raw\_nodup.dta", clear}
+		\item Similarly, replace the global in \newline \texttt{save "\$\string{folder\_Lab1\string}/Data/endline\_data\_post\_topic1.dta", replace} to the \texttt{\$\string{ST1\_dtInt\string}} global (note that it is not the same global as above), i.e. \newline  \texttt{save "\$\string{ST1\_dtInt\string}/endline\_data\_post\_topic1.dta", replace}
 	\end{itemize}
 
 \end{frame}
@@ -286,14 +284,14 @@
 
 \begin{frame}{Task 3 - Test of unit of observation}
 	\begin{itemize}
-		\item Re-run \texttt{ST1\_MasterDofile.do} that you edited in the last task. Make sure that after it runs you have  \texttt{endline\_data\_raw.dta} open
+		\item Re-run \texttt{ST1\_MasterDofile.do} that you edited in the last task. Make sure that after it runs you are still in the \texttt{endline\_data\_raw\_nodup.dta} data set.
 		\begin{itemize}
 			\item What is the unit of observation, i.e. what does each row represents?
 			\item Which variable do you think is the variable that uniquely and fully identifies the data set?
 			\item Test the variable to make sure that is the unique ID variable
 		\end{itemize}
-		\item Create a new do-file for this session. Save it in the same location as the do-file from topic 2, and then make sure that the new do-file also runs from the master do-file. 
-		\item Then in that do-file, open the data using \texttt{use "\$\string{ST1\_dtInt\string}/endline\_data\_post\_lab2.dta", clear}
+		\item Create a new do-file for this session. Save it in the same folder as the do-file from topic 1, and then make sure that the new do-file also runs from the master do-file. 
+		\item Then in that do-file, open the data using \newline \texttt{use "\$\string{ST1\_dtInt\string}/endline\_data\_post\_topic1.dta", clear}
 		\item Then add to the new do-file the tests you do to verify which variable is the ID variable in the data set.
 	\end{itemize}
 \end{frame}
@@ -412,7 +410,7 @@
 \end{frame}
 
 
-\begin{frame}{Missing values / Survey codes}
+\begin{frame}{Missing values - Survey codes}
 	\begin{itemize}
 		\item During surveys missing answers are recorded using different codes. Like -88 for “I do not know” or -999 for “Declined to answer”
 		\item We need to turn these survey codes to missing values since -88 or -999 will distort averages and other calculations
@@ -435,7 +433,7 @@
 \end{frame}
 
 
-\begin{frame}{Outliers \newline How to deal with outliers?}
+\begin{frame}{Outliers - How to deal with outliers?}
 	\begin{itemize}
 		\item This is ultimately the decision of the researcher
 		\item The goal is to deal with them while losing as little information as possible
@@ -477,7 +475,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 4}
+\begin{frame}{Task 4 - destring and encode}
 	\begin{itemize}
 		\item The district variable \texttt{pl\_id\_09} is a string variable. We need to make this variable numeric. Since it is a categorical variable we should end up with a numeric variable with value labels. Stata has a command called encode which do this for us
 		\begin{itemize}
@@ -495,7 +493,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 5}
+\begin{frame}{Task 5 - replace missing values}
 	\begin{itemize}
 		\item Variable \texttt{ag\_08\_1\_1} is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
 		\item Summarize \texttt{ag\_08\_1\_1} to get the mean. Is the value between 1 and 0 like you expect a percentage in decimal form to be?
@@ -513,7 +511,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 6}
+\begin{frame}{Task 6 - find outliers}
 	\begin{itemize}
 		\item Variables \texttt{aa\_02\_1}, \texttt{aa\_02\_2}, \texttt{aa\_02\_3}, \texttt{aa\_02\_4}, \texttt{aa\_02\_5}, \texttt{aa\_02\_6}, \texttt{aa\_02\_7}, \texttt{aa\_02\_8}, \texttt{aa\_02\_9}, and \texttt{aa\_02\_10} list purchases of common animals. Let’s check for outliers
 		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character
@@ -525,7 +523,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 7}
+\begin{frame}{Task 7 - address outliers}
 	\begin{itemize}
 		\item Winsorize the income variable
 		\begin{itemize}
@@ -544,12 +542,13 @@
 \end{frame}
 
 
-\begin{frame}{Task 7}
+\begin{frame}{Task 8 - save data}
 	\begin{itemize}
-		\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global.
+		\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global
+		\item Always \texttt{compress} your data before saving it. This is a command that goes over your data set, and make sure it is stored as efficiently as possible, and if not change the data set so that it does, but there is no loss of information or precision, only memory storage optimization.
 	\end{itemize}
 
-	\codeexample{save-topic3.do}{code/save-topic3.do}
+	\codeexample{save-topic2.do}{code/save-topic2.do}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section

@@ -19,8 +19,8 @@
     ieboilstart , version(12.0) noclear
     `r(version)'
 
-    *Open that data
-    use "${ST1_dtInt}/endline_data_post_topic2.dta",  clear
+    *Open data from last topic
+    use "${ST1_dtInt}/endline_data_post_topic1.dta",  clear
 
     *Use codebook to explore ID variable candidate
         codebook id_05
@@ -83,6 +83,6 @@
 *    Task 8: Save data
 ********************************************************************************
 
-    * Save data after topic 3
+    * Save data after topic 2
     compress
-    save "${ST1_dtInt}/endline_data_post_topic3.dta",  clear
+    save "${ST1_dtInt}/endline_data_post_topic2.dta",  clear
