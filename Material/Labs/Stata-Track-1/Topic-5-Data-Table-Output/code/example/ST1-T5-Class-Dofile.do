@@ -13,10 +13,6 @@
 	* Create variable locals
     local income_vars
 
-	* Remove missing codes, and replace by missing values
-	recode `income_vars' (-88 = .b)
-	recode `income_vars' (-66 = .c)
-
     * Summarize incomce vars
 
 

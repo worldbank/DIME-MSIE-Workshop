@@ -493,7 +493,7 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 5 - replace missing values}
+\begin{frame}{Task 5 - replace survey codes for missing values}
 	\begin{itemize}
 		\item Variable \texttt{ag\_08\_1\_1} is a dummy variable where 1 means that a household used compost, and 0 that they didn’t. We want to know the percentage of farmers that used compost. (Tip! The mean of a dummy is the percentage in decimals)
 		\item Summarize \texttt{ag\_08\_1\_1} to get the mean. Is the value between 1 and 0 like you expect a percentage in decimal form to be?
@@ -511,26 +511,38 @@
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 6 - find outliers}
+\begin{frame}{Task 6 - replace survey codes for missing values (at bulk)}
 	\begin{itemize}
-		\item Variables \texttt{aa\_02\_1}, \texttt{aa\_02\_2}, \texttt{aa\_02\_3}, \texttt{aa\_02\_4}, \texttt{aa\_02\_5}, \texttt{aa\_02\_6}, \texttt{aa\_02\_7}, \texttt{aa\_02\_8}, \texttt{aa\_02\_9}, and \texttt{aa\_02\_10} list purchases of common animals. Let’s check for outliers
-		\item Start by using summarize. The two lines of code below are gives you the same result. The question mark tells Stata to include all variables that start on AA\_02\_ plus exactly one more character
+		\item Create a local will all main income variables (see line 2 of code below)
+		\item Use that local in the command \texttt{recode} to change code -99 to \texttt{.a}, code -88 to \texttt{.b}, and code -66 to \texttt{.c} in one simple line of code.
+	\end{itemize}
+
+	\codeexample{encode.do}{code/recode.do}
+\end{frame}
+
+
+\begin{frame}{Task 7 - find outliers}
+	\begin{itemize}
+		\item Keep using the local of income variables you created in the last task
+		\item \texttt{summarize} all income variables to see if you can spot outliers
 		\begin{itemize}
-			\item \texttt{summarize aa\_02\_1 aa\_02\_2 aa\_02\_3 aa\_02\_4 aa\_02\_5 aa\_02\_6 aa\_02\_7 aa\_02\_8 aa\_02\_9 aa\_02\_10, detail}
-			\item \texttt{summarize aa\_02\_? aa\_02\_10, detail}
+			\item \texttt{summarize `income\_vars', detail}
 		\end{itemize}
-		\item Do you see any implausible values? What can we do to fix this? There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI
+		\item Do you see any implausible values? What can we do to fix this?
+		\begin{itemize}
+			\item There is no exact answer what to do as these are obvious typos. Discuss what action to take with your PI
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
-\begin{frame}{Task 7 - address outliers}
+\begin{frame}{Task 8 - address outliers}
 	\begin{itemize}
 		\item Winsorize the income variable
 		\begin{itemize}
 			\item Winsorizing works better at large estimated values like, income, harvest value, land area etc.
 			\item Winsorizing works less great on small exactly counted number like number of visit at a clinic, animals owned etc. and is never a good idea on a dummy
 		\end{itemize}
-		\item Summrize the \texttt{inc\_01} variable. Use detail option. Or do a histogram (we will speak about that tomorrow)
+		\item Summarize the \texttt{inc\_01} variable. Use detail option. (In a later topic we talk about histograms that is also useful for this)
 		\item Winsorize \texttt{inc\_01} to the 95th percentile. Like this:
 			\begin{itemize}
 				\item \texttt{ssc install winsor}
@@ -542,7 +554,7 @@
 \end{frame}
 
 
-\begin{frame}{Task 8 - save data}
+\begin{frame}{Task 9 - save data}
 	\begin{itemize}
 		\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global
 		\item Always \texttt{compress} your data before saving it. This is a command that goes over your data set, and make sure it is stored as efficiently as possible, and if not change the data set so that it does, but there is no loss of information or precision, only memory storage optimization.
@@ -557,7 +569,7 @@
 
 \vspace{20mm}
 For more information or further questions please contact:
-\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+\newline Kristoffer Bjarkefur (\url{kbjarkefur@worldbank.org}) \newline Luiza Andrade (\url{lcardoso@worldbank.org})
 
 \end{frame}
 
