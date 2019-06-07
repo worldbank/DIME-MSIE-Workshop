@@ -6,8 +6,8 @@
 	ieboilstart , version(12.0)
 	`r(version)'
 
-	* Save data after topic 3
-    save "${ST1_dtInt}/endline_data_post_topic3.dta",  clear
+	* Use data after topic 2
+    use "${ST1_dtInt}/endline_data_post_topic2.dta",  clear
 
 	** Setting seed. This is the second rule for a
 	*  replicable randomization. Can be any random number
@@ -106,6 +106,6 @@
 	*    Task 3 : Save data
 	********************************************************************************
 
-	* Save data after topic 5
+	* Save data after topic 4
 	compress
-	save "${ST1_dtInt}/endline_data_post_topic5.dta",  replace
+	save "${ST1_dtInt}/endline_data_post_topic4.dta",  replace

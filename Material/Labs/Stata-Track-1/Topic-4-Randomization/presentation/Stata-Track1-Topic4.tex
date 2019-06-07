@@ -16,9 +16,9 @@
 \usepackage{hyperref}
 \hypersetup{urlcolor=DarkBlue}
 
-\title{Topic 5 - Track 1 \newline Randomisation}
+\title{Stata Track 1 - Topic 4 \newline Randomization}
 \date{\today}
-\author{Author of Session here!} % Name of author(s) of session here
+\author{Luiza Andrade, Kristoffer Bjarkefur} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
 \setbeamercolor{background canvas}{bg=white}	% Sets background color
 
@@ -334,7 +334,7 @@
 		\end{itemize}
 		\item Set the seed
 		\begin{itemize}
-			\item 	Guarantees the same starting point in that list
+			\item Guarantees the same starting point in that list
 			\item See command set seed. Randomize a seed at least 6 digits long (for example at \url{www.random.org})
 		\end{itemize}
 		\item Stable sort
@@ -350,8 +350,8 @@
 
 \begin{frame}{Task 1 - Basic Randomization in Stata}
 	\begin{itemize}
-		\item Open \texttt{endline\_data\_raw.dta}
-		\item We have 1067 households and we want half of them to be treatment and control
+		\item Open \texttt{endline\_data\_post\_topic2.dta}
+		\item We have 1,064 households and we want half of them to be treatment and control
 		\item What is our randomization rule?
 		\item Start a new do-file for this topic and add it to the master do-file
 	\end{itemize}
@@ -370,7 +370,7 @@
 \begin{frame}{Task 2 - Multi-Arm Randomization in Stata}
 	\begin{itemize}
 		\item Multiple treatment arms
-		\item We have 1067 households and we want one third of them to be control and two treatment arms with one third in each
+		\item We have 1,064 households and we want one third of them to be control and two treatment arms with one third in each
 	\end{itemize}
 \end{frame}
 
@@ -385,11 +385,10 @@
 
 
 \begin{frame}{Task 3 - Save your data}
-\begin{itemize}
-	\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global.
-\end{itemize}
-
-\codeexample{save-topic5.do}{code/save-topic5.do}
+	\begin{itemize}
+		\item Save your data using the \texttt{\$\string{ST1\_dtInt\string}} global.
+	\end{itemize}
+	\codeexample{save-topic4.do}{code/save-topic4.do}
 \end{frame}
 
 
@@ -441,7 +440,7 @@
 
 \vspace{20mm}
 For more information or further questions please contact:
-\newline John Doe (\url{johndoe@worldbank.org}) \newline Mary Doe (\url{marydoe@worldbank.org})
+\newline Kristoffer Bjarkefur (\url{kbjarkefur@worldbank.org}) \newline Luiza Andrade (\url{lcardoso@worldbank.org})
 
 \end{frame}
 
