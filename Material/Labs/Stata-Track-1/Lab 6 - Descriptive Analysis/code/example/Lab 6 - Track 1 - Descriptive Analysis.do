@@ -115,5 +115,6 @@
     *    Task 6 : Save data
     ********************************************************************************
 
-    * Save data after topic 5
+    * Save data after topic 6
+    compress
 	save "${ST1_dtInt}/endline_data_post_topic6.dta",  replace
