@@ -43,7 +43,7 @@
    local user_commands ietoolkit iefieldkit      //Fill this list will all commands this project requires
    foreach command of local user_commands {
        cap which `command'
-       if _rc == 111 {
+       if (_rc == 111) {
            cap ssc install `command'
        }
    }
@@ -78,11 +78,11 @@
    * Root folder globals
    * ---------------------
 
-   if $user == 1 {
+   if (${user} == 1) {
        global projectfolder "C:/Users/kbrkb/Dropbox/MSIE-workshop/Material/Labs/Stata-Track-1"
    }
 
-   if $user == 2 {
+   if (${user} == 2) {
        global projectfolder ""  //Enter the file path to the projectfolder of next user here
    }
 

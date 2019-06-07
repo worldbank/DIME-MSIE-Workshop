@@ -15,7 +15,7 @@
 *    Task 3: Test unit of ovbservation
 ********************************************************************************
 
-    *Alwasys start 
+    *Alwasys start
     ieboilstart , version(12.0) noclear
     `r(version)'
 
@@ -49,7 +49,7 @@
 		summarize ag_08_1_1
 
 	*Replace -99 with missing value .a
-		replace ag_08_1_1 = .a if ag_08_1_1 == -99
+		replace ag_08_1_1 = .a if (ag_08_1_1 == -99)
 
 	*Summarize again
 		summarize ag_08_1_1
