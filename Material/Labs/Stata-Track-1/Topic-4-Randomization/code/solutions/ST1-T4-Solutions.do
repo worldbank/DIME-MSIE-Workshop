@@ -39,9 +39,7 @@
 	*  to 1 if the rank is more than half the number
 	*  of total observations in the data set.
 	generate 	treatment = 0
-
 	replace 	treatment = 1 if (rank > tot_obs/2)
-
 
 	*Create a label docuementing the treatment variable
 	label define 			treat_lab 0 "Control" 1 "Treatment"
