@@ -46,14 +46,14 @@
 
     * Task 3a : regular sumstat
 	sumStats ( `controls' `outcome1' `outcome2' ) ///
-		using "${ST1_outRaw}/sumstats_1.xls"         ///
+		using "${ST1_outRaw}/sumstats_1.xls"      ///
 	  , replace stats(N mean median sd min max)
 
     * Task 3b : sumstat by treatment/control
 	sumStats ///
-		(`controls' `outcome1' `outcome2' if (treatment == 0)) ///
-		(`controls' `outcome1' `outcome2' if (treatment == 1)) ///
-		using "${ST1_outRaw}/sumstats_2.xls"                       ///
+		(`controls' `outcome1' `outcome2' if treatment == 0) ///
+		(`controls' `outcome1' `outcome2' if treatment == 1) ///
+		using "${ST1_outRaw}/sumstats_2.xls"                 ///
 	  , replace stats(N mean median sd min max)
 
     ********************************************************************************
