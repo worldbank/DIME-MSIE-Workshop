@@ -37,9 +37,7 @@
 	* Summarize food security
 
 	* Install programs
-	net install "https://raw.githubusercontent.com/worldbank/stata/master/wb_git_install/wb_git_install.pkg"
-	wb_git_install sumStats
-	wb_git_install xml_tab
+	ssc install sumstats
 
     * Create locals of varlists to use
 	local controls fs_01 fs_03 fs_05 inc_01 inc_02
