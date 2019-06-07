@@ -543,16 +543,12 @@
 
 \begin{frame}{Lab Task 9 - Import other types of data}
 	\begin{itemize}
-		\item \small Use the drop down menus to import the \texttt{village\_codes.xls} data to Stata. After you select Excel Spreadsheet you get a new window with all import excel options. For now, only use browse to select the file and then click OK.
+		\item \small Use the drop down menus to import the \texttt{village\_codes.xls} data to Stata. Use all default options for now, so click \texttt{OK} for everything.
 		\begin{itemize}
 			\item \small Use \texttt{describe}, \texttt{tabulate}, \texttt{browse} or any other tools you have learned to explore the data. What are your key observations?
 		\end{itemize}
-		\item \small In excel the first row can be used as variable names, but in Stata the first row is always data. Use the drop down menus to open up the window with the import excel options again. Is there any option you see that you think will solve this?
-		\begin{itemize}
-			\item \small Use the option you think will solve this. Then explore the data again.
-			\item \small See that the columns that stored text in Excel are imported as strings, and the columns that stored numbers in Excel are imported as numeric
-		\end{itemize}
-		\item \small In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end.
+		\item \small In Excel the first row can be used as variable names, but in Stata the first row is always data. Use the drop-down menu to import that data again, but see if you find an option that solves this before clikcing \texttt{OK}. Use the option you think is suitable for this, and explore the data again. What is different?
+		\item \small In the result window or in the review window, see that the two lines of code generated are similar, but have the difference that the second time the word \texttt{firstrow} is used at the end. Include this option when you copy your code to your do-file.
 		\item \small It is a very good practice to use the drop down menus and the command window to experiment with your code until you are happy with it. When you are happy with the code Stata generates to import \texttt{village\_code.xls}, copy that line of code to your do-file and use the global you created in Task 6 to shorten the file path
 	\end{itemize}
 \end{frame}
