@@ -1,6 +1,6 @@
 
-    * Save data after topic 4
-    save "${ST1_dtInt}/endline_data_post_topic4.dta",  replace
+    * Load data after topic 4
+    use "${ST1_dtInt}/endline_data_post_topic4.dta",  clear
 
 
 	* Easy graph defaults (milage varies by version)
