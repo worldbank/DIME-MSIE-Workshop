@@ -109,7 +109,7 @@
 	*Generate a dummy that 1 if the harvest
 	*yeild is more than 4,000lbs.
 	generate high_farm_income_EURO = 0
-	replace  high_farm_income_EURO = 1 if inc_01_EURO > 5000
+	replace  high_farm_income_EURO = 1 if (inc_01_EURO > 5000)
 
 	*Tabulate the result
 	tabulate high_farm_income_EURO
