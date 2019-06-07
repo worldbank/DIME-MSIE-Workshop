@@ -37,7 +37,9 @@
 	* Summarize food security
 
 	* Install programs
-	ssc install sumStats
+	net install "https://raw.githubusercontent.com/worldbank/stata/master/wb_git_install/wb_git_install.pkg"
+	wb_git_install sumStats
+	wb_git_install xml_tab
 
     * Create locals of varlists to use
 	local controls fs_01 fs_03 fs_05 inc_01 inc_02
@@ -51,8 +53,8 @@
 
     * Task 3b : sumstat by treatment/control
 	sumStats ///
-		(`controls' `outcome1' `outcome2' if treatment == 0) ///
-		(`controls' `outcome1' `outcome2' if treatment == 1) ///
+		(`controls' `outcome1' `outcome2' if (treatment == 0)) ///
+		(`controls' `outcome1' `outcome2' if (treatment == 1)) ///
 		using "${ST1_outRaw}/sumstats_2.xls"                       ///
 	  , replace stats(N mean median sd min max)
 
@@ -67,13 +69,13 @@
 		**This is a balance table testing differences between treatment and control
 		* for all the income variables
 		iebaltab  `balancevars' if !missing(inc_t) , grpvar(treatment) ///
-			save("${ST1_outRaw}/balance_1.xlsx") replace
+			save("${ST1_outRaw}/balance_1") replace
 
 		**The same balance table as above but the variable labels are used as row
 		* names instead of the variable names. A column for the total sample
 		* (treatment and control combined) is also added
 		iebaltab  `balancevars' if !missing(inc_t), grpvar(treatment) total 	///
-			save("${ST1_outRaw}/balance_2.xlsx") replace rowvarlabel
+			save("${ST1_outRaw}/balance_2") replace rowvarlabel
 
 		**The same balance table as above but row labels for inc_01 and inc_02
 		* are entered manually. rowvarlabels is still used so the variable label would be used
@@ -83,7 +85,7 @@
 		* the bottom of the table.
 		iebaltab `balancevars' if !missing(inc_t), grpvar(treatment) total 	///
 			balmiss(zero) ftest														///
-			save("${ST1_outRaw}/balance_3.xlsx") replace rowvarlabel						///
+			save("${ST1_outRaw}/balance_3") replace rowvarlabel						///
 			rowlabels("inc_01 Enterprise Income from Farm Activities @ inc_02 Enterprise Income from Non-Farm Activities")
 
     ********************************************************************************
