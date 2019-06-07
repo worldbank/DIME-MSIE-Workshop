@@ -114,3 +114,6 @@ MSIE-Presenter-Page/site/
 
 #Images in hands-on sessions
 !**/img/*.png
+
+#Binary file needed for ietestform
+!**/Hands-on/HandsOn-ietestform/ietestform-handson-session-cto-form.xls
