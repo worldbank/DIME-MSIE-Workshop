@@ -15,7 +15,7 @@
 \usepackage{fontspec}
 
 
-\title{Topic 2 - Track 1 \newline Coding for Reproducible Research}
+\title{Stata Track 1 - Topic 1 \newline Intro to Stata}
 \date{\today}
 \author{Meyhar Mohammed, Kristoffer Bjarkefur} % Name of author(s) of session here
 \institute{Development Impact Evaluation (DIME) \newline The World Bank }
@@ -450,7 +450,7 @@
 		\item Open the do-file you created in the previous task and create a global to the folder where you have been saving your work. Call the global \texttt{folder\_Lab1}
 		\item To check what is stored in your global, type this in the command window and hit enter:
 			\begin{itemize}
-				\item \texttt{display "\$\string{folder\_Lab1\string}“}
+				\item \texttt{display "\$\string{folder\_topic1\string}“}
 			\end{itemize}
 		\item Update the use and save commands in your do-file with the global you created. See example blow. Then re-run your code to make sure that it works with the new file paths!
 	\end{itemize}
@@ -520,11 +520,11 @@
 
 \begin{frame}{Lab Task 8 - Saving Stata datasets}
 	\begin{itemize}
-		\item Use the drop down menu to save your data under a different name, for example \texttt{endline\_data\_post\_topic2.dta}. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
+		\item Use the drop down menu to save your data under a different name, for example \texttt{endline\_data\_post\_topic1.dta}. File -> Save as. If you use Save instead of Save as you will not be asked to save under a new name
 		\item Copy the code generated when using the menu to your do-file. Run again. Did you get an error?
 			\begin{itemize}
 				\item Since you already saved the data set under the new name, Stata warns you that there already is a file with that name. We want to overwrite it as each time we make an update to the instructions, we want the final data to reflect that. We therefore need to add a comma and the word replace.
-				\item \texttt{save "\$\{folder\_Lab1\}/endline\_data\_post\_topic2.dta", replace}
+				\item \texttt{save "\$\{folder\_topic1\}/endline\_data\_post\_topic1.dta", replace}
 			\end{itemize}
 		\item Run your code again. Now you both have a final version of your data set and the instructions on how to get there. When your supervisor wants to see your work, share both of these!
 	\end{itemize}
