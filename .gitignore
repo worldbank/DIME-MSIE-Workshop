@@ -57,6 +57,7 @@
 
 # LaTeX
 !/**/*.tex
+!/**/*.bib
 
 # Python
 !/**/*.py
@@ -102,6 +103,9 @@ passwords/
 !Material/Labs/Stata-Track-*/**/img/*.png
 !Material/Labs/Stata-Track-*/**/img/*.pdf
 
+#Unignore logo images
+!/**/Handouts/light.png
+
 #Unignore files needed for the webpage
 !MSIE-Presenter-Page/*.yml
 
@@ -112,8 +116,5 @@ MSIE-Presenter-Page/site/
 !Beamer_template/img/*.png
 !Beamer_template/img/*.pdf
 
-#Images in hands-on sessions
-!**/img/*.png
-
-#Binary file needed for ietestform
-!**/Hands-on/HandsOn-ietestform/ietestform-handson-session-cto-form.xls
+#Track 2 image files
+!Material/Labs/Stata-Track-2/**/img/*.*
