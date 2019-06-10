@@ -1,0 +1,267 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{marvosym}
+
+\title{Georeferencing}
+\date{June 14, 2019}
+\author{Jonas Guthoff and Matteo Ruzzante} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\\
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{green},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+{
+\usebackgroundtemplate{\includegraphics[height=55mm,right]{img/top_right_corner.pdf}} 
+\maketitle
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+
+\begin{frame}{Motivation}
+
+\begin{itemize}
+    \setlength\itemsep{1.5em}
+    \item Application in \alert{agricultural studies}: clear location of plots, compute precise plot size, use NDVI values for productivity (vegetation) analysis
+    \begin{itemize}
+        \vspace{0.75em}
+        \setlength\itemsep{0.75em}
+        \item Increasingly used for research purposes (plot-level regression analysis, social network, etc.)
+        \item Already implemented in some DIME projects (irrigation in Mozambique, technology adoption and diffusion in Burkina Faso)
+    \end{itemize}
+
+    \item You can produce some cool pictures for your report or paper \Smiley{}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Examples from the Field}
+    
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=6.5cm,height=6.5cm]{fig/Chinhacanine.PNG}
+            \caption{Mozambique}
+            \label{fig:MOZ}
+        \end{figure}
+    \end{minipage}%
+    \begin{minipage}{0.5\textwidth}
+        \begin{figure}[h!]
+            \centering
+            \includegraphics[width=7cm,height=6.5cm]{fig/Burkina.PNG}
+            \caption{Burkina Faso aka Veneto}
+            \label{fig:Burkina}
+        \end{figure}
+    \end{minipage}
+    
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\sectionpic{SurveyCTO}{img/section_slide}
+
+\begin{frame}{Set Up a \textit{SurveyCTO} Form}
+
+\begin{itemize}
+    \item Standard CTO forms take the GPS position of the interview (one point) $\Leftrightarrow$ here we want to take multiple points
+    \begin{itemize}
+        \item We use the \alert{GPS function} to record latitude, longitude, and altitude with a set accuracy (directly programmed into the form)
+        \item We record multiple GPS points in a \alert{repeat} group to generate a polygon
+    \end{itemize}
+    \item Need to use a bluetooth device to guarantee geo-accuracy %display how it looks like if the GPS is not < 5 metres in the conclusion
+   
+    \vspace{0.5cm}
+    
+    \setbeamertemplate{itemize item}[triangle]
+
+    \item \textbf{Let's code the form} %setup a server before, prepare Google Sheet, ask Luiza for attendance list for the preload, which is going to be enumerator list
+    \item \textbf{And go get some GPS points out there}:  Form groups and make sure to have at least 1 Android device (tablet or personal phone)
+    
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Details for the server
+
+\begin{frame}{Collect Geo Point Data using \textit{SurveyCTO}}
+   
+    \begin{enumerate}
+        \item Download \textit{SurveyCTO collect} from  google play store
+    
+        \item Setup \textit{SurveyCTO} server on the application and download the Georeferencing (Points)
+    
+        \begin{center}
+            
+            \begin{figure}[!htb]
+                \minipage{0.2\textwidth}
+                \includegraphics[width=\linewidth]{screenshot/main_menu.png}
+                \endminipage \hspace{1cm}
+                \minipage{0.2\textwidth}%
+                \includegraphics[width=\linewidth]{screenshot/menu_settings.png}
+                \endminipage \hspace{1cm}
+                \minipage{0.2\textwidth}%
+                \includegraphics[width=\linewidth]{screenshot/general_settings.png}
+                \endminipage
+                \label{fig:screenshots}
+            \end{figure}
+            \FloatBarrier      
+        \end{center}        
+            
+    \end{enumerate}
+
+
+\end{frame}
+
+
+
+
+\begin{frame}{Collect Geo Point Data using \textit{SurveyCTO} -- Server details}
+   
+
+        \begin{itemize}
+            \item[3.] The server login details: \par
+            \vspace{0.2cm}
+            \bf{Server name:} Georeferencing \par
+            \bf{Username:} participant \par
+            \bf{Password:} fctraining2019 \par
+        \end{itemize} 
+    
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+
+\sectionpic{Mapping}{img/section_slide}
+
+\begin{frame}[fragile]{Mapping}
+
+\begin{itemize}
+    
+    \item First, we need to reshape the observations to plot and then point level in Stata
+    
+\begin{lstlisting}
+reshape long `gpsVars', i(key point) j(plot)
+
+[...]
+
+reshape long latitude longitude accuracy, i(plot key) j(point) string
+\end{lstlisting}
+
+
+    \item Then, we will use R to generate the spatial polygons and map our plots
+    
+    \begin{itemize}
+        \item Plot polygon(s) with \texttt{ggmap}
+        \item Interactive map with \texttt{leaflet}
+    \end{itemize}
+    
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+
+
+\sectionpic{Application \& Conclusion}{img/section_slide}
+
+\begin{frame}{Conclusion}
+
+    \begin{itemize}
+        \item Applications for high-frequency checks: were plots well-referenced, compare distances to subjective measures
+        \item Potential issues in the field: geo-accuracy is key! %add image comparing plots with and without bluetooth here
+    \end{itemize}
+    
+    \vspace{12.5mm}
+    You can find all the materials used today in GitHub.
+    
+    \vspace{2.5mm}
+    For more information contact:
+    \newline Matteo Ruzzante (\url{mruzzante@worldbank.org}) \newline Jonas Guthoff (\url{jguthoff@worldbank.org})
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{The End}{img/section_slide}
+
+\end{document} 
