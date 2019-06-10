@@ -103,12 +103,10 @@
 \begin{frame}{Motivation}
 
 \begin{itemize}
-    \setlength\itemsep{1.25em}
     \item Data quality is a fundamental ingredient of a sound impact evaluation \\ and should be assured through \textbf{daily monitoring}
     \item As this is a quite time demanding activity, we can set up some ``flows'' to partially automatize it (and help us not give up during data collection...)
     \pause
-    \\[2.5em]
-    \item Quality checks can be directly embedded in the SurveyCTO form but most of the times this not enough
+    \item Quality checks can be directly embedded in the SurveyCTO form but most of the times this is not enough
     \item Two additional tools are \textit{high frequency checks} (HFCs) and \textit{backchecks} (BCs) %today we are going to focus on how to follow up on these, assuming they were properly set up before the start of data collection
 \end{itemize}
 
@@ -120,11 +118,11 @@
 \begin{frame}{How to Organize the Daily Flow}
 
 \begin{itemize}
-    \setlength\itemsep{1.4em}
+    \setlength\itemsep{1em}
     
-    \item Do-files to run HFCs (in one click) and choose BCs need to be prepared in advance and ideally be tested during the pilot or the training
+    \item Do-files to run HFCs (in one click) and choose BCs need to be prepared in advance and ideally be tested during the pilot or the training. Different ways to do this have been used in this weeks labs 
     
-    \item \textbf{HFCs} should flag every case where there are
+    \item \textbf{HFCs} should flag every potentially problematic case and save these information in a daily report. Flags should include cases of 
     \begin{itemize}
         \item Missing data (e.g., GPS)
         \item Clear typos (e.g., wrong magnitude)
@@ -132,14 +130,13 @@
         \item Inconsistent answers across the survey (e.g., sold more than produced)
         \item New household name
     \end{itemize}
-    \vspace{-1.25em}
-    \item and save these information in a daily report
-    
+
     \pause
     \item In addition, a subsample of interviewees (ideally 10\%) should be subjected to a shorter version of the survey (\textbf{BC}) to check the legitimacy of the original data
     
 \end{itemize}
 \end{frame}
+
 
 \begin{frame}{How to Communicate with the Field Team}
     
@@ -168,7 +165,7 @@
 
 \begin{itemize}
     \setlength\itemsep{1.5em}
-    \item Verify if the enumerator's answer to the flagged issues was satisfying
+    \item Verify that the enumerators' answers to the flagged issues were satisfying
         \begin{itemize}
             \item Otherwise, request second follow up
         \end{itemize}
@@ -187,6 +184,65 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
 \sectionpic{Exercise}{img/section_slide}
+
+\begin{frame}{Context}
+	\begin{itemize}
+		\item For this session, we will consider an agricultural survey
+		\item The most important information in this survey are 
+		\begin{enumerate}
+			\item Household's production value
+			\item Each plots' yield
+		\end{enumerate}
+		\item The team shared with the survey firm the list of issues to be flagged and protocol for solving them as listed in \texttt{Protocol for follow up.xlsx}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 1}
+	\begin{itemize}
+		\item After the first couple days of data collection, the team shared the flag report in \texttt{HFC flags.xlsx} with the survey firm
+		\item Open the file and
+		\begin{enumerate}
+			\item Make sure that the problem descriptions are clear
+			\item Check that all data necessary for the field team to solve the issue is in the file
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise 2}
+	\begin{itemize}
+		\item After reviewing the issue report, the field team send the answers in the \texttt{Answers} tab
+		\item Open the tab and
+		\begin{enumerate}
+			\item Compare the field team's answers to the protocol to solve issues that was initially shared
+			\item If all the necessary information is included, mark the issue as solved
+			\item If there's still missing information, detail the steps needed to solve the issue
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 3}
+\begin{itemize}
+	\item The file called \texttt{Flags for backchecks.xlsx} contains a summary of the issues found in the day's observations
+	\item Open the file and discuss, in a group
+	\begin{enumerate}
+		\item Which of these observations would you ask to be back-checked?
+		\item What are the main variables you based your decision on?
+	\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 4}
+\begin{itemize}
+	\item The file called \texttt{bc\_diffs.xlsx} contains the output of the \texttt{bcstats} command, that compares back-checks and original interviews and points out inconsistencies
+	\item Open the file and discuss, in a group
+	\begin{enumerate}
+		\item Which of these observations show consistent information across both surveys?
+		\item Which observations indicate issues that need follow-up?
+		\item Which follow-up actions would you suggest?
+	\end{enumerate}
+\end{itemize}
+\end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
 
@@ -213,4 +269,4 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
 \sectionpic{The End}{img/section_slide}
 
-\end{document} 
+\end{document}
