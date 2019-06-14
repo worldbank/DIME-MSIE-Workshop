@@ -1,7 +1,9 @@
 
 \documentclass[aspectratio=169]{beamer}
 \usetheme{metropolis}           % Use metropolis theme
+\usepackage{amsmath} 
 \usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
 \usepackage{graphicx}
 \usepackage{eso-pic}
 \usepackage{graphics}
@@ -106,6 +108,7 @@
     \item Data quality is a fundamental ingredient of a sound impact evaluation \\ and should be assured through \textbf{daily monitoring}
     \item As this is a quite time demanding activity, we can set up some ``flows'' to partially automatize it (and help us not give up during data collection...)
     \pause
+    \vspace{1.5em}
     \item Quality checks can be directly embedded in the SurveyCTO form but most of the times this is not enough
     \item Two additional tools are \textit{high frequency checks} (HFCs) and \textit{backchecks} (BCs) %today we are going to focus on how to follow up on these, assuming they were properly set up before the start of data collection
 \end{itemize}
@@ -117,24 +120,27 @@
 
 \begin{frame}{How to Organize the Daily Flow}
 
-\begin{itemize}
-    \setlength\itemsep{1em}
-    
-    \item Do-files to run HFCs (in one click) and choose BCs need to be prepared in advance and ideally be tested during the pilot or the training. Different ways to do this have been used in this weeks labs 
-    
-    \item \textbf{HFCs} should flag every potentially problematic case and save these information in a daily report. Flags should include cases of 
     \begin{itemize}
-        \item Missing data (e.g., GPS)
-        \item Clear typos (e.g., wrong magnitude)
-        \item Extreme values (e.g., revenues or yields)
-        \item Inconsistent answers across the survey (e.g., sold more than produced)
-        \item New household name
-    \end{itemize}
-
-    \pause
-    \item In addition, a subsample of interviewees (ideally 10\%) should be subjected to a shorter version of the survey (\textbf{BC}) to check the legitimacy of the original data
+        \setlength\itemsep{1.1em}
+        
+        \item Do-files to run HFCs (in one click) and choose BCs need to be prepared in advance and ideally be tested during the pilot or the training
+        \begin{itemize}
+            \item Different ways to do this have been used in this week's labs 
+        \end{itemize}
+        
+        \item \textbf{HFCs} should flag every potentially problematic case and save these information in a daily report. Flags should include cases of 
+        \begin{itemize}
+            \item Missing data (e.g., GPS)
+            \item Clear typos (e.g., wrong magnitude)
+            \item Extreme values (e.g., revenues or yields)
+            \item Inconsistent answers across the survey (e.g., sold more than produced)
+            \item New household name
+        \end{itemize}
     
-\end{itemize}
+        \pause
+        \item In addition, a subsample of interviewees (ideally 10\%) should be subjected to a shorter version of the survey (\textbf{BC}) to check the legitimacy of the original data
+        
+    \end{itemize}
 \end{frame}
 
 
@@ -163,22 +169,22 @@
 
 \begin{frame}{How to Follow Up}
 
-\begin{itemize}
-    \setlength\itemsep{1.5em}
-    \item Verify that the enumerators' answers to the flagged issues were satisfying
-        \begin{itemize}
-            \item Otherwise, request second follow up
-        \end{itemize}
-    
-    \item Serious cases (e.g, lower number of plots in an agricultural survey) may need re-surveying
-        \begin{itemize}
-            \item It is critical to verify this ASAP since the enumerator is most likely close by
-            \item So it is easy to re-interview and get missing data if needed
-        \end{itemize}
+    \begin{itemize}
+        \setlength\itemsep{1.5em}
+        \item Verify that the enumerators' answers to the flagged issues were satisfying
+            \begin{itemize}
+                \item Otherwise, request second follow up
+            \end{itemize}
         
-    \item Based on the BCs data, we can ask to re-do either a section or the entire survey
-    
-\end{itemize}
+        \item Serious cases (e.g., lower number of plots in an agricultural survey) may need re-surveying
+            \begin{itemize}
+                \item It is critical to verify this ASAP since the enumerator is most likely close by
+                \item So it is easy to re-interview and get missing data if needed
+            \end{itemize}
+            
+        \item Based on the BCs data, we can ask to re-do either a section or the entire survey
+        
+    \end{itemize}
 
 \end{frame}
 
@@ -222,26 +228,26 @@
 \end{frame}
 
 \begin{frame}{Exercise 3}
-\begin{itemize}
-	\item The file called \texttt{Flags for backchecks.xlsx} contains a summary of the issues found in the day's observations
-	\item Open the file and discuss, in a group
-	\begin{enumerate}
-		\item Which of these observations would you ask to be back-checked?
-		\item What are the main variables you based your decision on?
-	\end{enumerate}
-\end{itemize}
+    \begin{itemize}
+    	\item The file called \texttt{Flags for backchecks.xlsx} contains a summary of the issues found in the day's observations
+    	\item Open the file and discuss, in a group
+    	\begin{enumerate}
+    		\item Which of these observations would you ask to be back-checked?
+    		\item What are the main variables you based your decision on?
+    	\end{enumerate}
+    \end{itemize}
 \end{frame}
 
 \begin{frame}{Exercise 4}
-\begin{itemize}
-	\item The file called \texttt{bc\_diffs.xlsx} contains the output of the \texttt{bcstats} command, that compares back-checks and original interviews and points out inconsistencies
-	\item Open the file and discuss, in a group
-	\begin{enumerate}
-		\item Which of these observations show consistent information across both surveys?
-		\item Which observations indicate issues that need follow-up?
-		\item Which follow-up actions would you suggest?
-	\end{enumerate}
-\end{itemize}
+    \begin{itemize}
+    	\item The file called \texttt{bc\_diffs.xlsx} contains the output of the \texttt{bcstats} command, that compares back-checks and original interviews and points out inconsistencies
+    	\item Open the file and discuss, in a group
+    	\begin{enumerate}
+    		\item Which of these observations show consistent information across both surveys?
+    		\item Which observations indicate issues that need follow-up?
+    		\item Which follow-up actions would you suggest?
+    	\end{enumerate}
+    \end{itemize}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
