@@ -331,7 +331,7 @@
 	\begin{columns}[c]
 		
 		\column{.22\linewidth}
-		\small Next, open up the excel file \texttt{hfc\_inputs.xlsm} in \texttt{02\_checks/01\_inputs}. 
+		\small Next, open up the excel file \texttt{hfc\_inputs.xlsm} in \texttt{04\_checks/01\_inputs}. 
 		
 		\vspace{.2cm}
 		
@@ -400,10 +400,10 @@
 \begin{frame}{IPA's HFC: Add no-miss test}
 
 	\begin{itemize}
-		\item \small Now open the \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
+		\item \small Now open the \texttt{04\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
 		\item \small In the variable column, on separate rows, add the two variables \texttt{longitude} and \texttt{latitude}, and then in the \texttt{0. setup} sheet, select no miss like in the image below
 		\item \small Coordinates of the respondents dwelling is an example of a variable we want to never be missing.
-		\item \small Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} 
+		\item \small Then run the \texttt{master\_check.do} and check \texttt{04\_checks/02\_outputs/HFC\_output.xlsm} 
 	\end{itemize}
 
 	\begin{figure}
@@ -414,17 +414,17 @@
 
 \begin{frame}{IPA's HFC: Add more tests}
 	\begin{itemize}
-		\item \small Now open the \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
+		\item \small Now open the \texttt{04\_checks/01\_inputs/hfc\_inputs.xlsm} again and go to the sheet called \texttt{4. no miss}.
 		\item \small In the variable column, on separate rows, add the two variables \texttt{longitude} and \texttt{latitude}, and then in the \texttt{0. setup} sheet, select no miss like in the image below
 		\item \small Coordinates of the respondents dwelling is an example of a variable we want to never be missing.
-		\item \small Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} 
+		\item \small Then run the \texttt{master\_check.do} and check \texttt{04\_checks/02\_outputs/HFC\_output.xlsm} 
 	\end{itemize}
 \end{frame}
 
 
 
 \begin{frame}{IPA's HFC: Add more tests}
-	Do all of the next steps in \texttt{02\_checks/01\_inputs/hfc\_inputs.xlsm}
+	Do all of the next steps in \texttt{04\_checks/01\_inputs/hfc\_inputs.xlsm}
 	\begin{itemize}
 		\item In \texttt{6. logic}, add \texttt{crp\_08\_0\_1\_1\_1 amount\_harvest\_1\_1\_1} in the variable column, \texttt{!missing(crp\_08\_0\_1\_1\_1)} in the assert column, and \texttt{amount\_harvest\_1\_1\_1 == 0} in the if-statement column.
 		\item In \texttt{7. all miss}, replace \texttt{\_all} with \texttt{health\_report\_01}, \texttt{health\_report\_02},..., \texttt{health\_report\_05}, 01-05 in the variable column. \texttt{\_all} would include all variables which is sometimes very useful, but some survey (like our example) has repeat patterns that create a lot of variables with all missing.
@@ -436,7 +436,7 @@
 \begin{frame}{IPA's HFC: Add more tests}	
 	\begin{itemize}
 		\item Then go to the \texttt{0. setup} sheet and select all tests we are now using (see image below)
-		\item Then run the \texttt{master\_check.do} and check \texttt{02\_checks/02\_outputs/HFC\_output.xlsm} again.
+		\item Then run the \texttt{master\_check.do} and check \texttt{04\_checks/02\_outputs/HFC\_output.xlsm} again.
 	\end{itemize}
 	
 	\begin{figure}
