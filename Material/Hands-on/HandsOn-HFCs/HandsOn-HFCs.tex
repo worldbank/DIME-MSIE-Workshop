@@ -1,0 +1,278 @@
+
+\documentclass[aspectratio=169]{beamer}
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage{amsmath} 
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} 
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{marvosym}
+\usepackage{hyperref}
+
+\title{Data Quality Checks}
+\date{June 13, 2019}
+\author{Luiza Andrade and Matteo Ruzzante} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\\
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{green},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+{
+\usebackgroundtemplate{\includegraphics[height=55mm,right]{img/top_right_corner.pdf}} 
+\maketitle
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+
+\begin{frame}{Motivation}
+
+\begin{itemize}
+    \item Data quality is a fundamental ingredient of a sound impact evaluation \\ and should be assured through \textbf{daily monitoring}
+    \item As this is a quite time demanding activity, we can set up some ``flows'' to partially automatize it (and help us not give up during data collection...)
+    \pause
+    \vspace{1.5em}
+    \item Quality checks can be directly embedded in the SurveyCTO form but most of the times this is not enough
+    \item Two additional tools are \textit{high frequency checks} (HFCs) and \textit{backchecks} (BCs) %today we are going to focus on how to follow up on these, assuming they were properly set up before the start of data collection
+\end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 1
+\sectionpic{Overview}{img/section_slide}
+
+\begin{frame}{How to Organize the Daily Flow}
+
+    \begin{itemize}
+        \setlength\itemsep{1.1em}
+        
+        \item Do-files to run HFCs (in one click) and choose BCs need to be prepared in advance and ideally be tested during the pilot or the training
+        \begin{itemize}
+            \item Different ways to do this have been used in this week's labs 
+        \end{itemize}
+        
+        \item \textbf{HFCs} should flag every potentially problematic case and save these information in a daily report. Flags should include cases of 
+        \begin{itemize}
+            \item Missing data (e.g., GPS)
+            \item Clear typos (e.g., wrong magnitude)
+            \item Extreme values (e.g., revenues or yields)
+            \item Inconsistent answers across the survey (e.g., sold more than produced)
+            \item New household name
+        \end{itemize}
+    
+        \pause
+        \item In addition, a subsample of interviewees (ideally 10\%) should be subjected to a shorter version of the survey (\textbf{BC}) to check the legitimacy of the original data
+        
+    \end{itemize}
+\end{frame}
+
+
+\begin{frame}{How to Communicate with the Field Team}
+    
+    \begin{itemize}
+    \setlength\itemsep{2em}
+        
+        \vspace{1em}
+        \item Need to set up a direct line between the field team and the FC/RA who will be doing HFCs
+        \begin{itemize}
+            \item Division of tasks and frequent communication is key
+        \end{itemize}
+        \item HFC flags can be shared with the field team through DropBox folders
+        \begin{itemize}
+            \item Or Google Sheet, but issue with connections
+        \end{itemize}
+        \item The list of new BCs should be picked by the FC/RA and directly sent to the field team at the end of each day
+        \begin{itemize}
+            \item Can start with a random sample of interview and then focus on enumerators with higher number of flags
+        \end{itemize}
+        
+    \end{itemize}
+    
+\end{frame}
+
+\begin{frame}{How to Follow Up}
+
+    \begin{itemize}
+        \setlength\itemsep{1.5em}
+        \item Verify that the enumerators' answers to the flagged issues were satisfying
+            \begin{itemize}
+                \item Otherwise, request second follow up
+            \end{itemize}
+        
+        \item Serious cases (e.g., lower number of plots in an agricultural survey) may need re-surveying
+            \begin{itemize}
+                \item It is critical to verify this ASAP since the enumerator is most likely close by
+                \item So it is easy to re-interview and get missing data if needed
+            \end{itemize}
+            
+        \item Based on the BCs data, we can ask to re-do either a section or the entire survey
+        
+    \end{itemize}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 2
+\sectionpic{Exercise}{img/section_slide}
+
+\begin{frame}{Context}
+	\begin{itemize}
+		\item For this session, we will consider an agricultural survey
+		\item The most important information in this survey are 
+		\begin{enumerate}
+			\item Household's production value
+			\item Each plots' yield
+		\end{enumerate}
+		\item The team shared with the survey firm the list of issues to be flagged and protocol for solving them as listed in \texttt{Protocol for follow up.xlsx}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 1}
+	\begin{itemize}
+		\item After the first couple days of data collection, the team shared the flag report in \texttt{HFC flags.xlsx} with the survey firm
+		\item Open the file and
+		\begin{enumerate}
+			\item Make sure that the problem descriptions are clear
+			\item Check that all data necessary for the field team to solve the issue is in the file
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Exercise 2}
+	\begin{itemize}
+		\item After reviewing the issue report, the field team send the answers in the \texttt{Answers} tab
+		\item Open the tab and
+		\begin{enumerate}
+			\item Compare the field team's answers to the protocol to solve issues that was initially shared
+			\item If all the necessary information is included, mark the issue as solved
+			\item If there's still missing information, detail the steps needed to solve the issue
+		\end{enumerate}
+	\end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 3}
+    \begin{itemize}
+    	\item The file called \texttt{Flags for backchecks.xlsx} contains a summary of the issues found in the day's observations
+    	\item Open the file and discuss, in a group
+    	\begin{enumerate}
+    		\item Which of these observations would you ask to be back-checked?
+    		\item What are the main variables you based your decision on?
+    	\end{enumerate}
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Exercise 4}
+    \begin{itemize}
+    	\item The file called \texttt{bc\_diffs.xlsx} contains the output of the \texttt{bcstats} command, that compares back-checks and original interviews and points out inconsistencies
+    	\item Open the file and discuss, in a group
+    	\begin{enumerate}
+    		\item Which of these observations show consistent information across both surveys?
+    		\item Which observations indicate issues that need follow-up?
+    		\item Which follow-up actions would you suggest?
+    	\end{enumerate}
+    \end{itemize}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+
+\sectionpic{Conclusion}{img/section_slide}
+
+\begin{frame}{Conclusion}
+
+    \begin{itemize}
+        \item Let's take data quality seriously, and do HFCs and BCs!
+        \item There is scope to optimally split the work between the office and the field
+    \end{itemize}
+    
+    \vspace{1.25em}
+    You can find additional materials in the DIME Wiki page (\textcolor{blue}{\hyperlink{https://dimewiki.worldbank.org/wiki/Monitoring_Data_Quality}{HFCs}} and \textcolor{blue}{\hyperlink{https://dimewiki.worldbank.org/wiki/Back_Checks}{BCs}}) \\ and in the \textcolor{blue}{\hyperlink{https://github.com/PovertyAction/high-frequency-checks}{IPA Stata template}}. \\
+    Also see examples of HFC and BC codes used by DIME Mozambique team \textcolor{blue}{\hyperlink{ADD LINK HERE}{here}}.
+    
+    \vspace{1.25em}
+    For more information contact:
+    \newline Luiza Andrade (\url{lcardoso@worldbank.org})
+    \newline Matteo Ruzzante (\url{mruzzante@worldbank.org}) 
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% The End
+\sectionpic{The End}{img/section_slide}
+
+\end{document}
