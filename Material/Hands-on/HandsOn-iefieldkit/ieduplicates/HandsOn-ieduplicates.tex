@@ -1,0 +1,240 @@
+
+\documentclass[aspectratio=169]{beamer}
+
+\usetheme{metropolis}           % Use metropolis theme
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage{eso-pic}
+\usepackage{graphics}
+\usepackage{tikz}
+\usepackage[export]{adjustbox}
+\usepackage{multicol}
+\usepackage{listings}
+\usepackage{helvet}
+\usepackage{booktabs}
+\usepackage{threeparttable}
+\usepackage{marvosym}
+\usepackage{hyperref}
+
+\title{ieduplicates}
+\date{June 14, 2019}
+\author{Luiza Andrade, and Matteo Ruzzante} % Name of author(s) of session here
+\institute{Development Impact Evaluation (DIME) \newline The World Bank }
+\setbeamercolor{background canvas}{bg=white}	% Sets background color
+
+% The below command places the World Bank logo and DIME logo to the right corner
+\titlegraphic{%
+	\begin{picture}(0,0)
+	\put(330,-180){\makebox(0,0)[rt]{\includegraphics[width=3cm]{img/WB_logo}}}
+	\end{picture}%
+	\begin{picture}(0,0)
+	\put(390,-180){\makebox(0,0)[rt]{\includegraphics[width=1.5cm]{img/i2i}}}
+	\end{picture}%
+}
+
+%%% Section page with picture of Light bulb
+\makeatletter
+\defbeamertemplate*{section page}{mytheme}[1][]{
+	\centering
+	\begin{minipage}{22em}
+		\raggedright
+		\usebeamercolor[fg]{section title}
+		\usebeamerfont{section title}
+		\par
+		\ifx\insertsubsectionhead\@empty\else%
+		\usebeamercolor[fg]{subsection title}%
+		\usebeamerfont{subsection title}%
+		\fi
+		\ifstrempty{#1}{}{%
+			\includegraphics[width=100mm, height=60mm]{#1}%
+		}
+		\\
+		\insertsectionhead\\[-1ex]
+		\insertsubsectionhead
+		\usebeamertemplate*{progress bar in section page}
+		
+	\end{minipage}
+	\par
+	\vspace{\baselineskip}
+}
+\makeatother
+
+%%% Define a command to include picture in section, 
+%%% make section, and revert to old template
+\newcommand{\sectionpic}[2]{
+	\setbeamertemplate{section page}[mytheme][#2]
+	\section{#1}
+	\setbeamertemplate{section page}[mytheme]
+}
+
+%%% The command below allows for the text that contains Stata code
+\lstset{ %
+	backgroundcolor=\color{white},
+	basicstyle=\tiny,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{green},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	frame=single,
+	numbers=left,
+	numbersep=5pt,
+	numberstyle=\tiny\color{gray},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stringstyle=\color{mauve},
+	tabsize=2,
+	title=\lstname,
+	morekeywords={not,\},\{,preconditions,effects },
+	deletekeywords={time}
+}
+
+%% The below command creates the ligh bulb logos in the top right corner of the 
+\begin{document}
+	
+{
+\usebackgroundtemplate{\includegraphics[height=55mm,right]{img/top_right_corner.pdf}} 
+\maketitle
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% heading of section 3
+\sectionpic{ieduplicates}{img/section_slide}
+
+\begin{frame}{ieduplicates}
+    \begin{itemize}
+        \item \texttt{ieduplicates} is used to identify and resolve duplicates in raw survey data
+        \item It's part of DIME Analytics' \texttt{iefieldkit} package
+        \item The command outputs a report of all the duplicated entries of a variable (in Excel), and removes the duplicates from the data set until they are resolved
+        \item The Excel report is used to document the cases of duplicated interviews and how they were solved
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Objectives}
+\begin{itemize}
+	\item Learn how to use \texttt{ieduplicates}' basic options
+	\item Understand how to solve common causes of duplicated entries
+	\item Use \texttt{ieduplicates}' duplicates report
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Keep in mind}
+    It is important to solve duplicates during the data collection
+    \begin{itemize}
+        \item To guarantee that the desired sample size is achieved
+        \item To be able to run other quality checks that require unique IDs
+        \item More importantly, you may not remember what happened later, and may not be able to come back to verify the information
+    \end{itemize}
+\end{frame}
+
+\begin{frame}{Why do we have duplicates?}
+    \begin{enumerate}
+        \item Double submissions of same observation and the same data
+         \begin{itemize}
+            \item First upload from tablet not complete due to bad internet
+        \end{itemize}
+        \item Double submissions of same observation but with modified data
+         \begin{itemize}
+            \item Answers modified after submission, and then re-submitted
+            \item Bad practice, more transparent to write correction in a do-file
+            \item Many survey software have features preventing this
+        \end{itemize}
+        \item Incorrectly assigned ID. Two respondents are given the same ID
+         \begin{itemize}
+            \item Typo in the field when entering respondent ID
+        \end{itemize}
+        \item Household was interviewed twice
+        \begin{itemize}
+            \item First visit was rescheduled
+            \item There was a problem with the data and individual was re-surveyed
+        \end{itemize}
+    \end{enumerate}   
+\end{frame}
+
+\begin{frame}{Exercise 1: Looking for duplicates}
+    \begin{enumerate}
+        \item Open a new do-file
+        \item Start by importing the data set in this session's folder. It's called \texttt{ieduplicates\_dataset.dta}
+        \item Use the \texttt{count} command to see how many observations are in your data set
+        \item Use the \texttt{isid} command to check if the variable \texttt{uuid} uniquely identifies the data
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise 2: \texttt{ieduplicates} basic syntax}
+    \begin{center}
+        \large
+        \texttt{ieduplicates \textit{ID\_varname}, folder(\textit{string}) uniquevars(\textit{varlist})}    
+    \end{center}    
+There are other very useful options to the command, but we'll focus on the basic usage. You can see all the different options by typing \texttt{ help ieduplicates}
+
+    \begin{enumerate}
+        \item Write the command above to your do-file
+        \item Replace \textit{ID\_varname} with \texttt{uuid}: this should be the data set's unique ID
+        \item Replace \textit{string} with the path to this session's folder in your computer
+        \item Because this dataset was created using SurveyCTO, the unique observation identifier is called \texttt{key}
+        \item Run the code. Don't click on the link on your screen yet!
+        \item Check how many observations are in your data set now
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise 3: Reading iedupreport}
+    \begin{enumerate}
+        \item Click on the link to the ieduplicates report. This shows all the duplicated observations in the data set.
+        \item It will contain the following columns already filled:
+        \begin{itemize}
+            \item \texttt{uuid}: the duplicated value of the ID variable
+            \item \texttt{duplistid}: used to maintain the sort order in the Excel Report
+            \item \texttt{datelisted}: date the duplicated entry was first identified
+            \item \texttt{datefixed}: date a valid correction was imported the first time for that duplicated entry
+            \item \texttt{key}: the unique observation ID
+            \item \texttt{listofdiffs:} a list of all the variables that are different across duplicated entries
+        \end{itemize}
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise 4: Solving duplicated entries}
+    \begin{enumerate}
+        \item Using only the information in \texttt{iedupreport}, which of these issues can you solve?
+        \item Open the file in the session's folder called \texttt{Logbook.xlsx}. This is a list made by the field team of all the visits made.
+        \item Compare the information in the logbook to the information in the duplicates report and discuss how to solve the duplicated entries still unsolved
+    \end{enumerate}
+\end{frame}
+
+\begin{frame}{Exercise 4: Solving duplicated entries}
+    \begin{enumerate}
+        \item To correct the issues, use the blank columns:
+        \begin{itemize}
+            \item \texttt{correct}: fill in ``yes'' to keep the information as is
+            \item \texttt{drop}: fill in ``yes'' to drop the observation
+            \item \texttt{newid}: fill in a new ID value to assign to this observatoin
+            \item \texttt{initials}: add your initials to keep track on who decided on corrections
+            \item \texttt{notes}: write down how the decision was made
+        \end{itemize}
+        \item Save the duplicates report and close it
+        \item Run the do-file that opens the data set and runs \texttt{ieudplicates} again
+        \item Check the number of observations in your data set now
+    \end{enumerate}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Final thougts section
+
+\sectionpic{Thank you!}{img/section_slide}
+
+\begin{frame}{Thank you!}
+    
+    You can find additional materials in DIME Wiki (\textcolor{blue}{\hyperlink{https://dimewiki.worldbank.org/wiki/Ieduplicates}{ieduplicates}}).
+    
+    \vspace{0.75em}
+    
+    If you find any bug, or if you want to submit requests for additional features, please open an issue in the \texttt{iefieldkit} \textcolor{blue}{\hyperlink{https://github.com/worldbank/iefieldkit}{GitHub page}}.
+    
+    \vspace{1.25em}
+    For more information contact:
+    \newline Luiza Andrade (\url{lcardoso@worldbank.org})
+    \newline Matteo Ruzzante (\url{mruzzante@worldbank.org}) 
+
+\end{frame}
+
+\end{document} 
