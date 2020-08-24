@@ -1,0 +1,156 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% How to use writeLaTeX:
+%
+% You edit the source code here on the left, and the preview on the
+% right shows you the result within a few seconds.
+%
+% Bookmark this page and share the URL with your co-authors. They can
+% edit at the same time!
+%
+% You can upload figures, bibliographies, custom classes and
+% styles using the files menu.
+%
+% If you're new to LaTeX, the wikibook is a great place to start:
+% http://en.wikibooks.org/wiki/LaTeX
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass{tufte-handout}
+
+%\geometry{showframe}% for debugging purposes -- displays the margins
+
+\usepackage{amsmath}
+
+% Set up the images/graphics package
+\usepackage{graphicx}
+\setkeys{Gin}{width=\linewidth,totalheight=\textheight,keepaspectratio}
+\graphicspath{{graphics/}}
+
+\title{Exercise: Planning High-Frequency Checks}
+\author{DIME Analytics \\ dimeanalytics@worldbank.org}
+\date{July 2020}  % if the \date{} command is left out, the current date will be used
+
+% The following package makes prettier tables.  We're all about the bling!
+\usepackage{booktabs}
+
+% The units package provides nice, non-stacked fractions and better spacing
+% for units.
+\usepackage{units}
+
+% The fancyvrb package lets us customize the formatting of verbatim
+% environments.  We use a slightly smaller font.
+\usepackage{upquote}
+\usepackage{fancyvrb}
+\fvset{fontsize=\normalsize}
+\renewcommand{\FancyVerbFormatLine}{\color{violet}}
+\DefineShortVerb{\|}
+
+% Small sections of multiple columns
+\usepackage{multicol}
+
+% Provides paragraphs of dummy text
+\usepackage{lipsum}
+
+% These commands are used to pretty-print LaTeX commands
+\newcommand{\doccmd}[1]{\texttt{\textbackslash#1}}% command name -- adds backslash automatically
+\newcommand{\docopt}[1]{\ensuremath{\langle}\textrm{\textit{#1}}\ensuremath{\rangle}}% optional command argument
+\newcommand{\docarg}[1]{\textrm{\textit{#1}}}% (required) command argument
+\newenvironment{docspec}{\begin{quote}\noindent}{\end{quote}}% command specification environment
+\newcommand{\docenv}[1]{\textsf{#1}}% environment name
+\newcommand{\docpkg}[1]{\texttt{#1}}% package name
+\newcommand{\doccls}[1]{\texttt{#1}}% document class name
+\newcommand{\docclsopt}[1]{\texttt{#1}}% document class option name
+
+\begin{document}
+
+\maketitle% this prints the handout title, author, and date
+
+\begin{marginfigure}%
+  \includegraphics[width=\linewidth]{"img/Light bulb-01"}
+\end{marginfigure}
+
+\begin{abstract}
+In this exercise, you will complete some of the key tasks during high-frequency checks. To complete it, you will need the files available in \textcolor{blue}{\href{https://osf.io/uv8d5/}{this link}}:
+\begin{itemize}
+	\item A Stata dataset called \texttt{burkina\_faso\_hfc.dta}; and
+	\item A SurveyCTO form called \texttt{Programmed Questionnaire.xlsx}.
+\end{itemize}
+
+Submit your responses through \textcolor{blue}{\href{https://survey.wb.surveycto.com/collect/hfc?caseid=}{this SurveyCTO form}}.
+
+\bigskip\noindent \textbf{Exercise Objectives}:
+\begin{enumerate}
+  \item Practice reviewing a SurveyCTO form and looking for checks that can improve data quality
+  \item Use \texttt{ieduplicates} to identify and correct duplicated entries 
+  \item Learn to identify potentially problematic patterns in data received from the field
+\end{enumerate}
+\end{abstract}
+
+%\printclassoptions
+\section{Exercise 1: Built-in checks}
+Most consistency tests can and should be built into the questionnaire programming via logic and constraints. In the questionnaire used for this exercise, there are three examples of questions that must have consistent answers and for which it would be simple to add built-in constraints, though they are not currently present. Open the ODK form for the questionnaire and identify this cases. To do so, read the question labels and ask yourself: 
+\begin{itemize}
+	\item Is this question connected to previous questions in this questionnaire? 
+	\item If so, is there a simple logic test (equal to, different from, larger than, smaller than) that could describe how the two questions should be related?
+\end{itemize}
+\textit{Hint: one of the cases involves two questions in Module 2, another involves two questions in Module 5, and the last one involves one question in Module 2 and one in Module 5.}
+
+\section{Exercise 2: Consistency checks}
+Differently from the cases in Exercise 1, some checks may be overly complex to program in the survey instrument, and may be more easily implemented as consistency checks written on statistical software. One such case is present in Module 3 from this questionnaire, and includes different valid combinations of two categorical variables. Which variables are these?
+
+%\printclassoptions
+\section{Exercise 3: Unique identifier}
+
+Use \textcolor{blue}{\href{https://dimewiki.worldbank.org/wiki/Ieduplicates}{\texttt{ieduplicates}}} to find duplicated entries in \texttt{burkina\_faso\_hfc.dta}. The syntax of the command is: 
+\begin{Verbatim}
+  ieduplicates ID_varname using "/path/to/duplicates_report.xlsx" , uniquevars(varlist)
+\end{Verbatim}
+
+\begin{itemize}
+	\item Open \texttt{burkina\_faso\_hfc.dta} in Stata.
+	\item Identify the variable that contains the unique business owner ID. Replace \texttt{ID\_varname} in the line above with this variable's name.
+	\item Identify the variable that contains the unique survey entry ID created by SurveyCTO. This is the argument to be used inside the parentheses in option \texttt{uniquevars}.
+	\item Specify the file path to the Excel sheet you want to export with the list of duplicated answers. This will replace \texttt{"/path/to/duplicates\_report.xlsx"}.
+	\item Run the resulting line of code.
+	\item Click on the link shown on the Stata console.
+\end{itemize}
+
+On the submission form:
+\begin{enumerate}
+	\item Indicate the codes for the duplicated entries identified.
+	\item For one of these cases, the correction should be straightforward. Implement this correction on the Excel file, save and close it, then run the command again, this time adding the option \texttt{force}. Take a screenshot of the resulting message showed on the Stata results window and upload it to SurveyCTO. 
+\end{enumerate} 
+
+\vspace{.5cm}
+\noindent
+\textit{Hint:}
+\begin{itemize}
+	\item Before using the command, you will need to install the \texttt{iefieldkit} package. To do so, type \texttt{ssc install iefieldkit} in the Stata console.
+	\item If you find the \textcolor{blue}{\href{https://dimewiki.worldbank.org/wiki/Ieduplicates}{\texttt{ieduplicates}}} DIME wiki page does not contain enough detail on how to use the command, please watch the week 3 video on \texttt{iefieldkit} for detailed instructions on how to use the command.
+\end{itemize}
+
+%\printclassoptions
+\section{Exercise 4: Quality of responses}
+
+One important finding of high-frequency checks is identifying questions that are not well-phrased or well-delivered. Issues like these can lead to high non-response rates, and may require the research team to revisit the wording of questions, or to re-train enumerators. 
+
+In the \texttt{burkina\_faso\_hfc.dta} dataset, two consequences of this type of issue are present. One of them relates to a particular question, and the other one, to an enumerator. By exploring the data, can you identify which question and which enumerator these are? What follow-up actions would you take to address this issue if you were managing this survey?
+
+\section{Exercise 5: Quality of responses}
+
+Another issue frequently identified through high-frequency checks are data-entry mistakes. These usually to happen in the form of typos, but sometimes also occur when a correct answer is entered to the wrong question. The easiest way to identify them is to look for outliers or for values that are very similar to survey codes. When you suspect you have encountered a data-entry error, it's important to follow up with the field team as soon as possible, while they may still recall what happened.
+
+There are two cases of continuous variables in \texttt{burkina\_faso\_hfc.dta} that contain possible data-entry mistakes. Can you identify in which are the variables names and unique observation IDs for these cases?
+
+\vspace{.5cm}
+\noindent
+\textit{Hint for exercises 4 and 5: below are some Stata commands that are useful when exploring datasets. To view their helpfiles, type} ``\texttt{help}\textit{ command\_name'' in Stata.}
+\begin{itemize}
+	\item \texttt{browse}
+	\item \texttt{codebook}
+	\item \texttt{tabulate} (for categorical variables)
+	\item \texttt{histogram} (for continuous variables)
+	\item \texttt{summarize} and \texttt{summarize, detail} (for continuous variables)
+\end{itemize}
+
+
+\end{document}
